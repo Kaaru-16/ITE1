@@ -13,17 +13,19 @@
         <!-- Navigation -->
         <header class="site-header">
             <div class="nav-atmosphere" aria-hidden="true">
-                <img src="images/nav-shade.png" alt="">
+                <img src="image/nav-shade.png" alt="">
             </div>
             <nav class="guild-nav" aria-label="Main navigation">
-                <div class="nation-menu static-nation-menu" aria-label="Seven-Nation Tour Packages"><a href="company.html#destinations">Seven-Nation Tour Packages</a></div>
-                <a class="guild-logo" href="company.html" aria-label="Teyvat Travel Services home">
-                    <img src="images/logo.png" width="117" height="79" alt="Teyvat Travel Services">
-                </a>
+                <details class="nation-menu">
+                    <summary>Seven-Nation Tour Packages <img src="image/next-arrow.png" width="18" height="22" alt=""></summary>
+                    <div class="nation-options"><a href="mondstadt.html">Mondstadt</a><a href="company.html#liyue">Liyue</a><a href="company.html#inazuma">Inazuma</a><a href="company.html#sumeru">Sumeru</a><a href="company.html#fontaine">Fontaine</a><a href="company.html#natlan">Natlan</a><a href="company.html#snezhnaya">Snezhnaya</a></div>
+                </details>
+                <a class="guild-logo" href="company.html" aria-label="Teyvat Travel Services home"><img src="image/home-imgLogo12.png" width="117" height="79" alt="Teyvat Travel Services"></a>
                 <a href="company.html#our-story">Our Guild and Story</a>
+                <a href="company.html#travel-notes">FAQs</a>
             </nav>
         </header>
-        
+
         <!-- Main content -->
         <main id="main">
             <div class="landing-world">
@@ -33,124 +35,115 @@
                         <h1>Discover the<br>Wonders of<br>
                             <span>Teyvat</span>
                         </h1>
-                        <p>Premium, bespoke travel experiences across<br>the seven nations. Let us curate your ultimate continental journey!</p>
+                        <p>Premium, bespoke travel experiences across the seven nations. Let us curate your ultimate continental journey!</p>
                         <a class="journey-button" href="#destinations">Begin Your Journey</a>
                     </div>
                     <div class="companion">
-                        <img src="images/paimon.png" alt="Paimon welcoming travelers to Teyvat" width="1000" height="1138">
+                        <img src="image/paimon.png" alt="Paimon welcoming travelers to Teyvat" width="1000" height="1138">
                     </div>
                 </section>
-                <!-- Guild story -->
-                <section class="guild-story" id="our-story">
-                    <h2>Our Guild and Story</h2>
-                    <div class="story-panel">
-                        <p>Authorized by the Liyue Qixing and the Knights of Favonius, Teyvat Travel Services is the premier luxury travel guild. We specialize in transforming perilous continental routes into comfortable, unforgettable bespoke vacations.</p>
-                    </div>
-                    <div class="story-panel director">
-                        <p>Guided by our visionary Director, a seasoned adventurer who has charted every Domain and Waypoint. We guarantee safety, absolute luxury, and exclusive access to Teyvat’s most hidden wonders.</p>
-                    </div>
-                </section>
-            </div>
+
 
             <!-- Destinations section -->
             <section class="section wrap" id="destinations">
                 <div class="section-head">
                     <div>
                         <span class="eyebrow">Find your somewhere</span>
-                        <h2>One world. Seven stories.</h2>
+                        <h2>One world, Seven stories.</h2>
                     </div>
-                    <p>Follow the scenery, the culture, or simply your curiosity. Your next chapter starts here.</p>
+
                 </div>
                 <div class="cards">
-                    <a class="card" href="mondstadt.html">
+                    <a class="card" href="mondstadt.html" id="mondstadt">
+                        <span class="choice-badge"><img src="image/home-imgImage4.png" alt=""><span>Travellers’<br>Choice</span></span>
                         <div class="card-art">
-                            <img src="images/mondstadt-background.png" loading="lazy" width="1440" height="800" alt="Mondstadt city across Cider Lake">
-                            <span class="card-number">01 / MONDSTADT</span>
+                            <img src="image/home-img88541361.png" loading="lazy" width="1440" height="800" alt="Mondstadt city across Cider Lake">
+
                         </div>
                         <div class="card-info">
                             <div>
                                 <h3>Mondstadt</h3>
-                                <p>The City of Freedom Expedition · PHP 12,500</p>
+                                <p>The City of Freedom</p>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true"><img src="image/home-imgImage3.png" width="36" height="36" alt=""></span>
                         </div>
                     </a>
-                    <a class="card" href="liyue.html">
+                    <a class="card" href="liyue.html" id="liyue">
                         <div class="card-art">
-                            <img src="images/liyue.png" loading="lazy" width="1440" height="800" alt="Illustrated Liyue-inspired mountain and waterside landscape">
+                            <img src="image/home-img88541364.png" loading="lazy" width="1440" height="800" alt="Illustrated Liyue-inspired mountain and waterside landscape">
                             <span class="card-number">02 / LIYUE</span>
                         </div>
                         <div class="card-info">
                             <div>
                                 <h3>Liyue</h3>
-                                <p>The Harbor of Stone and Commerce · PHP 15,000</p>
+                                <p>The Harbor of Stone and Commerce</p>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true"><img src="image/home-imgImage3.png" width="36" height="36" alt=""></span>
                         </div>
                     </a>
-                    <a class="card" href="inazuma.html">
+                    <a class="card" href="inazuma.html" id="inazuma">
                         <div class="card-art">
-                            <img src="images/inazuma.png" loading="lazy" width="1440" height="800" alt="Illustrated Inazuma-inspired mountain and waterside landscape">
+                            <img src="image/home-img88541366.png" loading="lazy" width="1440" height="800" alt="Illustrated Inazuma-inspired mountain and waterside landscape">
                             <span class="card-number">03 / INAZUMA</span>
                         </div>
                         <div class="card-info">
                             <div>
                                 <h3>Inazuma</h3>
-                                <p>The Realm of Eternal Thunder · PHP 18,000</p>
+                                <p>The Realm of Eternal Thunder</p>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true"><img src="image/home-imgImage3.png" width="36" height="36" alt=""></span>
                         </div>
                     </a>
-                    <a class="card" href="sumeru.html">
+                    <a class="card" href="sumeru.html" id="sumeru">
                         <div class="card-art">
-                            <img src="images/Sumeru.png" loading="lazy" width="1440" height="800" alt="Illustrated Sumeru-inspired mountain and waterside landscape">
+                            <img src="image/home-img88541362.png" loading="lazy" width="1440" height="800" alt="Illustrated Sumeru-inspired mountain and waterside landscape">
                             <span class="card-number">04 / SUMERU</span>
                         </div>
                         <div class="card-info">
                             <div>
                                 <h3>Sumeru</h3>
-                                <p>The City of Wisdom & Rainforest Retreat · PHP 14,000</p>
+                                <p>The City of Wisdom & Rainforest Retreat</p>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true"><img src="image/home-imgImage3.png" width="36" height="36" alt=""></span>
                         </div>
                     </a>
-                    <a class="card" href="fontaine.html">
+                    <a class="card" href="fontaine.html" id="fontaine"><span class="choice-badge"><img src="image/home-imgImage4.png" alt=""><span>Travellers’<br>Choice</span></span>
                         <div class="card-art">
-                            <img src="images/Fontaine.png" loading="lazy" width="1440" height="800" alt="Illustrated Fontaine-inspired mountain and waterside landscape">
-                            <span class="card-number">05 / FONTAINE</span>
+                            <img src="image/home-img88541365.png" loading="lazy" width="1440" height="800" alt="Illustrated Fontaine-inspired mountain and waterside landscape">
+
                         </div>
                         <div class="card-info">
                             <div>
                                 <h3>Fontaine</h3>
-                                <p>The Capital of Justice, Steam, and Aquanics · PHP 20,000</p>
+                                <p>The Capital of Justice, Steam, and Aquanics</p>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true"><img src="image/home-imgImage3.png" width="36" height="36" alt=""></span>
                         </div>
                     </a>
-                    <a class="card" href="natlan.html">
+                    <a class="card" href="natlan.html" id="natlan">
                         <div class="card-art">
-                            <img src="images/Natlan.png" loading="lazy" width="1440" height="800" alt="Illustrated Natlan-inspired mountain and waterside landscape">
+                            <img src="image/home-img88541367.png" loading="lazy" width="1440" height="800" alt="Illustrated Natlan-inspired mountain and waterside landscape">
                             <span class="card-number">06 / NATLAN</span>
                         </div>
                         <div class="card-info">
                             <div>
                                 <h3>Natlan</h3>
-                                <p>The Land of Ash, Hot Springs, and Valor · PHP 16,500</p>
+                                <p>The Land of Ash, Hot Springs, and Valor</p>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true"><img src="image/home-imgImage3.png" width="36" height="36" alt=""></span>
                         </div>
                     </a>
-                    <a class="card" href="snezhnaya.html">
+                    <a class="card" href="snezhnaya.html" id="snezhnaya">
                         <div class="card-art">
-                            <img src="images/Snezhnaya.png" loading="lazy" width="1440" height="800" alt="Illustrated Snezhnaya-inspired mountain and waterside landscape">
+                            <img src="image/home-img88541363.png" loading="lazy" width="1440" height="800" alt="Illustrated Snezhnaya-inspired mountain and waterside landscape">
                             <span class="card-number">07 / SNEZHNAYA</span>
                         </div>
                         <div class="card-info">
                             <div>
                                 <h3>Snezhnaya</h3>
-                                <p>The Eternal White Tundra · PHP 22,000</p>
+                                <p>The Eternal White Tundra</p>
                             </div>
-                            <span class="arrow" aria-hidden="true">↗</span>
+                            <span class="arrow" aria-hidden="true"><img src="image/home-imgImage3.png" width="36" height="36" alt=""></span>
                         </div>
                     </a>
                     <div class="card-note">
@@ -161,13 +154,26 @@
                     </div>
                 </div>
             </section>
+            </div>
+            <div class="story-world">
+                <div class="story-scenery" aria-hidden="true"><img src="image/home-img110436882.png" alt=""></div>
+                <!-- Guild story -->
+                <section class="guild-story" id="our-story">
+                    <h2>Our Guild and Story</h2>
+                    <div class="story-panel">
+                        <p>Authorized by the Liyue Qixing and the Knights of Favonius, Teyvat Travel Services is the premier luxury travel guild. We specialize in transforming perilous continental routes into comfortable, unforgettable bespoke vacations.</p>
+                    </div>
+                    <div class="story-panel director">
+                        <p>Guided by our visionary Director, a seasoned adventurer who has charted every Domain and Waypoint. We guarantee safety, absolute luxury, and exclusive access to Teyvat’s most hidden wonders.</p>
+                    </div>
+                </section>
             <!-- Travel notes section -->
             <section class="section wrap" id="travel-notes">
                 <div class="faq-grid">
                     <div class="faq-intro">
-                        <span class="eyebrow">A little preparation goes a long way</span>
-                        <h2>Before you<br>begin.</h2>
-                        <p>A few useful answers to help you take the first step with confidence.</p>
+                        <span class="eyebrow">A little preparation goes long way</span>
+                        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+
                     </div>
                     <div class="faq">
                         <div class="faq-item">
@@ -193,45 +199,12 @@
                     </div>
                 </div>
             </section>
-            <!-- Planning call to action -->
-            <section class="cta wrap" id="plan">
-                <div>
-                    <span class="eyebrow">Start with a little daydreaming</span>
-                    <h2>Where will your curiosity take you?</h2>
-                    <p>Choose a region, preferred dates, and your group size.<br>Agency contact details will be added when confirmed.</p>
-                </div>
-                <a class="button light" href="#destinations">Find your journey <span aria-hidden="true">↗</span>
-                </a>
-            </section>
-        </main>
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="wrap">
-                <div class="footer-top">
-                    <div>
-                        <a class="guild-logo" href="company.html" aria-label="Teyvat Travel Services home">
-                            <img src="images/logo.png" alt="Teyvat Travel Services" width="117" height="79">
-                        </a>
-                        <p>Thoughtfully imagined journeys.<br>For the traveler in all of us.</p>
-                    </div>
-                    <div class="footer-links">
-                        <div>
-                            <strong>Explore</strong>
-                            <a href="company.html#destinations">The seven nations</a>
-                            <a href="company.html#our-story">Meet the Director</a>
-                        </div>
-                        <div>
-                            <strong>Before you go</strong>
-                            <a href="company.html#travel-notes">Common questions</a>
-                            <a href="company.html#plan">Planning your trip</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <span>© 2026 Teyvat Travel Services · Educational concept</span>
-                    <span>Fictional travel offers · Educational local demo · No online booking</span>
-                </div>
             </div>
+        </main>
+        <footer class="reference-footer">
+            <a href="company.html" aria-label="Teyvat Travel Services home"><img src="image/home-imgLogo12.png" width="180" height="121" alt="Teyvat Travel Services"></a>
+            <div class="footer-policies"><span>Privacy Policy</span><span>Contact Us</span><span>Terms and Conditions</span></div>
+            <p>© Teyvat Travel Services.<br>All Rights Reserved.</p>
         </footer>
     </body>
 </html>

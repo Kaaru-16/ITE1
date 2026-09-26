@@ -1,6 +1,5 @@
 /* Font loading */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap');
-/* Design tokens */
 :root {
     --ink: #203b35;
     --muted: #6b7369;
@@ -163,6 +162,7 @@ a:focus-visible,summary:focus-visible {
     display: block;
     margin-bottom: 22px;
 }
+
 /* Hero section */
 .hero {
     position: relative;
@@ -220,6 +220,7 @@ a:focus-visible,summary:focus-visible {
     width: 50px;
     background: currentColor;
 }
+
 /* Trust strip and content sections */
 .trust {
     border-bottom: 1px solid var(--line);
@@ -278,7 +279,7 @@ a:focus-visible,summary:focus-visible {
     object-fit: cover;
     transition: transform .5s;
 }
-.card:hover img {
+.card:hover .card-art img {
     transform: scale(1.045);
 }
 .card-number {
@@ -315,8 +316,8 @@ a:focus-visible,summary:focus-visible {
     place-items: center;
 }
 .card:hover .arrow {
-    background: var(--ink);
-    color: white;
+    background: #ffe8a0;
+    color: #143752;
 }
 .card-note {
     border: 1px solid var(--line);
@@ -619,6 +620,8 @@ a:focus-visible,summary:focus-visible {
 .explore-next h2 {
     font-size: 35px;
 }
+
+
 /* Responsive layout */
 @media(min-width:1500px) {
     .hero {
@@ -941,7 +944,7 @@ h1, h2, h3 {
     position: absolute;
     z-index: -1;
     inset: -3.56% -2.2% -12.76%;
-    background: url('../images/price-panel.svg') center / 100% 100% no-repeat;
+    background: url('../image/price-panel.svg') center / 100% 100% no-repeat;
 }
 .scene-pricing small {
     display: block;
@@ -969,7 +972,7 @@ h1, h2, h3 {
 }
 .stops-value:before {
     inset: -4.77% -.84% -17.08%;
-    background-image: url('../images/stops-panel.svg');
+    background-image: url('../image/stops-panel.svg');
 }
 .scene-next {
     position: absolute;
@@ -1241,7 +1244,7 @@ h1, h2, h3 {
     inset: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../images/hero-background.png');
+    background-image: url('../image/hero-background.png');
     background-size: cover;
     background-position: center;
     filter: saturate(.82) contrast(1.12) brightness(.65);
@@ -1550,6 +1553,7 @@ h1, h2, h3 {
     color: #999;
     font-family: var(--font-body);
 }
+
 @media (max-width: 900px) {
     .reference-home .hero-copy {
         width: 65%;
@@ -1563,12 +1567,14 @@ h1, h2, h3 {
 .reference-destination-grid {
     grid-template-columns: repeat(2, 1fr);
 }
-.about-layout, .notes-layout {
+.about-layout, .notes-layout
+{
     gap: 35px;
 }
 }
-@media (max-width: 600px) {
-    .reference-home .navbar {
+
+@media (max-width: 600px) {.reference-home .navbar
+    {
         height: 54px;
     }
 .reference-home .nav-links {
@@ -1657,4 +1663,502 @@ body:has(.destination-scene) .destination-scene {
     min-height: 790px;
     padding-top: 120px;
 }
+}
+
+/* Company and Mondstadt page styles */
+/* Measurements scale from a 1920px canvas. */
+.landing-page, .mondstadt-page { --display: HYWenHei, Cambria, Georgia, serif; background: #000; color: #fff; font-family: var(--display); font-weight: 700; overflow-x: clip; }
+.landing-page p, .mondstadt-page p { color: inherit; }
+.guild-nav { width: max-content; max-width: 94%; grid-template-columns: auto auto auto auto; gap: 4.7vw; padding: 2.35vw 0; font-size: 1.25vw; line-height: 1.15; }
+.guild-nav > a { white-space: nowrap; }
+.guild-nav > a:last-child { margin-left: -2.5vw; }
+.guild-logo img { width: 6.12vw; height: auto; }
+.nav-atmosphere { height: 30vw; opacity: .78; }
+.nation-menu { justify-self: auto; }
+.nation-menu summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: .65vw; white-space: nowrap; }
+.nation-menu summary::-webkit-details-marker { display: none; }
+.nation-menu summary img { width: .95vw; height: 1.15vw; object-fit: contain; transform: rotate(-90deg); }
+.nation-menu[open] summary img { transform: rotate(90deg); }
+.nation-options { position: absolute; top: calc(100% + 18px); left: 0; min-width: 100%; padding: 12px; border: 1px solid #ffeaa880; border-radius: 14px; background: #193e50f2; box-shadow: 0 6px 20px #0005; }
+.nation-options a { display: block; padding: 12px; font-size: max(14px, 1vw); white-space: nowrap; }
+.nation-options a:hover, .nation-options a:focus-visible { background: #ffffff20; color: #ffeeab; }
+.landing-world { background: url('../image/hero-background.png') center top / 100% 100% no-repeat; padding: 10.7vw 0 4vw; }
+.discovery-hero { position: relative; width: 87.5%; min-height: 38.5vw; margin: 0 auto; border: 1px solid #e1e6ec55; border-radius: 1.6vw; background: #d3dfdf55; box-shadow: 0 5px 8px #0003; backdrop-filter: blur(4px); }
+.discovery-copy { position: relative; z-index: 2; padding: 2.5vw 1.6vw 3.3vw; width: 56%; text-shadow: 0 4px 5px #0004; }
+.discovery-copy h1 { font-size: 7.4vw; line-height: .79; letter-spacing: -.12vw; }
+.discovery-copy h1 span { color: #ffe8a0; }
+.discovery-copy p { width: 94%; margin: 1.8vw .2vw 1.65vw; font-size: 1.9vw; line-height: .94; }
+.journey-button { display: inline-flex; align-items: center; justify-content: center; min-height: 6vw; padding: 1.15vw 2vw; border: 2px solid #ffe39a; border-radius: 1.8vw; color: #163a5a; background: #e8e8d59c; box-shadow: 0 4px 6px #0003; font-size: 2.3vw; text-shadow: none; }
+.journey-button:hover { background: #fff0bf; }
+.companion { position: absolute; width: 43vw; right: -.9vw; top: -5.1vw; pointer-events: none; }
+.companion img { width: 100%; height: auto; }
+.landing-page #destinations { width: 87%; max-width: none; padding: 8vw 0 0; }
+.landing-page .section-head { margin-bottom: 1.6vw; }
+.landing-page .eyebrow { color: #fff; font: bold 1.75vw/1.1 var(--display); letter-spacing: 0; text-transform: uppercase; margin: 0 0 .4vw; }
+.landing-page .section-head h2 { font-size: 4.4vw; line-height: 1; }
+.landing-page .cards { gap: 2.6vw 5.6vw; }
+.landing-page .card { padding: 1.25vw 1.3vw .9vw; border-radius: 2vw; background: #b8e3c28c; backdrop-filter: blur(7px); box-shadow: 0 4px 9px #0002; color: #143752; }
+.landing-page .card:nth-child(2) { background: #d7d5a18c; }
+.landing-page .card:nth-child(3), .landing-page .card:nth-child(5) { background: #b4b9e494; }
+.landing-page .card:nth-child(4), .landing-page .card:nth-child(7) { background: #c6d69494; }
+.landing-page .card:nth-child(6) { background: #efb49a94; }
+.landing-page .card-art { aspect-ratio: 1.8; border-radius: 1.5vw 1.5vw .6vw .6vw; }
+.landing-page .card-number { display: none; }
+.landing-page .card-info { padding: .4vw .15vw 0; gap: 4px; align-items: center; }
+.landing-page .card h3 { font-size: 1.8vw; line-height: .95; }
+.landing-page .card p { font: bold .92vw/.95 var(--display); margin: 0; }
+.landing-page .arrow { border: 0; font-size: 1.8vw; width: auto; height: auto; }
+.landing-page article.card .arrow { display: none; }
+.landing-page .card-note { border: 0; border-radius: 2vw; padding: 1.6vw; background: #a5b89899; backdrop-filter: blur(6px); color: #fff; position: relative; }
+.landing-page .card-note .eyebrow { font-size: 1.3vw; }
+.landing-page .card-note h3 { font-size: 2.75vw; line-height: .9; margin: .45vw 0 .65vw; max-width: none; }
+.landing-page .card-note p { font: bold 1.35vw/.98 var(--display); max-width: 67%; margin: 0; }
+.landing-page .card-note .text-link { position: absolute; bottom: 1.5vw; right: 1.8vw; font-size: .85vw; border: 0; padding: .65vw 1.5vw; border-radius: 2vw; background: #e2dfbf80; }
+
+/* Nighttime scenery and image crops for the guild story section. */
+.story-world { position: relative; isolation: isolate; }
+.guild-story { padding: 8vw 0 10.5vw; text-align: center; text-shadow: 0 4px 5px #0008; }
+.guild-story h2 { font-size: 5.6vw; line-height: 1.1; margin-bottom: 1.8vw; }
+.story-panel { width: 53%; margin: 0 auto 2.3vw; padding: 2.2vw 2.5vw; border: 1px solid #ddd8b533; border-radius: 2vw; background: #ced2c64d; backdrop-filter: blur(6px); box-shadow: 0 4px 5px #0003; }
+.story-panel p { font-size: 1.85vw; line-height: .97; }
+.story-panel:last-child { margin-bottom: 0; }
+.landing-page #travel-notes { width: 100%; max-width: none; padding: 2.7vw 6.7vw 9.5vw; background: #172b4670; }
+.landing-page .faq-grid { display: block; }
+.landing-page .faq-intro h2 { font-size: 4.3vw; line-height: 1.05; margin: 0 0 3vw; }
+.landing-page .faq { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 3vw 2.3vw; border: 0; }
+.landing-page .faq-item { width: calc((100% - 4.6vw) / 3); text-align: center; padding: 0; border: 0; }
+.landing-page .faq-item h3 { display: flex; align-items: center; justify-content: center; min-height: 5vw; padding: .7vw 2vw; border-radius: 1.8vw; background: #cbc4b875; font-family: var(--display); font-weight: 700; font-size: 1.85vw; line-height: .9; margin-bottom: 1vw; }
+.landing-page .faq-item p { font: bold 1.18vw/1 var(--display); }
+.reference-footer { display: flex; justify-content: center; align-items: center; gap: 6.5vw; min-height: 16.8vw; background: #08131c; font: .85vw/1.25 Arial, sans-serif; }
+.reference-footer img { width: 9.6vw; height: auto; }
+.reference-footer nav { display: grid; gap: 1vw; border-left: 1px solid #fff8; padding: 2vw 0 2vw 6.5vw; }
+.reference-footer p { color: #fff; }
+.mondstadt-page { min-height: 66.67vw; }
+.mondstadt-page .scene-copy { padding-top: 9.95vw; width: 48%; margin-left: 6.77%; }
+.mondstadt-page .scene-copy h1 { font-size: 7.92vw; line-height: .86; color: #e4e5e4; }
+.mondstadt-page .scene-subtitle { font-size: 3.02vw; line-height: 1.1; margin-top: -.2vw; }
+.mondstadt-page .scene-description { width: 82%; font-size: 1.56vw; line-height: .81; margin-top: 1.05vw; }
+.mondstadt-page .scene-pricing { top: 33.95vw; left: 6.82%; }
+.mondstadt-page .scene-pricing h3, .mondstadt-page .scene-stops h3 { font-size: 2.92vw; }
+.mondstadt-page .price-value { font-size: 2.5vw; margin-top: .4vw; backdrop-filter: blur(8px); border-radius: 32px; background: #c9d7ad35; }
+.mondstadt-page .scene-pricing small { font-size: 1.1vw; margin-top: .3vw; }
+.mondstadt-page .scene-stops { top: 43.8vw; left: 6.82%; }
+.mondstadt-page .stops-value { font-size: 1.51vw; margin-top: .45vw; padding: .8vw 1.5vw; backdrop-filter: blur(8px); border-radius: 2vw; }
+.mondstadt-page .scene-next { top: 60.5%; left: 91.2%; }
+.mondstadt-page .scene-next img { width: 2.8vw; height: 3.47vw; }
+
+@media (max-width: 1100px)
+{
+  .guild-nav { width: 94%; max-width: none; gap: 10px; padding: 18px 0; grid-template-columns: 1.5fr 58px 1fr auto; font-size: 11px; }
+  .guild-nav > a, .nation-menu summary { white-space: normal; }
+  .guild-nav > a:last-child { margin-left: 0; }
+  .guild-logo img { width: 58px; }
+  .nation-menu summary img { width: 12px; height: 15px; flex-shrink: 0; }
+  .nav-atmosphere { height: 300px; }
+  .landing-world { padding: 115px 0 40px; background-size: auto 100%; }
+  .discovery-hero { min-height: 610px; border-radius: 20px; }
+  .discovery-copy { width: 100%; padding: 28px 22px; }
+  .discovery-copy h1 { font-size: clamp(42px, 9vw, 66px); line-height: .9; }
+  .discovery-copy p { font-size: 17px; line-height: 1.1; max-width: 340px; margin: 20px 0; }
+  .journey-button { min-height: 50px; padding: 12px 20px; font-size: 20px; border-radius: 18px; }
+  .companion { width: 245px; top: auto; bottom: -25px; right: 0; }
+  .landing-page #destinations { padding-top: 70px; }
+  .landing-page .eyebrow { font-size: 15px; margin-bottom: 8px; }
+  .landing-page .section-head h2 { font-size: 34px; }
+  .landing-page .section-head { margin-bottom: 24px; }
+  .landing-page .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .landing-page .card { padding: 10px; border-radius: 18px; }
+  .landing-page .card-art { border-radius: 12px; }
+  .landing-page .card-info { padding-top: 8px; }
+  .landing-page .card h3 { font-size: 19px; }
+  .landing-page .card p { font-size: 11px; line-height: 1.1; margin-top: 3px; }
+  .landing-page .arrow { font-size: 22px; }
+  .landing-page .card-note { grid-column: 1 / -1; padding: 22px; border-radius: 18px; }
+  .landing-page .card-note .eyebrow { font-size: 13px; }
+  .landing-page .card-note h3 { font-size: 28px; margin: 10px 0; }
+  .landing-page .card-note p { font-size: 15px; max-width: none; line-height: 1.2; }
+  .landing-page .card-note .text-link { position: static; margin-top: 16px; font-size: 12px; padding: 10px 14px; border-radius: 20px; }
+  .guild-story { padding: 65px 0; }
+  .guild-story h2 { font-size: 36px; padding: 0 20px; margin-bottom: 25px; }
+  .story-panel { width: 86%; padding: 24px; border-radius: 20px; margin-bottom: 22px; }
+  .story-panel p { font-size: 18px; line-height: 1.15; }
+  .landing-page #travel-notes { padding: 35px 7% 65px; }
+  .landing-page .faq-intro h2 { font-size: 30px; margin-bottom: 28px; }
+  .landing-page .faq { gap: 26px; }
+  .landing-page .faq-item { width: 100%; }
+  .landing-page .faq-item h3 { min-height: 60px; padding: 14px 24px; border-radius: 18px; font-size: 22px; line-height: 1; margin-bottom: 12px; }
+  .landing-page .faq-item p { font-size: 15px; line-height: 1.2; }
+  .reference-footer { flex-wrap: wrap; padding: 35px 7%; gap: 25px; font-size: 12px; }
+  .reference-footer img { width: 100px; }
+  .reference-footer nav { gap: 14px; padding: 15px 0 15px 25px; }
+  .mondstadt-page .destination-scene { height: auto; min-height: 860px; padding: 155px 0 45px; }
+  .mondstadt-page .scene-copy { padding: 0; width: 86%; margin: auto; }
+  .mondstadt-page .scene-copy h1 { font-size: clamp(42px, 11vw, 78px); }
+  .mondstadt-page .scene-subtitle { font-size: 25px; line-height: 1.1; margin-top: 12px; }
+  .mondstadt-page .scene-description { width: 100%; font-size: 17px; line-height: 1.2; margin-top: 22px; }
+  .mondstadt-page .scene-pricing, .mondstadt-page .scene-stops { position: relative; top: auto; left: auto; width: 86%; margin: 150px auto 0; }
+  .mondstadt-page .scene-pricing h3, .mondstadt-page .scene-stops h3 { font-size: 32px; }
+  .mondstadt-page .price-value { font-size: 30px; margin-top: 10px; }
+  .mondstadt-page .scene-pricing small { font-size: 14px; margin-top: 8px; }
+  .mondstadt-page .scene-stops { margin-top: 30px; margin-bottom: 0; }
+  .mondstadt-page .stops-value { font-size: 17px; line-height: 1.15; padding: 16px; margin-top: 10px; }
+  .mondstadt-page .scene-next { top: 54%; left: auto; right: 7%; }
+  .mondstadt-page .scene-next img { width: 35px; height: 44px; }
+}
+@media (max-width: 380px)
+{
+.guild-nav { font-size: 10px; gap: 7px; } .landing-page .cards { grid-template-columns: 1fr; }
+}
+.landing-page #main { overflow: clip; }
+.story-scenery { position: absolute; z-index: -1; pointer-events: none; overflow: hidden; top: -2.601vw; left: -27.74vw; width: 137.975vw; height: 108.225vw; filter: blur(2.35px); mask-image: url('../image/home-img110436881.svg'); mask-repeat: no-repeat; mask-size: 100vw 120.3125vw; mask-position: 27.74vw -8.18vw; }
+.story-scenery img { position: absolute; width: 146.57%; height: 100%; max-width: none; left: -54.02%; top: .02%; }
+.landing-page .card { position: relative; backdrop-filter: none; }
+.landing-page .card-art img { position: absolute; max-width: none; object-fit: fill; transform: none; }
+.landing-page .card:nth-child(1) .card-art img, .landing-page .card:nth-child(2) .card-art img { width: 164.27%; height: 167.33%; left: -28.9%; top: -29.03%; }
+.landing-page .card:nth-child(3) .card-art img { width: 100%; height: 100%; left: 0; top: 0; object-fit: cover; }
+.landing-page .card:nth-child(4) .card-art img { width: 132.57%; height: 135%; left: -24.38%; top: -2.95%; }
+.landing-page .card:nth-child(5) .card-art img { width: 108.57%; height: 147.4%; left: -.04%; top: -29.29%; }
+.landing-page .card:nth-child(6) .card-art img { width: 113.49%; height: 115.56%; left: -6.75%; top: -.91%; }
+.landing-page .card:nth-child(7) .card-art img { width: 109.21%; height: 116.22%; left: -9.1%; top: .03%; }
+.landing-page .card:nth-child(1) { background: #b3ffeb6b; }
+.landing-page .card:nth-child(2) { background: #eec96669; }
+.landing-page .card:nth-child(3) { background: #d6b2ff69; }
+.landing-page .card:nth-child(4) { background: #e0ff9769; }
+.landing-page .card:nth-child(5) { background: #6c9fff69; }
+.landing-page .card:nth-child(6) { background: #ff969669; }
+.landing-page .card:nth-child(7) { background: #c1e1ff69; }
+.landing-page article.card .arrow { display: grid; }
+.landing-page .arrow img { width: 1.875vw; height: 1.875vw; opacity: .42; }
+.choice-badge { position: absolute; z-index: 2; width: 9.8958vw; height: 9.8958vw; left: -1.6146vw; top: -.8333vw; pointer-events: none; }
+.choice-badge img { width: 100%; height: 100%; }
+.choice-badge > span { position: absolute; left: 19.47%; top: 41.58%; color: #fff; font-size: 1vw; line-height: .85; }
+.footer-policies { display: grid; gap: 1vw; border-left: 1px solid #fff8; padding: 2vw 0 2vw 6.5vw; }
+.nation-options { border: 0; background: url('../image/home-imgRectangle5.svg') center / 100% 100% no-repeat; text-align: center; }
+.nation-options a { background-repeat: no-repeat; background-position: bottom center; background-size: 90% 1px; }
+.nation-options a:nth-child(1) { background-image: url('../image/divider-1.svg'); }
+.nation-options a:nth-child(2) { background-image: url('../image/divider-2.svg'); }
+.nation-options a:nth-child(3) { background-image: url('../image/divider-3.svg'); }
+.nation-options a:nth-child(4) { background-image: url('../image/divider-4.svg'); }
+.nation-options a:nth-child(5) { background-image: url('../image/divider-5.svg'); }
+.nation-options a:nth-child(6) { background-image: url('../image/divider-6.svg'); }
+.nation-options a:nth-child(7) { background-image: url('../image/divider-7.svg'); }
+.footer-policies { position: relative; border-left: 0; }
+.footer-policies::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 1px; background: url('../image/home-imgLine8.svg') center / 100% 100%; }
+.mondstadt-page .price-value:before { background-image: url('../image/mond-imgRectangle7.svg'); }
+.mondstadt-page .stops-value:before { background-image: url('../image/mond-imgRectangle4.svg'); }
+.mondstadt-page .price-value, .mondstadt-page .stops-value { background: transparent; backdrop-filter: none; }
+
+
+@media (min-width: 1101px)
+{
+  .nav-atmosphere { width: 100%; left: 0; top: -.1042vw; height: 54.7917vw; opacity: .7826; }
+  .nav-atmosphere img { height: 133.1%; top: -33.1%; }
+  .guild-nav { width: 50.1%; max-width: none; margin-left: 24.6354%; gap: 0; grid-template-columns: 22.292vw 10.938vw 13.594vw auto; padding-top: 2.2917vw; font-size: 1.25vw; }
+  .guild-nav > a:last-child { margin: 0; }
+  .guild-nav summary { gap: .6vw; }
+  .guild-nav summary img { width: 1.2vw; height: 1.3vw; }
+  .landing-world { height: 124.7396vw; padding-top: 10.78125vw; background-size: auto 127.8125vw; mask-image: linear-gradient(#000 97%, transparent); }
+  .discovery-hero { width: 87.65625%; margin-left: 5.9375%; height: 38.3854vw; min-height: 0; border: 0; border-radius: 1.40625vw; background: #b9b7b566; backdrop-filter: none; }
+  .discovery-copy { padding: 3.4375vw 0 0 1.5625vw; width: 50vw; }
+  .discovery-copy h1 { font-size: 7.4vw; line-height: .79; width: 46.25vw; }
+  .discovery-copy p { position: relative; width: 44vw; margin: 2vw 0 1.7vw .78vw; font-size: 1.95vw; line-height: .86; }
+  .journey-button { width: 24.79vw; height: 6.0417vw; min-height: 0; padding: 0; font-size: 2.3vw; margin-left: .78vw; border-radius: 1.823vw; }
+  .companion { width: 45.15625vw; height: 47.6042vw; top: -4.9479vw; left: 44.53125vw; right: auto; overflow: hidden; }
+  .companion img { position: absolute; width: 100.06%; height: 107.96%; left: -.03%; top: -7.84%; }
+  .landing-page #destinations { width: 86.9792%; margin-left: 6.7708%; padding-top: 8.6979vw; }
+  .landing-page .section-head { height: 8.1771vw; margin-bottom: 0; align-items: flex-start; }
+  .landing-page .section-head .eyebrow { display: block; margin-bottom: 1.05vw; }
+  .landing-page .section-head h2 { font-size: 4.7vw; line-height: .9; }
+  .landing-page .cards { grid-template-columns: repeat(3, 25.15625vw); grid-auto-rows: 17.03125vw; justify-content: space-between; gap: 2.7604vw 0; }
+  .landing-page .card { padding: 1.25vw 1.3542vw .52vw; border-radius: 1.823vw; }
+  .landing-page .card-art { width: 21.875vw; height: 12.0833vw; aspect-ratio: auto; border-radius: 1.1458vw; }
+  .landing-page .card:nth-child(7) .card-art { width: 21.875vw; height: 12.0833vw; margin-left: 0; }
+  .landing-page .card-info { padding: .625vw .26vw 0; }
+  .landing-page .card h3 { font-size: 1.9vw; line-height: .87; }
+  .landing-page .card p { font-size: .94vw; line-height: 1; letter-spacing: -.02vw; }
+  .landing-page .card-note { padding: 2.96875vw 1.3542vw 1vw; border-radius: 1.823vw; justify-content: flex-start; background: #a69f8966; }
+  .landing-page .card-note h3 { margin: .6vw 0 .8vw; font-size: 2.8vw; }
+  .landing-page .card-note p { max-width: 31vw; font-size: 1.45vw; }
+  .landing-page .card-note .text-link { right: 1.93vw; bottom: 1.77vw; font-size: .94vw; padding: .65vw 1.5vw; }
+  .story-world { height: 105.2083vw; }
+  .guild-story { height: 55.6771vw; padding: 10.8333vw 0 0; }
+  .guild-story h2 { font-size: 6vw; line-height: .987; margin-bottom: 2.5vw; }
+  .story-panel { width: 53.4375%; min-height: 12.24vw; padding: 2.0833vw 1.35vw; margin-bottom: 2.34375vw; border: 0; border-radius: 1.823vw; background: #a69f8966; backdrop-filter: none; }
+  .story-panel p { font-size: 1.9vw; line-height: .987; }
+  .story-panel.director { width: 52.7604%; padding: 2.7083vw 2.58vw 1.5vw; }
+  .landing-page #travel-notes { height: 42.7083vw; padding: 3.0729vw 6.48vw 0; background: #151e2566; }
+  .landing-page .faq-intro .eyebrow { font-size: 1.9vw; margin-bottom: 1vw; }
+  .landing-page .faq-intro h2 { font-size: 4.7vw; line-height: .859; margin-bottom: 3vw; white-space: nowrap; }
+  .landing-page .faq {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 3.125vw 2.34375vw;
+  }
+  .landing-page .faq-item {
+    grid-column: span 2;
+    width: 100%;
+    min-width: 0;
+    min-height: 11.875vw;
+  }
+  .landing-page .faq-item:nth-child(4) { grid-column: 2 / span 2; }
+  .landing-page .faq-item:nth-child(5) { grid-column: 4 / span 2; }
+  .landing-page .faq-item h3 { height: 5.0521vw; min-height: 0; font-size: 1.9vw; line-height: .85; border-radius: 1.823vw; background: #a69f8966; margin-bottom: 1.09375vw; padding: .7vw 2.6vw; }
+  .landing-page .faq-item p { font-size: 1.22vw; line-height: 1; }
+  .reference-footer { height: 16.71875vw; min-height: 0; gap: 0; justify-content: flex-start; padding-left: 25.26vw; font-size: .9115vw; }
+  .reference-footer img { width: 9.7917vw; }
+  .footer-policies { margin-left: 4.27vw; padding-left: 6.51vw; width: 26.15vw; }
+  .mondstadt-page { min-height: 65.15625vw; background: #1e1e1e; }
+  .mondstadt-page .scene-next { top: 33.2292vw; left: 90.4167%; }
+  .mondstadt-page .scene-next img { width: 4.1623vw; height: 5.15625vw; }
+  .mondstadt-page .scene-pricing { top: 33.90625vw; }
+  .mondstadt-page .scene-pricing h3 { margin-left: .3125vw; }
+  .mondstadt-page .price-value { margin-top: .3854vw; }
+  .mondstadt-page .scene-stops { top: 43.9583vw; }
+  .mondstadt-page .stops-value { font-size: 1.46vw; height: 3.3854vw; white-space: nowrap; }
+}
+
+@media (max-width: 1100px)
+{
+  .story-world { background: #21446a; overflow: hidden; }
+  .story-scenery { inset: 0; width: 100%; height: 100%; mask: none; filter: blur(2px); opacity: .8; }
+  .story-scenery img { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% center; }
+  .landing-page .arrow img { width: 18px; height: 18px; }
+  .choice-badge { width: 80px; height: 80px; left: -12px; top: -6px; }
+  .choice-badge > span { font-size: 9px; }
+  .footer-policies { font-size: 12px; gap: 14px; padding: 15px 0 15px 25px; }
+}
+
+
+/* Tablet and phone layout: content determines section height. */
+@media (max-width: 1100px) {
+    .landing-world,
+    .story-world,
+    .guild-story,
+    .landing-page #travel-notes {
+        height: auto;
+    }
+
+    .landing-page .faq-intro h2 {
+        white-space: normal;
+        line-height: 1.15;
+    }
+
+    .landing-page .faq-item h3 {
+        height: auto;
+        line-height: 1.2;
+    }
+
+    .landing-page .faq-item p,
+    .story-panel p {
+        line-height: 1.45;
+    }
+
+    .landing-page .card p {
+        font-size: 14px;
+        line-height: 1.3;
+    }
+
+    .landing-page .cards {
+        grid-auto-rows: auto;
+    }
+
+    .landing-page .card-info > div {
+        min-width: 0;
+    }
+
+    .story-panel.director {
+        width: 86%;
+    }
+
+    .mondstadt-page .scene-art {
+        object-position: 60% center;
+    }
+
+    .mondstadt-page .price-value {
+        width: 230px;
+        height: 62px;
+    }
+
+    .mondstadt-page .stops-value {
+        width: 100%;
+        height: auto;
+        min-height: 64px;
+        white-space: normal;
+    }
+}
+
+/* Two readable columns on tablets; phones retain the stacked layout. */
+@media (min-width: 761px) and (max-width: 1100px) {
+    .guild-nav {
+        font-size: 15px;
+        gap: 22px;
+        grid-template-columns: 1.5fr 72px 1fr auto;
+    }
+
+    .guild-logo img {
+        width: 72px;
+    }
+
+    .discovery-hero {
+        min-height: 540px;
+    }
+
+    .discovery-copy {
+        width: 62%;
+    }
+
+    .discovery-copy h1 {
+        font-size: clamp(52px, 7vw, 72px);
+        line-height: 1;
+    }
+
+    .discovery-copy p {
+        font-size: 19px;
+        line-height: 1.35;
+    }
+
+    .companion {
+        width: 43%;
+        bottom: 0;
+        right: -2%;
+    }
+
+    .landing-page .card h3 {
+        font-size: 26px;
+        line-height: 1.15;
+    }
+
+    .landing-page .faq {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 32px 24px;
+    }
+
+    .landing-page .faq-item {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .landing-page .faq-item:last-child {
+        grid-column: 1 / -1;
+        width: calc(50% - 12px);
+        justify-self: center;
+    }
+
+    .landing-page .faq-item p {
+        font-size: 17px;
+    }
+
+    .reference-footer {
+        font-size: 14px;
+        gap: 40px;
+    }
+}
+
+/* Allow longer FAQ answers without colliding with the footer on desktop. */
+@media (min-width: 1101px) {
+    .story-world {
+        height: auto;
+        min-height: 105.2083vw;
+    }
+
+    .story-scenery {
+        min-height: calc(100% + 2.601vw);
+        mask-size: 100vw calc(100% + 12vw);
+    }
+
+    .landing-page #travel-notes {
+        height: auto;
+        min-height: 42.7083vw;
+        padding-bottom: 6vw;
+    }
+
+    .landing-page .faq-item h3 {
+        height: auto;
+        min-height: 5.0521vw;
+        line-height: 1.1;
+    }
+
+    .landing-page .faq-item p {
+        line-height: 1.3;
+    }
+}
+
+.landing-page .faq-item p {
+    padding-right: 0;
+}
+
+/* Destination cards: gold accents with a clear, readable arrow. */
+.landing-page .card {
+    transition: transform 220ms ease, box-shadow 220ms ease;
+    box-shadow: 0 4px 12px #102d3926, inset 0 0 0 1px #ffffff55;
+}
+
+.landing-page .card .arrow {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: clamp(28px, 2.25vw, 40px);
+    height: clamp(28px, 2.25vw, 40px);
+    border: 1px solid #fff2bd99;
+    border-radius: 50%;
+    background: #fff5d4b3;
+    color: #143752;
+    box-shadow: 0 2px 6px #14375226;
+    transition: background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.landing-page .card .arrow img {
+    width: 65%;
+    height: 65%;
+    object-fit: contain;
+    opacity: 1;
+    filter: brightness(0) saturate(100%);
+    transform: none;
+    transition: transform 220ms ease;
+}
+
+.landing-page a.card:focus-visible {
+    outline: 3px solid #ffe8a0;
+    outline-offset: 5px;
+    box-shadow: 0 12px 28px #102d3940;
+}
+
+.landing-page a.card:focus-visible .arrow {
+    background: #ffe8a0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .landing-page a.card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 14px 30px #102d394d, inset 0 0 0 2px #ffe8a0b3;
+    }
+
+    .landing-page a.card:hover .card-art img {
+        transform: scale(1.035);
+    }
+
+    .landing-page a.card:hover .arrow {
+        background: #ffe8a0;
+        box-shadow: 0 0 12px #ffe8a066;
+    }
+
+    .landing-page a.card:hover .arrow img {
+        transform: translate(1px, -1px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .landing-page .card,
+    .landing-page .card .card-art img,
+    .landing-page .card .arrow,
+    .landing-page .card .arrow img {
+        transition: none;
+    }
+
+    .landing-page a.card:hover,
+    .landing-page a.card:hover .card-art img,
+    .landing-page a.card:hover .arrow img {
+        transform: none;
+    }
 }
