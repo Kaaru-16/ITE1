@@ -1679,9 +1679,36 @@ body:has(.destination-scene) .destination-scene {
 .nation-menu summary::-webkit-details-marker { display: none; }
 .nation-menu summary img { width: .95vw; height: 1.15vw; object-fit: contain; transform: rotate(-90deg); }
 .nation-menu[open] summary img { transform: rotate(90deg); }
-.nation-options { position: absolute; top: calc(100% + 18px); left: 0; min-width: 100%; padding: 12px; border: 1px solid #ffeaa880; border-radius: 14px; background: #193e50f2; box-shadow: 0 6px 20px #0005; }
-.nation-options a { display: block; padding: 12px; font-size: max(14px, 1vw); white-space: nowrap; }
-.nation-options a:hover, .nation-options a:focus-visible { background: #ffffff20; color: #ffeeab; }
+.nation-options {
+    position: absolute;
+    z-index: 1;
+    top: calc(100% + 18px);
+    left: 0;
+    width: clamp(200px, 12.3542vw, 237.2px);
+    max-width: calc(100vw - 32px);
+    padding: 18px 14px;
+    border: 1px solid #fff7dc66;
+    border-radius: 30px;
+    background: #747c70f5;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 6px 14px #0004;
+    text-align: center;
+}
+.nation-options a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 12px 8px;
+    font-size: clamp(14px, 1vw, 19px);
+    line-height: 1.2;
+    white-space: nowrap;
+}
+.nation-options a:hover, .nation-options a:focus-visible {
+    background-color: #ffffff20;
+    color: #ffeeab;
+    border-radius: 8px;
+}
 .landing-world { background: url('../image/hero-background.png') center top / 100% 100% no-repeat; padding: 10.7vw 0 4vw; }
 .discovery-hero { position: relative; width: 87.5%; min-height: 38.5vw; margin: 0 auto; border: 1px solid #e1e6ec55; border-radius: 1.6vw; background: #d3dfdf55; box-shadow: 0 5px 8px #0003; backdrop-filter: blur(4px); }
 .discovery-copy { position: relative; z-index: 2; padding: 2.5vw 1.6vw 3.3vw; width: 56%; text-shadow: 0 4px 5px #0004; }
@@ -1833,7 +1860,6 @@ body:has(.destination-scene) .destination-scene {
 .choice-badge img { width: 100%; height: 100%; }
 .choice-badge > span { position: absolute; left: 19.47%; top: 41.58%; color: #fff; font-size: 1vw; line-height: .85; }
 .footer-policies { display: grid; gap: 1vw; border-left: 1px solid #fff8; padding: 2vw 0 2vw 6.5vw; }
-.nation-options { border: 0; background: url('../image/home-imgRectangle5.svg') center / 100% 100% no-repeat; text-align: center; }
 .nation-options a { background-repeat: no-repeat; background-position: bottom center; background-size: 90% 1px; }
 .nation-options a:nth-child(1) { background-image: url('../image/divider-1.svg'); }
 .nation-options a:nth-child(2) { background-image: url('../image/divider-2.svg'); }
