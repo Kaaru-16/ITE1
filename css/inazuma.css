@@ -1,1 +1,334 @@
-/* Inazuma page styles. Add this nation's design here. */
+.inazuma-page {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.destination-scene {
+    position: relative;
+    width: 100%;
+    height: 56.25vw;
+    min-height: 600px;
+    color: #fff;
+    overflow: hidden;
+}
+
+.scene-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* Purple overlay from the Figma design */
+.destination-scene::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        90deg,
+        rgba(74, 25, 145, 0.78),
+        rgba(74, 25, 145, 0.35) 45%,
+        rgba(74, 25, 145, 0)
+    );
+}
+
+/* Navigation */
+.site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+}
+
+.nav-atmosphere {
+    position: absolute;
+    width: 100%;
+    height: 250px;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.nav-atmosphere img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.75;
+}
+
+.guild-nav {
+    position: relative;
+    z-index: 2;
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 40px;
+
+    display: grid;
+    grid-template-columns: 1fr 150px 1fr 1fr;
+    align-items: center;
+    gap: 25px;
+
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.guild-nav a,
+.nation-menu summary {
+    color: #fff;
+    text-decoration: none;
+}
+
+.guild-logo {
+    text-align: center;
+}
+
+.guild-logo img {
+    width: 117px;
+    height: auto;
+}
+
+.nation-menu summary {
+    cursor: pointer;
+    list-style: none;
+}
+
+.nation-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.nation-menu summary img {
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.nation-options {
+    position: absolute;
+    margin-top: 10px;
+    padding: 12px;
+    background: rgba(20, 15, 55, 0.95);
+    border: 1px solid #e7c95c;
+    border-radius: 8px;
+}
+
+.nation-options a {
+    display: block;
+    padding: 7px 12px;
+    font-size: 16px;
+}
+
+/* Main text */
+.scene-copy {
+    position: relative;
+    z-index: 2;
+    padding-top: 15vw;
+    margin-left: 6.77%;
+    width: 48%;
+}
+
+.scene-copy h1 {
+    margin: 0;
+    font-size: clamp(70px, 8vw, 150px);
+    line-height: 0.9;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.45);
+}
+
+.scene-subtitle {
+    margin: 15px 0 0;
+    font-size: clamp(30px, 3vw, 55px);
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.scene-description {
+    margin-top: 20px;
+    max-width: 720px;
+    font-size: clamp(18px, 1.5vw, 30px);
+    line-height: 1.05;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Price */
+.scene-pricing {
+    position: absolute;
+    z-index: 2;
+    left: 6.77%;
+    top: 70%;
+}
+
+.scene-pricing h3,
+.scene-stops h3 {
+    margin: 0 0 8px;
+    font-size: clamp(25px, 2vw, 40px);
+}
+
+.scene-stops h3 {
+    margin-bottom: 8px;
+}
+
+.price-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 225px;
+    height: 55px;
+
+    border: 2px solid #f0d34f;
+    border-radius: 40px;
+
+    background: rgba(100, 80, 100, 0.65);
+
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.scene-pricing small {
+    display: block;
+    margin-top: 7px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Featured stops */
+.scene-stops {
+    position: absolute;
+    z-index: 2;
+    left: 6.77%;
+    top: 89%;
+}
+
+.stops-value {
+    margin: 0;
+    padding: 12px 20px;
+
+    border-radius: 30px;
+    background: rgba(70, 50, 80, 0.65);
+
+    font-size: clamp(15px, 1.3vw, 25px);
+    font-weight: bold;
+}
+
+/* Next arrow */
+.scene-next {
+    position: absolute;
+    z-index: 3;
+    right: 8%;
+    top: 78%;
+
+    display: block;
+}
+
+.scene-next img {
+    width: 60px;
+    height: auto;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+
+    .guild-nav {
+        width: 90%;
+        grid-template-columns: 1fr 70px 1fr;
+        gap: 12px;
+        font-size: 13px;
+    }
+
+    .guild-nav > a:last-child {
+        display: none;
+    }
+
+    .guild-logo img {
+        width: 70px;
+    }
+
+    .destination-scene {
+        height: auto;
+        min-height: 850px;
+    }
+
+    .scene-copy {
+        padding-top: 150px;
+        margin-left: 7%;
+        width: 85%;
+    }
+
+    .scene-copy h1 {
+        font-size: 65px;
+    }
+
+    .scene-subtitle {
+        font-size: 28px;
+    }
+
+    .scene-description {
+        font-size: 17px;
+        line-height: 1.25;
+    }
+
+    .scene-pricing {
+    position: absolute;
+    z-index: 2;
+    left: 6.77%;
+    top: 70%;
+}
+    }
+
+    .scene-stops {
+    position: absolute;
+    z-index: 2;
+    left: 6.77%;
+    top: 84%;
+}
+
+    .scene-next {
+        right: 5%;
+        top: 52%;
+    }
+
+    .scene-next img {
+        width: 40px;
+    }
+    .inazuma-page .scene-stops {
+    position: absolute !important;
+    left: 6.77% !important;
+    top: 90% !important;
+    z-index: 10 !important;
+}
+.book-journey {
+    position: absolute;
+    right: 9%;
+    bottom: 8%;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    width: 480px;
+    height: 95px;
+
+    border: 2px solid #f4d35e;
+    border-radius: 60px;
+
+    background: rgba(210, 205, 215, 0.65);
+    color: #fff;
+
+    text-decoration: none;
+    font-size: 34px;
+    font-weight: bold;
+
+    backdrop-filter: blur(4px);
+}
+
+.book-journey span {
+    font-size: 32px;
+}
