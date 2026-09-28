@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1920" height="2310" viewBox="0 0 1920 2310" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect id="Top blend mask" width="1920" height="2310" fill="url(#paint0_linear_0_14)"/>
+<defs>
+<linearGradient id="paint0_linear_0_14" x1="960" y1="0" x2="960" y2="2310" gradientUnits="userSpaceOnUse">
+<stop stop-color="white" stop-opacity="0"/>
+<stop offset="0.0528846" stop-color="white" stop-opacity="0.07"/>
+<stop offset="0.115385" stop-color="white"/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>

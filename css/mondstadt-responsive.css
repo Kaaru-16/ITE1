@@ -1,0 +1,312 @@
+@media (max-width:900px) {
+    .hero:after {
+        background: linear-gradient(90deg,#f0efdbeb,#f0efdbb0 50%,#f0efdb22);
+    }
+}
+@media (prefers-reduced-motion:reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    * {
+        transition: none !important;
+    }
+}
+@media (min-width:1921px) {
+    .guild-nav {
+        font-size: 1.042vw;
+    }
+    .guild-logo img {
+        width: 6.12vw;
+    }
+}
+@media (max-width:760px) {
+    .guild-nav {
+        width: 91%;
+        gap: 12px;
+        padding-top: 20px;
+        grid-template-columns: 1fr 66px 1fr;
+        font-size: 11px;
+    }
+    .guild-logo img {
+        width: 66px;
+    }
+    .guild-nav > a:last-child {
+        white-space: normal;
+    }
+    .nav-atmosphere {
+        height: 400px;
+    }
+    .destination-scene {
+        height: auto;
+        min-height: 830px;
+        padding: 130px 0 35px;
+    }
+    .scene-copy {
+        padding: 0;
+        width: 86%;
+        margin: 0 auto;
+    }
+    .scene-copy h1 {
+        font-size: clamp(42px, 11vw, 68px);
+        overflow-wrap: anywhere;
+    }
+    .scene-subtitle {
+        font-size: 25px;
+        margin-top: 8px;
+    }
+    .scene-description {
+        font-size: 17px;
+        line-height: 1.35;
+        width: 95%;
+        margin-top: 20px;
+    }
+    .scene-pricing,
+.scene-stops {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 86%;
+        margin: 140px auto 0;
+    }
+    .scene-pricing h3,
+.scene-stops h3 {
+        font-size: 28px;
+    }
+    .price-value {
+        width: 230px;
+        height: 62px;
+        margin-top: 10px;
+        font-size: 28px;
+    }
+    .scene-pricing small {
+        text-align: left;
+        margin-top: 10px;
+        font-size: 12px;
+    }
+    .scene-stops {
+        margin-top: 25px;
+        margin-bottom: 55px;
+    }
+    .stops-value {
+        width: 100%;
+        min-height: 64px;
+        padding: 15px;
+        margin-top: 12px;
+        font-size: 16px;
+        line-height: 1.35;
+    }
+    .scene-next {
+        left: auto;
+        right: 7%;
+        top: 49%;
+    }
+    .scene-next img {
+        width: 35px;
+        height: 44px;
+    }
+    .scene-art {
+        object-position: 60% center;
+    }
+    .destination-scene:before {
+        background: linear-gradient(90deg,#006b81db,#006b8133);
+    }
+}
+@media (max-width: 600px) {
+    .guild-nav {
+        width: 94%;
+        grid-template-columns: 1fr 58px 1fr;
+        gap: 10px;
+        font-size: 9px;
+    }
+    .guild-logo img {
+        width: 58px;
+    }
+    body:has(.destination-scene) .destination-scene {
+        height: auto;
+        min-height: 790px;
+        padding-top: 120px;
+    }
+}
+@media (max-width: 1100px) {
+    .guild-nav {
+        width: 94%;
+        max-width: none;
+        gap: 10px;
+        padding: 18px 0;
+        grid-template-columns: 1.5fr 58px 1fr auto;
+        font-size: 11px;
+    }
+    .guild-nav > a,
+.nation-menu summary {
+        white-space: normal;
+    }
+    .guild-nav > a:last-child {
+        margin-left: 0;
+    }
+    .guild-logo img {
+        width: 58px;
+    }
+    .nation-menu summary img {
+        width: 12px;
+        height: 15px;
+        flex-shrink: 0;
+    }
+    .nav-atmosphere {
+        height: 300px;
+    }
+    .mondstadt-page .destination-scene {
+        height: auto;
+        min-height: 860px;
+        padding: 155px 0 45px;
+    }
+    .mondstadt-page .scene-copy {
+        padding: 0;
+        width: 86%;
+        margin: auto;
+    }
+    .mondstadt-page .scene-copy h1 {
+        font-size: clamp(42px, 11vw, 78px);
+    }
+    .mondstadt-page .scene-subtitle {
+        font-size: 25px;
+        line-height: 1.1;
+        margin-top: 12px;
+    }
+    .mondstadt-page .scene-description {
+        width: 100%;
+        font-size: 17px;
+        line-height: 1.2;
+        margin-top: 22px;
+    }
+    .mondstadt-page .scene-pricing,
+.mondstadt-page .scene-stops {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 86%;
+        margin: 150px auto 0;
+    }
+    .mondstadt-page .scene-pricing h3,
+.mondstadt-page .scene-stops h3 {
+        font-size: 32px;
+    }
+    .mondstadt-page .price-value {
+        font-size: 30px;
+        margin-top: 10px;
+    }
+    .mondstadt-page .scene-pricing small {
+        font-size: 14px;
+        margin-top: 8px;
+    }
+    .mondstadt-page .scene-stops {
+        margin-top: 30px;
+        margin-bottom: 0;
+    }
+    .mondstadt-page .stops-value {
+        font-size: 17px;
+        line-height: 1.15;
+        padding: 16px;
+        margin-top: 10px;
+    }
+    .mondstadt-page .scene-next {
+        top: 54%;
+        left: auto;
+        right: 7%;
+    }
+    .mondstadt-page .scene-next img {
+        width: 35px;
+        height: 44px;
+    }
+}
+@media (max-width: 380px) {
+    .guild-nav {
+        font-size: 10px;
+        gap: 7px;
+    }
+}
+@media (min-width: 1101px) {
+    .nav-atmosphere {
+        width: 100%;
+        left: 0;
+        top: -.1042vw;
+        height: 54.7917vw;
+        opacity: .7826;
+    }
+    .nav-atmosphere img {
+        height: 133.1%;
+        top: -33.1%;
+    }
+    .guild-nav {
+        width: 50.1%;
+        max-width: none;
+        margin-left: 24.6354%;
+        gap: 0;
+        grid-template-columns: 22.292vw 10.938vw 13.594vw auto;
+        padding-top: 2.2917vw;
+        font-size: 1.25vw;
+    }
+    .guild-nav > a:last-child {
+        margin: 0;
+    }
+    .guild-nav summary {
+        gap: .6vw;
+    }
+    .guild-nav summary img {
+        width: 1.2vw;
+        height: 1.3vw;
+    }
+    .mondstadt-page {
+        min-height: 65.15625vw;
+        background: #1e1e1e;
+    }
+    .mondstadt-page .scene-next {
+        top: 33.2292vw;
+        left: 90.4167%;
+    }
+    .mondstadt-page .scene-next img {
+        width: 4.1623vw;
+        height: 5.15625vw;
+    }
+    .mondstadt-page .scene-pricing {
+        top: 33.90625vw;
+    }
+    .mondstadt-page .scene-pricing h3 {
+        margin-left: .3125vw;
+    }
+    .mondstadt-page .price-value {
+        margin-top: .3854vw;
+    }
+    .mondstadt-page .scene-stops {
+        top: 43.9583vw;
+    }
+    .mondstadt-page .stops-value {
+        font-size: 1.46vw;
+        height: 3.3854vw;
+        white-space: nowrap;
+    }
+}
+@media (max-width: 1100px) {
+    .mondstadt-page .scene-art {
+        object-position: 60% center;
+    }
+    .mondstadt-page .price-value {
+        width: 230px;
+        height: 62px;
+    }
+    .mondstadt-page .stops-value {
+        width: 100%;
+        height: auto;
+        min-height: 64px;
+        white-space: normal;
+    }
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+    .guild-nav {
+        font-size: 15px;
+        gap: 22px;
+        grid-template-columns: 1.5fr 72px 1fr auto;
+    }
+    .guild-logo img {
+        width: 72px;
+    }
+}
