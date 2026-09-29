@@ -205,15 +205,15 @@ h6 {
 
 .book-bg {
     display: block;
-    left: 1100px;
-    width: 400px;
+    left: 1800px;
+    width: 25vw;
     height: 6vw;
 }
 
 .book-text {
     position: absolute;
     top: 45%;
-    left: 35%;
+    left: 33%;
     transform: translate(-50%, -50%);
     color: white;
     font-family: "HYWenHei", sans-serif;
@@ -225,8 +225,8 @@ h6 {
 
 .book-icon {
     position: absolute;
-    top: 44%;
-    right: 28%;
+    top: 45%;
+    right: 33%;
     transform: translateY(-50%);
     width: 2.2vw;
     height: auto;
