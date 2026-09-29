@@ -20,6 +20,7 @@ html {
     scroll-padding-top: 100px;
 }
 body {
+    -webkit-text-stroke: 0;
     margin: 0;
     background: var(--cream);
     color: var(--ink);
@@ -276,7 +277,7 @@ h3 {
     color: #fff;
     font-size: clamp(12px, 1.042vw, 20px);
     font-weight: 700;
-    text-shadow: 0 2px 4px #0006;
+    text-shadow: 0 3px 8px #0006;
 }
 .guild-nav > a:last-child {
     justify-self: start;
@@ -473,7 +474,7 @@ h3 {
     z-index: 2;
     padding: 2.5vw 1.6vw 3.3vw;
     width: 56%;
-    text-shadow: 0 4px 5px #0004;
+    text-shadow: 0 3px 8px #0006;
 }
 .discovery-copy h1 {
     font-size: 7.4vw;
@@ -627,7 +628,7 @@ h3 {
 .guild-story {
     padding: 8vw 0 10.5vw;
     text-align: center;
-    text-shadow: 0 4px 5px #0008;
+    text-shadow: 0 3px 8px #0006;
 }
 .guild-story h2 {
     font-size: 5.6vw;
