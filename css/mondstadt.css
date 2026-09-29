@@ -549,6 +549,7 @@ h3 {
     margin: 0 6.7708% 3vw;
     font-size: 3.3333vw;
     line-height: 1.1;
+    text-shadow: 0 4px 5px #0009;
 }
 .journey-places {
     display: grid;
@@ -556,6 +557,7 @@ h3 {
     gap: 5.5729vw;
     padding: 1.25vw 11.09375%;
     background: #ffffff40;
+    box-shadow: 0 4px 6px #0004;
 }
 .journey-places figure {
     margin: 0;
@@ -566,13 +568,14 @@ h3 {
     aspect-ratio: 420 / 232;
     object-fit: cover;
     border-radius: 1.1458vw;
-    border: 1px solid #ffffff80;
+    border: 0;
 }
 .journey-places figcaption {
     margin-top: .8vw;
     text-align: center;
     font-size: 1.6667vw;
     line-height: 1.15;
+    text-shadow: 0 3px 3px #000a;
 }
 .package-details {
     scroll-margin-top: 24px;
@@ -653,8 +656,9 @@ h3 {
     position: relative;
     aspect-ratio: 420 / 232;
     overflow: hidden;
-    border: 1px solid #ffffff80;
+    border: 0;
     border-radius: 1.1458vw;
+    box-shadow: 0 3px 5px #0006;
 }
 .journey-photo img {
     position: absolute;
