@@ -489,3 +489,188 @@ h3 {
     background: transparent;
     backdrop-filter: none;
 }
+/* Mondstadt journey, itinerary, and package details. */
+.mondstadt-world {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: #1d6579;
+}
+.mondstadt-world::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(#1290aa52, #1290aa52), url("../image/mondstadt-street.png") center / cover no-repeat;
+    filter: blur(4.4px);
+}
+.mondstadt-page .destination-scene {
+    height: 52.6042vw;
+}
+.mondstadt-page .scene-art {
+    height: 59.53125vw;
+    mask-image: linear-gradient(#000 60%, transparent 100%);
+}
+.mondstadt-page .destination-scene::before {
+    mask-image: linear-gradient(#000 55%, transparent);
+}
+.booking-button {
+    position: absolute;
+    top: 41.6146vw;
+    right: 9.5833%;
+    width: 29.1667vw;
+    min-height: 6.0417vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.3vw;
+    border: 2px solid #eec966;
+    border-radius: 5vw;
+    background: #fff3cd7a;
+    font-size: 2.0833vw;
+    line-height: 1.1;
+    text-shadow: 0 2px 5px #0007;
+}
+.booking-button img {
+    width: 1.875vw;
+    height: 1.875vw;
+    filter: brightness(0) invert(1);
+}
+.booking-button:hover, .booking-button:focus-visible {
+    background: #fff3cda6;
+}
+.journey-gallery h2 {
+    margin: 0 6.7708% 3vw;
+    font-size: 3.3333vw;
+    line-height: 1.1;
+}
+.journey-places {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5.5729vw;
+    padding: 1.25vw 11.09375%;
+    background: #ffffff40;
+}
+.journey-places figure {
+    margin: 0;
+    min-width: 0;
+}
+.journey-places img {
+    width: 100%;
+    aspect-ratio: 420 / 232;
+    object-fit: cover;
+    border-radius: 1.1458vw;
+    border: 1px solid #ffffff80;
+}
+.journey-places figcaption {
+    margin-top: .8vw;
+    text-align: center;
+    font-size: 1.6667vw;
+    line-height: 1.15;
+}
+.package-details {
+    width: 86.4583%;
+    margin: 3.75vw auto 0;
+    padding-bottom: 4vw;
+    display: grid;
+    grid-template-columns: 1.51fr 1fr;
+    align-items: start;
+    gap: 3.2vw;
+    text-shadow: 0 2px 4px #0006;
+}
+.journey-day {
+    display: grid;
+    grid-template-columns: 5.7292vw 1fr;
+    gap: 1.15vw;
+    padding: 1.35vw 0 1.7vw;
+    border-bottom: 1px solid #fff8;
+}
+.journey-day > span {
+    font-size: 1.0417vw;
+}
+.journey-day h3, .package-inclusions h3 {
+    margin: 0 0 .8vw;
+    font-size: 1.6667vw;
+    line-height: 1.1;
+}
+.journey-day p {
+    font-size: .9375vw;
+    line-height: 1.35;
+    margin: 0;
+}
+.package-inclusions {
+    padding: 1.875vw 2.0833vw;
+    border-radius: 1.823vw;
+    background: #ffffff40;
+    box-shadow: 0 4px 7px #0004;
+}
+.package-inclusions ul {
+    margin: 1.1vw 0;
+    padding: 0 0 1.1vw 1.5vw;
+    border-bottom: 1px solid #fff8;
+    font-size: 1.25vw;
+    line-height: 1.15;
+}
+.package-note {
+    font-size: .9375vw;
+    line-height: 1.3;
+    margin: 1.1vw 0 0;
+}
+.package-inclusions .package-note {
+    font-size: .83vw;
+}
+.reference-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6.5vw;
+    min-height: 16.71875vw;
+    padding: 3vw 7%;
+    background: #0a131d;
+    font: .9115vw/1.25 Arial, sans-serif;
+}
+.reference-footer img {
+    width: 9.7917vw;
+    height: auto;
+}
+.footer-policies {
+    display: grid;
+    gap: 1vw;
+    border-left: 1px solid #fff8;
+    padding: 2vw 0 2vw 6.5vw;
+}
+.reference-footer p {
+    color: #fff;
+}
+.journey-photo {
+    position: relative;
+    aspect-ratio: 420 / 232;
+    overflow: hidden;
+    border: 1px solid #ffffff80;
+    border-radius: 1.1458vw;
+}
+.journey-photo img {
+    position: absolute;
+    max-width: none;
+    border: 0;
+    border-radius: 0;
+    aspect-ratio: auto;
+}
+.journey-places figure:nth-child(1) img {
+    width: 112.38%;
+    height: 114.44%;
+    left: -3.04%;
+    top: -.13%;
+}
+.journey-places figure:nth-child(2) img {
+    width: 130.79%;
+    height: 133.22%;
+    left: -15.48%;
+    top: -16.83%;
+}
+.journey-places figure:nth-child(3) img {
+    width: 106.63%;
+    height: 108.62%;
+    left: -.4%;
+    top: -4.19%;
+}

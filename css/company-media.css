@@ -699,3 +699,77 @@
         transform: none;
     }
 }
+@media (min-width: 1101px) {
+    .guild-story {
+        height: 55.6771vw;
+        padding-top: 10.9896vw;
+    }
+    .guild-story h2 {
+        margin-left: 10.15625%;
+        text-align: left;
+        font-size: 5vw;
+        margin-bottom: 3.7vw;
+    }
+    .story-panel, .story-panel.director {
+        margin-left: 10.15625%;
+        width: 53.4375%;
+        min-height: 12.24vw;
+    }
+    .story-panel p {
+        font-size: 1.6667vw;
+        line-height: 1.12;
+    }
+    .landing-page .faq-intro {
+        margin-left: 2.34375vw;
+    }
+    .landing-page .faq-intro h2 {
+        font-size: 3.3333vw;
+    }
+    .landing-page .faq-intro .eyebrow {
+        font-size: 1.25vw;
+    }
+    .landing-page #travel-notes {
+        padding-left: 7.8125vw;
+        padding-right: 8.8542vw;
+    }
+    .landing-page .faq-item h3 {
+        font-size: 1.6667vw;
+        min-height: 4.7604vw;
+    }
+    .landing-page .faq-item p {
+        font-size: 1.04167vw;
+        line-height: 1.124;
+    }
+    .journey-button {
+        border-radius: 4.8958vw;
+    }
+    .discovery-copy h1 {
+        font-size: 6.6667vw;
+    }
+    .discovery-copy p {
+        font-size: 1.6667vw;
+        margin-top: 3.6vw;
+    }
+    .landing-page .section-head h2 {
+        font-size: 4.1667vw;
+    }
+}
+@media (max-width: 1100px) {
+    .guild-companion {
+        position: relative;
+        width: min(65%, 440px);
+        margin: 24px auto -65px;
+        right: auto;
+        top: auto;
+    }
+    .guild-story {
+        display: flex;
+        flex-direction: column;
+    }
+    .guild-companion {
+        order: 4;
+    }
+    .journey-button {
+        border-radius: 60px;
+    }
+}

@@ -725,7 +725,7 @@ h3 {
     width: 137.975vw;
     height: 108.225vw;
     filter: blur(2.35px);
-    mask-image: url("../image/home-img110436881.svg");
+    mask-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 7%) 5.28846%, #000 11.5385%);
     mask-repeat: no-repeat;
     mask-size: 100vw 120.3125vw;
     mask-position: 27.74vw -8.18vw;
@@ -920,4 +920,36 @@ h3 {
 }
 .landing-page a.card:focus-visible .arrow {
     background: #ffe8a0;
+}
+/* Updated company artwork and color accents. */
+.guild-story {
+    position: relative;
+    isolation: isolate;
+}
+.guild-companion {
+    position: absolute;
+    z-index: -1;
+    width: 47.6042%;
+    right: 2.3958%;
+    top: 7.03125vw;
+    transform: scaleX(-1);
+    pointer-events: none;
+}
+.landing-page .card:nth-child(2) {
+    background: #eec96669;
+}
+.landing-page .card:nth-child(3) {
+    background: #d6b2ff69;
+}
+.landing-page .card:nth-child(4) {
+    background: #e0ff9769;
+}
+.landing-page .card:nth-child(5) {
+    background: #6c9fff69;
+}
+.landing-page .card:nth-child(6) {
+    background: #ff969669;
+}
+.landing-page .card:nth-child(7) {
+    background: #c1e1ff69;
 }
