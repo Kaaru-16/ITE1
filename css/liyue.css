@@ -26,7 +26,6 @@ html, body {
     margin: 0;
     padding: 0;
 }
-/* adjust shadowwwww */
 body {
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
 }
@@ -41,10 +40,9 @@ body {
 }
 
 /* TOP PORTION */
-/* title nung lugar */
+
 h1 {
     font-size: 7.92vw;
-    line-height: ;
 }
 .scene-art {
     position: absolute;
@@ -93,7 +91,7 @@ h1 {
 h4 {
     position: absolute;
     left: 7.5%;
-    top: 608px;
+    top: 820px;
     z-index: 10;
     font-size: 1vw;
     font-weight: 700;
@@ -144,8 +142,8 @@ h3 {
 }
 .price-image {
     position: absolute;
-    top: 535px;
-    left: 100px;
+    top: 720px;
+    left: 140px;
     width: 265px;    
     margin-top: 0.62vw;
 }
@@ -169,29 +167,30 @@ h3 {
 }
 /* ung featured stop mismo */
 h5 {
-    margin-top: 4px;
-    font-size: 1.56vw;
+    margin-top: 5px;
+    font-size: 1.3vw;
     line-height: 1.5;
-    margin-left: 10px;
+    margin-left: 18px;
     margin-bottom: 1.5vw;
 }
 /* ung featured stop na text */
 h6 {
-    margin-top: 20px;
+    margin-top: 30px;
     font-size: 2.93vw;
 }
+
 .stop-image {
     position: absolute;
-    top: 70px;
-    left: -10px;
-    width: 265px;
+    top: 100px;
+    left: -15px;
+    width: 250px;
     z-index: -1;
 }
 
 .stop-image img {
     display: block;
     top: 90;
-    width: 40vw;
+    width: 35vw;
     height: 50px;
 }
 
