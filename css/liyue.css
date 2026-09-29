@@ -341,7 +341,7 @@ body {
 .inclusions-box {
     width: 40%;
     padding: 1.2vw 1.5vw;
-    border-radius: 20px;
+    border-radius: 2vw;
     background: rgba(220, 225, 200, .45);
     border: 1px solid rgba(255,255,255,.5);
     box-shadow: 0 4px 12px rgba(0,0,0,.25);
