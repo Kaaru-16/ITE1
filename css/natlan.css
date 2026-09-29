@@ -531,7 +531,7 @@ summary:focus-visible {
     aspect-ratio: 420 / 232;
     overflow: hidden;
     border-radius: 1.1458vw;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, .38);
+    box-shadow: 0 6px 16px rgba(8, 8, 8, 0.38);
 }
 
 .journey-photo img {
