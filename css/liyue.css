@@ -31,25 +31,25 @@ body {
 }
 
 .liyue-page {
-    --display: HYWenHei, Cambria, Georgia, serif;
-    background: #000;
+    --display: "HYWenHei", Cambria, Georgia, serif;
+    background-color: #000;
+    background-image: url("../image/BGliy.png");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
     color: #fff;
     font-family: var(--display);
     font-weight: 700;
-    overflow-x: clip;
+    overflow-x: hidden;
 }
 
 /* TOP PORTION */
 
-h1 {
+.destination-scene h1 {
     font-size: 7.92vw;
 }
 .scene-art {
-    position: absolute;
-    top: -1vw;
-    left: 0;
-    object-fit: cover;
-    z-index: 0;
+    display: none;
 }
 .scene-stops {
     position: absolute;
@@ -88,7 +88,7 @@ h1 {
     z-index: 10;
 }
 /* per person ba */
-h4 {
+.destination-scene h4 {
     position: absolute;
     left: 7.5%;
     top: 820px;
@@ -97,7 +97,7 @@ h4 {
     font-weight: 700;
 }
 /* based price */
-h3 {
+.scene-pricing h5 {
     left: 6.7%;
     top: 545vw;
     font-size: 2.7em;
@@ -121,15 +121,7 @@ h3 {
     position: relative;
     width: 100%;
     height: 56.25vw;
-    overflow: hidden;
-}
-
-.journey-section {
-    position: relative;
-    min-height: 38vw;
-    padding: 3vw 6.7vw 5vw;
-    color: #fff;
-    z-index: 1;
+    overflow: visible;
 }
 
 .journey-section h2 {
@@ -166,7 +158,7 @@ h3 {
     text-shadow: 0 4px 5px #0007;
 }
 /* ung featured stop mismo */
-h5 {
+.destination-scene h5 {
     margin-top: 5px;
     font-size: 1.3vw;
     line-height: 1.5;
@@ -174,7 +166,7 @@ h5 {
     margin-bottom: 1.5vw;
 }
 /* ung featured stop na text */
-h6 {
+.destination-scene h6 {
     margin-top: 30px;
     font-size: 2.93vw;
 }
@@ -231,3 +223,168 @@ h6 {
     width: 2.2vw;
     height: auto;
 }
+
+.journey-content {
+    position: relative;
+    z-index: 2;
+}
+
+.journey-section {
+    position: relative;
+    width: 100%;
+    min-height: 38vw;
+    padding: 1vw 6.7vw 5vw;
+    color: #fff;
+    background: transparent;
+    overflow: visible;
+    z-index: 1;
+}
+
+.journey-section h2 {
+    margin: 0 0 2vw;
+    color: #fff;
+    font-family: "HYWenHei", sans-serif;
+    font-size: 3.2vw;
+    line-height: 1.1;
+    text-shadow: 0 3px 7px rgba(0,0,0,.7);
+}
+
+
+/* THREE DESTINATION IMAGES */
+
+.journey-stops {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto 3vw;
+}
+
+.journey-card {
+    width: 25%;
+    text-align: center;
+}
+
+.journey-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+
+}
+
+.journey-card p {
+    margin-top: .4vw;
+    font-size: 1.1vw;
+    text-shadow: 0 2px 5px #000;
+}
+
+.journey-rectangle {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    height: 280px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.journey-section h2,
+.journey-stops {
+    position: relative;
+    z-index: 3;
+}
+
+/* spacing from the 3 journey */
+
+.itinerary-section {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    gap: 4vw;
+    width: 90%;
+    margin: 4vw auto 0;
+    margin-bottom: 15vw;
+    color: #fff;
+}
+/* ung haba ng itinerary */
+.itinerary-days {
+    width: 62%;
+}
+
+.day-item {
+    display: flex;
+    gap: 1.5vw;
+    padding: 0.9vw 0;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+}
+/* day number ano pa ba */
+.day-number {
+    top:10%;
+    min-width: 5vw;;
+    font-size: 1.10vw;
+    font-weight: 700;
+}
+/* the "day title" arrival ganon */
+.day-item h3 {
+    position: static;
+    font-size: 1.5vw;
+    margin: 0 0 .2vw;
+}
+/* content nung nasa baba ng each days */
+.day-item p {
+    font-size: .90vw;
+    line-height: 1.2;
+    font-weight: 400;
+}
+/* ung pinaka box */
+.inclusions-box {
+    width: 40%;
+    padding: 1.2vw 1.5vw;
+    border-radius: 20px;
+    background: rgba(220, 225, 200, .45);
+    border: 1px solid rgba(255,255,255,.5);
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+/* ung title nung nasa box like inclusions ganon */
+.inclusions-box h3 {
+    position: static;
+    font-size: 1.3vw;
+    margin: 0 0 .8vw;
+}
+/* spacing nung dalawang nasa box */
+.inclusions-box ul {
+    padding-left: 1.8vw;
+    margin-bottom: 1.2vw;
+}
+/* ung content sa mismong box sa tabi ng days */
+.inclusions-box li {
+    font-size: 1.2vw;
+    line-height: 1.9;
+}
+
+.inclusions-box hr {
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.75);
+    margin: 1.4vw 0;
+}
+
+.package-note {
+    font-family: "HYWenHei", sans-serif;
+    font-size: 0.80vw;
+    line-height: 1.05;
+    color: #fff;
+    margin: 0.8vw 0 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,.6);
+}
+
+.itinerary-note {
+    margin-top: 1vw;
+    font-size: 0.80vw;
+    line-height: 1.2;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+
