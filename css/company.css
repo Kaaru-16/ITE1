@@ -1,4 +1,3 @@
-/* Base and text */
 :root {
     --font-body: Arial,Helvetica,sans-serif;
     --ink: #2e2444;
@@ -8,17 +7,22 @@
     --line: #d8d6cd;
     --display: Georgia, "Times New Roman", serif;
 }
+/* Include padding inside element widths. */
 * { box-sizing: border-box; }
+/* Smooth section navigation. */
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+/* Link and image defaults. */
 a { color: inherit; text-decoration: none; }
 img { display: block; width: 100%; }
+/* Remove default heading spacing. */
 h1, h2, h3, p { margin: 0; }
 h1 { font-size: clamp(3.3rem,6.5vw,6.4rem); }
 h2 { font-size: clamp(2.3rem,4vw,3.8rem); }
 h3 { font-size: 1.7rem; }
-p { color: var(--muted); }
 .skip:focus { top: 0; }
+/* Visible keyboard focus. */
 a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 6px; }
+/* Page background and text. */
 body {
     margin: 0;
     background: var(--cream);
@@ -32,6 +36,7 @@ h1, h2, h3 {
     font-weight: 700;
     letter-spacing: 0;
 }
+/* Keyboard shortcut to main content. */
 .skip {
     position: fixed;
     top: -80px;
@@ -40,6 +45,7 @@ h1, h2, h3 {
     z-index: 20;
     color: #2e2444;
 }
+/* Company page theme. */
 .landing-page {
     --display: HYWenHei, Cambria, Georgia, serif;
     background: #000;
@@ -49,11 +55,13 @@ h1, h2, h3 {
     overflow-x: clip;
 }
 .landing-page p { color: inherit; }
-.landing-page #destinations { width: 87%; max-width: none; padding: 8vw 0 0; }
+.landing-page .destinations { width: 87%; max-width: none; padding: 8vw 0 0; }
 .landing-page #main { overflow: clip; }
-
-/* Navigation */
+/* Land 40px below the viewport top. */
+#destinations { scroll-margin-top: -60px; }
+/* Place navigation over the hero. */
 .site-header { position: absolute; z-index: 10; inset: 0 0 auto; }
+/* Crop the navigation backdrop. */
 .nav-atmosphere img {
     position: absolute;
     width: 100%;
@@ -61,6 +69,7 @@ h1, h2, h3 {
     top: -26.83%;
     object-fit: fill;
 }
+/* Align navigation links and logo. */
 .guild-nav {
     position: relative;
     display: grid;
@@ -80,6 +89,7 @@ h1, h2, h3 {
 .guild-nav > a { white-space: nowrap; }
 .guild-nav > a:last-child { justify-self: start; white-space: nowrap; margin-left: -2.5vw; }
 .guild-logo img { filter: drop-shadow(0 4px 7px #0005); width: 6.12vw; height: auto; }
+/* Decorative navigation shading. */
 .nav-atmosphere {
     position: absolute;
     width: 100%;
@@ -88,6 +98,7 @@ h1, h2, h3 {
     height: 30vw;
     opacity: .78;
 }
+/* Anchor the nation dropdown. */
 .nation-menu { position: relative; justify-self: auto; }
 .nation-menu summary {
     cursor: pointer;
@@ -105,6 +116,7 @@ h1, h2, h3 {
     transform: rotate(-90deg);
 }
 .nation-menu[open] summary img { transform: rotate(90deg); }
+/* Dropdown panel and nation links. */
 .nation-options {
     position: absolute;
     z-index: 1;
@@ -141,9 +153,9 @@ h1, h2, h3 {
 .nation-options a:nth-child(5) { background-image: url("../image/divider-5.svg"); }
 .nation-options a:nth-child(6) { background-image: url("../image/divider-6.svg"); }
 .nation-options a:nth-child(7) { background-image: url("../image/divider-7.svg"); }
-
-/* Hero and scenery */
+/* Shared hero and destination scenery. */
 .landing-world { background: url("../image/hero-background.png") center top / 100% 100% no-repeat; padding: 10.7vw 0 4vw; }
+/* Glass panel behind the hero. */
 .discovery-hero {
     position: relative;
     width: 87.5%;
@@ -155,6 +167,7 @@ h1, h2, h3 {
     box-shadow: 0 5px 8px #0003;
     backdrop-filter: blur(4px);
 }
+/* Hero heading and introduction. */
 .discovery-copy {
     position: relative;
     z-index: 2;
@@ -170,6 +183,7 @@ h1, h2, h3 {
     font-size: 1.9vw;
     line-height: .94;
 }
+/* Begin Your Journey button. */
 .journey-button {
     display: inline-flex;
     align-items: center;
@@ -185,6 +199,7 @@ h1, h2, h3 {
     text-shadow: none;
 }
 .journey-button:hover { background: #fff0bf; }
+/* Position Paimon beside the hero. */
 .companion {
     position: absolute;
     width: 43vw;
@@ -193,23 +208,20 @@ h1, h2, h3 {
     pointer-events: none;
 }
 .companion img { width: 100%; height: auto; }
-
-/* Destination cards */
+/* Small section labels. */
 .eyebrow {
     font-size: 10px;
-    letter-spacing: .23em;
-    text-transform: uppercase;
     font-weight: 700;
     display: block;
     margin-bottom: 22px;
 }
 .section { padding: 90px 0; }
+/* Section heading alignment. */
 .section-head {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     gap: 40px;
-    margin-bottom: 36px;
 }
 .section-head .eyebrow { margin-bottom: 14px; }
 .text-link {
@@ -219,59 +231,28 @@ h1, h2, h3 {
     padding-bottom: 6px;
 }
 .card { display: block; }
-.card-art img { height: 100%; object-fit: cover; transition: transform .5s; }
+.card-art img { height: 100%; transition: transform .5s; }
 .card:hover .card-art img { transform: scale(1.045); }
-.card-number {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    color: white;
-    font-size: 10px;
-    letter-spacing: .1em;
-    background: #203b354d;
-    border: 1px solid #ffffff70;
-    border-radius: 30px;
-    padding: 3px 10px;
-}
-.card-info {
-    padding: 19px 0 0;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
+/* Align card titles and link icons. */
+.card-info { display: flex; justify-content: space-between; }
 .card p { font-size: 12px; margin-top: 7px; }
-.arrow {
-    width: 34px;
-    height: 34px;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-}
-.card:hover .arrow { background: #ffe8a0; color: #143752; }
-.card-note h3 { font-size: 32px; max-width: 430px; margin: 12px 0; }
-.card-note p { font-size: 13px; margin-bottom: 22px; max-width: 460px; }
+/* Center the link icon. */
+.arrow { border-radius: 50%; display: grid; place-items: center; }
+.card-note p { font-size: 13px; margin-bottom: 22px; }
 .wrap { margin: auto; width: 86.46%; max-width: 1660px; }
 .section-head .eyebrow, .eyebrow { color: #796942; }
-.cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
-.card-art {
-    position: relative;
-    overflow: hidden;
-    background: #dce5db;
-    aspect-ratio: 1.45;
-    border-radius: 18px;
-}
-.card h3 { font-size: 26px; font-weight: 700; }
+/* Nation card grid. */
+.cards { display: grid; grid-template-columns: repeat(3,1fr); }
+/* Clip images inside rounded cards. */
+.card-art { position: relative; overflow: hidden; background: #dce5db; }
+.card h3 { font-weight: 700; }
+/* Closing message beside the cards. */
 .card-note {
-    border: 1px solid var(--line);
-    padding: 34px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     grid-column: span 2;
-    border-radius: 18px;
-    background: #e9e8e1;
 }
 .landing-page .section-head { margin-bottom: 1.6vw; }
 .landing-page .eyebrow {
@@ -284,7 +265,6 @@ h1, h2, h3 {
 .landing-page .section-head h2 { font-size: 4.4vw; line-height: 1; }
 .landing-page .cards { gap: 2.6vw 5.6vw; }
 .landing-page .card-art { aspect-ratio: 1.8; border-radius: 1.5vw 1.5vw .6vw .6vw; }
-.landing-page .card-number { display: none; }
 .landing-page .card-info { padding: .4vw .15vw 0; gap: 4px; align-items: center; }
 .landing-page .card h3 { font-size: 1.8vw; line-height: .95; }
 .landing-page .card p { font: bold .92vw/.95 var(--display); margin: 0; }
@@ -321,6 +301,7 @@ h1, h2, h3 {
     border-radius: 2vw;
     background: #e2dfbf80;
 }
+/* Crop exported nation images. */
 .landing-page .card-art img {
     position: absolute;
     max-width: none;
@@ -366,6 +347,7 @@ h1, h2, h3 {
 }
 .landing-page .card:nth-child(1) { background: #b3ffeb6b; }
 .landing-page .arrow img { width: 1.875vw; height: 1.875vw; opacity: .42; }
+/* Travellers Choice ribbon. */
 .choice-badge {
     position: absolute;
     z-index: 2;
@@ -384,6 +366,7 @@ h1, h2, h3 {
     font-size: 1vw;
     line-height: .85;
 }
+/* Glass card surface and hover motion. */
 .landing-page .card {
     padding: 1.25vw 1.3vw .9vw;
     border-radius: 2vw;
@@ -394,6 +377,7 @@ h1, h2, h3 {
     transition: transform 220ms ease, box-shadow 220ms ease;
     box-shadow: 0 4px 12px #102d3926, inset 0 0 0 1px #ffffff55;
 }
+/* Keep link icon backgrounds transparent. */
 .landing-page .card .arrow {
     flex: 0 0 auto;
     width: 1.875vw;
@@ -409,16 +393,17 @@ h1, h2, h3 {
 }
 .landing-page a.card:focus-visible { outline: 3px solid #ffe8a0; outline-offset: 5px; box-shadow: 0 12px 28px #102d3940; }
 .landing-page a.card:focus-visible .arrow img { opacity: 1; }
+/* Nation card colors. */
 .landing-page .card:nth-child(2) { background: #eec96669; }
 .landing-page .card:nth-child(3) { background: #d6b2ff69; }
 .landing-page .card:nth-child(4) { background: #e0ff9769; }
 .landing-page .card:nth-child(5) { background: #6c9fff69; }
 .landing-page .card:nth-child(6) { background: #ff969669; }
 .landing-page .card:nth-child(7) { background: #c1e1ff69; }
-
-/* Guild story */
+/* Layer the guild story scenery. */
 .story-world { position: relative; isolation: isolate; }
 .guild-story h2 { font-size: 5.6vw; line-height: 1.1; margin-bottom: 1.8vw; }
+/* Glass panels for the story text. */
 .story-panel {
     width: 53%;
     margin: 0 auto 2.3vw;
@@ -431,6 +416,7 @@ h1, h2, h3 {
 }
 .story-panel p { font-size: 1.85vw; line-height: .97; }
 .story-panel:last-child { margin-bottom: 0; }
+/* Fade scenery behind the story and FAQs. */
 .story-scenery {
     position: absolute;
     z-index: -1;
@@ -454,6 +440,7 @@ h1, h2, h3 {
     left: -54.02%;
     top: .02%;
 }
+/* Story section spacing. */
 .guild-story {
     padding: 8vw 0 10.5vw;
     text-align: center;
@@ -462,6 +449,7 @@ h1, h2, h3 {
     isolation: isolate;
 }
 .story-accent { color: #fff4d0; }
+/* Position the founder illustration. */
 .guild-founder {
     position: absolute;
     width: 46.3133%;
@@ -470,6 +458,7 @@ h1, h2, h3 {
     margin: 0;
     pointer-events: none;
 }
+/* Crop the founder portrait. */
 .founder-art { position: relative; height: 50.1962vw; overflow: hidden; }
 .founder-art img {
     position: absolute;
@@ -478,6 +467,7 @@ h1, h2, h3 {
     top: -.02%;
     object-fit: fill;
 }
+/* Founder name and title. */
 .guild-founder figcaption {
     position: absolute;
     top: 40.57vw;
@@ -489,6 +479,7 @@ h1, h2, h3 {
     line-height: 1.1;
 }
 .guild-founder strong { display: block; font-size: 1.875vw; margin-bottom: .5vw; }
+/* Overlay the founder signature. */
 .founder-signature {
     position: absolute;
     width: 80%;
@@ -497,19 +488,12 @@ h1, h2, h3 {
     left: 10%;
     bottom: 1vw;
 }
-
-/* FAQs */
-.faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 90px; }
-.faq-item { border-bottom: 1px solid var(--line); padding: 20px 0; }
-.faq-item h3 {
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.4;
-    margin: 0;
-}
+.faq-grid { grid-template-columns: .8fr 1.2fr; gap: 90px; }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item h3 { margin: 0; }
 .faq-item p { font-size: 13px; padding: 15px 25px 0 0; }
 .faq, .card p, .card-note p { font-family: var(--font-body); }
+/* FAQ section background and spacing. */
 .landing-page #travel-notes {
     width: 100%;
     max-width: none;
@@ -518,6 +502,7 @@ h1, h2, h3 {
 }
 .landing-page .faq-grid { display: block; }
 .landing-page .faq-intro h2 { font-size: 4.3vw; line-height: 1.05; margin: 0 0 3vw; }
+/* Arrange FAQ questions. */
 .landing-page .faq {
     display: flex;
     flex-wrap: wrap;
@@ -526,6 +511,7 @@ h1, h2, h3 {
     gap: 3vw 2.3vw;
     border: 0;
 }
+/* Question and answer spacing. */
 .landing-page .faq-item {
     width: calc((100% - 4.6vw) / 3);
     text-align: center;
@@ -547,8 +533,7 @@ h1, h2, h3 {
     margin-bottom: 1vw;
 }
 .landing-page .faq-item p { font: bold 1.18vw/1 var(--display); padding-right: 0; }
-
-/* Footer */
+/* Footer logo, policies and copyright. */
 .reference-footer {
     display: flex;
     justify-content: center;
@@ -560,6 +545,8 @@ h1, h2, h3 {
 }
 .reference-footer img { width: 9.6vw; height: auto; }
 .reference-footer p { color: #fff; }
+
+/* Separate the policy text. */
 .footer-policies {
     display: grid;
     gap: 1vw;
@@ -576,3 +563,18 @@ h1, h2, h3 {
     width: 1px;
     background: url("../image/home-imgLine8.svg") center / 100% 100%;
 }
+
+/* Hide legacy card numbers. */
+.card-number {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    color: white;
+    font-size: 10px;
+    letter-spacing: .1em;
+    background: #203b354d;
+    border: 1px solid #ffffff70;
+    border-radius: 30px;
+    padding: 3px 10px;
+}
+.landing-page .card-number { display: none; }

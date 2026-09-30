@@ -1,33 +1,19 @@
-/* Mondstadt: screen sizes and reduced motion. */
+/* Screen sizes and motion preferences. */
+/* Reduce motion. */
 @media (prefers-reduced-motion:reduce) {
     html { scroll-behavior: auto; }
     * { transition: none !important; }
 }
+/* Wide-screen navigation. */
 @media (min-width:1921px) {
-    .guild-nav { font-size: 1.042vw; }
     .guild-logo img { width: 6.12vw; }
 }
+/* Small-screen adjustments. */
 @media (max-width:760px) {
-    .guild-nav {
-        width: 91%;
-        gap: 12px;
-        padding-top: 20px;
-        grid-template-columns: 1fr 66px 1fr;
-        font-size: 11px;
-    }
-    .guild-logo img { width: 66px; }
     .guild-nav > a:last-child { white-space: normal; }
-    .nav-atmosphere { height: 400px; }
-    .destination-scene { height: auto; min-height: 830px; padding: 130px 0 35px; }
-    .scene-copy { padding: 0; width: 86%; margin: 0 auto; }
-    .scene-copy h1 { font-size: clamp(42px, 11vw, 68px); overflow-wrap: anywhere; }
-    .scene-subtitle { font-size: 25px; margin-top: 8px; }
-    .scene-description {
-        font-size: 17px;
-        line-height: 1.35;
-        width: 95%;
-        margin-top: 20px;
-    }
+    .destination-scene { min-height: 830px; padding: 130px 0 35px; }
+    .scene-copy { padding: 0; margin: 0 auto; }
+    .scene-copy h1 { overflow-wrap: anywhere; }
     .scene-pricing, .scene-stops {
         position: relative;
         top: auto;
@@ -35,36 +21,18 @@
         width: 86%;
         margin: 140px auto 0;
     }
-    .scene-pricing h3, .scene-stops h3 { font-size: 28px; }
-    .price-value {
-        width: 230px;
-        height: 62px;
-        margin-top: 10px;
-        font-size: 28px;
-    }
-    .scene-pricing small { text-align: left; margin-top: 10px; font-size: 12px; }
+    .price-value { width: 230px; height: 62px; }
+    .scene-pricing small { text-align: left; }
     .scene-stops { margin-top: 25px; margin-bottom: 55px; }
-    .stops-value {
-        width: 100%;
-        min-height: 64px;
-        padding: 15px;
-        margin-top: 12px;
-        font-size: 16px;
-        line-height: 1.35;
-    }
+    .stops-value { width: 100%; min-height: 64px; line-height: 1.35; }
     .scene-art { object-position: 60% center; }
     .destination-scene:before { background: linear-gradient(90deg,#006b81db,#006b8133); }
 }
+/* Small-screen adjustments. */
 @media (max-width: 600px) {
-    .guild-nav {
-        width: 94%;
-        grid-template-columns: 1fr 58px 1fr;
-        gap: 10px;
-        font-size: 9px;
-    }
-    .guild-logo img { width: 58px; }
     body:has(.destination-scene) .destination-scene { height: auto; min-height: 790px; padding-top: 120px; }
 }
+/* Tablet and phone layout. */
 @media (max-width: 1100px) {
     .guild-nav {
         width: 94%;
@@ -107,9 +75,11 @@
         margin-top: 10px;
     }
 }
+/* Small-screen adjustments. */
 @media (max-width: 380px) {
     .guild-nav { font-size: 10px; gap: 7px; }
 }
+/* Desktop layout. */
 @media (min-width: 1101px) {
     .nav-atmosphere {
         width: 100%;
@@ -137,6 +107,7 @@
     .mondstadt-page .price-value { margin-top: .3854vw; }
     .mondstadt-page .stops-value { height: 3.3854vw; white-space: nowrap; }
 }
+/* Tablet and phone layout. */
 @media (max-width: 1100px) {
     .mondstadt-page .scene-art { object-position: 60% center; }
     .mondstadt-page .price-value { width: 230px; height: 62px; }
@@ -147,10 +118,12 @@
         white-space: normal;
     }
 }
+/* Tablet layout. */
 @media (min-width: 761px) and (max-width: 1100px) {
     .guild-nav { font-size: 15px; gap: 22px; grid-template-columns: 1.5fr 72px 1fr auto; }
     .guild-logo img { width: 72px; }
 }
+/* Desktop layout. */
 @media (min-width: 1101px) {
     .mondstadt-page .scene-copy h1 { font-size: 6.6667vw; }
     .mondstadt-page .scene-subtitle { font-size: 2.5vw; margin-top: .6vw; }
@@ -161,6 +134,7 @@
     .mondstadt-page .scene-stops { top: 41.8229vw; }
     .mondstadt-page .stops-value { font-size: 1.25vw; }
 }
+/* Tablet and phone layout. */
 @media (max-width: 1100px) {
     .mondstadt-page .destination-scene { height: auto; min-height: 0; padding-bottom: 55px; }
     .mondstadt-page .scene-art { height: 100%; }
@@ -205,11 +179,13 @@
     .reference-footer img { width: 100px; }
     .footer-policies { gap: 14px; padding: 15px 0 15px 25px; }
 }
+/* Small-screen adjustments. */
 @media (max-width: 600px) {
     .journey-places { grid-template-columns: 1fr; gap: 28px; }
     .journey-gallery h2 { font-size: 30px; }
     .journey-places figcaption { font-size: 22px; }
 }
+/* Tablet and phone layout. */
 @media (max-width: 1100px) {
     .mondstadt-page .scene-pricing small { width: 230px; max-width: 100%; }
     .journey-photo { border-radius: 14px; }
