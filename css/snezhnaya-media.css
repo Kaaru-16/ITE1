@@ -1,0 +1,73 @@
+/* Snezhnaya: screen sizes and reduced motion. */
+@media (min-width: 1101px) {
+    .nav-atmosphere { height: 54.7917vw; }
+    .nav-atmosphere img { height: 133.1%; top: -33.1%; }
+    .guild-nav {
+        width: 50.1%;
+        max-width: none;
+        margin-left: 24.6354%;
+        gap: 0;
+        grid-template-columns: 22.292vw 10.938vw 13.594vw auto;
+        padding-top: 2.2917vw;
+        font-size: 1.0417vw;
+    }
+    .guild-nav > a:last-child { margin: 0; }
+}
+@media (max-width: 1100px) {
+    .guild-nav {
+        width: 94%;
+        max-width: none;
+        gap: 16px;
+        padding: 18px 0;
+        grid-template-columns: 1.5fr 72px 1fr auto;
+        font-size: 15px;
+    }
+    .guild-nav > a, .nation-menu summary { white-space: normal; }
+    .guild-nav > a:last-child { margin-left: 0; }
+    .guild-logo img { width: 72px; }
+    .nation-menu summary img { width: 12px; height: 15px; flex-shrink: 0; }
+    .nav-atmosphere { height: 300px; }
+    .destination-scene { height: auto; padding: 150px 7% 55px; }
+    .scene-art { height: 100%; }
+    .scene-art img { width: 100%; height: 100%; top: 0; object-fit: cover; object-position: 60% center; }
+    .scene-copy { width: auto; padding: 0; margin: 0; }
+    .scene-copy h1 { font-size: clamp(42px, 10vw, 78px); line-height: 1.1; }
+    .scene-subtitle { font-size: 25px; margin-top: 12px; }
+    .scene-description { width: 100%; margin-top: 22px; font-size: 17px; line-height: 1.35; }
+    .scene-pricing, .scene-stops { position: relative; inset: auto; }
+    .scene-pricing { margin-top: 120px; }
+    .scene-pricing h3, .scene-stops h3 { font-size: 28px; }
+    .price-value { width: 230px; min-height: 62px; margin-top: 10px; border-radius: 32px; font-size: 30px; }
+    .scene-pricing small { width: 230px; font-size: 14px; margin-top: 8px; }
+    .scene-stops { margin-top: 30px; }
+    .stops-value { width: 100%; min-height: 64px; margin-top: 10px; padding: 16px; font-size: 17px; line-height: 1.3; border-radius: 28px; }
+    .booking-button { position: relative; inset: auto; width: fit-content; max-width: 100%; min-height: 58px; margin-top: 28px; padding: 16px 24px; gap: 16px; font-size: 23px; border-radius: 60px; }
+    .world-scenery { inset: 0; height: 100%; }
+    .world-scenery img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .journey-gallery h2 { margin-bottom: 24px; font-size: 34px; }
+    .journey-places { gap: 22px; padding: 24px 7%; }
+    .journey-photo { border-radius: 14px; }
+    .journey-places figcaption { font-size: 18px; margin-top: 12px; }
+    .package-details { grid-template-columns: 1fr; gap: 30px; margin-top: 36px; padding-bottom: 48px; }
+    .journey-day { grid-template-columns: 65px 1fr; gap: 18px; padding: 24px 0; }
+    .journey-day > span { font-size: 14px; }
+    .journey-day h3, .package-inclusions h3 { font-size: 23px; margin-bottom: 12px; }
+    .journey-day p, .package-note { font-size: 15px; line-height: 1.45; }
+    .package-note { margin-top: 22px; }
+    .package-inclusions { padding: 26px; border-radius: 22px; }
+    .package-inclusions ul { margin: 18px 0; padding: 0 0 20px 22px; font-size: 18px; line-height: 1.4; }
+    .reference-footer { flex-wrap: wrap; padding: 35px 7%; gap: 25px; font-size: 12px; }
+    .reference-footer img { width: 100px; }
+    .footer-policies { gap: 14px; padding: 15px 0 15px 25px; }
+}
+@media (max-width: 600px) {
+    .guild-nav { grid-template-columns: minmax(0, 1.5fr) 58px minmax(0, 1fr) auto; font-size: 10px; gap: 10px; }
+    .guild-logo img { width: 58px; }
+    .destination-scene { padding-top: 125px; }
+    .journey-gallery h2 { font-size: 30px; }
+    .journey-places { grid-template-columns: 1fr; gap: 28px; }
+    .journey-places figcaption { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
