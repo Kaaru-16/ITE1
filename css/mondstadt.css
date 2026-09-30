@@ -17,10 +17,8 @@
 }
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 100px;
 }
 body {
-    -webkit-text-stroke: 0;
     margin: 0;
     background: var(--cream);
     color: var(--ink);
@@ -545,6 +543,9 @@ h3 {
 .booking-button:hover, .booking-button:focus-visible {
     background: #fff3cda6;
 }
+.journey-gallery {
+    padding-top: clamp(32px, 4vw, 80px);
+}
 .journey-gallery h2 {
     margin: 0 6.7708% 3vw;
     font-size: 3.3333vw;
@@ -567,8 +568,6 @@ h3 {
     width: 100%;
     aspect-ratio: 420 / 232;
     object-fit: cover;
-    border-radius: 1.1458vw;
-    border: 0;
 }
 .journey-places figcaption {
     margin-top: .8vw;
@@ -606,7 +605,6 @@ h3 {
 .journey-day p {
     font-size: .9375vw;
     line-height: 1.35;
-    margin: 0;
 }
 .package-inclusions {
     padding: 1.875vw 2.0833vw;
@@ -656,15 +654,12 @@ h3 {
     position: relative;
     aspect-ratio: 420 / 232;
     overflow: hidden;
-    border: 0;
     border-radius: 1.1458vw;
     box-shadow: 0 3px 5px #0006;
 }
 .journey-photo img {
     position: absolute;
     max-width: none;
-    border: 0;
-    border-radius: 0;
     aspect-ratio: auto;
 }
 .journey-places figure:nth-child(1) img {
