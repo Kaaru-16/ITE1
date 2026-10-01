@@ -1,3 +1,11 @@
+/* Load the Figma typeface locally. */
+@font-face {
+    font-family: "HYWenHei";
+    src: url("../font/zhcn.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
 :root {
     --display: HYWenHei, Cambria, Georgia, serif;
     --gold: #ffeeab;
@@ -285,7 +293,7 @@ a:focus-visible, summary:focus-visible {
     position: absolute;
     top: 41.6146vw;
     right: 9.5833%;
-    width: 29.1667vw;
+    width: 32.5521vw;
     min-height: 6.0417vw;
     display: flex;
     align-items: center;

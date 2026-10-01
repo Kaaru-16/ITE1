@@ -96,7 +96,7 @@
         gap: 0;
         grid-template-columns: 22.292vw 10.938vw 13.594vw auto;
         padding-top: 2.2917vw;
-        font-size: 1.25vw;
+        font-size: 1.0417vw;
     }
     .guild-nav > a:last-child { margin: 0; }
     .guild-nav summary { gap: .6vw; }
@@ -128,7 +128,7 @@
     .mondstadt-page .scene-copy h1 { font-size: 6.6667vw; }
     .mondstadt-page .scene-subtitle { font-size: 2.5vw; margin-top: .6vw; }
     .mondstadt-page .scene-description { font-size: 1.25vw; line-height: 1.05; margin-top: 1vw; }
-    .mondstadt-page .scene-pricing h3, .mondstadt-page .scene-stops h3 { font-size: 2.5vw; }
+    .mondstadt-page .scene-pricing h3, .mondstadt-page .scene-stops h3 { font-size: 1.875vw; }
     .mondstadt-page .price-value { width: 13.8021vw; height: 3.0729vw; font-size: 1.6667vw; }
     .mondstadt-page .scene-pricing small { font-size: .8333vw; }
     .mondstadt-page .scene-stops { top: 41.8229vw; }
