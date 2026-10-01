@@ -335,7 +335,7 @@ h1, h3 {
 }
 .journey-day > span { font-size: 1.0417vw; }
 .journey-day h3, .package-inclusions h3 { margin: 0 0 .8vw; font-size: 1.6667vw; line-height: 1.1; }
-.journey-day p { font-size: .9375vw; line-height: 1.35; }
+.journey-day p { font-size: .8333vw; line-height: 1.35; }
 /* Package inclusions panel. */
 .package-inclusions {
     padding: 1.875vw 2.0833vw;
@@ -351,7 +351,7 @@ h1, h3 {
     line-height: 1.15;
 }
 /* Small package notes. */
-.package-note { font-size: .9375vw; line-height: 1.3; margin: 1.1vw 0 0; }
+.package-note { font-size: .78125vw; line-height: 1.3; margin: 1.1vw 0 0; }
 .package-inclusions .package-note { font-size: .83vw; }
 /* Rounded photos with soft shadows. */
 .journey-photo {

@@ -230,7 +230,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
 .booking-button {
     position: absolute;
     top: 41.6146vw;
-    right: 9.5833%;
+    right: 6.7708%;
     width: 32.5521vw;
     min-height: 6.0417vw;
     display: flex;

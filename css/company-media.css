@@ -219,7 +219,7 @@
     .landing-page .section-head h2 { line-height: .9; }
     .landing-page .cards {
         grid-template-columns: repeat(3, 25.15625vw);
-        grid-auto-rows: 17.03125vw;
+        grid-auto-rows: minmax(17.03125vw, auto);
         justify-content: space-between;
         gap: 2.7604vw 0;
     }
@@ -231,9 +231,11 @@
         border-radius: 1.1458vw;
     }
     .landing-page .card:nth-child(7) .card-art { width: 21.875vw; height: 12.0833vw; margin-left: 0; }
-    .landing-page .card-info { padding: .625vw .26vw 0; }
+    /* Give subtitles the full card width. */
+    .landing-page .card-info { position: relative; display: block; padding: .625vw .26vw 0; }
+    .landing-page .card .arrow { position: absolute; top: .625vw; right: .26vw; }
     .landing-page .card h3 { font-size: 1.9vw; line-height: .87; }
-    .landing-page .card p { font-size: .94vw; line-height: 1; letter-spacing: -.02vw; }
+    .landing-page .card p { font-size: .8333vw; line-height: 1.1; letter-spacing: -.02vw; }
     .landing-page .card-note {
         padding: 2.96875vw 1.3542vw 1vw;
         border-radius: 1.823vw;
@@ -347,15 +349,18 @@
     .story-panel { width: 53.4375%; min-height: 12.2396vw; padding: 1.2vw 3vw; }
     .story-panel.director { width: 52.7604%; min-height: 21.9792vw; padding: 1.9271vw 3.1vw; }
     .story-panel p { line-height: .987; }
-    .guild-founder { left: 51.09375%; top: 5.46875vw; width: 46.3133%; }
+    /* Anchor the portrait to the FAQ edge. */
+    .guild-founder { left: 51.09375%; top: auto; bottom: 0; width: 46.3133%; }
     .founder-art { height: 50.1962vw; }
     .guild-founder figcaption { top: 40.57vw; left: 42%; width: 46%; }
     .guild-founder figcaption span { display: block; max-width: 18vw; margin: auto; }
-    .story-world { height: 105.2083vw; }
+    .story-world { min-height: 105.2083vw; }
     .landing-page .guild-nav { font-size: 1.0417vw; }
 }
 /* Tablet and phone layout. */
 @media (max-width: 1100px) {
+    /* Remove the gap below the portrait. */
+    .guild-story { padding-bottom: 0; }
     .guild-founder {
         position: relative;
         left: auto;
