@@ -383,7 +383,7 @@ h1, h2, h3 {
     position: relative;
     backdrop-filter: none;
     transition: transform 220ms ease, box-shadow 220ms ease;
-    box-shadow: 0 4px 12px #102d3926, inset 0 0 0 1px #ffffff55;
+    box-shadow: 0 4px 12px #102d3926;
 }
 /* Keep link icon backgrounds transparent. */
 .landing-page .card .arrow {
