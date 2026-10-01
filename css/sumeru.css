@@ -1,1 +1,50 @@
-/* Sumeru page styles. Add this nation's design here. */
+@import url("natlan.css");
+
+.sumeru-page {
+	background: #101910;
+	color: #f5f4e7;
+}
+
+.sumeru-page .nation-options {
+	background: rgba(28, 58, 39, .9);
+}
+
+.sumeru-page .destination-scene:before {
+	background: linear-gradient(90deg, rgba(17, 51, 36, .82) 5.7%, rgba(36, 73, 47, .46) 42%, rgba(0, 0, 0, 0) 98.8%);
+}
+
+.sumeru-page .scene-copy h1 {
+	color: #eff2d1;
+}
+
+.sumeru-page .price-value {
+	background: rgba(185, 208, 140, .2);
+}
+
+.sumeru-page .sumeru-world {
+	background: linear-gradient(#14271b, #101910);
+}
+
+.sumeru-page .sumeru-world::before {
+	background: linear-gradient(rgba(18, 47, 31, .38), rgba(18, 47, 31, .38)), url("../image/Sumeru-Desert.jpeg") center bottom / cover no-repeat;
+}
+
+.sumeru-page .booking-button {
+	border-color: rgba(222, 237, 160, .9);
+	background: linear-gradient(110deg, rgba(184, 216, 141, .65), rgba(82, 147, 104, .55));
+}
+
+.sumeru-page .booking-button:hover,
+.sumeru-page .booking-button:focus-visible {
+	background: rgba(172, 210, 139, .82);
+}
+
+.sumeru-page .reference-footer {
+	background: #0a131d;
+}
+
+@media (max-width: 1100px) {
+	.sumeru-page .destination-scene:before {
+		background: linear-gradient(90deg, rgba(17, 51, 36, .9), rgba(17, 51, 36, .25));
+	}
+}
