@@ -1,15 +1,14 @@
-/* Screen sizes and motion preferences. */
 /* Reduce motion. */
-@media (prefers-reduced-motion:reduce) {
+@media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     * { transition: none !important; }
 }
 /* Wide-screen navigation. */
-@media (min-width:1921px) {
+@media (min-width: 1921px) {
     .guild-logo img { width: 6.12vw; }
 }
 /* Small-screen adjustments. */
-@media (max-width:760px) {
+@media (max-width: 760px) {
     .guild-nav > a:last-child { white-space: normal; }
     .destination-scene { min-height: 830px; padding: 130px 0 35px; }
     .scene-copy { padding: 0; margin: 0 auto; }
