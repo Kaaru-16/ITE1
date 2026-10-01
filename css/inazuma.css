@@ -160,9 +160,7 @@ body.inazuma-page {
 }
 
 
-/*
-   Final centered desktop navigation
-*/
+/* Final centered desktop navigation */
 
 .guild-nav {
     position: relative;
@@ -429,7 +427,7 @@ body.inazuma-page {
 
 
 /* =========================================================
-   BOOK YOUR JOURNEY
+   VIEW PACKAGE DETAILS BUTTON
    ========================================================= */
 
 .book-journey {
@@ -470,8 +468,18 @@ body.inazuma-page {
         transform 0.2s ease;
 }
 
-.book-journey span {
-    font-size: 26px;
+
+/* Link.png exported from Figma */
+
+.package-details-icon {
+    display: block;
+
+    width: 22px;
+    height: 22px;
+
+    object-fit: contain;
+
+    flex: 0 0 auto;
 }
 
 .book-journey:hover {
@@ -511,7 +519,11 @@ body.inazuma-page {
 
     width: 100%;
 
-    margin: 0;
+    /*
+       Slight overlap removes the thin line/seam
+       between the hero and this section.
+    */
+    margin: -2px 0 0;
     padding: 0;
 
     overflow: hidden;
@@ -523,50 +535,75 @@ body.inazuma-page {
     background-position: center;
     background-repeat: no-repeat;
 
-    /*
-       Prevent the unwanted dark/black separator
-       between this section and itinerary.
-    */
-
     border: 0;
     box-shadow: none;
 }
 
+
+/* Remove unwanted generated overlays */
+
 .journey-glimpse::before,
 .journey-glimpse::after {
     content: none;
-
     display: none;
 }
 
-.journey-container {
+
+/* =========================================================
+   GLIMPSE HEADING AREA
+   Heading is ABOVE the destination highlight
+   ========================================================= */
+
+.journey-heading {
     position: relative;
 
     z-index: 2;
 
-    width: 88%;
+    width: 86%;
     max-width: 1450px;
 
     margin: 0 auto;
+
+    padding: 17px 0 14px;
+
+    /* No highlight behind the heading */
+    background: transparent;
+}
+.journey-heading h2 {
+    margin: 0;
+    padding: 0;
+
+    color: #ffffff;
+
+    font-size: clamp(27px, 2.15vw, 38px);
+    line-height: 1;
+
+    font-weight: 700;
+
+    text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.40);
 }
 
 
-/* Glimpse heading */
+/* =========================================================
+   DESTINATION HIGHLIGHT AREA
+   Only the destination artwork sits in this area.
+   ========================================================= */
 
-.journey-glimpse h2 {
+.journey-destinations {
     position: relative;
 
     z-index: 2;
 
-    margin: 0;
+    width: 100%;
 
-    padding: 0;
+    /*
+       Soft light-violet highlight behind the three
+       destination panels, matching the Figma layout.
+    */
+    background: rgba(205, 184, 226, 0.18);
 
-    font-size: clamp(36px, 3vw, 50px);
-    line-height: 1;
-
-    text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.40);
+    padding: 10px 0 14px;
 }
 
 
@@ -575,15 +612,18 @@ body.inazuma-page {
    ========================================================= */
 
 /*
-   Current HTML uses the exported Figma destination artwork.
-   Keep its layout intact and only polish its spacing.
+   DESTINATIONS.png already contains:
+   - Narukami Island Grand Shrine
+   - Ritou Trading Port
+   - Tenshukaku
+   - Their labels
 */
 
 .destinations-image {
     display: block;
 
-    width: 90%;
-    max-width: 1350px;
+    width: 72%;
+    max-width: 1050px;
     height: auto;
 
     margin: 0 auto;
@@ -591,23 +631,56 @@ body.inazuma-page {
     object-fit: contain;
 
     border: 0;
+    border-radius: 0;
     outline: 0;
-
     box-shadow: none;
 }
 
 
-/*
-   These rules also support individual destination cards
-   if they exist in the current HTML.
-*/
+/* =========================================================
+   LEGACY GLIMPSE SUPPORT
+
+   These rules are kept so the old HTML does not completely
+   break before we replace the HTML in the next step.
+   ========================================================= */
+
+.journey-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: 86%;
+    max-width: 1450px;
+
+    margin: 0 auto;
+    padding: 0;
+}
+
+.journey-container > h2 {
+    margin: 0;
+
+    padding: 17px 0 14px;
+
+    font-size: clamp(27px, 2.15vw, 38px);
+    line-height: 1;
+
+    font-weight: 700;
+
+    text-shadow:
+        2px 2px 4px rgba(0, 0, 0, 0.40);
+}
+
+
+/* =========================================================
+   FALLBACK INDIVIDUAL DESTINATION CARDS
+   ========================================================= */
 
 .journey-photo,
 .destination-card,
 .journey-card {
     border: 0;
+    border-radius: 0;
     outline: 0;
-
     box-shadow: none;
 }
 
@@ -620,14 +693,17 @@ body.inazuma-page {
     height: auto;
 
     border: 0;
+    border-radius: 0;
+    outline: 0;
+    box-shadow: none;
 }
 
 .journey-photo h3,
 .destination-card h3,
 .journey-card h3 {
-    margin: 10px 0 8px;
+    margin: 8px 0 6px;
 
-    font-size: clamp(20px, 1.7vw, 28px);
+    font-size: clamp(18px, 1.5vw, 25px);
     line-height: 1.1;
 
     text-align: center;
@@ -644,11 +720,6 @@ body.inazuma-page {
     width: 100%;
 
     min-height: 590px;
-
-    /*
-       A tiny negative margin removes any browser-rendered
-       seam between the two image sections.
-    */
 
     margin: 0;
 
@@ -779,10 +850,7 @@ body.inazuma-page {
 }
 
 
-/*
-   Supports both naming styles that appeared
-   during development.
-*/
+/* Supports both naming styles used during development */
 
 .day-details h2,
 .day-content h3 {
@@ -1059,9 +1127,7 @@ body.inazuma-page {
 
 @media (max-width: 1000px) {
 
-    /* -----------------------------------------------------
-       NAVIGATION
-       ----------------------------------------------------- */
+    /* NAVIGATION */
 
     .guild-nav {
         width: 92%;
@@ -1082,9 +1148,7 @@ body.inazuma-page {
     }
 
 
-    /* -----------------------------------------------------
-       HERO
-       ----------------------------------------------------- */
+    /* HERO */
 
     .destination-scene {
         height: auto;
@@ -1135,8 +1199,9 @@ body.inazuma-page {
         font-size: 21px;
     }
 
-    .book-journey span {
-        font-size: 21px;
+    .package-details-icon {
+        width: 19px;
+        height: 19px;
     }
 
     .scene-next {
@@ -1149,26 +1214,30 @@ body.inazuma-page {
     }
 
 
-    /* -----------------------------------------------------
-       GLIMPSE
-       ----------------------------------------------------- */
+    /* GLIMPSE */
 
+    .journey-heading,
     .journey-container {
         width: 90%;
     }
 
-    .journey-glimpse h2 {
-        font-size: 36px;
+    .journey-heading h2,
+    .journey-container > h2 {
+        font-size: 32px;
     }
 
+    /*
+       Do NOT change this to 100%.
+       Keeping the destination artwork compact prevents
+       the old responsive rule from making it huge.
+    */
     .destinations-image {
-        width: 100%;
+        width: 78%;
+        max-width: 900px;
     }
 
 
-    /* -----------------------------------------------------
-       ITINERARY
-       ----------------------------------------------------- */
+    /* ITINERARY */
 
     .itinerary-section {
         min-height: 0;
@@ -1191,9 +1260,7 @@ body.inazuma-page {
     }
 
 
-    /* -----------------------------------------------------
-       FOOTER
-       ----------------------------------------------------- */
+    /* FOOTER */
 
     .footer-container {
         grid-template-columns:
@@ -1222,9 +1289,7 @@ body.inazuma-page {
 
 @media (max-width: 760px) {
 
-    /* -----------------------------------------------------
-       NAVIGATION
-       ----------------------------------------------------- */
+    /* NAVIGATION */
 
     .guild-nav {
         width: 94%;
@@ -1245,9 +1310,7 @@ body.inazuma-page {
     }
 
 
-    /* -----------------------------------------------------
-       HERO
-       ----------------------------------------------------- */
+    /* HERO */
 
     .scene-copy {
         width: 88%;
@@ -1266,6 +1329,18 @@ body.inazuma-page {
     .scene-description {
         max-width: 540px;
     }
+
+
+    /* GLIMPSE */
+
+    .journey-heading h2,
+    .journey-container > h2 {
+        font-size: 29px;
+    }
+
+    .destinations-image {
+        width: 84%;
+    }
 }
 
 
@@ -1275,15 +1350,12 @@ body.inazuma-page {
 
 @media (max-width: 650px) {
 
-    .journey-container,
     .itinerary-container {
         width: 90%;
     }
 
 
-    /* -----------------------------------------------------
-       NAVIGATION
-       ----------------------------------------------------- */
+    /* NAVIGATION */
 
     .guild-nav {
         padding-top: 20px;
@@ -1306,9 +1378,7 @@ body.inazuma-page {
     }
 
 
-    /* -----------------------------------------------------
-       HERO
-       ----------------------------------------------------- */
+    /* HERO */
 
     .destination-scene {
         min-height: 820px;
@@ -1354,25 +1424,45 @@ body.inazuma-page {
         height: 58px;
 
         font-size: 18px;
+
+        gap: 9px;
+    }
+
+    .package-details-icon {
+        width: 17px;
+        height: 17px;
     }
 
 
-    /* -----------------------------------------------------
-       GLIMPSE
-       ----------------------------------------------------- */
+    /* GLIMPSE */
 
     .journey-glimpse {
-        padding-bottom: 15px;
+        padding-bottom: 0;
     }
 
-    .journey-glimpse h2 {
-        padding: 25px 0 22px;
+    .journey-heading,
+    .journey-container {
+        width: 90%;
+    }
 
-        font-size: 29px;
+    .journey-heading {
+        padding: 16px 0 13px;
+    }
+
+    .journey-heading h2,
+    .journey-container > h2 {
+        padding: 0;
+
+        font-size: 27px;
+    }
+
+    .journey-destinations {
+        padding: 9px 0 12px;
     }
 
     .destinations-image {
-        width: 100%;
+        width: 90%;
+        max-width: none;
     }
 
     .journey-photo h3,
@@ -1384,9 +1474,7 @@ body.inazuma-page {
     }
 
 
-    /* -----------------------------------------------------
-       ITINERARY
-       ----------------------------------------------------- */
+    /* ITINERARY */
 
     .itinerary-section {
         padding: 40px 0 50px;
@@ -1444,9 +1532,7 @@ body.inazuma-page {
     }
 
 
-    /* -----------------------------------------------------
-       FOOTER
-       ----------------------------------------------------- */
+    /* FOOTER */
 
     .site-footer {
         min-height: auto;
@@ -1529,8 +1615,18 @@ body.inazuma-page {
         font-size: 16px;
     }
 
-    .journey-glimpse h2 {
-        font-size: 26px;
+    .package-details-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .journey-heading h2,
+    .journey-container > h2 {
+        font-size: 24px;
+    }
+
+    .destinations-image {
+        width: 94%;
     }
 
     .itinerary-day {
