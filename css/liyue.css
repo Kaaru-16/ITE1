@@ -321,8 +321,11 @@ body {
 }
 /* day number ano pa ba */
 .day-number {
-    flex: 0 0 4vw;
-    font-size: clamp(11px, 1.1vw, 18px);
+    position: relative;
+    top: .4vw;
+    flex: 10px 0 60px;
+    white-space: nowrap;
+    font-size: clamp(10px, .8vw, 18px);
     font-weight: 700;
 }
 /* the "day title" arrival ganon */
