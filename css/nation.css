@@ -106,7 +106,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
     margin-top: .4229vw;
     padding: .8vw 1.40625vw;
     background: var(--stops-panel) center / 100% 100% no-repeat;
-    font-size: 1.25vw;
+    font-size: 1.18vw;
     line-height: 1.05;
 }
 /* Same-page package link. */
