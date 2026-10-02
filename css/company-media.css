@@ -41,7 +41,7 @@
     .discovery-copy p { font-size: 17px; line-height: 1.1; max-width: 340px; margin: 20px 0; }
     .journey-button { min-height: 50px; padding: 12px 20px; font-size: 20px; }
     .companion { width: 245px; top: auto; bottom: -25px; right: 0; }
-    .landing-page .destinations { padding-top: 70px; }
+    .landing-page .destinations { padding-top: 70px; padding-bottom: 40px; }
     .landing-page .eyebrow { font-size: 15px; margin-bottom: 8px; }
     .landing-page .section-head h2 { font-size: 34px; }
     .landing-page .section-head { margin-bottom: 24px; }

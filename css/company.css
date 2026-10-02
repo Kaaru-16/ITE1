@@ -45,7 +45,7 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     overflow-x: clip;
 }
 .landing-page p { color: inherit; }
-.landing-page .destinations { width: 87%; max-width: none; padding: 8vw 0 0; }
+.landing-page .destinations { width: 87%; max-width: none; padding: 8vw 0 3vw; }
 .landing-page #main { overflow: clip; }
 /* Land 40px below the viewport top. */
 #destinations { scroll-margin-top: -60px; }
