@@ -1,3 +1,11 @@
+/* Load the Figma typeface locally. */
+@font-face {
+    font-family: "HYWenHei";
+    src: url("../font/zhcn.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
 :root {
     --font-body: Arial,Helvetica,sans-serif;
     --ink: #2e2444;
@@ -375,7 +383,7 @@ h1, h2, h3 {
     position: relative;
     backdrop-filter: none;
     transition: transform 220ms ease, box-shadow 220ms ease;
-    box-shadow: 0 4px 12px #102d3926, inset 0 0 0 1px #ffffff55;
+    box-shadow: 0 4px 12px #102d3926;
 }
 /* Keep link icon backgrounds transparent. */
 .landing-page .card .arrow {
@@ -545,7 +553,6 @@ h1, h2, h3 {
 }
 .reference-footer img { width: 9.6vw; height: auto; }
 .reference-footer p { color: #fff; }
-
 /* Separate the policy text. */
 .footer-policies {
     display: grid;
@@ -563,7 +570,6 @@ h1, h2, h3 {
     width: 1px;
     background: url("../image/home-imgLine8.svg") center / 100% 100%;
 }
-
 /* Hide legacy card numbers. */
 .card-number {
     position: absolute;

@@ -1,5 +1,5 @@
 /* Small-screen adjustments. */
-@media (max-width:900px) {
+@media (max-width: 900px) {
     .cards { grid-template-columns: repeat(2,1fr); }
     .card-note { grid-column: auto; }
     .faq-grid { gap: 40px; }
@@ -9,12 +9,8 @@
     .guild-nav { font-size: 10px; gap: 7px; }
     .landing-page .cards { grid-template-columns: 1fr; }
 }
-
-@media (max-width:760px) {
+@media (max-width: 760px) {
     .guild-nav > a:last-child { white-space: normal; }
-}
-
-@media (max-width:760px) {
     .wrap { width: 88%; }
     .section-head { display: block; }
     .cards { grid-template-columns: 1fr; }
@@ -22,15 +18,14 @@
     .section { padding: 55px 0; }
 }
 /* Reduce motion. */
-@media (prefers-reduced-motion:reduce) {
+@media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     * { transition: none !important; }
 }
 /* Wide-screen navigation. */
-@media (min-width:1921px) {
+@media (min-width: 1921px) {
     .guild-logo img { width: 6.12vw; }
 }
-
 /* Tablet and phone layout. */
 @media (max-width: 1100px) {
     .guild-nav {
@@ -66,12 +61,12 @@
     .landing-page .eyebrow { font-size: 15px; margin-bottom: 8px; }
     .landing-page .section-head h2 { font-size: 34px; }
     .landing-page .section-head { margin-bottom: 24px; }
-    .landing-page .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .landing-page .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; grid-auto-rows: auto; }
     .landing-page .card { padding: 10px; border-radius: 18px; }
     .landing-page .card-art { border-radius: 12px; }
     .landing-page .card-info { padding-top: 8px; }
     .landing-page .card h3 { font-size: 19px; }
-    .landing-page .card p { margin-top: 3px; }
+    .landing-page .card p { margin-top: 3px; font-size: 14px; line-height: 1.3; }
     .landing-page .arrow { font-size: 22px; }
     .landing-page .card-note { grid-column: 1 / -1; padding: 22px; border-radius: 18px; }
     .landing-page .card-note .eyebrow { font-size: 13px; }
@@ -94,7 +89,12 @@
     }
     .story-panel p { font-size: 18px; }
     .landing-page #travel-notes { padding: 35px 7% 65px; }
-    .landing-page .faq-intro h2 { font-size: 30px; margin-bottom: 28px; }
+    .landing-page .faq-intro h2 {
+        font-size: 30px;
+        margin-bottom: 28px;
+        white-space: normal;
+        line-height: 1.15;
+    }
     .landing-page .faq { gap: 26px; }
     .landing-page .faq-item { width: 100%; }
     .landing-page .faq-item h3 {
@@ -103,6 +103,8 @@
         border-radius: 18px;
         font-size: 22px;
         margin-bottom: 12px;
+        height: auto;
+        line-height: 1.2;
     }
     .landing-page .faq-item p { font-size: 15px; }
     .reference-footer {
@@ -112,8 +114,6 @@
         font-size: 12px;
     }
     .reference-footer img { width: 100px; }
-}
-@media (max-width: 1100px) {
     .story-world { background: #21446a; overflow: hidden; }
     .story-scenery {
         inset: 0;
@@ -139,15 +139,8 @@
     }
     .choice-badge > span { font-size: 9px; }
     .footer-policies { font-size: 12px; gap: 14px; padding: 15px 0 15px 25px; }
-}
-
-@media (max-width: 1100px) {
     .landing-world, .story-world, .guild-story, .landing-page #travel-notes { height: auto; }
-    .landing-page .faq-intro h2 { white-space: normal; line-height: 1.15; }
-    .landing-page .faq-item h3 { height: auto; line-height: 1.2; }
     .landing-page .faq-item p, .story-panel p { line-height: 1.45; }
-    .landing-page .card p { font-size: 14px; line-height: 1.3; }
-    .landing-page .cards { grid-auto-rows: auto; }
     .landing-page .card-info > div { min-width: 0; }
     .story-panel.director { width: 86%; }
 }
@@ -174,9 +167,11 @@
     .guild-nav summary { gap: .6vw; }
     .guild-nav summary img { width: 1.2vw; height: 1.3vw; }
     .landing-world {
-        height: 124.7396vw;
+        /* Keep the last card row above the section fade. */
+        min-height: 124.7396vw;
         padding-top: 10.78125vw;
-        background-size: auto 127.8125vw;
+        padding-bottom: 6vw;
+        background-size: auto 100%;
         mask-image: linear-gradient(#000 97%, transparent);
     }
     .discovery-hero {
@@ -202,7 +197,7 @@
         height: 6.0417vw;
         min-height: 0;
         padding: 0;
-        font-size: 2.3vw;
+        font-size: 2.0833vw;
         margin-left: .78vw;
     }
     .companion {
@@ -226,7 +221,7 @@
     .landing-page .section-head h2 { line-height: .9; }
     .landing-page .cards {
         grid-template-columns: repeat(3, 25.15625vw);
-        grid-auto-rows: 17.03125vw;
+        grid-auto-rows: minmax(17.03125vw, auto);
         justify-content: space-between;
         gap: 2.7604vw 0;
     }
@@ -238,9 +233,11 @@
         border-radius: 1.1458vw;
     }
     .landing-page .card:nth-child(7) .card-art { width: 21.875vw; height: 12.0833vw; margin-left: 0; }
-    .landing-page .card-info { padding: .625vw .26vw 0; }
+    /* Give subtitles the full card width. */
+    .landing-page .card-info { position: relative; display: block; padding: .625vw .26vw 0; }
+    .landing-page .card .arrow { position: absolute; top: .625vw; right: .26vw; }
     .landing-page .card h3 { font-size: 1.9vw; line-height: .87; }
-    .landing-page .card p { font-size: .94vw; line-height: 1; letter-spacing: -.02vw; }
+    .landing-page .card p { font-size: .8333vw; line-height: 1.1; letter-spacing: -.02vw; }
     .landing-page .card-note {
         padding: 2.96875vw 1.3542vw 1vw;
         border-radius: 1.823vw;
@@ -292,7 +289,6 @@
     .reference-footer img { width: 9.7917vw; }
     .footer-policies { margin-left: 4.27vw; padding-left: 6.51vw; width: 26.15vw; }
 }
-
 /* Tablet layout. */
 @media (min-width: 761px) and (max-width: 1100px) {
     .guild-nav { font-size: 15px; gap: 22px; }
@@ -355,15 +351,18 @@
     .story-panel { width: 53.4375%; min-height: 12.2396vw; padding: 1.2vw 3vw; }
     .story-panel.director { width: 52.7604%; min-height: 21.9792vw; padding: 1.9271vw 3.1vw; }
     .story-panel p { line-height: .987; }
-    .guild-founder { left: 51.09375%; top: 5.46875vw; width: 46.3133%; }
+    /* Anchor the portrait to the FAQ edge. */
+    .guild-founder { left: 51.09375%; top: auto; bottom: 0; width: 46.3133%; }
     .founder-art { height: 50.1962vw; }
     .guild-founder figcaption { top: 40.57vw; left: 42%; width: 46%; }
     .guild-founder figcaption span { display: block; max-width: 18vw; margin: auto; }
-    .story-world { height: 105.2083vw; }
+    .story-world { min-height: 105.2083vw; }
     .landing-page .guild-nav { font-size: 1.0417vw; }
 }
 /* Tablet and phone layout. */
 @media (max-width: 1100px) {
+    /* Remove the gap below the portrait. */
+    .guild-story { padding-bottom: 0; }
     .guild-founder {
         position: relative;
         left: auto;
