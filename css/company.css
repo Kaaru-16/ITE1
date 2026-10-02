@@ -1,0 +1,389 @@
+/* Shared site elements. */
+@import url("shared.css");
+:root {
+    --font-body: Arial,Helvetica,sans-serif;
+    --ink: #2e2444;
+    --muted: #5c6278;
+    --cream: #f6f4ed;
+    --gold: #ffeeab;
+    --line: #d8d6cd;
+    --display: Georgia, "Times New Roman", serif;
+}
+/* Include padding inside element widths. */
+* { box-sizing: border-box; }
+/* Smooth section navigation. */
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+/* Link and image defaults. */
+a { color: inherit; text-decoration: none; }
+img { display: block; width: 100%; }
+/* Remove default heading spacing. */
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: clamp(3.3rem,6.5vw,6.4rem); }
+h2 { font-size: clamp(2.3rem,4vw,3.8rem); }
+h3 { font-size: 1.7rem; }
+.skip:focus { top: 0; }
+/* Visible keyboard focus. */
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 6px; }
+/* Page background and text. */
+body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.65;
+    font-family: var(--display);
+}
+h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; letter-spacing: 0; }
+/* Keyboard shortcut to main content. */
+.skip { position: fixed; top: -80px; background: white; padding: 12px; z-index: 20; color: #2e2444; }
+/* Company page theme. */
+.landing-page {
+    --display: HYWenHei, Cambria, Georgia, serif;
+    background: #000;
+    color: #fff;
+    font-family: var(--display);
+    font-weight: 700;
+    overflow-x: clip;
+}
+.landing-page p { color: inherit; }
+.landing-page .destinations { width: 87%; max-width: none; padding: 8vw 0 3vw; }
+.landing-page #main { overflow: clip; }
+/* Land 40px below the viewport top. */
+#destinations { scroll-margin-top: -60px; }
+/* Dropdown panel and nation links. */
+.nation-options a:hover, .nation-options a:focus-visible {
+    background-color: #ffffff20;
+    color: #ffeeab;
+    border-radius: 8px;
+}
+/* Shared hero and destination scenery. */
+.landing-world {
+    background: url("../image/hero-background.png") center top / 100% 100% no-repeat;
+    padding: 10.7vw 0 4vw;
+}
+/* Glass panel behind the hero. */
+.discovery-hero {
+    position: relative;
+    width: 87.5%;
+    min-height: 38.5vw;
+    margin: 0 auto;
+    border: 1px solid #e1e6ec55;
+    border-radius: 1.6vw;
+    background: #d3dfdf55;
+    box-shadow: 0 5px 8px #0003;
+    backdrop-filter: blur(4px);
+}
+/* Hero heading and introduction. */
+.discovery-copy {
+    position: relative;
+    z-index: 2;
+    padding: 2.5vw 1.6vw 3.3vw;
+    width: 56%;
+    text-shadow: 0 3px 8px #0006;
+}
+.discovery-copy h1 { font-size: 7.4vw; line-height: .79; letter-spacing: -.12vw; }
+.discovery-copy h1 span { color: #ffe8a0; }
+.discovery-copy p { width: 94%; margin: 1.8vw .2vw 1.65vw; font-size: 1.9vw; line-height: .94; }
+/* Begin Your Journey button. */
+.journey-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 6vw;
+    padding: 1.15vw 2vw;
+    border: 2px solid #ffe39a;
+    border-radius: 1.8vw;
+    color: #163a5a;
+    background: #e8e8d59c;
+    box-shadow: 0 4px 6px #0003;
+    font-size: 2.3vw;
+    text-shadow: none;
+}
+.journey-button:hover { background: #fff0bf; }
+/* Position Paimon beside the hero. */
+.companion { position: absolute; width: 43vw; right: -.9vw; top: -5.1vw; pointer-events: none; }
+.companion img { width: 100%; height: auto; }
+/* Small section labels. */
+.eyebrow { font-size: 10px; font-weight: 700; display: block; margin-bottom: 22px; }
+.section { padding: 90px 0; }
+/* Section heading alignment. */
+.section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
+.section-head .eyebrow { margin-bottom: 14px; }
+.text-link { font-size: 12px; font-weight: 600; border-bottom: 1px solid var(--gold); padding-bottom: 6px; }
+.card { display: block; }
+.card-art img { height: 100%; transition: transform .5s; }
+.card:hover .card-art img { transform: scale(1.045); }
+/* Align card titles and link icons. */
+.card-info { display: flex; justify-content: space-between; }
+.card p { font-size: 12px; margin-top: 7px; }
+/* Center the link icon. */
+.arrow { border-radius: 50%; display: grid; place-items: center; }
+.card-note p { font-size: 13px; margin-bottom: 22px; }
+.wrap { margin: auto; width: 86.46%; max-width: 1660px; }
+.section-head .eyebrow, .eyebrow { color: #796942; }
+/* Nation card grid. */
+.cards { display: grid; grid-template-columns: repeat(3,1fr); }
+/* Clip images inside rounded cards. */
+.card-art { position: relative; overflow: hidden; background: #dce5db; }
+.card h3 { font-weight: 700; }
+/* Closing message beside the cards. */
+.card-note {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    grid-column: span 2;
+}
+.landing-page .section-head { margin-bottom: 1.6vw; }
+.landing-page .eyebrow {
+    color: #fff;
+    font: bold 1.75vw/1.1 var(--display);
+    letter-spacing: 0;
+    text-transform: uppercase;
+    margin: 0 0 .4vw;
+}
+.landing-page .section-head h2 { font-size: 4.4vw; line-height: 1; }
+.landing-page .cards { gap: 2.6vw 5.6vw; }
+.landing-page .card-art { aspect-ratio: 1.8; border-radius: 1.5vw 1.5vw .6vw .6vw; }
+.landing-page .card-info { padding: .4vw .15vw 0; gap: 4px; align-items: center; }
+.landing-page .card h3 { font-size: 1.8vw; line-height: .95; }
+.landing-page .card p { font: bold .92vw/.95 var(--display); margin: 0; }
+.landing-page .arrow { border: 0; font-size: 1.8vw; width: auto; height: auto; }
+.landing-page .card-note {
+    border: 0;
+    border-radius: 2vw;
+    padding: 1.6vw;
+    background: #a5b89899;
+    backdrop-filter: blur(6px);
+    color: #fff;
+    position: relative;
+}
+.landing-page .card-note .eyebrow { font-size: 1.3vw; }
+.landing-page .card-note h3 { font-size: 2.75vw; line-height: .9; margin: .45vw 0 .65vw; max-width: none; }
+.landing-page .card-note p { font: bold 1.35vw/.98 var(--display); max-width: 67%; margin: 0; }
+.landing-page .card-note .text-link {
+    position: absolute;
+    bottom: 1.5vw;
+    right: 1.8vw;
+    font-size: .85vw;
+    border: 0;
+    padding: .65vw 1.5vw;
+    border-radius: 2vw;
+    background: #e2dfbf80;
+}
+/* Crop exported nation images. */
+.landing-page .card-art img { position: absolute; max-width: none; object-fit: fill; transform: none; }
+.landing-page .card:nth-child(1) .card-art img, .landing-page .card:nth-child(2) .card-art img {
+    width: 164.27%;
+    height: 167.33%;
+    left: -28.9%;
+    top: -29.03%;
+}
+.landing-page .card:nth-child(3) .card-art img {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+}
+.landing-page .card:nth-child(4) .card-art img { width: 132.57%; height: 135%; left: -24.38%; top: -2.95%; }
+.landing-page .card:nth-child(5) .card-art img { width: 108.57%; height: 147.4%; left: -.04%; top: -29.29%; }
+.landing-page .card:nth-child(6) .card-art img { width: 113.49%; height: 115.56%; left: -6.75%; top: -.91%; }
+.landing-page .card:nth-child(7) .card-art img { width: 109.21%; height: 116.22%; left: -9.1%; top: .03%; }
+.landing-page .card:nth-child(1) { background: #b3ffeb6b; }
+.landing-page .arrow img { width: 1.875vw; height: 1.875vw; opacity: .42; }
+/* Travellers Choice ribbon. */
+.choice-badge {
+    position: absolute;
+    z-index: 2;
+    width: 9.8958vw;
+    height: 9.8958vw;
+    left: -1.6146vw;
+    top: -.8333vw;
+    pointer-events: none;
+}
+.choice-badge img { width: 100%; height: 100%; }
+.choice-badge > span {
+    position: absolute;
+    left: 19.47%;
+    top: 41.58%;
+    color: #fff;
+    font-size: 1vw;
+    line-height: .85;
+}
+/* Glass card surface and hover motion. */
+.landing-page .card {
+    padding: 1.25vw 1.3vw .9vw;
+    border-radius: 2vw;
+    background: #b8e3c28c;
+    color: #143752;
+    position: relative;
+    backdrop-filter: none;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+    box-shadow: 0 4px 12px #102d3926;
+}
+/* Keep link icon backgrounds transparent. */
+.landing-page .card .arrow {
+    flex: 0 0 auto;
+    width: 1.875vw;
+    height: 1.875vw;
+    border: 0;
+    background: transparent;
+}
+.landing-page .card .arrow img { width: 100%; height: 100%; object-fit: contain; opacity: .42; }
+.landing-page a.card:focus-visible {
+    outline: 3px solid #ffe8a0;
+    outline-offset: 5px;
+    box-shadow: 0 12px 28px #102d3940;
+}
+.landing-page a.card:focus-visible .arrow img { opacity: 1; }
+/* Nation card colors. */
+.landing-page .card:nth-child(2) { background: #eec96669; }
+.landing-page .card:nth-child(3) { background: #d6b2ff69; }
+.landing-page .card:nth-child(4) { background: #e0ff9769; }
+.landing-page .card:nth-child(5) { background: #6c9fff69; }
+.landing-page .card:nth-child(6) { background: #ff969669; }
+.landing-page .card:nth-child(7) { background: #c1e1ff69; }
+/* Layer the guild story scenery. */
+.story-world { position: relative; isolation: isolate; }
+.guild-story h2 { font-size: 5.6vw; line-height: 1.1; margin-bottom: 1.8vw; }
+/* Glass panels for the story text. */
+.story-panel {
+    width: 53%;
+    margin: 0 auto 2.3vw;
+    padding: 2.2vw 2.5vw;
+    border: 1px solid #ddd8b533;
+    border-radius: 2vw;
+    background: #ced2c64d;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 5px #0003;
+}
+.story-panel p { font-size: 1.85vw; line-height: .97; }
+.story-panel:last-child { margin-bottom: 0; }
+/* Fade scenery behind the story and FAQs. */
+.story-scenery {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    top: -2.601vw;
+    left: -27.74vw;
+    width: 137.975vw;
+    height: 108.225vw;
+    filter: blur(2.35px);
+    mask-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 7%) 5.28846%, #000 11.5385%);
+    mask-repeat: no-repeat;
+    mask-size: 100vw 120.3125vw;
+    mask-position: 27.74vw -8.18vw;
+}
+.story-scenery img {
+    position: absolute;
+    width: 146.57%;
+    height: 100%;
+    max-width: none;
+    left: -54.02%;
+    top: .02%;
+}
+/* Story section spacing. */
+.guild-story {
+    padding: 8vw 0 10.5vw;
+    text-align: center;
+    text-shadow: 0 3px 8px #0006;
+    position: relative;
+    isolation: isolate;
+}
+.story-accent { color: #fff4d0; }
+/* Position the founder illustration. */
+.guild-founder {
+    position: absolute;
+    width: 46.3133%;
+    left: 51.09375%;
+    top: 5.46875vw;
+    margin: 0;
+    pointer-events: none;
+}
+/* Crop the founder portrait. */
+.founder-art { position: relative; height: 50.1962vw; overflow: hidden; }
+.founder-art img { position: absolute; width: 100%; height: 165.17%; top: -.02%; object-fit: fill; }
+/* Founder name and title. */
+.guild-founder figcaption {
+    position: absolute;
+    top: 40.57vw;
+    left: 42%;
+    width: 46%;
+    color: white;
+    text-align: center;
+    font-size: 1.25vw;
+    line-height: 1.1;
+}
+.guild-founder strong { display: block; font-size: 1.875vw; margin-bottom: .5vw; }
+/* Overlay the founder signature. */
+.founder-signature {
+    position: absolute;
+    width: 80%;
+    height: 11.4583vw;
+    object-fit: contain;
+    left: 10%;
+    bottom: 1vw;
+}
+.faq-grid { grid-template-columns: .8fr 1.2fr; gap: 90px; }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item h3 { margin: 0; }
+.faq-item p { font-size: 13px; padding: 15px 25px 0 0; }
+.faq, .card p, .card-note p { font-family: var(--font-body); }
+/* FAQ section background and spacing. */
+.landing-page #travel-notes {
+    width: 100%;
+    max-width: none;
+    padding: 2.7vw 6.7vw 9.5vw;
+    background: #172b4670;
+}
+.landing-page .faq-grid { display: block; }
+.landing-page .faq-intro h2 { font-size: 4.3vw; line-height: 1.05; margin: 0 0 3vw; }
+/* Arrange FAQ questions. */
+.landing-page .faq {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3vw 2.3vw;
+    border: 0;
+}
+/* Question and answer spacing. */
+.landing-page .faq-item { width: calc((100% - 4.6vw) / 3); text-align: center; padding: 0; border: 0; }
+.landing-page .faq-item h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5vw;
+    padding: .7vw 2vw;
+    border-radius: 1.8vw;
+    background: #cbc4b875;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.85vw;
+    line-height: .9;
+    margin-bottom: 1vw;
+}
+.landing-page .faq-item p { font: bold 1.18vw/1 var(--display); padding-right: 0; }
+/* Footer logo, policies and copyright. */
+.reference-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6.5vw;
+    min-height: 16.8vw;
+    background: #08131c;
+    font: .85vw/1.25 Arial, sans-serif;
+}
+.reference-footer img { width: 9.6vw; height: auto; }
+/* Separate the policy text. */
+.footer-policies { display: grid; gap: 1vw; padding: 2vw 0 2vw 6.5vw; position: relative; border-left: 0; }
+.footer-policies::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background: url("../image/home-imgLine8.svg") center / 100% 100%;
+}

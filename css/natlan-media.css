@@ -1,0 +1,69 @@
+/* Responsive rules unique to Natlan. */
+@media (min-width: 1101px) {
+    .natlan-page .scene-subtitle {
+        margin-top: .6vw;
+    }
+
+    /* Keep stops and the CTA in separate desktop columns. */
+    .natlan-page .scene-actions {
+        position: absolute;
+        top: 41.8229vw;
+        left: 6.82%;
+        width: 86.36%;
+        display: grid;
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+        align-items: end;
+        gap: 3vw;
+    }
+
+    .natlan-page .scene-stops,
+    .natlan-page .scene-actions .booking-button {
+        position: static;
+        width: 100%;
+    }
+
+    .natlan-page .stops-value {
+        width: 100%;
+        line-height: 1.3;
+        white-space: normal;
+    }
+
+    .natlan-page .scene-actions .booking-button {
+        font-size: 1.9vw;
+    }
+}
+
+@media (max-width: 1100px) {
+    /* Reset Natlan's desktop sizing before the shared mobile layout runs. */
+    .natlan-page .destination-scene {
+        height: auto;
+        padding: 150px 7% 55px;
+    }
+
+    .natlan-page .scene-art {
+        height: 100%;
+    }
+
+    .natlan-page .scene-copy {
+        width: auto;
+        margin: 0;
+        padding: 0;
+    }
+
+    .natlan-page .scene-description {
+        width: 100%;
+        margin-top: 22px;
+        line-height: 1.35;
+    }
+
+    .natlan-page .scene-pricing h3,
+    .natlan-page .scene-stops h3 {
+        font-size: 28px;
+    }
+
+    .natlan-page .scene-actions {
+        position: static;
+        display: block;
+        width: auto;
+    }
+}

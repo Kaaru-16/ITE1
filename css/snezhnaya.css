@@ -1,0 +1,41 @@
+/* Nation artwork and proportions. */
+:root {
+    --button-left: 61.1458%;
+    --world-height: 126.6667vw;
+    --scene-color: #185d8b;
+    --hero-tint: #00bee8ba;
+    --scenery-tint: transparent;
+    --scenery-width: 219.57%;
+    --scenery-height: 123.3333vw;
+    --scenery-left: -73.92%;
+    --scenery-top: 25.1173vw;
+    --title-top: 9.4792vw;
+    --title-line: 1.07905;
+    --description-width: 45.3125vw;
+    --stops-width: 51.6667vw;
+    --caption-size: 1.25vw;
+    --panel-height: 31.5104vw;
+    --panel-padding: 2.2vw;
+    --list-gap: 1.5vw;
+    --list-line: 1.52;
+    --price-panel: url("../image/snezhnaya-price.svg");
+    --stops-panel: url("../image/snezhnaya-stops.svg");
+}
+.journey-places figure:nth-child(1) {
+    --crop-width: 130.93%;
+    --crop-height: 100%;
+    --crop-left: -22.71%;
+    --crop-top: 0.03%;
+}
+.journey-places figure:nth-child(2) {
+    --crop-width: 100%;
+    --crop-height: 100%;
+    --crop-left: 0%;
+    --crop-top: 0%;
+}
+.journey-places figure:nth-child(3) {
+    --crop-width: 122.93%;
+    --crop-height: 129%;
+    --crop-left: -10.33%;
+    --crop-top: -10.17%;
+}

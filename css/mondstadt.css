@@ -1,0 +1,50 @@
+/* Nation artwork and proportions. */
+:root {
+    --world-height: 112.5vw;
+    --scene-color: #1d6579;
+    --hero-tint: #006b81ba;
+    --hero-flip: none;
+    --scenery-width: 217.41%;
+    --scenery-height: 120.9404vw;
+    --scenery-left: -58.86%;
+    --scenery-top: -6.098vw;
+    --title-top: 9.4792vw;
+    --title-line: 1.07905;
+    --description-width: 39.1146vw;
+    --stops-width: 43.9583vw;
+    --caption-size: 1.6667vw;
+    --panel-height: 26.7708vw;
+    --panel-padding: 1.875vw;
+    --list-gap: 1.1vw;
+    --list-line: 1.29;
+    --price-panel: url("../image/mond-imgRectangle7.svg");
+    --stops-panel: url("../image/mond-imgRectangle4.svg");
+    --scenery-tint: #1290aa52;
+}
+.journey-places figure:nth-child(1) {
+    --crop-width: 112.38%;
+    --crop-height: 114.44%;
+    --crop-left: -3.04%;
+    --crop-top: -0.13%;
+}
+.journey-places figure:nth-child(2) {
+    --crop-width: 130.79%;
+    --crop-height: 133.22%;
+    --crop-left: -15.48%;
+    --crop-top: -16.83%;
+}
+.journey-places figure:nth-child(3) {
+    --crop-width: 106.63%;
+    --crop-height: 108.62%;
+    --crop-left: -0.4%;
+    --crop-top: -4.19%;
+}
+/* Match the hero image crop. */
+.scene-art img {
+    position: absolute;
+    width: 107.22%;
+    max-width: none;
+    height: 101.31%;
+    left: -1.67%;
+    top: -1.31%;
+}

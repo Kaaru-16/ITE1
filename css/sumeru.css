@@ -1,0 +1,39 @@
+:root {
+    --world-height: 112.5vw;
+    --scene-color: #326c48;
+    --hero-tint: #559e00ba;
+    --hero-flip: scaleX(-1);
+    --scenery-width: 142%;
+    --scenery-height: 79.8409vw;
+    --scenery-left: -21%;
+    --scenery-top: 35.017vw;
+    --title-top: 9.4792vw;
+    --title-line: 1.07905;
+    --description-width: 48.3333vw;
+    --stops-width: 45.15625vw;
+    --caption-size: 1.6667vw;
+    --panel-height: 26.7708vw;
+    --panel-padding: 1.875vw;
+    --list-gap: 1.1vw;
+    --list-line: 1.29;
+    --price-panel: url("../image/sumeru-price.svg");
+    --stops-panel: url("../image/sumeru-stops.svg");
+}
+.journey-places figure:nth-child(1) {
+    --crop-width: 115.88%;
+    --crop-height: 118%;
+    --crop-left: -5.78%;
+    --crop-top: -2.59%;
+}
+.journey-places figure:nth-child(2) {
+    --crop-width: 121%;
+    --crop-height: 101.17%;
+    --crop-left: -2.11%;
+    --crop-top: -0.79%;
+}
+.journey-places figure:nth-child(3) {
+    --crop-width: 124.73%;
+    --crop-height: 127%;
+    --crop-left: -4.97%;
+    --crop-top: -17.96%;
+}

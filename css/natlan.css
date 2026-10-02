@@ -1,0 +1,107 @@
+/* Natlan artwork and page-specific design tokens. */
+:root {
+    --title-top: 9.95vw;
+    --title-line: .86;
+    --caption-size: 1.6667vw;
+    --panel-height: auto;
+    --panel-padding: 1.875vw;
+    --list-gap: 1.1vw;
+    --list-line: 1.15;
+    --price-panel: url("../image/price-panel.svg");
+    --stops-panel: url("../image/stops-panel.svg");
+}
+
+/* Keep the Natlan artwork behind the page content. */
+.natlan-world {
+    min-height: 0;
+    background: linear-gradient(#220f0d, #170d0d);
+}
+
+.natlan-world::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background:
+        linear-gradient(rgba(71, 23, 15, .38), rgba(71, 23, 15, .38)),
+        url("../image/Natlan.png") center / cover no-repeat;
+    filter: blur(4.4px);
+}
+
+/* Natlan uses a shorter hero and a deeper artwork fade. */
+.natlan-page .destination-scene {
+    height: 52.6042vw;
+    color: #fff;
+}
+
+.natlan-page .scene-art {
+    height: 59.53125vw;
+    mask-image: linear-gradient(#000 60%, transparent 100%);
+}
+
+.natlan-page .destination-scene::before {
+    background: linear-gradient(
+        90deg,
+        rgba(77, 24, 18, .8) 5.7%,
+        rgba(102, 51, 26, .44) 42%,
+        transparent 98.8%
+    );
+    mask-image: linear-gradient(#000 55%, transparent);
+}
+
+/* Keep the Natlan title and introduction compact. */
+.natlan-page .scene-copy {
+    width: 48%;
+    margin-left: 6.77%;
+}
+
+.natlan-page .scene-copy h1 {
+    color: #fff2d9;
+}
+
+.natlan-page .scene-subtitle {
+    line-height: 1.1;
+}
+
+.natlan-page .scene-description {
+    position: static;
+    width: 84.6%;
+    margin-top: 1.2vw;
+    color: #fff;
+    line-height: 1.05;
+}
+
+/* The emblem is a transparent crop of the supplied Natlan mark. */
+.natlan-emblem {
+    flex: 0 0 auto;
+    width: 7.03125vw;
+    height: 7.03125vw;
+    background: url("../image/natlan-emblem.png") center / 100% 135% no-repeat;
+    mix-blend-mode: screen;
+}
+
+/* Natlan uses larger hero labels and a warm CTA treatment. */
+.natlan-page .scene-pricing h3,
+.natlan-page .scene-stops h3 {
+    color: #fff;
+    font-size: 2.5vw;
+    line-height: 1.08;
+}
+
+.natlan-page .booking-button {
+    border-color: rgba(255, 230, 158, .9);
+    background: linear-gradient(110deg, rgba(255, 233, 171, .68), rgba(236, 138, 94, .45));
+}
+
+.natlan-page .booking-button:hover,
+.natlan-page .booking-button:focus-visible {
+    background: rgba(255, 225, 168, .8);
+}
+
+/* Natlan gallery images use their source framing. */
+.natlan-page .journey-places figure {
+    --crop-width: 100%;
+    --crop-height: 100%;
+    --crop-left: 0;
+    --crop-top: 0;
+}
