@@ -1,5 +1,4 @@
-@import url("shared.css");
-/* Load the Figma typeface locally. */
+/* Shared nation tokens and layout. */
 :root { --display: HYWenHei, Cambria, Georgia, serif; --gold: #ffeeab; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }

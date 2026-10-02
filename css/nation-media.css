@@ -105,8 +105,15 @@
 /* Phone layout. */
 @media (max-width: 600px) {
     /* Fit navigation to this screen size. */
-    .guild-nav { grid-template-columns: minmax(0, 1.5fr) 58px minmax(0, 1fr) auto; font-size: 10px; gap: 10px; }
-    .guild-logo img { width: 58px; }
+    .guild-nav {
+        width: 100%;
+        padding-right: 10px;
+        padding-left: 10px;
+        grid-template-columns: minmax(0, 1.2fr) 52px minmax(0, 1fr) max-content;
+        gap: 6px;
+        font-size: 9px;
+    }
+    .guild-logo img { width: 52px; }
     /* Adjust hero spacing. */
     .destination-scene { padding-top: 125px; }
     /* Resize the gallery heading. */
