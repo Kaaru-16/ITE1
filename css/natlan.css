@@ -15,7 +15,7 @@
     --font-display: HYWenHei, "Playfair Display", Georgia, serif;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+html { scroll-behavior: smooth; scroll-padding-top: 0; }
 body {
     margin: 0;
     background: #120b09;
@@ -39,7 +39,7 @@ p { color: var(--muted); }
 a:focus-visible,
 summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 6px; }
 .natlan-page {
-    --display: HYWenHei, HYWenHei, Cambria, Georgia, serif;
+    --display: HYWenHei, Cambria, Georgia, serif;
     background: #130b09;
     color: #fffaf3;
     font-family: var(--font-display);
@@ -127,7 +127,14 @@ summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 6px; }
     mask-image: linear-gradient(#000 55%, transparent);
 }
 .natlan-page .scene-copy { padding-top: 9.95vw; width: 48%; margin-left: 6.77%; text-shadow: 0 3px 8px #0006; }
-.natlan-page .scene-copy h1 { font-size: 7.92vw; line-height: .86; color: #fff2d9; }
+.natlan-page .scene-copy h1 { display: flex; align-items: center; gap: .15em; font-size: 7.92vw; line-height: .86; color: #fff2d9; }
+.natlan-emblem {
+    flex: 0 0 auto;
+    width: 7.03125vw;
+    height: 7.03125vw;
+    background: url("../image/natlan-emblem.png") center / 100% 135% no-repeat;
+    mix-blend-mode: screen;
+}
 .natlan-page .scene-subtitle { color: #fff; font-size: 3.02vw; line-height: 1.1; margin-top: -.2vw; }
 .natlan-page .scene-description {
     width: 84.6%;
