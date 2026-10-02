@@ -1,6 +1,5 @@
 /* Shared site elements. */
 @import url("shared.css");
-/* Load the Figma typeface locally. */
 :root {
     --font-body: Arial,Helvetica,sans-serif;
     --ink: #2e2444;
