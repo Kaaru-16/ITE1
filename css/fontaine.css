@@ -26,13 +26,13 @@
 .journey-places figure:nth-child(1) {
     --crop-width: 103.04%;
     --crop-height: 104.93%;
-    --crop-left: -3.04%;
+    --crop-left: -2.04%;
     --crop-top: -0.13%;
 }
 .journey-places figure:nth-child(2) {
-    --crop-width: 111.35%;
+    --crop-width: 105.35%;
     --crop-height: 114.19%;
-    --crop-left: 0.03%;
+    --crop-left: -1%;
     --crop-top: -2.55%;
 }
 .journey-places figure:nth-child(3) {
