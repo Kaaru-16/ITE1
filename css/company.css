@@ -387,17 +387,3 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     width: 1px;
     background: url("../image/home-imgLine8.svg") center / 100% 100%;
 }
-/* Hide legacy card numbers. */
-.card-number {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    color: white;
-    font-size: 10px;
-    letter-spacing: .1em;
-    background: #203b354d;
-    border: 1px solid #ffffff70;
-    border-radius: 30px;
-    padding: 3px 10px;
-}
-.landing-page .card-number { display: none; }

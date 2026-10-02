@@ -42,6 +42,7 @@
     .destination-scene { height: auto; padding: 150px 7% 55px; }
     /* Fit the hero artwork. */
     .scene-art { height: 100%; }
+    .scene-art img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
     /* Resize the hero introduction. */
     .scene-copy { width: auto; padding: 0; margin: 0; }
     .scene-copy h1 { font-size: clamp(42px, 10vw, 78px); line-height: 1.1; }

@@ -2,13 +2,6 @@
 @import url("shared.css");
 /* Natlan scenery and layout. */
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap");
-@font-face {
-    font-family: "HYWenHei-Extended-Font-main";
-    src: url("../font/HYWenHei Extended.ttf") format("truetype");
-    font-weight: 700;
-    font-display: swap;
-    font-style: normal;
-}
 :root {
     --ink: #2a140d;
     --muted: #f6d6b8;
@@ -19,7 +12,7 @@
     --accent-deep: #8d2f18;
     --panel: rgba(83, 29, 18, 0.48);
     --font-main: "DM Sans", Arial, sans-serif;
-    --font-display: "HYWenHei-Extended-Font-main", "Playfair Display", Georgia, serif;
+    --font-display: HYWenHei, "Playfair Display", Georgia, serif;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
@@ -46,7 +39,7 @@ p { color: var(--muted); }
 a:focus-visible,
 summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 6px; }
 .natlan-page {
-    --display: "HYWenHei-Extended-Font-main", HYWenHei, Cambria, Georgia, serif;
+    --display: HYWenHei, HYWenHei, Cambria, Georgia, serif;
     background: #130b09;
     color: #fffaf3;
     font-family: var(--font-display);

@@ -1,198 +1,41 @@
-/* Shared site elements. */
-@import url("shared.css");
-/* Load the Figma typeface locally. */
-:root { --display: HYWenHei, Cambria, Georgia, serif; --gold: #ffeeab; }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; color: #fff; background: #0a131d; font: 700 16px/1.3 var(--display); }
-a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
-h1, h2, h3, p, figure { margin: 0; }
-a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 6px; }
-.skip { position: fixed; top: -80px; z-index: 20; padding: 12px; background: #fff; color: #203b35; }
-.skip:focus { top: 0; }
-/* Space the nation links. */
-.nation-options a:hover,
-.nation-options a:focus-visible {
-    background-color: #ffffff20;
-    color: #ffeeab;
-    border-radius: 8px;
+/* Nation artwork and proportions. */
+:root {
+    --button-left: 61.1458%;
+    --world-height: 126.6667vw;
+    --scene-color: #185d8b;
+    --hero-tint: #00bee8ba;
+    --scenery-tint: transparent;
+    --scenery-width: 219.57%;
+    --scenery-height: 123.3333vw;
+    --scenery-left: -73.92%;
+    --scenery-top: 25.1173vw;
+    --title-top: 9.4792vw;
+    --title-line: 1.07905;
+    --description-width: 45.3125vw;
+    --stops-width: 51.6667vw;
+    --caption-size: 1.25vw;
+    --panel-height: 31.5104vw;
+    --panel-padding: 2.2vw;
+    --list-gap: 1.5vw;
+    --list-line: 1.52;
+    --price-panel: url("../image/snezhnaya-price.svg");
+    --stops-panel: url("../image/snezhnaya-stops.svg");
 }
-/* Layered scenery */
-.snezhnaya-world { position: relative; isolation: isolate; overflow: hidden; background: #185d8b; }
-.world-scenery {
-    position: absolute;
-    z-index: -2;
-    top: 3.6458vw;
-    width: 100%;
-    height: 123.3333vw;
-    overflow: hidden;
-    filter: blur(4.4px);
+.journey-places figure:nth-child(1) {
+    --crop-width: 130.93%;
+    --crop-height: 100%;
+    --crop-left: -22.71%;
+    --crop-top: 0.03%;
 }
-.world-scenery img {
-    position: absolute;
-    width: 219.57%;
-    max-width: none;
-    height: 100%;
-    left: -73.92%;
-    top: 17.41%;
+.journey-places figure:nth-child(2) {
+    --crop-width: 100%;
+    --crop-height: 100%;
+    --crop-left: 0%;
+    --crop-top: 0%;
 }
-.destination-scene {
-    position: relative;
-    isolation: isolate;
-    height: 54.53125vw;
-    text-shadow: 0 4px 8px #0007;
-}
-.scene-art {
-    position: absolute;
-    z-index: -2;
-    inset: 0 0 auto;
-    height: 59.53125vw;
-    overflow: hidden;
-    mask-image: linear-gradient(#000 65%, transparent);
-}
-.scene-art img { position: absolute; width: 114%; max-width: none; height: 107.72%; left: .01%; top: -5.83%; }
-.destination-scene::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    background: linear-gradient(90deg, #0079ddba 5.7%, #6660 98.8%);
-    mask-image: linear-gradient(#000 65%, transparent);
-}
-.scene-copy { padding-top: 9.4792vw; margin-left: 6.7708%; width: 59.4271%; }
-/* Align the title and nation emblem. */
-.scene-copy h1 { display: flex; align-items: center; gap: .15em; font-size: 6.6667vw; line-height: 1.313; }
-/* Keep the emblem proportional. */
-.nation-emblem { width: 1.055em; height: 1.055em; object-fit: contain; flex-shrink: 0; }
-/* Size the subtitle and description. */
-.scene-subtitle { font-size: 2.5vw; line-height: 1.313; }
-.scene-description { width: 45.3125vw; font-size: 1.25vw; line-height: 1.05; }
-/* Position the base price. */
-.scene-pricing { position: absolute; top: 33.90625vw; left: 6.8229%; }
-.scene-pricing h3, .scene-stops h3 { font-size: 1.875vw; line-height: 1.08; }
-/* Center the price in its panel. */
-.price-value {
-    display: grid;
-    place-items: center;
-    width: 14.3229vw;
-    min-height: 3.0729vw;
-    margin-top: .65vw;
-    font-size: 1.6667vw;
-    background: url("../image/snezhnaya-price.svg") center / 100% 100% no-repeat;
-}
-/* Style the trip duration. */
-.scene-pricing small { display: block; text-align: center; margin-top: .52vw; font-size: .8333vw; }
-.scene-stops { position: absolute; top: 41.8229vw; left: 6.8229%; }
-/* Style the featured stops panel. */
-.stops-value {
-    width: 51.6667vw;
-    min-height: 3.3854vw;
-    margin-top: .5729vw;
-    padding: 1vw 1.40625vw;
-    background: url("../image/snezhnaya-stops.svg") center / 100% 100% no-repeat;
-    font-size: 1.25vw;
-    line-height: 1.05;
-}
-/* View Package Details button. */
-.booking-button {
-    position: absolute;
-    top: 41.6146vw;
-    right: 6.7708%;
-    width: 32.5521vw;
-    min-height: 6.0417vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .85vw;
-    padding: 1vw 1.8vw;
-    border: 2px solid #eec966;
-    border-radius: 5.3646vw;
-    background: #ffe79c75;
-    box-shadow: 0 4px 7px #0004;
-    font-size: 2.0833vw;
-    line-height: 1.1;
-}
-/* Show the button icon in white. */
-.booking-button img {
-    width: .9em;
-    height: .9em;
-    object-fit: contain;
-    flex-shrink: 0;
-    filter: brightness(0) invert(1);
-}
-/* Highlight button interaction. */
-.booking-button:hover, .booking-button:focus-visible { background: #fff3cda6; }
-/* Gallery and itinerary */
-.journey-gallery h2 {
-    margin: 0 6.7708% 2.1354vw;
-    font-size: 3.3333vw;
-    line-height: 1.03;
-    text-shadow: 0 4px 6.5px #0004;
-}
-/* Arrange three featured photos. */
-.journey-places {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 5.5729vw;
-    padding: 1.25vw 11.09375% 1.2vw;
-    background: #ffffff40;
-    box-shadow: 0 4px 7px #0004;
-}
-/* Round and shadow each photo. */
-.journey-photo {
-    position: relative;
-    aspect-ratio: 420 / 232;
-    overflow: hidden;
-    border-radius: 1.1458vw;
-    box-shadow: 0 4px 5.9px #0006;
-}
-/* Fill the photo frame. */
-.journey-photo img { position: absolute; max-width: none; width: 100%; height: 100%; object-fit: cover; }
-/* Match the reference image crops. */
-.journey-places figure:nth-child(1) img { width: 130.93%; left: -22.71%; top: .03%; }
-.journey-places figure:nth-child(3) img { width: 122.93%; height: 129%; left: -10.33%; top: -10.17%; }
-/* Center photo captions. */
-.journey-places figcaption {
-    margin-top: .9896vw;
-    font-size: 1.25vw;
-    text-align: center;
-    text-shadow: 0 4px 2px #0004;
-}
-.package-details {
-    width: 86.7708%;
-    margin: 3.75vw auto 0;
-    padding-bottom: 4vw;
-    display: grid;
-    grid-template-columns: 962fr 637fr;
-    align-items: start;
-    gap: 3.4896vw;
-    text-shadow: 0 4px 5.6px #0007;
-}
-/* Separate the daily itinerary rows. */
-.journey-day {
-    display: grid;
-    grid-template-columns: 5.7292vw 1fr;
-    gap: 1.1458vw;
-    min-height: 7.9167vw;
-    padding: 1.1vw 0 1.5vw;
-    border-bottom: 1px solid #fff8;
-}
-/* Size the day labels. */
-.journey-day > span { font-size: 1.0417vw; }
-.journey-day h3, .package-inclusions h3 { font-size: 1.6667vw; line-height: 1.1; margin-bottom: .8vw; }
-.journey-day p { font-size: .8333vw; line-height: 1.3; }
-.package-note { margin-top: 1.6vw; font-size: .78125vw; line-height: 1.3; }
-.package-inclusions {
-    padding: 2.2vw 2.0833vw;
-    border-radius: 1.823vw;
-    background: #ffffff40;
-    box-shadow: 0 4px 7px #0004;
-}
-.package-inclusions ul {
-    margin: 1.5vw 0;
-    padding: 0 0 1.5vw 1.5vw;
-    border-bottom: 1px solid #fff8;
-    font-size: 1.25vw;
-    line-height: 1.5;
+.journey-places figure:nth-child(3) {
+    --crop-width: 122.93%;
+    --crop-height: 129%;
+    --crop-left: -10.33%;
+    --crop-top: -10.17%;
 }
