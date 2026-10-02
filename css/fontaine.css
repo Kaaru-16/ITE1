@@ -1,0 +1,42 @@
+
+/* Nation colors, proportions and artwork. */
+:root {
+    --world-height: 119.6354vw;
+    --scene-color: ;
+    --hero-tint: ;
+    --scenery-tint: ;
+    --scenery-width: 204.49%;
+    --scenery-height: 120vw;
+    --scenery-left: -50.48%;
+    --scenery-top: 36.828vw;
+    --title-top: 7.3958vw;
+    --title-line: 1.34455;
+    --description-width: 39.1146vw;
+    --stops-width: 40.34375vw;
+    --caption-size: 1.25vw;
+    --panel-height: 31.5104vw;
+    --panel-padding: 2.2vw;
+    --list-gap: 1.5vw;
+    --list-line: 1.52;
+    --price-panel: url("../image/liyue-price.svg");
+    --stops-panel: url("../image/liyue-stops.svg");
+}
+  
+.journey-places figure:nth-child(1) {
+    --crop-width: 103.04%;
+    --crop-height: 104.93%;
+    --crop-left: -2.04%;
+    --crop-top: -0.13%;
+}
+.journey-places figure:nth-child(2) {
+    --crop-width: 105.35%;
+    --crop-height: 114.19%;
+    --crop-left: -1%;
+    --crop-top: -2.55%;
+}
+.journey-places figure:nth-child(3) {
+    --crop-width: 113.93%;
+    --crop-height: 116%;
+    --crop-left: -6.93%;
+    --crop-top: -0.14%;
+}
