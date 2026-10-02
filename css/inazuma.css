@@ -1,12 +1,4 @@
-/* =========================================================
-   INAZUMA — FINAL STYLESHEET
-   Teyvat Travel Services
-   ========================================================= */
-
-
-/* =========================================================
-   CUSTOM FONT
-   ========================================================= */
+/* Font */
 
 @font-face {
     font-family: "HYWenHei";
@@ -16,9 +8,7 @@
 }
 
 
-/* =========================================================
-   GENERAL
-   ========================================================= */
+/* General */
 
 * {
     box-sizing: border-box;
@@ -31,12 +21,9 @@ html {
 body.inazuma-page {
     margin: 0;
     padding: 0;
-
     background: #07121d;
     color: #ffffff;
-
     overflow-x: hidden;
-
     font-family: "HYWenHei", Georgia, "Times New Roman", serif;
 }
 
@@ -48,137 +35,52 @@ body.inazuma-page {
 .skip:focus {
     left: 20px;
     top: 20px;
-
     z-index: 1000;
-
     padding: 10px 14px;
-
     background: #ffffff;
     color: #111111;
-
     text-decoration: none;
 }
 
 
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.destination-scene {
-    position: relative;
-
-    width: 100%;
-    height: 56.25vw;
-
-    min-height: 720px;
-    max-height: 1080px;
-
-    overflow: hidden;
-
-    color: #ffffff;
-}
-
-
-/* Mirrored to place the statue on the left like Figma */
-
-.scene-art {
-    position: absolute;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-    object-position: center center;
-
-    transform: scaleX(-1);
-
-    z-index: 0;
-}
-
-
-/* Purple overlay */
-
-.destination-scene::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: 1;
-
-    background: linear-gradient(
-        90deg,
-        rgba(76, 28, 151, 0.80) 0%,
-        rgba(75, 30, 145, 0.55) 38%,
-        rgba(65, 27, 125, 0.18) 70%,
-        rgba(65, 27, 125, 0.05) 100%
-    );
-
-    pointer-events: none;
-}
-
-
-/* =========================================================
-   HEADER / NAVIGATION
-   ========================================================= */
+/* Header */
 
 .site-header {
     position: absolute;
-
     top: 0;
     left: 0;
-
     width: 100%;
-
     z-index: 10;
 }
 
 .nav-atmosphere {
     position: absolute;
-
     top: 0;
     left: 0;
-
     width: 100%;
     height: 250px;
-
     overflow: hidden;
-
     pointer-events: none;
 }
 
 .nav-atmosphere img {
     display: block;
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
     opacity: 0.75;
 }
 
-
-/* Final centered desktop navigation */
-
 .guild-nav {
     position: relative;
-
     z-index: 2;
-
     width: min(1180px, 88%);
-
     margin: 0 auto;
     padding-top: 40px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     gap: clamp(45px, 5vw, 90px);
-
     font-size: 22px;
     font-weight: bold;
 }
@@ -190,31 +92,25 @@ body.inazuma-page {
 .guild-nav a,
 .nation-menu summary {
     color: #ffffff;
-
     text-decoration: none;
 }
 
 
-/* =========================================================
-   NATION MENU
-   ========================================================= */
+/* Nation dropdown */
 
 .nation-menu {
     position: relative;
-
     flex: 0 0 auto;
 }
 
 .nation-menu summary {
     display: flex;
-
     align-items: center;
-
     cursor: pointer;
-
     list-style: none;
-
     white-space: nowrap;
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .nation-menu summary::-webkit-details-marker {
@@ -223,139 +119,193 @@ body.inazuma-page {
 
 .nation-menu summary img {
     flex: 0 0 auto;
-
     width: 18px;
     height: auto;
-
-    margin-left: 8px;
-
+    margin-left: 12px;
     vertical-align: middle;
 }
 
 .nation-options {
     position: absolute;
-
-    top: 100%;
-    left: 0;
-
-    min-width: 190px;
-
-    margin-top: 10px;
-    padding: 12px;
-
-    background: rgba(20, 15, 55, 0.95);
-
-    border: 1px solid #e7c95c;
-    border-radius: 8px;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    padding: 20px 25px 24px;
+    background: rgba(184, 186, 202, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(255, 255, 255, 0.90);
+    border-radius: 42px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+    overflow: hidden;
 }
 
 .nation-options a {
-    display: block;
-
-    padding: 7px 12px;
-
-    font-size: 16px;
-
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 61px;
+    padding: 7px 4px;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 25px;
+    line-height: 1;
+    font-weight: 700;
     white-space: nowrap;
+    text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.40);
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+}
+
+.nation-options a:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.65);
+}
+
+.nation-options a:nth-child(1)::after {
+    background: #9ef4f2;
+}
+
+.nation-options a:nth-child(2)::after {
+    background: #f5cf72;
+}
+
+.nation-options a:nth-child(3)::after {
+    background: #d9a8ff;
+}
+
+.nation-options a:nth-child(4)::after {
+    background: #c8ff39;
+}
+
+.nation-options a:nth-child(5)::after {
+    background: #59c9ef;
+}
+
+.nation-options a:nth-child(6)::after {
+    background: #ff805c;
 }
 
 .nation-options a:hover {
-    background: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.02);
 }
 
 
-/* =========================================================
-   HEADER LOGO
-   ========================================================= */
+/* Logo */
 
 .guild-logo {
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     margin: 0;
 }
 
 .guild-logo img {
     display: block;
-
     width: 117px;
     height: auto;
 }
-
-
-/* Keep normal navigation links on one line */
 
 .guild-nav > a {
     white-space: nowrap;
 }
 
 
-/* =========================================================
-   HERO TEXT
-   ========================================================= */
+/* Hero */
+
+.destination-scene {
+    position: relative;
+    width: 100%;
+    height: 56.25vw;
+    min-height: 720px;
+    max-height: 1080px;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+.scene-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transform: scaleX(-1);
+    z-index: 0;
+}
+
+.destination-scene::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        90deg,
+        rgba(76, 28, 151, 0.80) 0%,
+        rgba(75, 30, 145, 0.55) 38%,
+        rgba(65, 27, 125, 0.18) 70%,
+        rgba(65, 27, 125, 0.05) 100%
+    );
+    pointer-events: none;
+}
+
+
+/* Hero text */
 
 .scene-copy {
     position: relative;
-
     z-index: 2;
-
     width: 47%;
-
     margin-left: 6.8%;
     padding-top: 10.5vw;
 }
 
 .scene-copy h1 {
     margin: 0;
-
     font-size: clamp(76px, 7.2vw, 122px);
     line-height: 0.86;
-
     letter-spacing: -2px;
-
-    text-shadow:
-        3px 3px 5px rgba(0, 0, 0, 0.45);
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.45);
 }
 
 .scene-subtitle {
     margin: 12px 0 0;
-
     font-size: clamp(29px, 2.55vw, 43px);
     line-height: 1;
-
     font-weight: bold;
-
-    text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.50);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.50);
 }
 
 .scene-description {
     width: 88%;
     max-width: 650px;
-
     margin-top: 18px;
-
     font-size: clamp(17px, 1.35vw, 23px);
     line-height: 1.03;
-
     font-weight: bold;
-
-    text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.50);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.50);
 }
 
 
-/* =========================================================
-   BASE PRICE
-   ========================================================= */
+/* Price */
 
 .scene-pricing {
     position: absolute;
-
     z-index: 2;
-
     left: 6.8%;
     top: 67%;
 }
@@ -363,184 +313,149 @@ body.inazuma-page {
 .scene-pricing h3,
 .scene-stops h3 {
     margin: 0 0 7px;
-
     font-size: clamp(23px, 1.75vw, 30px);
     line-height: 1;
 }
 
 .price-value {
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     width: 200px;
     height: 47px;
-
     border: 2px solid #f0d34f;
     border-radius: 40px;
-
     background: rgba(100, 80, 100, 0.65);
-
     font-size: 23px;
     font-weight: bold;
 }
 
 .scene-pricing small {
     display: block;
-
     margin-top: 6px;
     margin-left: 8px;
-
     font-size: 12px;
     font-weight: bold;
 }
 
 
-/* =========================================================
-   FEATURED STOPS
-   ========================================================= */
+/* Featured stops */
 
 .scene-stops {
     position: absolute;
-
     z-index: 2;
-
     left: 6.8%;
     top: 82%;
 }
 
 .stops-value {
     margin: 0;
-
     padding: 10px 18px;
-
     border-radius: 28px;
-
     background: rgba(70, 50, 80, 0.65);
-
     font-size: clamp(15px, 1.15vw, 20px);
     line-height: 1.05;
-
     font-weight: bold;
 }
 
 
-/* =========================================================
-   VIEW PACKAGE DETAILS BUTTON
-   ========================================================= */
+/* Package details button */
 
 .book-journey {
     position: absolute;
-
     right: 9.5%;
     bottom: 12.5%;
-
     z-index: 2;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     gap: 12px;
-
     width: 420px;
     height: 86px;
-
     border: 2px solid #f4d35e;
     border-radius: 50px;
-
     background: rgba(210, 205, 215, 0.65);
-
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-
     color: #ffffff;
-
     text-decoration: none;
-
     font-size: 31px;
     font-weight: bold;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease;
 }
 
-
-/* Link.png exported from Figma */
-
 .package-details-icon {
     display: block;
-
     width: 22px;
     height: 22px;
-
     object-fit: contain;
-
     flex: 0 0 auto;
 }
 
 .book-journey:hover {
     background: rgba(225, 218, 235, 0.82);
-
     transform: translateY(-2px);
 }
 
 
-/* =========================================================
-   RIGHT ARROW
-   ========================================================= */
+/* Next arrow */
 
 .scene-next {
     position: absolute;
-
     z-index: 3;
-
     right: 8.5%;
     top: 46%;
 }
 
 .scene-next img {
     display: block;
-
     width: 52px;
     height: auto;
 }
 
 
-/* =========================================================
-   A GLIMPSE OF YOUR JOURNEY
-   ========================================================= */
+/* Journey title */
 
-.journey-glimpse {
-    position: relative;
-
-    width: 100%;
-
-    /*
-       Slight overlap removes the thin line/seam
-       between the hero and this section.
-    */
-    margin: -2px 0 0;
-    padding: 0;
-
-    overflow: hidden;
-
-    color: #ffffff;
-
-    background-image: url("../image/Rectangle 5.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
+.journey-title {
+    position: absolute;
+    left: 6.8%;
+    bottom: 2.5%;
+    z-index: 3;
+    width: 86%;
+    background: transparent;
     border: 0;
+    outline: 0;
     box-shadow: none;
 }
 
+.journey-title h2 {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: #ffffff;
+    font-size: clamp(27px, 2.15vw, 38px);
+    line-height: 1;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.40);
+}
 
-/* Remove unwanted generated overlays */
+
+/* Journey section */
+
+.journey-glimpse {
+    position: relative;
+    width: 100%;
+    margin: -2px 0 0;
+    padding: 0;
+    overflow: hidden;
+    color: #ffffff;
+    border: 0;
+    border-top: 0;
+    outline: 0;
+    box-shadow: none;
+}
 
 .journey-glimpse::before,
 .journey-glimpse::after {
@@ -548,88 +463,26 @@ body.inazuma-page {
     display: none;
 }
 
-
-/* =========================================================
-   GLIMPSE HEADING AREA
-   Heading is ABOVE the destination highlight
-   ========================================================= */
-
-.journey-heading {
-    position: relative;
-
-    z-index: 2;
-
-    width: 86%;
-    max-width: 1450px;
-
-    margin: 0 auto;
-
-    padding: 17px 0 14px;
-
-    /* No highlight behind the heading */
-    background: transparent;
-}
-.journey-heading h2 {
-    margin: 0;
-    padding: 0;
-
-    color: #ffffff;
-
-    font-size: clamp(27px, 2.15vw, 38px);
-    line-height: 1;
-
-    font-weight: 700;
-
-    text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.40);
-}
-
-
-/* =========================================================
-   DESTINATION HIGHLIGHT AREA
-   Only the destination artwork sits in this area.
-   ========================================================= */
-
 .journey-destinations {
     position: relative;
-
     z-index: 2;
-
     width: 100%;
-
-    /*
-       Soft light-violet highlight behind the three
-       destination panels, matching the Figma layout.
-    */
-    background: rgba(205, 184, 226, 0.18);
-
+    background-image: url("../image/Rectangle 5.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     padding: 10px 0 14px;
+    border: 0;
+    outline: 0;
 }
-
-
-/* =========================================================
-   DESTINATION PANELS
-   ========================================================= */
-
-/*
-   DESTINATIONS.png already contains:
-   - Narukami Island Grand Shrine
-   - Ritou Trading Port
-   - Tenshukaku
-   - Their labels
-*/
 
 .destinations-image {
     display: block;
-
     width: 72%;
     max-width: 1050px;
     height: auto;
-
     margin: 0 auto;
-
     object-fit: contain;
-
     border: 0;
     border-radius: 0;
     outline: 0;
@@ -637,161 +490,55 @@ body.inazuma-page {
 }
 
 
-/* =========================================================
-   LEGACY GLIMPSE SUPPORT
-
-   These rules are kept so the old HTML does not completely
-   break before we replace the HTML in the next step.
-   ========================================================= */
-
-.journey-container {
-    position: relative;
-
-    z-index: 2;
-
-    width: 86%;
-    max-width: 1450px;
-
-    margin: 0 auto;
-    padding: 0;
-}
-
-.journey-container > h2 {
-    margin: 0;
-
-    padding: 17px 0 14px;
-
-    font-size: clamp(27px, 2.15vw, 38px);
-    line-height: 1;
-
-    font-weight: 700;
-
-    text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.40);
-}
-
-
-/* =========================================================
-   FALLBACK INDIVIDUAL DESTINATION CARDS
-   ========================================================= */
-
-.journey-photo,
-.destination-card,
-.journey-card {
-    border: 0;
-    border-radius: 0;
-    outline: 0;
-    box-shadow: none;
-}
-
-.journey-photo img,
-.destination-card img,
-.journey-card img {
-    display: block;
-
-    max-width: 100%;
-    height: auto;
-
-    border: 0;
-    border-radius: 0;
-    outline: 0;
-    box-shadow: none;
-}
-
-.journey-photo h3,
-.destination-card h3,
-.journey-card h3 {
-    margin: 8px 0 6px;
-
-    font-size: clamp(18px, 1.5vw, 25px);
-    line-height: 1.1;
-
-    text-align: center;
-}
-
-
-/* =========================================================
-   ITINERARY
-   ========================================================= */
+/* Itinerary */
 
 .itinerary-section {
     position: relative;
-
     width: 100%;
-
     min-height: 590px;
-
     margin: 0;
-
     padding: 52px 0 70px;
-
     overflow: hidden;
-
     color: #ffffff;
-
     border: 0;
 }
 
-
-/* Figma BG.svg */
-
 .itinerary-section::before {
     content: "";
-
     position: absolute;
     inset: 0;
-
     background-image: url("../image/BG.svg");
     background-size: cover;
     background-position: center 48%;
     background-repeat: no-repeat;
-
     filter: blur(1.5px);
-
     transform: scale(1.01);
-
     z-index: 0;
 }
 
-
-/* Purple overlay */
-
 .itinerary-section::after {
     content: "";
-
     position: absolute;
     inset: 0;
-
     background: rgba(58, 0, 133, 0.30);
-
     z-index: 1;
-
     pointer-events: none;
 }
 
 
-/* =========================================================
-   ITINERARY CONTENT
-   ========================================================= */
+/* Itinerary layout */
 
 .itinerary-container {
     position: relative;
-
     z-index: 2;
-
     width: 86%;
     max-width: 1320px;
-
     margin: 0 auto;
-
     display: grid;
-
     grid-template-columns:
         minmax(0, 1.72fr)
         minmax(360px, 0.88fr);
-
     column-gap: 44px;
-
     align-items: start;
 }
 
@@ -799,23 +546,13 @@ body.inazuma-page {
     width: 100%;
 }
 
-
-/* =========================================================
-   DAY ROWS
-   ========================================================= */
-
 .itinerary-day {
     display: grid;
-
     grid-template-columns: 80px 1fr;
-
     column-gap: 18px;
-
     padding: 0 0 19px;
     margin-bottom: 19px;
-
-    border-bottom:
-        1px solid rgba(255, 255, 255, 0.65);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.65);
 }
 
 .itinerary-day:first-child {
@@ -824,276 +561,178 @@ body.inazuma-page {
 
 .day-number {
     display: flex;
-
     align-items: flex-start;
-
     gap: 5px;
-
     padding-top: 3px;
-
     white-space: nowrap;
-
     font-size: 13px;
     line-height: 1;
-
     font-weight: 700;
 }
 
 .day-number span,
 .day-number strong {
     display: inline;
-
     font-size: inherit;
     line-height: inherit;
-
     font-weight: inherit;
 }
-
-
-/* Supports both naming styles used during development */
 
 .day-details h2,
 .day-content h3 {
     margin: 0 0 7px;
-
     font-size: 25px;
     line-height: 1;
-
     font-weight: 700;
-
-    text-shadow:
-        1px 1px 3px rgba(0, 0, 0, 0.45);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
 }
 
 .day-details p,
 .day-content p {
     max-width: 650px;
-
     margin: 0;
-
     font-size: 12px;
     line-height: 1.08;
-
     font-weight: 600;
-
-    text-shadow:
-        1px 1px 2px rgba(0, 0, 0, 0.55);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.55);
 }
-
-
-/* =========================================================
-   ITINERARY DISCLAIMER
-   ========================================================= */
 
 .itinerary-note,
 .itinerary-disclaimer {
     margin: 31px 0 0;
-
     font-size: 11px;
     line-height: 1.15;
-
     font-weight: 600;
-
     opacity: 0.9;
 }
 
 
-/* =========================================================
-   PROPOSED INCLUSIONS CARD
-   ========================================================= */
+/* Inclusions */
 
 .inclusions-card {
     width: 100%;
     min-height: 390px;
-
     margin-top: -2px;
-
     padding: 27px 29px 24px;
-
-    border:
-        1px solid rgba(255, 255, 255, 0.55);
-
+    border: 1px solid rgba(255, 255, 255, 0.55);
     border-radius: 25px;
-
     background: rgba(176, 156, 210, 0.47);
-
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-
-    box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.18);
 }
 
 .inclusions-card h2,
 .inclusions-card h3,
 .inclusion-group h2 {
     margin: 0 0 17px;
-
     font-size: 23px;
     line-height: 1;
-
     font-weight: 700;
 }
 
 .inclusions-card ul,
 .inclusion-group ul {
     margin: 0;
-
     padding-left: 22px;
 }
 
 .inclusions-card li,
 .inclusion-group li {
     margin: 0 0 6px;
-
     padding-left: 1px;
-
     font-size: 15px;
     line-height: 1.05;
-
     font-weight: 600;
 }
 
-
-/* Divider between included / not included */
-
 .not-included {
     margin-top: 22px;
-
     padding-top: 20px;
-
-    border-top:
-        1px solid rgba(255, 255, 255, 0.72);
+    border-top: 1px solid rgba(255, 255, 255, 0.72);
 }
 
 .inclusions-card hr {
     margin: 22px 0 20px;
-
     border: 0;
-
-    border-top:
-        1px solid rgba(255, 255, 255, 0.72);
+    border-top: 1px solid rgba(255, 255, 255, 0.72);
 }
 
 .inclusions-card .not-included-title {
     margin-top: 0;
     margin-bottom: 17px;
-
     font-size: 23px;
     line-height: 1;
 }
 
-
-/* =========================================================
-   INCLUSION DISCLAIMER
-   ========================================================= */
-
 .inclusion-note,
 .inclusions-disclaimer {
     margin: 20px 0 0;
-
     padding-top: 15px;
-
-    border-top:
-        1px solid rgba(255, 255, 255, 0.65);
-
+    border-top: 1px solid rgba(255, 255, 255, 0.65);
     font-size: 10px;
     line-height: 1.05;
-
     font-weight: 600;
-
     opacity: 0.9;
 }
 
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
+/* Footer */
 
 .site-footer {
     width: 100%;
-
     min-height: 240px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     padding: 45px 0;
-
     background: #07131f;
-
     color: #ffffff;
 }
 
 .footer-container {
     width: auto;
-
     margin: 0 auto;
-
     display: grid;
-
     grid-template-columns:
         150px
         1px
         220px
         230px;
-
     align-items: center;
     justify-content: center;
-
     column-gap: 45px;
 }
 
-
-/* Footer logo */
-
 .footer-brand {
     display: flex;
-
     align-items: center;
     justify-content: center;
 }
 
 .footer-brand img {
     display: block;
-
     width: 125px;
     height: auto;
 }
 
-
-/* Vertical divider */
-
 .footer-divider {
     width: 1px;
     height: 115px;
-
-    background:
-        rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.65);
 }
-
-
-/* Footer links */
 
 .footer-links {
     display: flex;
-
     flex-direction: column;
-
     align-items: flex-start;
-
     gap: 14px;
 }
 
 .footer-links a {
     color: #ffffff;
-
     text-decoration: none;
-
     font-family: Arial, sans-serif;
-
     font-size: 13px;
     font-weight: normal;
 }
@@ -1102,40 +741,25 @@ body.inazuma-page {
     text-decoration: underline;
 }
 
-
-/* Copyright */
-
 .footer-copy {
     margin: 0;
-
     color: #ffffff;
-
     font-family: Arial, sans-serif;
-
     font-size: 13px;
     line-height: 1.05;
-
     text-align: left;
-
     opacity: 1;
 }
 
 
-/* =========================================================
-   TABLET
-   ========================================================= */
+/* Tablet */
 
 @media (max-width: 1000px) {
 
-    /* NAVIGATION */
-
     .guild-nav {
         width: 92%;
-
         padding-top: 28px;
-
         gap: 20px;
-
         font-size: 14px;
     }
 
@@ -1147,19 +771,14 @@ body.inazuma-page {
         width: 75px;
     }
 
-
-    /* HERO */
-
     .destination-scene {
         height: auto;
-
         min-height: 850px;
         max-height: none;
     }
 
     .scene-copy {
         width: 85%;
-
         margin-left: 7%;
         padding-top: 150px;
     }
@@ -1185,17 +804,14 @@ body.inazuma-page {
     .scene-stops {
         left: 7%;
         top: 75%;
-
         width: 85%;
     }
 
     .book-journey {
         right: 7%;
         bottom: 4%;
-
         width: 300px;
         height: 65px;
-
         font-size: 21px;
     }
 
@@ -1213,54 +829,30 @@ body.inazuma-page {
         width: 40px;
     }
 
-
-    /* GLIMPSE */
-
-    .journey-heading,
-    .journey-container {
-        width: 90%;
-    }
-
-    .journey-heading h2,
-    .journey-container > h2 {
+    .journey-title h2 {
         font-size: 32px;
     }
 
-    /*
-       Do NOT change this to 100%.
-       Keeping the destination artwork compact prevents
-       the old responsive rule from making it huge.
-    */
     .destinations-image {
         width: 78%;
         max-width: 900px;
     }
 
-
-    /* ITINERARY */
-
     .itinerary-section {
         min-height: 0;
-
         padding: 48px 0 55px;
     }
 
     .itinerary-container {
         width: 88%;
-
         grid-template-columns: 1fr;
-
         gap: 35px;
     }
 
     .inclusions-card {
         max-width: 600px;
-
         margin: 0 auto;
     }
-
-
-    /* FOOTER */
 
     .footer-container {
         grid-template-columns:
@@ -1268,7 +860,6 @@ body.inazuma-page {
             1px
             180px
             190px;
-
         column-gap: 25px;
     }
 
@@ -1283,21 +874,14 @@ body.inazuma-page {
 }
 
 
-/* =========================================================
-   SMALL TABLET / LARGE PHONE
-   ========================================================= */
+/* Small tablet */
 
 @media (max-width: 760px) {
 
-    /* NAVIGATION */
-
     .guild-nav {
         width: 94%;
-
         justify-content: space-between;
-
         gap: 10px;
-
         font-size: 12px;
     }
 
@@ -1309,12 +893,8 @@ body.inazuma-page {
         width: 65px;
     }
 
-
-    /* HERO */
-
     .scene-copy {
         width: 88%;
-
         margin-left: 6%;
     }
 
@@ -1330,11 +910,7 @@ body.inazuma-page {
         max-width: 540px;
     }
 
-
-    /* GLIMPSE */
-
-    .journey-heading h2,
-    .journey-container > h2 {
+    .journey-title h2 {
         font-size: 29px;
     }
 
@@ -1344,9 +920,7 @@ body.inazuma-page {
 }
 
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+/* Mobile */
 
 @media (max-width: 650px) {
 
@@ -1354,18 +928,13 @@ body.inazuma-page {
         width: 90%;
     }
 
-
-    /* NAVIGATION */
-
     .guild-nav {
         padding-top: 20px;
-
         font-size: 11px;
     }
 
     .nation-menu summary img {
         width: 13px;
-
         margin-left: 4px;
     }
 
@@ -1377,9 +946,6 @@ body.inazuma-page {
         display: none;
     }
 
-
-    /* HERO */
-
     .destination-scene {
         min-height: 820px;
     }
@@ -1390,7 +956,6 @@ body.inazuma-page {
 
     .scene-copy h1 {
         font-size: 55px;
-
         letter-spacing: -1px;
     }
 
@@ -1422,9 +987,7 @@ body.inazuma-page {
     .book-journey {
         width: 250px;
         height: 58px;
-
         font-size: 18px;
-
         gap: 9px;
     }
 
@@ -1433,27 +996,18 @@ body.inazuma-page {
         height: 17px;
     }
 
+    .journey-title {
+        left: 6%;
+        bottom: 2.5%;
+        width: 88%;
+    }
 
-    /* GLIMPSE */
+    .journey-title h2 {
+        font-size: 27px;
+    }
 
     .journey-glimpse {
         padding-bottom: 0;
-    }
-
-    .journey-heading,
-    .journey-container {
-        width: 90%;
-    }
-
-    .journey-heading {
-        padding: 16px 0 13px;
-    }
-
-    .journey-heading h2,
-    .journey-container > h2 {
-        padding: 0;
-
-        font-size: 27px;
     }
 
     .journey-destinations {
@@ -1465,20 +1019,8 @@ body.inazuma-page {
         max-width: none;
     }
 
-    .journey-photo h3,
-    .destination-card h3,
-    .journey-card h3 {
-        font-size: 18px;
-
-        margin-top: 7px;
-    }
-
-
-    /* ITINERARY */
-
     .itinerary-section {
         padding: 40px 0 50px;
-
         background-color: #321168;
     }
 
@@ -1489,7 +1031,6 @@ body.inazuma-page {
 
     .itinerary-day {
         grid-template-columns: 65px 1fr;
-
         gap: 12px;
     }
 
@@ -1515,7 +1056,6 @@ body.inazuma-page {
 
     .inclusions-card {
         min-height: 0;
-
         padding: 24px 22px;
     }
 
@@ -1531,24 +1071,16 @@ body.inazuma-page {
         line-height: 1.2;
     }
 
-
-    /* FOOTER */
-
     .site-footer {
         min-height: auto;
-
         padding: 35px 20px;
     }
 
     .footer-container {
         display: flex;
-
         flex-direction: column;
-
         align-items: center;
-
         width: 100%;
-
         gap: 20px;
     }
 
@@ -1567,15 +1099,12 @@ body.inazuma-page {
 }
 
 
-/* =========================================================
-   VERY SMALL SCREENS
-   ========================================================= */
+/* Small screens */
 
 @media (max-width: 480px) {
 
     .guild-nav {
         font-size: 10px;
-
         gap: 6px;
     }
 
@@ -1585,7 +1114,6 @@ body.inazuma-page {
 
     .scene-copy {
         width: 90%;
-
         margin-left: 5%;
     }
 
@@ -1603,15 +1131,12 @@ body.inazuma-page {
 
     .price-value {
         width: 180px;
-
         font-size: 20px;
     }
 
     .book-journey {
         right: 5%;
-
         width: 220px;
-
         font-size: 16px;
     }
 
@@ -1620,8 +1145,7 @@ body.inazuma-page {
         height: 16px;
     }
 
-    .journey-heading h2,
-    .journey-container > h2 {
+    .journey-title h2 {
         font-size: 24px;
     }
 
@@ -1631,7 +1155,6 @@ body.inazuma-page {
 
     .itinerary-day {
         grid-template-columns: 58px 1fr;
-
         column-gap: 9px;
     }
 }
