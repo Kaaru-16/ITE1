@@ -1,42 +1,57 @@
 
 /* Nation colors, proportions and artwork. */
 :root {
-    --world-height: 119.6354vw;
-    --scene-color: ;
-    --hero-tint: ;
-    --scenery-tint: ;
-    --scenery-width: 204.49%;
-    --scenery-height: 120vw;
-    --scenery-left: -50.48%;
-    --scenery-top: 36.828vw;
-    --title-top: 7.3958vw;
-    --title-line: 1.34455;
+    --world-height: 126.6667vw;
+    --scene-color: #185d8b;
+    --hero-tint: #0079ddba;
+    --scenery-width: 219.57%;
+    --scenery-height: auto;
+    --scenery-left: -73.92%;
+    --scenery-top: 25.1173vw;
+    --title-top: 9.4792vw;
+    --title-line: 1.313;
     --description-width: 39.1146vw;
-    --stops-width: 40.34375vw;
+    --stops-width: 43.6458vw;
     --caption-size: 1.25vw;
     --panel-height: 31.5104vw;
     --panel-padding: 2.2vw;
     --list-gap: 1.5vw;
     --list-line: 1.52;
-    --price-panel: url("../image/liyue-price.svg");
-    --stops-panel: url("../image/liyue-stops.svg");
+    --price-panel: url("../image/fontaine-price.svg");
+    --stops-panel: url("../image/fontaine-stops.svg");
 }
-  
+/* Preserve image proportions inside the Figma crop. */
+.scene-art {
+    overflow: hidden;
+    mask: url("../image/fontaine-hero-mask.svg") -1.6667vw -5.0521vw / 107.1875vw 60.3125vw no-repeat;
+}
+.scene-art img {
+    position: absolute;
+    max-width: none;
+    width: 114%;
+    height: auto;
+    left: .01%;
+    top: -5.83%;
+}
+.destination-scene::before {
+    mask: url("../image/fontaine-tint-mask.svg") 0 -2.03125vw / 100vw 60.3125vw no-repeat;
+}
+/* Original gallery crops. */
 .journey-places figure:nth-child(1) {
-    --crop-width: 103.04%;
-    --crop-height: 104.93%;
-    --crop-left: -2.04%;
-    --crop-top: -0.13%;
+    --crop-width: 130.93%;
+    --crop-height: 100%;
+    --crop-left: -10.9%;
+    --crop-top: .03%;
 }
 .journey-places figure:nth-child(2) {
-    --crop-width: 105.35%;
-    --crop-height: 114.19%;
-    --crop-left: -1%;
-    --crop-top: -2.55%;
+    --crop-width: 112.13%;
+    --crop-height: 115%;
+    --crop-left: -2.89%;
+    --crop-top: -7.5%;
 }
 .journey-places figure:nth-child(3) {
-    --crop-width: 113.93%;
-    --crop-height: 116%;
-    --crop-left: -6.93%;
-    --crop-top: -0.14%;
+    --crop-width: 122.93%;
+    --crop-height: 129%;
+    --crop-left: -10.33%;
+    --crop-top: -10.17%;
 }
