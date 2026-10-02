@@ -1,11 +1,6 @@
+/* Shared site elements. */
+@import url("shared.css");
 /* Load the Figma typeface locally. */
-@font-face {
-    font-family: "HYWenHei";
-    src: url("../font/zhcn.ttf") format("truetype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
 :root {
     --ink: #2e2444;
     --muted: #5c6278;
@@ -32,21 +27,9 @@ body {
     line-height: 1.65;
     font-family: var(--display);
 }
-h1, h3 {
-    line-height: 1.15;
-    font-family: var(--display);
-    font-weight: 700;
-    letter-spacing: 0;
-}
+h1, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; letter-spacing: 0; }
 /* Keyboard shortcut to main content. */
-.skip {
-    position: fixed;
-    top: -80px;
-    background: white;
-    padding: 12px;
-    z-index: 20;
-    color: #2e2444;
-}
+.skip { position: fixed; top: -80px; background: white; padding: 12px; z-index: 20; color: #2e2444; }
 .mondstadt-page p { color: inherit; }
 /* Mondstadt page theme. */
 .mondstadt-page {
@@ -58,109 +41,17 @@ h1, h3 {
     overflow-x: clip;
     min-height: 66.67vw;
 }
-/* Place navigation over the hero. */
-.site-header { position: absolute; z-index: 10; inset: 0 0 auto; }
-/* Crop the navigation backdrop. */
-.nav-atmosphere img {
-    position: absolute;
-    width: 100%;
-    height: 126.83%;
-    top: -26.83%;
-    object-fit: fill;
-}
-.guild-nav {
-    position: relative;
-    display: grid;
-    align-items: center;
-    margin: 0 auto;
-    color: #fff;
-    font-weight: 700;
-    text-shadow: 0 3px 8px #0006;
-    width: max-content;
-    max-width: 94%;
-    grid-template-columns: auto auto auto auto;
-    gap: 4.7vw;
-    padding: 2.35vw 0;
-    font-size: 1.25vw;
-    line-height: 1.15;
-}
-.guild-nav > a { white-space: nowrap; }
-.guild-nav > a:last-child { justify-self: start; white-space: nowrap; margin-left: -2.5vw; }
-.guild-logo img { filter: drop-shadow(0 4px 7px #0005); width: 6.12vw; height: auto; }
-/* Decorative navigation shading. */
-.nav-atmosphere {
-    position: absolute;
-    width: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    height: 30vw;
-    opacity: .78;
-}
 /* Anchor the nation dropdown. */
-.nation-menu { position: relative; justify-self: auto; }
-.nation-menu summary {
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: .65vw;
-    white-space: nowrap;
+.nation-options a:hover, .nation-options a:focus-visible {
+    background-color: #ffffff20;
+    color: #ffeeab;
+    border-radius: 8px;
 }
-.nation-menu summary::-webkit-details-marker { display: none; }
-.nation-menu summary img {
-    width: .95vw;
-    height: 1.15vw;
-    object-fit: contain;
-    transform: rotate(-90deg);
-}
-.nation-menu[open] summary img { transform: rotate(90deg); }
-.nation-options {
-    position: absolute;
-    z-index: 1;
-    top: calc(100% + 18px);
-    left: 0;
-    width: clamp(200px, 12.3542vw, 237.2px);
-    max-width: calc(100vw - 32px);
-    padding: 18px 14px;
-    border: 1px solid #fff7dc66;
-    border-radius: 30px;
-    background: #747c70f5;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 6px 14px #0004;
-    text-align: center;
-}
-.nation-options a:hover, .nation-options a:focus-visible { background-color: #ffffff20; color: #ffeeab; border-radius: 8px; }
 /* Size the emblem beside the title. */
 .nation-emblem { width: 1.055em; height: 1.055em; object-fit: contain; }
-.nation-options a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 52px;
-    padding: 12px 8px;
-    font-size: clamp(14px, 1vw, 19px);
-    line-height: 1.2;
-    white-space: nowrap;
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    background-size: 90% 1px;
-}
-.nation-options a:nth-child(1) { background-image: url("../image/divider-1.svg"); }
-.nation-options a:nth-child(2) { background-image: url("../image/divider-2.svg"); }
-.nation-options a:nth-child(3) { background-image: url("../image/divider-3.svg"); }
-.nation-options a:nth-child(4) { background-image: url("../image/divider-4.svg"); }
-.nation-options a:nth-child(5) { background-image: url("../image/divider-5.svg"); }
-.nation-options a:nth-child(6) { background-image: url("../image/divider-6.svg"); }
-.nation-options a:nth-child(7) { background-image: url("../image/divider-7.svg"); }
 /* Hero scene container. */
 .destination-scene { position: relative; color: #fff; isolation: isolate; }
-.scene-art {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    object-fit: cover;
-    z-index: -2;
-}
+.scene-art { position: absolute; inset: 0; width: 100%; object-fit: cover; z-index: -2; }
 /* Tint the hero for readable text. */
 .destination-scene:before {
     content: "";
@@ -220,32 +111,17 @@ h1, h3 {
     color: #e4e5e4;
 }
 .mondstadt-page .scene-subtitle { font-size: 3.02vw; line-height: 1.1; margin-top: -.2vw; }
-.mondstadt-page .scene-description {
-    width: 82%;
-    font-size: 1.56vw;
-    line-height: .81;
-    margin-top: 1.05vw;
-}
+.mondstadt-page .scene-description { width: 82%; font-size: 1.56vw; line-height: .81; margin-top: 1.05vw; }
 .mondstadt-page .scene-pricing { top: 33.95vw; left: 6.82%; }
 .mondstadt-page .scene-pricing h3, .mondstadt-page .scene-stops h3 { font-size: 2.92vw; }
 .mondstadt-page .price-value { font-size: 2.5vw; margin-top: .4vw; border-radius: 32px; }
 .mondstadt-page .scene-pricing small { font-size: 1.1vw; margin-top: .3vw; }
 .mondstadt-page .scene-stops { top: 43.8vw; left: 6.82%; }
-.mondstadt-page .stops-value {
-    font-size: 1.51vw;
-    margin-top: .45vw;
-    padding: .8vw 1.5vw;
-    border-radius: 2vw;
-}
+.mondstadt-page .stops-value { font-size: 1.51vw; margin-top: .45vw; padding: .8vw 1.5vw; border-radius: 2vw; }
 .mondstadt-page .price-value:before { background-image: url("../image/mond-imgRectangle7.svg"); }
 .mondstadt-page .stops-value:before { background-image: url("../image/mond-imgRectangle4.svg"); }
 .mondstadt-page .price-value, .mondstadt-page .stops-value { background: transparent; backdrop-filter: none; }
-.mondstadt-world {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    background: #1d6579;
-}
+.mondstadt-world { position: relative; isolation: isolate; overflow: hidden; background: #1d6579; }
 /* Blur the street scenery. */
 .mondstadt-world::before {
     content: "";
@@ -363,41 +239,6 @@ h1, h3 {
 }
 .journey-photo img { position: absolute; max-width: none; aspect-ratio: auto; }
 /* Match the reference photo crops. */
-.journey-places figure:nth-child(1) img {
-    width: 112.38%;
-    height: 114.44%;
-    left: -3.04%;
-    top: -.13%;
-}
-.journey-places figure:nth-child(2) img {
-    width: 130.79%;
-    height: 133.22%;
-    left: -15.48%;
-    top: -16.83%;
-}
-.journey-places figure:nth-child(3) img {
-    width: 106.63%;
-    height: 108.62%;
-    left: -.4%;
-    top: -4.19%;
-}
-/* Footer logo, policies and copyright. */
-.reference-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6.5vw;
-    min-height: 16.71875vw;
-    padding: 3vw 7%;
-    background: #0a131d;
-    font: .9115vw/1.25 Arial, sans-serif;
-}
-.reference-footer img { width: 9.7917vw; height: auto; }
-/* Separate the policy text. */
-.footer-policies {
-    display: grid;
-    gap: 1vw;
-    border-left: 1px solid #fff8;
-    padding: 2vw 0 2vw 6.5vw;
-}
-.reference-footer p { color: #fff; }
+.journey-places figure:nth-child(1) img { width: 112.38%; height: 114.44%; left: -3.04%; top: -.13%; }
+.journey-places figure:nth-child(2) img { width: 130.79%; height: 133.22%; left: -15.48%; top: -16.83%; }
+.journey-places figure:nth-child(3) img { width: 106.63%; height: 108.62%; left: -.4%; top: -4.19%; }

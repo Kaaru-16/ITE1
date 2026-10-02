@@ -28,13 +28,7 @@
 }
 /* Tablet and phone layout. */
 @media (max-width: 1100px) {
-    .guild-nav {
-        width: 94%;
-        max-width: none;
-        gap: 10px;
-        padding: 18px 0;
-        font-size: 11px;
-    }
+    .guild-nav { width: 94%; max-width: none; gap: 10px; padding: 18px 0; font-size: 11px; }
     .guild-nav > a, .nation-menu summary { white-space: normal; }
     .guild-nav > a:last-child { margin-left: 0; }
     .guild-logo img { width: 58px; }
@@ -44,19 +38,9 @@
     .discovery-hero { min-height: 610px; border-radius: 20px; }
     .discovery-copy { width: 100%; padding: 28px 22px; }
     .discovery-copy h1 { font-size: clamp(42px, 9vw, 66px); line-height: .9; }
-    .discovery-copy p {
-        font-size: 17px;
-        line-height: 1.1;
-        max-width: 340px;
-        margin: 20px 0;
-    }
+    .discovery-copy p { font-size: 17px; line-height: 1.1; max-width: 340px; margin: 20px 0; }
     .journey-button { min-height: 50px; padding: 12px 20px; font-size: 20px; }
-    .companion {
-        width: 245px;
-        top: auto;
-        bottom: -25px;
-        right: 0;
-    }
+    .companion { width: 245px; top: auto; bottom: -25px; right: 0; }
     .landing-page .destinations { padding-top: 70px; }
     .landing-page .eyebrow { font-size: 15px; margin-bottom: 8px; }
     .landing-page .section-head h2 { font-size: 34px; }
@@ -81,20 +65,10 @@
     }
     .guild-story { padding: 65px 0; }
     .guild-story h2 { font-size: 36px; padding: 0 20px; margin-bottom: 25px; }
-    .story-panel {
-        width: 86%;
-        padding: 24px;
-        border-radius: 20px;
-        margin-bottom: 22px;
-    }
+    .story-panel { width: 86%; padding: 24px; border-radius: 20px; margin-bottom: 22px; }
     .story-panel p { font-size: 18px; }
     .landing-page #travel-notes { padding: 35px 7% 65px; }
-    .landing-page .faq-intro h2 {
-        font-size: 30px;
-        margin-bottom: 28px;
-        white-space: normal;
-        line-height: 1.15;
-    }
+    .landing-page .faq-intro h2 { font-size: 30px; margin-bottom: 28px; white-space: normal; line-height: 1.15; }
     .landing-page .faq { gap: 26px; }
     .landing-page .faq-item { width: 100%; }
     .landing-page .faq-item h3 {
@@ -107,36 +81,13 @@
         line-height: 1.2;
     }
     .landing-page .faq-item p { font-size: 15px; }
-    .reference-footer {
-        flex-wrap: wrap;
-        padding: 35px 7%;
-        gap: 25px;
-        font-size: 12px;
-    }
+    .reference-footer { flex-wrap: wrap; padding: 35px 7%; gap: 25px; font-size: 12px; }
     .reference-footer img { width: 100px; }
     .story-world { background: #21446a; overflow: hidden; }
-    .story-scenery {
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        mask: none;
-        filter: blur(2px);
-        opacity: .8;
-    }
-    .story-scenery img {
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: 75% center;
-    }
+    .story-scenery { inset: 0; width: 100%; height: 100%; mask: none; filter: blur(2px); opacity: .8; }
+    .story-scenery img { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% center; }
     .landing-page .arrow img { width: 18px; height: 18px; }
-    .choice-badge {
-        width: 80px;
-        height: 80px;
-        left: -12px;
-        top: -6px;
-    }
+    .choice-badge { width: 80px; height: 80px; left: -12px; top: -6px; }
     .choice-badge > span { font-size: 9px; }
     .footer-policies { font-size: 12px; gap: 14px; padding: 15px 0 15px 25px; }
     .landing-world, .story-world, .guild-story, .landing-page #travel-notes { height: auto; }
@@ -146,13 +97,7 @@
 }
 /* Desktop layout. */
 @media (min-width: 1101px) {
-    .nav-atmosphere {
-        width: 100%;
-        left: 0;
-        top: -.1042vw;
-        height: 54.7917vw;
-        opacity: .7826;
-    }
+    .nav-atmosphere { width: 100%; left: 0; top: -.1042vw; height: 54.7917vw; opacity: .7826; }
     .nav-atmosphere img { height: 133.1%; top: -33.1%; }
     .guild-nav {
         width: 50.1%;
@@ -167,7 +112,6 @@
     .guild-nav summary { gap: .6vw; }
     .guild-nav summary img { width: 1.2vw; height: 1.3vw; }
     .landing-world {
-        /* Keep the last card row above the section fade. */
         min-height: 124.7396vw;
         padding-top: 10.78125vw;
         padding-bottom: 6vw;
@@ -186,12 +130,7 @@
     }
     .discovery-copy { padding: 3.4375vw 0 0 1.5625vw; width: 50vw; }
     .discovery-copy h1 { line-height: .79; width: 46.25vw; }
-    .discovery-copy p {
-        position: relative;
-        width: 44vw;
-        margin: 2vw 0 1.7vw .78vw;
-        line-height: .86;
-    }
+    .discovery-copy p { position: relative; width: 44vw; margin: 2vw 0 1.7vw .78vw; line-height: .86; }
     .journey-button {
         width: 24.79vw;
         height: 6.0417vw;
@@ -208,13 +147,7 @@
         right: auto;
         overflow: hidden;
     }
-    .companion img {
-        position: absolute;
-        width: 100.06%;
-        height: 107.96%;
-        left: -.03%;
-        top: -7.84%;
-    }
+    .companion img { position: absolute; width: 100.06%; height: 107.96%; left: -.03%; top: -7.84%; }
     .landing-page .destinations { width: 86.9792%; margin-left: 6.7708%; padding-top: 8.6979vw; }
     .landing-page .section-head { height: 8.1771vw; margin-bottom: 0; align-items: flex-start; }
     .landing-page .section-head .eyebrow { display: block; margin-bottom: 1.05vw; }
@@ -226,12 +159,7 @@
         gap: 2.7604vw 0;
     }
     .landing-page .card { padding: 1.25vw 1.3542vw .52vw; border-radius: 1.823vw; }
-    .landing-page .card-art {
-        width: 21.875vw;
-        height: 12.0833vw;
-        aspect-ratio: auto;
-        border-radius: 1.1458vw;
-    }
+    .landing-page .card-art { width: 21.875vw; height: 12.0833vw; aspect-ratio: auto; border-radius: 1.1458vw; }
     .landing-page .card:nth-child(7) .card-art { width: 21.875vw; height: 12.0833vw; margin-left: 0; }
     /* Give subtitles the full card width. */
     .landing-page .card-info { position: relative; display: block; padding: .625vw .26vw 0; }
@@ -246,30 +174,15 @@
     }
     .landing-page .card-note h3 { margin: .6vw 0 .8vw; font-size: 2.8vw; }
     .landing-page .card-note p { max-width: 31vw; font-size: 1.45vw; }
-    .landing-page .card-note .text-link {
-        right: 1.93vw;
-        bottom: 1.77vw;
-        font-size: .94vw;
-        padding: .65vw 1.5vw;
-    }
+    .landing-page .card-note .text-link { right: 1.93vw; bottom: 1.77vw; font-size: .94vw; padding: .65vw 1.5vw; }
     .guild-story { padding: 10.8333vw 0 0; }
     .guild-story h2 { line-height: .987; }
-    .story-panel {
-        border: 0;
-        border-radius: 1.823vw;
-        background: #a69f8966;
-        backdrop-filter: none;
-    }
+    .story-panel { border: 0; border-radius: 1.823vw; background: #a69f8966; backdrop-filter: none; }
     .landing-page #travel-notes { padding: 3.0729vw 6.48vw 0; background: #151e2566; }
     .landing-page .faq-intro .eyebrow { margin-bottom: 1vw; }
     .landing-page .faq-intro h2 { line-height: .859; margin-bottom: 3vw; white-space: nowrap; }
     .landing-page .faq { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3.125vw 2.34375vw; }
-    .landing-page .faq-item {
-        grid-column: span 2;
-        width: 100%;
-        min-width: 0;
-        min-height: 11.875vw;
-    }
+    .landing-page .faq-item { grid-column: span 2; width: 100%; min-width: 0; min-height: 11.875vw; }
     .landing-page .faq-item:nth-child(4) { grid-column: 2 / span 2; }
     .landing-page .faq-item:nth-child(5) { grid-column: 4 / span 2; }
     .landing-page .faq-item h3 {
@@ -314,14 +227,21 @@
 }
 /* Mouse hover feedback. */
 @media (hover: hover) and (pointer: fine) {
-    .landing-page a.card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px #102d394d, inset 0 0 0 2px #ffe8a0b3; }
+    .landing-page a.card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 14px 30px #102d394d, inset 0 0 0 2px #ffe8a0b3;
+    }
     .landing-page a.card:hover .card-art img { transform: scale(1.035); }
     .landing-page a.card:hover .arrow img { transform: translate(1px, -1px); }
 }
 /* Reduce motion. */
 @media (prefers-reduced-motion: reduce) {
-    .landing-page .card, .landing-page .card .card-art img, .landing-page .card .arrow, .landing-page .card .arrow img { transition: none; }
-    .landing-page a.card:hover, .landing-page a.card:hover .card-art img, .landing-page a.card:hover .arrow img { transform: none; }
+    .landing-page .card, .landing-page .card .card-art img, .landing-page .card .arrow, .landing-page .card .arrow img {
+        transition: none;
+    }
+    .landing-page a.card:hover, .landing-page a.card:hover .card-art img, .landing-page a.card:hover .arrow img {
+        transform: none;
+    }
 }
 /* Desktop layout. */
 @media (min-width: 1101px) {
@@ -372,13 +292,7 @@
         order: 4;
     }
     .founder-art { height: clamp(330px, 80vw, 600px); }
-    .guild-founder figcaption {
-        top: auto;
-        bottom: 12%;
-        left: 38%;
-        width: 60%;
-        font-size: 14px;
-    }
+    .guild-founder figcaption { top: auto; bottom: 12%; left: 38%; width: 60%; font-size: 14px; }
     .guild-founder strong { font-size: 20px; }
     .founder-signature { height: 110px; bottom: 15px; }
     .landing-page .card .arrow { width: 24px; height: 24px; }

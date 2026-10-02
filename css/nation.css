@@ -18,24 +18,28 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
     color: #ffeeab;
     border-radius: 8px;
 }
-/* Layered scenery */
-.snezhnaya-world { position: relative; isolation: isolate; overflow: hidden; background: #185d8b; }
-.world-scenery {
-    position: absolute;
-    z-index: -2;
-    top: 3.6458vw;
-    width: 100%;
-    height: 123.3333vw;
+/* Scale desktop sections from the 1920px reference. */
+.nation-world {
+    position: relative;
+    isolation: isolate;
     overflow: hidden;
-    filter: blur(4.4px);
+    min-height: var(--world-height);
+    background: var(--scene-color);
 }
+.world-scenery { position: absolute; z-index: -2; inset: 0; overflow: hidden; filter: blur(4.4px); }
 .world-scenery img {
     position: absolute;
-    width: 219.57%;
     max-width: none;
-    height: 100%;
-    left: -73.92%;
-    top: 17.41%;
+    width: var(--scenery-width);
+    height: var(--scenery-height);
+    left: var(--scenery-left);
+    top: var(--scenery-top);
+}
+.world-scenery::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--scenery-tint, transparent);
 }
 .destination-scene {
     position: relative;
@@ -46,100 +50,103 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
 .scene-art {
     position: absolute;
     z-index: -2;
-    inset: 0 0 auto;
+    inset: 0;
+    width: 100%;
     height: 59.53125vw;
-    overflow: hidden;
-    mask-image: linear-gradient(#000 65%, transparent);
+    object-fit: cover;
+    transform: var(--hero-flip, none);
+    mask-image: linear-gradient(#000 54.35%, transparent 92.826%);
 }
-.scene-art img { position: absolute; width: 114%; max-width: none; height: 107.72%; left: .01%; top: -5.83%; }
 .destination-scene::before {
     content: "";
     position: absolute;
     z-index: -1;
     inset: 0;
-    background: linear-gradient(90deg, #0079ddba 5.7%, #6660 98.8%);
+    background: linear-gradient(90deg, var(--hero-tint) 5.7%, #6660 98.8%);
     mask-image: linear-gradient(#000 65%, transparent);
 }
-.scene-copy { padding-top: 9.4792vw; margin-left: 6.7708%; width: 59.4271%; }
-/* Align the title and nation emblem. */
-.scene-copy h1 { display: flex; align-items: center; gap: .15em; font-size: 6.6667vw; line-height: 1.313; }
-/* Keep the emblem proportional. */
-.nation-emblem { width: 1.055em; height: 1.055em; object-fit: contain; flex-shrink: 0; }
-/* Size the subtitle and description. */
-.scene-subtitle { font-size: 2.5vw; line-height: 1.313; }
-.scene-description { width: 45.3125vw; font-size: 1.25vw; line-height: 1.05; }
-/* Position the base price. */
+/* Hero title and introduction. */
+.scene-copy { margin-left: 6.7708%; padding-top: var(--title-top); }
+.scene-copy h1 {
+    display: flex;
+    align-items: center;
+    gap: .15em;
+    font-size: 6.6667vw;
+    line-height: var(--title-line);
+    color: #e4e5e4;
+}
+.nation-emblem { width: 7.03125vw; height: 7.03125vw; object-fit: contain; }
+.scene-subtitle { font-size: 2.5vw; line-height: var(--title-line); }
+.scene-description {
+    position: absolute;
+    top: 20.8333vw;
+    width: var(--description-width);
+    font-size: 1.25vw;
+    line-height: .987;
+}
+/* Price and featured stops. */
 .scene-pricing { position: absolute; top: 33.90625vw; left: 6.8229%; }
 .scene-pricing h3, .scene-stops h3 { font-size: 1.875vw; line-height: 1.08; }
-/* Center the price in its panel. */
 .price-value {
     display: grid;
     place-items: center;
-    width: 14.3229vw;
-    min-height: 3.0729vw;
-    margin-top: .65vw;
+    width: 13.8021vw;
+    height: 3.0729vw;
+    margin-top: .5771vw;
     font-size: 1.6667vw;
-    background: url("../image/snezhnaya-price.svg") center / 100% 100% no-repeat;
+    background: var(--price-panel) center / 100% 100% no-repeat;
 }
-/* Style the trip duration. */
-.scene-pricing small { display: block; text-align: center; margin-top: .52vw; font-size: .8333vw; }
+.scene-pricing small { display: block; margin-top: .52vw; text-align: center; font-size: .8333vw; }
 .scene-stops { position: absolute; top: 41.8229vw; left: 6.8229%; }
-/* Style the featured stops panel. */
 .stops-value {
-    width: 51.6667vw;
+    display: flex;
+    align-items: center;
+    width: var(--stops-width);
     min-height: 3.3854vw;
-    margin-top: .5729vw;
-    padding: 1vw 1.40625vw;
-    background: url("../image/snezhnaya-stops.svg") center / 100% 100% no-repeat;
+    margin-top: .4229vw;
+    padding: .8vw 1.40625vw;
+    background: var(--stops-panel) center / 100% 100% no-repeat;
     font-size: 1.25vw;
     line-height: 1.05;
 }
-/* View Package Details button. */
+/* Same-page package link. */
 .booking-button {
     position: absolute;
     top: 41.6146vw;
-    right: 6.7708%;
+    left: 57.8646%;
     width: 32.5521vw;
     min-height: 6.0417vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: .85vw;
+    gap: 1.4vw;
     padding: 1vw 1.8vw;
     border: 2px solid #eec966;
     border-radius: 5.3646vw;
     background: #ffe79c75;
-    box-shadow: 0 4px 7px #0004;
+    box-shadow: 0 4px 7.1px #0004;
     font-size: 2.0833vw;
+    letter-spacing: -.04167vw;
     line-height: 1.1;
 }
-/* Show the button icon in white. */
-.booking-button img {
-    width: .9em;
-    height: .9em;
-    object-fit: contain;
-    flex-shrink: 0;
-    filter: brightness(0) invert(1);
-}
-/* Highlight button interaction. */
+.booking-button img { width: 1.875vw; height: 1.875vw; object-fit: contain; filter: brightness(0) invert(1); }
 .booking-button:hover, .booking-button:focus-visible { background: #fff3cda6; }
-/* Gallery and itinerary */
+/* Gallery frames and reference crops. */
 .journey-gallery h2 {
-    margin: 0 6.7708% 2.1354vw;
+    margin: 0 6.7708% 2.28125vw;
     font-size: 3.3333vw;
-    line-height: 1.03;
+    line-height: .987;
     text-shadow: 0 4px 6.5px #0004;
 }
-/* Arrange three featured photos. */
 .journey-places {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 5.5729vw;
-    padding: 1.25vw 11.09375% 1.2vw;
+    padding: 1.25vw 11.09375% 1.4vw;
+    min-height: 17.0833vw;
     background: #ffffff40;
     box-shadow: 0 4px 7px #0004;
 }
-/* Round and shadow each photo. */
 .journey-photo {
     position: relative;
     aspect-ratio: 420 / 232;
@@ -147,18 +154,22 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
     border-radius: 1.1458vw;
     box-shadow: 0 4px 5.9px #0006;
 }
-/* Fill the photo frame. */
-.journey-photo img { position: absolute; max-width: none; width: 100%; height: 100%; object-fit: cover; }
-/* Match the reference image crops. */
-.journey-places figure:nth-child(1) img { width: 130.93%; left: -22.71%; top: .03%; }
-.journey-places figure:nth-child(3) img { width: 122.93%; height: 129%; left: -10.33%; top: -10.17%; }
-/* Center photo captions. */
+.journey-photo img {
+    position: absolute;
+    max-width: none;
+    width: var(--crop-width);
+    height: var(--crop-height);
+    left: var(--crop-left);
+    top: var(--crop-top);
+}
 .journey-places figcaption {
     margin-top: .9896vw;
-    font-size: 1.25vw;
     text-align: center;
+    font-size: var(--caption-size);
+    line-height: .987;
     text-shadow: 0 4px 2px #0004;
 }
+/* Itinerary and inclusions columns. */
 .package-details {
     width: 86.7708%;
     margin: 3.75vw auto 0;
@@ -169,30 +180,30 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
     gap: 3.4896vw;
     text-shadow: 0 4px 5.6px #0007;
 }
-/* Separate the daily itinerary rows. */
 .journey-day {
     display: grid;
     grid-template-columns: 5.7292vw 1fr;
     gap: 1.1458vw;
-    min-height: 7.9167vw;
-    padding: 1.1vw 0 1.5vw;
+    min-height: 7.96875vw;
+    padding: 1.875vw 0 1.5vw;
     border-bottom: 1px solid #fff8;
 }
-/* Size the day labels. */
 .journey-day > span { font-size: 1.0417vw; }
-.journey-day h3, .package-inclusions h3 { font-size: 1.6667vw; line-height: 1.1; margin-bottom: .8vw; }
-.journey-day p { font-size: .8333vw; line-height: 1.3; }
-.package-note { margin-top: 1.6vw; font-size: .78125vw; line-height: 1.3; }
+.journey-day h3, .package-inclusions h3 { font-size: 1.6667vw; line-height: .987; margin-bottom: .7vw; }
+.journey-day p { font-size: .8333vw; line-height: .987; }
+.package-note { margin-top: 1.875vw; font-size: .78125vw; line-height: .987; }
 .package-inclusions {
-    padding: 2.2vw 2.0833vw;
+    padding: var(--panel-padding) 2.0833vw;
+    min-height: var(--panel-height);
     border-radius: 1.823vw;
     background: #ffffff40;
     box-shadow: 0 4px 7px #0004;
 }
 .package-inclusions ul {
-    margin: 1.5vw 0;
-    padding: 0 0 1.5vw 1.5vw;
+    margin: var(--list-gap) 0;
+    padding: 0 0 var(--list-gap) 1.5vw;
     border-bottom: 1px solid #fff8;
     font-size: 1.25vw;
-    line-height: 1.5;
+    line-height: var(--list-line);
 }
+.package-inclusions .package-note { margin-top: 1vw; }

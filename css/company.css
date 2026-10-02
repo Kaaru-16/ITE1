@@ -1,11 +1,6 @@
+/* Shared site elements. */
+@import url("shared.css");
 /* Load the Figma typeface locally. */
-@font-face {
-    font-family: "HYWenHei";
-    src: url("../font/zhcn.ttf") format("truetype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
 :root {
     --font-body: Arial,Helvetica,sans-serif;
     --ink: #2e2444;
@@ -38,21 +33,9 @@ body {
     line-height: 1.65;
     font-family: var(--display);
 }
-h1, h2, h3 {
-    line-height: 1.15;
-    font-family: var(--display);
-    font-weight: 700;
-    letter-spacing: 0;
-}
+h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; letter-spacing: 0; }
 /* Keyboard shortcut to main content. */
-.skip {
-    position: fixed;
-    top: -80px;
-    background: white;
-    padding: 12px;
-    z-index: 20;
-    color: #2e2444;
-}
+.skip { position: fixed; top: -80px; background: white; padding: 12px; z-index: 20; color: #2e2444; }
 /* Company page theme. */
 .landing-page {
     --display: HYWenHei, Cambria, Georgia, serif;
@@ -67,102 +50,17 @@ h1, h2, h3 {
 .landing-page #main { overflow: clip; }
 /* Land 40px below the viewport top. */
 #destinations { scroll-margin-top: -60px; }
-/* Place navigation over the hero. */
-.site-header { position: absolute; z-index: 10; inset: 0 0 auto; }
-/* Crop the navigation backdrop. */
-.nav-atmosphere img {
-    position: absolute;
-    width: 100%;
-    height: 126.83%;
-    top: -26.83%;
-    object-fit: fill;
-}
-/* Align navigation links and logo. */
-.guild-nav {
-    position: relative;
-    display: grid;
-    align-items: center;
-    margin: 0 auto;
-    color: #fff;
-    font-weight: 700;
-    text-shadow: 0 3px 8px #0006;
-    width: max-content;
-    max-width: 94%;
-    grid-template-columns: auto auto auto auto;
-    gap: 4.7vw;
-    padding: 2.35vw 0;
-    font-size: 1.25vw;
-    line-height: 1.15;
-}
-.guild-nav > a { white-space: nowrap; }
-.guild-nav > a:last-child { justify-self: start; white-space: nowrap; margin-left: -2.5vw; }
-.guild-logo img { filter: drop-shadow(0 4px 7px #0005); width: 6.12vw; height: auto; }
-/* Decorative navigation shading. */
-.nav-atmosphere {
-    position: absolute;
-    width: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    height: 30vw;
-    opacity: .78;
-}
-/* Anchor the nation dropdown. */
-.nation-menu { position: relative; justify-self: auto; }
-.nation-menu summary {
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: .65vw;
-    white-space: nowrap;
-}
-.nation-menu summary::-webkit-details-marker { display: none; }
-.nation-menu summary img {
-    width: .95vw;
-    height: 1.15vw;
-    object-fit: contain;
-    transform: rotate(-90deg);
-}
-.nation-menu[open] summary img { transform: rotate(90deg); }
 /* Dropdown panel and nation links. */
-.nation-options {
-    position: absolute;
-    z-index: 1;
-    top: calc(100% + 18px);
-    left: 0;
-    width: clamp(200px, 12.3542vw, 237.2px);
-    max-width: calc(100vw - 32px);
-    padding: 18px 14px;
-    border: 1px solid #fff7dc66;
-    border-radius: 30px;
-    background: #747c70f5;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 6px 14px #0004;
-    text-align: center;
+.nation-options a:hover, .nation-options a:focus-visible {
+    background-color: #ffffff20;
+    color: #ffeeab;
+    border-radius: 8px;
 }
-.nation-options a:hover, .nation-options a:focus-visible { background-color: #ffffff20; color: #ffeeab; border-radius: 8px; }
-.nation-options a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 52px;
-    padding: 12px 8px;
-    font-size: clamp(14px, 1vw, 19px);
-    line-height: 1.2;
-    white-space: nowrap;
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    background-size: 90% 1px;
-}
-.nation-options a:nth-child(1) { background-image: url("../image/divider-1.svg"); }
-.nation-options a:nth-child(2) { background-image: url("../image/divider-2.svg"); }
-.nation-options a:nth-child(3) { background-image: url("../image/divider-3.svg"); }
-.nation-options a:nth-child(4) { background-image: url("../image/divider-4.svg"); }
-.nation-options a:nth-child(5) { background-image: url("../image/divider-5.svg"); }
-.nation-options a:nth-child(6) { background-image: url("../image/divider-6.svg"); }
-.nation-options a:nth-child(7) { background-image: url("../image/divider-7.svg"); }
 /* Shared hero and destination scenery. */
-.landing-world { background: url("../image/hero-background.png") center top / 100% 100% no-repeat; padding: 10.7vw 0 4vw; }
+.landing-world {
+    background: url("../image/hero-background.png") center top / 100% 100% no-repeat;
+    padding: 10.7vw 0 4vw;
+}
 /* Glass panel behind the hero. */
 .discovery-hero {
     position: relative;
@@ -185,12 +83,7 @@ h1, h2, h3 {
 }
 .discovery-copy h1 { font-size: 7.4vw; line-height: .79; letter-spacing: -.12vw; }
 .discovery-copy h1 span { color: #ffe8a0; }
-.discovery-copy p {
-    width: 94%;
-    margin: 1.8vw .2vw 1.65vw;
-    font-size: 1.9vw;
-    line-height: .94;
-}
+.discovery-copy p { width: 94%; margin: 1.8vw .2vw 1.65vw; font-size: 1.9vw; line-height: .94; }
 /* Begin Your Journey button. */
 .journey-button {
     display: inline-flex;
@@ -208,36 +101,15 @@ h1, h2, h3 {
 }
 .journey-button:hover { background: #fff0bf; }
 /* Position Paimon beside the hero. */
-.companion {
-    position: absolute;
-    width: 43vw;
-    right: -.9vw;
-    top: -5.1vw;
-    pointer-events: none;
-}
+.companion { position: absolute; width: 43vw; right: -.9vw; top: -5.1vw; pointer-events: none; }
 .companion img { width: 100%; height: auto; }
 /* Small section labels. */
-.eyebrow {
-    font-size: 10px;
-    font-weight: 700;
-    display: block;
-    margin-bottom: 22px;
-}
+.eyebrow { font-size: 10px; font-weight: 700; display: block; margin-bottom: 22px; }
 .section { padding: 90px 0; }
 /* Section heading alignment. */
-.section-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 40px;
-}
+.section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
 .section-head .eyebrow { margin-bottom: 14px; }
-.text-link {
-    font-size: 12px;
-    font-weight: 600;
-    border-bottom: 1px solid var(--gold);
-    padding-bottom: 6px;
-}
+.text-link { font-size: 12px; font-weight: 600; border-bottom: 1px solid var(--gold); padding-bottom: 6px; }
 .card { display: block; }
 .card-art img { height: 100%; transition: transform .5s; }
 .card:hover .card-art img { transform: scale(1.045); }
@@ -276,12 +148,7 @@ h1, h2, h3 {
 .landing-page .card-info { padding: .4vw .15vw 0; gap: 4px; align-items: center; }
 .landing-page .card h3 { font-size: 1.8vw; line-height: .95; }
 .landing-page .card p { font: bold .92vw/.95 var(--display); margin: 0; }
-.landing-page .arrow {
-    border: 0;
-    font-size: 1.8vw;
-    width: auto;
-    height: auto;
-}
+.landing-page .arrow { border: 0; font-size: 1.8vw; width: auto; height: auto; }
 .landing-page .card-note {
     border: 0;
     border-radius: 2vw;
@@ -292,12 +159,7 @@ h1, h2, h3 {
     position: relative;
 }
 .landing-page .card-note .eyebrow { font-size: 1.3vw; }
-.landing-page .card-note h3 {
-    font-size: 2.75vw;
-    line-height: .9;
-    margin: .45vw 0 .65vw;
-    max-width: none;
-}
+.landing-page .card-note h3 { font-size: 2.75vw; line-height: .9; margin: .45vw 0 .65vw; max-width: none; }
 .landing-page .card-note p { font: bold 1.35vw/.98 var(--display); max-width: 67%; margin: 0; }
 .landing-page .card-note .text-link {
     position: absolute;
@@ -310,12 +172,7 @@ h1, h2, h3 {
     background: #e2dfbf80;
 }
 /* Crop exported nation images. */
-.landing-page .card-art img {
-    position: absolute;
-    max-width: none;
-    object-fit: fill;
-    transform: none;
-}
+.landing-page .card-art img { position: absolute; max-width: none; object-fit: fill; transform: none; }
 .landing-page .card:nth-child(1) .card-art img, .landing-page .card:nth-child(2) .card-art img {
     width: 164.27%;
     height: 167.33%;
@@ -329,30 +186,10 @@ h1, h2, h3 {
     top: 0;
     object-fit: cover;
 }
-.landing-page .card:nth-child(4) .card-art img {
-    width: 132.57%;
-    height: 135%;
-    left: -24.38%;
-    top: -2.95%;
-}
-.landing-page .card:nth-child(5) .card-art img {
-    width: 108.57%;
-    height: 147.4%;
-    left: -.04%;
-    top: -29.29%;
-}
-.landing-page .card:nth-child(6) .card-art img {
-    width: 113.49%;
-    height: 115.56%;
-    left: -6.75%;
-    top: -.91%;
-}
-.landing-page .card:nth-child(7) .card-art img {
-    width: 109.21%;
-    height: 116.22%;
-    left: -9.1%;
-    top: .03%;
-}
+.landing-page .card:nth-child(4) .card-art img { width: 132.57%; height: 135%; left: -24.38%; top: -2.95%; }
+.landing-page .card:nth-child(5) .card-art img { width: 108.57%; height: 147.4%; left: -.04%; top: -29.29%; }
+.landing-page .card:nth-child(6) .card-art img { width: 113.49%; height: 115.56%; left: -6.75%; top: -.91%; }
+.landing-page .card:nth-child(7) .card-art img { width: 109.21%; height: 116.22%; left: -9.1%; top: .03%; }
 .landing-page .card:nth-child(1) { background: #b3ffeb6b; }
 .landing-page .arrow img { width: 1.875vw; height: 1.875vw; opacity: .42; }
 /* Travellers Choice ribbon. */
@@ -393,13 +230,12 @@ h1, h2, h3 {
     border: 0;
     background: transparent;
 }
-.landing-page .card .arrow img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: .42;
+.landing-page .card .arrow img { width: 100%; height: 100%; object-fit: contain; opacity: .42; }
+.landing-page a.card:focus-visible {
+    outline: 3px solid #ffe8a0;
+    outline-offset: 5px;
+    box-shadow: 0 12px 28px #102d3940;
 }
-.landing-page a.card:focus-visible { outline: 3px solid #ffe8a0; outline-offset: 5px; box-shadow: 0 12px 28px #102d3940; }
 .landing-page a.card:focus-visible .arrow img { opacity: 1; }
 /* Nation card colors. */
 .landing-page .card:nth-child(2) { background: #eec96669; }
@@ -468,13 +304,7 @@ h1, h2, h3 {
 }
 /* Crop the founder portrait. */
 .founder-art { position: relative; height: 50.1962vw; overflow: hidden; }
-.founder-art img {
-    position: absolute;
-    width: 100%;
-    height: 165.17%;
-    top: -.02%;
-    object-fit: fill;
-}
+.founder-art img { position: absolute; width: 100%; height: 165.17%; top: -.02%; object-fit: fill; }
 /* Founder name and title. */
 .guild-founder figcaption {
     position: absolute;
@@ -520,12 +350,7 @@ h1, h2, h3 {
     border: 0;
 }
 /* Question and answer spacing. */
-.landing-page .faq-item {
-    width: calc((100% - 4.6vw) / 3);
-    text-align: center;
-    padding: 0;
-    border: 0;
-}
+.landing-page .faq-item { width: calc((100% - 4.6vw) / 3); text-align: center; padding: 0; border: 0; }
 .landing-page .faq-item h3 {
     display: flex;
     align-items: center;
@@ -552,15 +377,8 @@ h1, h2, h3 {
     font: .85vw/1.25 Arial, sans-serif;
 }
 .reference-footer img { width: 9.6vw; height: auto; }
-.reference-footer p { color: #fff; }
 /* Separate the policy text. */
-.footer-policies {
-    display: grid;
-    gap: 1vw;
-    padding: 2vw 0 2vw 6.5vw;
-    position: relative;
-    border-left: 0;
-}
+.footer-policies { display: grid; gap: 1vw; padding: 2vw 0 2vw 6.5vw; position: relative; border-left: 0; }
 .footer-policies::before {
     content: "";
     position: absolute;
