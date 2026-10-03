@@ -1,4 +1,15 @@
 /* Shared typeface, navigation and footer. */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+a { color: inherit; text-decoration: none; }
+img { display: block; }
+h1, h2, h3, p { margin: 0; }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 6px; }
+.nation-options a:hover, .nation-options a:focus-visible {
+    background-color: #ffffff20;
+    color: #ffeeab;
+    border-radius: 8px;
+}
 @font-face {
     font-family: "HYWenHei";
     src: url("../font/zhcn.ttf") format("truetype");

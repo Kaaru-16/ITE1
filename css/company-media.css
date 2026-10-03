@@ -1,32 +1,24 @@
-/* Small-screen adjustments. */
 @media (max-width: 900px) {
-    .cards { grid-template-columns: repeat(2,1fr); }
-    .card-note { grid-column: auto; }
     .faq-grid { gap: 40px; }
     .section { padding: 65px 0; }
 }
 @media (max-width: 380px) {
     .guild-nav { font-size: 10px; gap: 7px; }
-    .landing-page .cards { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
     .guild-nav > a:last-child { white-space: normal; }
     .wrap { width: 88%; }
     .section-head { display: block; }
-    .cards { grid-template-columns: 1fr; }
     .faq-grid { grid-template-columns: 1fr; gap: 35px; }
     .section { padding: 55px 0; }
 }
-/* Reduce motion. */
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     * { transition: none !important; }
 }
-/* Wide-screen navigation. */
 @media (min-width: 1921px) {
     .guild-logo img { width: 6.12vw; }
 }
-/* Tablet and phone layout. */
 @media (max-width: 1100px) {
     .guild-nav { width: 94%; max-width: none; gap: 10px; padding: 18px 0; font-size: 11px; }
     .guild-nav > a, .nation-menu summary { white-space: normal; }
@@ -45,24 +37,6 @@
     .landing-page .eyebrow { font-size: 15px; margin-bottom: 8px; }
     .landing-page .section-head h2 { font-size: 34px; }
     .landing-page .section-head { margin-bottom: 24px; }
-    .landing-page .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; grid-auto-rows: auto; }
-    .landing-page .card { padding: 10px; border-radius: 18px; }
-    .landing-page .card-art { border-radius: 12px; }
-    .landing-page .card-info { padding-top: 8px; }
-    .landing-page .card h3 { font-size: 19px; }
-    .landing-page .card p { margin-top: 3px; font-size: 14px; line-height: 1.3; }
-    .landing-page .arrow { font-size: 22px; }
-    .landing-page .card-note { grid-column: 1 / -1; padding: 22px; border-radius: 18px; }
-    .landing-page .card-note .eyebrow { font-size: 13px; }
-    .landing-page .card-note h3 { font-size: 28px; margin: 10px 0; }
-    .landing-page .card-note p { font-size: 15px; max-width: none; line-height: 1.2; }
-    .landing-page .card-note .text-link {
-        position: static;
-        margin-top: 16px;
-        font-size: 12px;
-        padding: 10px 14px;
-        border-radius: 20px;
-    }
     .guild-story { padding: 65px 0; }
     .guild-story h2 { font-size: 36px; padding: 0 20px; margin-bottom: 25px; }
     .story-panel { width: 86%; padding: 24px; border-radius: 20px; margin-bottom: 22px; }
@@ -86,16 +60,11 @@
     .story-world { background: #21446a; overflow: hidden; }
     .story-scenery { inset: 0; width: 100%; height: 100%; mask: none; filter: blur(2px); opacity: .8; }
     .story-scenery img { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 75% center; }
-    .landing-page .arrow img { width: 18px; height: 18px; }
-    .choice-badge { width: 80px; height: 80px; left: -12px; top: -6px; }
-    .choice-badge > span { font-size: 9px; }
     .footer-policies { font-size: 12px; gap: 14px; padding: 15px 0 15px 25px; }
     .landing-world, .story-world, .guild-story, .landing-page #travel-notes { height: auto; }
     .landing-page .faq-item p, .story-panel p { line-height: 1.45; }
-    .landing-page .card-info > div { min-width: 0; }
     .story-panel.director { width: 86%; }
 }
-/* Desktop layout. */
 @media (min-width: 1101px) {
     .nav-atmosphere { width: 100%; left: 0; top: -.1042vw; height: 54.7917vw; opacity: .7826; }
     .nav-atmosphere img { height: 133.1%; top: -33.1%; }
@@ -148,38 +117,10 @@
         overflow: hidden;
     }
     .companion img { position: absolute; width: 100.06%; height: 107.96%; left: -.03%; top: -7.84%; }
-    .landing-page .destinations { width: 86.9792%; margin-left: 6.7708%; padding-top: 8.6979vw; }
+    .landing-page .destinations { width: 86.9792%; margin-left: 6.7708%; padding-top: 8.6979vw; padding-bottom: 0; }
     .landing-page .section-head { height: 8.1771vw; margin-bottom: 0; align-items: flex-start; }
     .landing-page .section-head .eyebrow { display: block; margin-bottom: 1.05vw; }
     .landing-page .section-head h2 { line-height: .9; }
-    .landing-page .cards {
-        grid-template-columns: repeat(3, 25.15625vw);
-        grid-auto-rows: minmax(17.03125vw, auto);
-        justify-content: space-between;
-        gap: 2.7604vw 0;
-    }
-    .landing-page .card { padding: 1.25vw 1.3542vw .52vw; border-radius: 1.823vw; }
-    .landing-page .card-art { width: 21.875vw; height: 12.0833vw; aspect-ratio: auto; border-radius: 1.1458vw; }
-    .landing-page .card:nth-child(7) .card-art { width: 21.875vw; height: 12.0833vw; margin-left: 0; }
-    /* Give subtitles the full card width. */
-    .landing-page .card-info { position: relative; display: block; padding: .625vw .26vw 0; }
-    .landing-page .card .arrow { position: absolute; top: .625vw; right: .26vw; }
-    .landing-page .card h3 { font-size: 1.6667vw; line-height: .987; }
-    .landing-page .card p { font-size: .8333vw; line-height: .987; letter-spacing: -.0333vw; }
-    .landing-page .card-note {
-        padding: 2.96875vw 1.3542vw 1vw;
-        border-radius: 1.823vw;
-        justify-content: flex-start;
-        background: #a69f8966;
-    }
-    .landing-page .card-note h3 { margin: .6vw 0 .8vw; font-size: 2.5vw; }
-    .landing-page .card-note p { max-width: 31vw; font-size: 1.25vw; }
-    .landing-page .card-note .text-link {
-        right: 1.93vw;
-        bottom: 1.77vw;
-        font-size: .8333vw;
-        padding: .65vw 1.5vw;
-    }
     .guild-story { padding: 10.8333vw 0 0; }
     .guild-story h2 { line-height: .987; }
     .story-panel { border: 0; border-radius: 1.823vw; background: #a69f8966; backdrop-filter: none; }
@@ -207,7 +148,6 @@
     .reference-footer img { width: 9.7917vw; }
     .footer-policies { margin-left: 4.27vw; padding-left: 6.51vw; width: 26.15vw; }
 }
-/* Tablet layout. */
 @media (min-width: 761px) and (max-width: 1100px) {
     .guild-nav { font-size: 15px; gap: 22px; }
     .guild-logo img { width: 72px; }
@@ -216,38 +156,17 @@
     .discovery-copy h1 { font-size: clamp(52px, 7vw, 72px); line-height: 1; }
     .discovery-copy p { font-size: 19px; line-height: 1.35; }
     .companion { width: 43%; bottom: 0; right: -2%; }
-    .landing-page .card h3 { font-size: 26px; line-height: 1.15; }
     .landing-page .faq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
     .landing-page .faq-item { width: 100%; min-width: 0; }
     .landing-page .faq-item:last-child { grid-column: 1 / -1; width: calc(50% - 12px); justify-self: center; }
     .landing-page .faq-item p { font-size: 17px; }
     .reference-footer { font-size: 14px; gap: 40px; }
 }
-/* Desktop layout. */
 @media (min-width: 1101px) {
     .story-scenery { min-height: calc(100% + 2.601vw); mask-size: 100vw calc(100% + 12vw); }
     .landing-page #travel-notes { height: auto; min-height: 42.7083vw; margin-top: -1.25vw; padding-bottom: 6vw; }
     .landing-page .faq-item h3 { height: auto; line-height: 1.1; }
 }
-/* Mouse hover feedback. */
-@media (hover: hover) and (pointer: fine) {
-    .landing-page a.card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 14px 30px #102d394d, inset 0 0 0 2px #ffe8a0b3;
-    }
-    .landing-page a.card:hover .card-art img { transform: scale(1.035); }
-    .landing-page a.card:hover .arrow img { transform: translate(1px, -1px); }
-}
-/* Reduce motion. */
-@media (prefers-reduced-motion: reduce) {
-    .landing-page .card, .landing-page .card .card-art img, .landing-page .card .arrow, .landing-page .card .arrow img {
-        transition: none;
-    }
-    .landing-page a.card:hover, .landing-page a.card:hover .card-art img, .landing-page a.card:hover .arrow img {
-        transform: none;
-    }
-}
-/* Desktop layout. */
 @media (min-width: 1101px) {
     .guild-story h2 { text-align: left; }
     .story-panel p { font-size: 1.6667vw; }
@@ -262,12 +181,10 @@
     .discovery-copy p { font-size: 1.6667vw; margin-top: 3.6vw; }
     .landing-page .section-head h2 { font-size: 4.1667vw; }
 }
-/* Tablet and phone layout. */
 @media (max-width: 1100px) {
     .guild-story { display: flex; flex-direction: column; }
     .journey-button { border-radius: 60px; }
 }
-/* Desktop layout. */
 @media (min-width: 1101px) {
     .guild-story { height: 56.9271vw; padding-top: 10.9896vw; }
     .guild-story h2 { margin-left: 6.25%; margin-bottom: 1.731vw; font-size: 5vw; }
@@ -275,7 +192,6 @@
     .story-panel { width: 53.4375%; min-height: 12.2396vw; padding: 1.2vw 1.3542vw; }
     .story-panel.director { width: 52.7604%; min-height: 21.9792vw; padding: 1.9271vw 2.5781vw; }
     .story-panel p { line-height: .987; }
-    /* Anchor the portrait to the FAQ edge. */
     .guild-founder { left: 51.09375%; top: 5.46875vw; width: 46.3133%; }
     .founder-art { height: 50.1962vw; }
     .guild-founder figcaption { top: 40.57vw; left: 42%; width: 46%; }
@@ -283,9 +199,7 @@
     .story-world { min-height: 105.2083vw; }
     .landing-page .guild-nav { font-size: 1.0417vw; }
 }
-/* Tablet and phone layout. */
 @media (max-width: 1100px) {
-    /* Remove the gap below the portrait. */
     .guild-story { padding-bottom: 0; }
     .guild-founder {
         position: relative;
@@ -299,6 +213,31 @@
     .guild-founder figcaption { top: auto; bottom: 12%; left: 38%; width: 60%; font-size: 14px; }
     .guild-founder strong { font-size: 20px; }
     .founder-signature { height: 110px; bottom: 15px; }
-    .landing-page .card .arrow { width: 24px; height: 24px; }
     .guild-nav { grid-template-columns: minmax(0, 1.5fr) 58px minmax(0, 1fr) auto; }
+}
+
+/* Readable cards on tablet and phone. */
+@media (max-width: 1100px) {
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .card { padding: 16px; border-radius: 22px; }
+    .card-art { width: 100%; border-radius: 14px; }
+    .card-info { min-height: 85px; padding: 12px 0 2px; }
+    .card-info > div { padding-right: 30px; }
+    .card h3 { font-size: 26px; line-height: 1.1; letter-spacing: 0; }
+    .card p { margin-top: 6px; font-size: 14px; line-height: 1.3; letter-spacing: 0; }
+    .card .arrow { top: 12px; right: 0; width: 24px; height: 24px; }
+    .choice-badge { width: 100px; height: 100px; left: -12px; top: 0; }
+    .choice-badge > span { font-size: 10px; }
+    .card-note { padding: 24px; border-radius: 22px; }
+    .card-note .eyebrow { font-size: 14px; }
+    .card-note h3 { margin: 12px 0; font-size: 28px; }
+    .card-note p { max-width: none; font-size: 16px; line-height: 1.3; }
+    .card-note .text-link { display: inline-block; position: static; margin-top: 20px; padding: 12px 16px; border-radius: 24px; font-size: 12px; }
+}
+@media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    .card-note { grid-column: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
 }

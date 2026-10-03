@@ -16,8 +16,7 @@
     --panel-padding: 1.875vw;
     --list-gap: 1.1vw;
     --list-line: 1.29;
-    --price-panel: url("../image/sumeru-price.svg");
-    --stops-panel: url("../image/sumeru-stops.svg");
+    --stops-panel: url("../image/stop.svg#long");
 }
 .journey-places figure:nth-child(1) {
     --crop-width: 115.88%;

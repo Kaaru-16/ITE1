@@ -17,13 +17,13 @@
     --panel-padding: 2.2vw;
     --list-gap: 1.5vw;
     --list-line: 1.52;
-    --price-panel: url("../image/fontaine-price.svg");
-    --stops-panel: url("../image/fontaine-stops.svg");
+    --price-panel: url("../image/price.svg#wide");
+    --stops-panel: url("../image/stop.svg#medium");
 }
 /* Preserve image proportions inside the Figma crop. */
 .scene-art {
     overflow: hidden;
-    mask: url("../image/fontaine-hero-mask.svg") -1.6667vw -5.0521vw / 107.1875vw 60.3125vw no-repeat;
+    mask: url("../image/hero-mask.svg") -1.6667vw -5.0521vw / 107.1875vw 60.3125vw no-repeat;
 }
 .scene-art img {
     position: absolute;
@@ -34,7 +34,7 @@
     top: -5.83%;
 }
 .destination-scene::before {
-    mask: url("../image/fontaine-tint-mask.svg") 0 -2.03125vw / 100vw 60.3125vw no-repeat;
+    mask: url("../image/tint-mask.svg") 0 -2.03125vw / 100vw 60.3125vw no-repeat;
 }
 /* Original gallery crops. */
 .journey-places figure:nth-child(1) {

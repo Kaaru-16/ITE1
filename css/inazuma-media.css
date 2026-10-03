@@ -1,0 +1,12 @@
+/* Inazuma's shorter hero and long shrine caption. */
+@media (min-width: 1101px) {
+    .destination-scene { height: 52.4479vw; }
+    .stops-value { font-size: 1.25vw; }
+    .journey-places { grid-template-columns: repeat(3, 21.875vw); padding-bottom: .9375vw; }
+    .journey-places figure:first-child figcaption { margin-left: -3.0208vw; margin-right: -3.0208vw; letter-spacing: -.0333vw; }
+    .package-details > div > .package-note { margin-top: 3.8vw; }
+}
+/* Scale fades with the taller mobile hero. */
+@media (max-width: 1100px) {
+    .scene-art, .destination-scene::before { mask-size: 100% 100%; mask-position: center; }
+}

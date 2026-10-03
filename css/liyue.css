@@ -16,8 +16,7 @@
     --panel-padding: 2.2vw;
     --list-gap: 1.5vw;
     --list-line: 1.52;
-    --price-panel: url("../image/liyue-price.svg");
-    --stops-panel: url("../image/liyue-stops.svg");
+    --stops-panel: url("../image/stop.svg#short");
 }
 .journey-places figure:nth-child(1) {
     --crop-width: 103.04%;

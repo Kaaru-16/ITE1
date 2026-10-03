@@ -17,8 +17,7 @@
     --panel-padding: 1.875vw;
     --list-gap: 1.1vw;
     --list-line: 1.29;
-    --price-panel: url("../image/mond-imgRectangle7.svg");
-    --stops-panel: url("../image/mond-imgRectangle4.svg");
+    --price-panel: url("../image/price.svg#tall");
     --scenery-tint: #1290aa52;
 }
 .journey-places figure:nth-child(1) {

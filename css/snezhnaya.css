@@ -18,8 +18,8 @@
     --panel-padding: 2.2vw;
     --list-gap: 1.5vw;
     --list-line: 1.52;
-    --price-panel: url("../image/snezhnaya-price.svg");
-    --stops-panel: url("../image/snezhnaya-stops.svg");
+    --price-panel: url("../image/price.svg#wide");
+    --stops-panel: url("../image/stop.svg#extra-wide");
 }
 .journey-places figure:nth-child(1) {
     --crop-width: 130.93%;

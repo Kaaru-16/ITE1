@@ -7,8 +7,7 @@
     --panel-padding: 1.875vw;
     --list-gap: 1.1vw;
     --list-line: 1.15;
-    --price-panel: url("../image/price-panel.svg");
-    --stops-panel: url("../image/stops-panel.svg");
+    --price-panel: url("../image/price.svg#thin");
 }
 
 /* Keep the Natlan artwork behind the page content. */
