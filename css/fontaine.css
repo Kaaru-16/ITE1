@@ -9,7 +9,7 @@
     --scenery-left: -73.92%;
     --scenery-top: 25.1173vw;
     --title-top: 9.4792vw;
-    --title-line: 1.313;
+    --title-line: 1.07905;
     --description-width: 39.1146vw;
     --stops-width: 43.6458vw;
     --caption-size: 1.25vw;
@@ -23,7 +23,8 @@
 /* Preserve image proportions inside the Figma crop. */
 .scene-art {
     overflow: hidden;
-    mask: url("../image/hero-mask.svg") -1.6667vw -5.0521vw / 107.1875vw 60.3125vw no-repeat;
+    /* CSS fades also work when opening the HTML directly. */
+    mask: linear-gradient(#000 62%, transparent) -1.6667vw -5.0521vw / 107.1875vw 60.3125vw no-repeat;
 }
 .scene-art img {
     position: absolute;
@@ -34,7 +35,7 @@
     top: -5.83%;
 }
 .destination-scene::before {
-    mask: url("../image/tint-mask.svg") 0 -2.03125vw / 100vw 60.3125vw no-repeat;
+    mask: linear-gradient(#000 62%, transparent) 0 -2.03125vw / 100vw 60.3125vw no-repeat;
 }
 /* Original gallery crops. */
 .journey-places figure:nth-child(1) {
