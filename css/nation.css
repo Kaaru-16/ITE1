@@ -89,7 +89,8 @@ figure { margin: 0; }
     background: var(--price-panel) center / 100% 100% no-repeat;
 }
 .scene-pricing small { display: block; margin-top: .52vw; text-align: center; font-size: .8333vw; }
-.scene-stops { position: absolute; top: 41.8229vw; left: 6.8229%; }
+/* Space below the per-person price note. */
+.scene-stops { position: absolute; top: 41.8229vw; left: 6.8229%; padding-top: clamp(12px, 1vw, 20px); }
 .stops-value {
     display: flex;
     align-items: center;

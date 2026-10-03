@@ -1,5 +1,4 @@
 @media (min-width: 1101px) {
-    .stops-value { white-space: nowrap; }
     .reference-footer { position: relative; padding: 0; }
     .reference-footer > a { position: absolute; left: 25.2083%; top: 5.2083vw; }
     .footer-policies {

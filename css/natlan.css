@@ -1,7 +1,9 @@
 /* Natlan artwork and page-specific design tokens. */
 :root {
-    --title-top: 9.95vw;
-    --title-line: .86;
+    --title-top: 9.4792vw;
+    --title-line: 1.07905;
+    --description-width: 40.6vw;
+    --stops-width: 47vw;
     --caption-size: 1.6667vw;
     --panel-height: auto;
     --panel-padding: 1.875vw;
@@ -27,14 +29,8 @@
     filter: blur(4.4px);
 }
 
-/* Natlan uses a shorter hero and a deeper artwork fade. */
-.natlan-page .destination-scene {
-    height: 52.6042vw;
-    color: #fff;
-}
-
+/* Natlan artwork fade. */
 .natlan-page .scene-art {
-    height: 59.53125vw;
     mask-image: linear-gradient(#000 60%, transparent 100%);
 }
 
@@ -48,27 +44,7 @@
     mask-image: linear-gradient(#000 55%, transparent);
 }
 
-/* Keep the Natlan title and introduction compact. */
-.natlan-page .scene-copy {
-    width: 48%;
-    margin-left: 6.77%;
-}
-
-.natlan-page .scene-copy h1 {
-    color: #fff2d9;
-}
-
-.natlan-page .scene-subtitle {
-    line-height: 1.1;
-}
-
-.natlan-page .scene-description {
-    position: static;
-    width: 84.6%;
-    margin-top: 1.2vw;
-    color: #fff;
-    line-height: 1.05;
-}
+.natlan-page .scene-copy h1 { color: #fff2d9; }
 
 /* The emblem is a transparent crop of the supplied Natlan mark. */
 .natlan-emblem {
@@ -79,14 +55,7 @@
     mix-blend-mode: screen;
 }
 
-/* Natlan uses larger hero labels and a warm CTA treatment. */
-.natlan-page .scene-pricing h3,
-.natlan-page .scene-stops h3 {
-    color: #fff;
-    font-size: 2.5vw;
-    line-height: 1.08;
-}
-
+/* Warm Natlan button colors. */
 .natlan-page .booking-button {
     border-color: rgba(255, 230, 158, .9);
     background: linear-gradient(110deg, rgba(255, 233, 171, .68), rgba(236, 138, 94, .45));
