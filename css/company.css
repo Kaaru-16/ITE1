@@ -89,6 +89,12 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     margin: 0 0 .4vw;
 }
 .landing-page .section-head h2 { font-size: 4.4vw; line-height: 1; }
+/* Subtle shadows keep text readable over the scenery. */
+.landing-page .section-head .eyebrow,
+.landing-page .section-head h2,
+.card-note .eyebrow,
+.card-note h3,
+.card-note p { text-shadow: 0 2px 4px #0006; }
 .story-world { position: relative; isolation: isolate; }
 .guild-story h2 { font-size: 5.6vw; line-height: 1.1; margin-bottom: 1.8vw; }
 .story-panel {
@@ -233,7 +239,7 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     background: var(--card-color, #b3ffeb6b);
     color: #16365e;
     box-shadow: 0 4px 7.1px #0004;
-    transition: box-shadow 180ms ease;
+    transition: transform 180ms ease, box-shadow 180ms ease;
 }
 .card-art { position: relative; width: 21.875vw; max-width: 100%; aspect-ratio: 420 / 232; overflow: hidden; border-radius: 1.1458vw; }
 .card-art img { position: absolute; max-width: none; width: var(--image-width, 100%); height: var(--image-height, 100%); left: var(--image-left, 0); top: var(--image-top, 0); object-fit: cover; }
@@ -261,6 +267,6 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
 .card-note .text-link { position: absolute; right: 1.93vw; bottom: 1.77vw; padding: .65vw 1.5vw; border-radius: 2vw; background: #e2dfbf80; font-size: .8333vw; }
 .card:focus-visible { outline: 3px solid #ffe8a0; outline-offset: 5px; }
 @media (hover: hover) {
-    .card:hover { box-shadow: 0 4px 7.1px #0004, inset 0 0 0 2px #ffe8a0b3; }
+    .card:hover { transform: translateY(-8px) scale(1.015); box-shadow: 0 12px 22px #0005, inset 0 0 0 2px #ffe8a0b3; }
     .card:hover .arrow img { opacity: 1; }
 }

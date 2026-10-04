@@ -1,12 +1,10 @@
+@import url("shared-media.css");
 @media (max-width: 900px) {
     .faq-grid { gap: 40px; }
     .section { padding: 65px 0; }
 }
-@media (max-width: 380px) {
-    .guild-nav { font-size: 10px; gap: 7px; }
-}
+
 @media (max-width: 760px) {
-    .guild-nav > a:last-child { white-space: normal; }
     .wrap { width: 88%; }
     .section-head { display: block; }
     .faq-grid { grid-template-columns: 1fr; gap: 35px; }
@@ -16,16 +14,8 @@
     html { scroll-behavior: auto; }
     * { transition: none !important; }
 }
-@media (min-width: 1921px) {
-    .guild-logo img { width: 6.12vw; }
-}
+
 @media (max-width: 1100px) {
-    .guild-nav { width: 94%; max-width: none; gap: 10px; padding: 18px 0; font-size: 11px; }
-    .guild-nav > a, .nation-menu summary { white-space: normal; }
-    .guild-nav > a:last-child { margin-left: 0; }
-    .guild-logo img { width: 58px; }
-    .nation-menu summary img { width: 12px; height: 15px; flex-shrink: 0; }
-    .nav-atmosphere { height: 300px; }
     .landing-world { padding: 115px 0 40px; background-size: auto 100%; }
     .discovery-hero { min-height: 610px; border-radius: 20px; }
     .discovery-copy { width: 100%; padding: 28px 22px; }
@@ -66,26 +56,15 @@
     .story-panel.director { width: 86%; }
 }
 @media (min-width: 1101px) {
-    .nav-atmosphere { width: 100%; left: 0; top: -.1042vw; height: 54.7917vw; opacity: .7826; }
-    .nav-atmosphere img { height: 133.1%; top: -33.1%; }
-    .guild-nav {
-        width: 50.1%;
-        max-width: none;
-        margin-left: 24.6354%;
-        gap: 0;
-        grid-template-columns: 22.292vw 10.938vw 13.594vw auto;
-        padding-top: 2.2917vw;
-        font-size: 1.25vw;
-    }
-    .guild-nav > a:last-child { margin: 0; }
-    .guild-nav summary { gap: .6vw; }
-    .guild-nav summary img { width: 1.2vw; height: 1.3vw; }
+    /* Company frame measurements, scaled from the 1920px design. */
+    .landing-page .nav-atmosphere { height: 54.7917vw; opacity: .7826; }
+    .landing-page .nav-atmosphere img { height: 133.1%; top: -33.1%; }
     .landing-world {
         min-height: 124.7396vw;
         padding-top: 10.78125vw;
         padding-bottom: 6vw;
-        background-size: auto 100%;
-        mask-image: linear-gradient(#000 97%, transparent);
+        background-size: 100% 100%;
+        mask-image: linear-gradient(#000 calc(100% - 48px), transparent);
     }
     .discovery-hero {
         width: 87.65625%;
@@ -97,16 +76,20 @@
         background: #b9b7b566;
         backdrop-filter: none;
     }
-    .discovery-copy { padding: 3.4375vw 0 0 1.5625vw; width: 50vw; }
-    .discovery-copy h1 { line-height: .79; width: 46.25vw; }
-    .discovery-copy p { position: relative; width: 44vw; margin: 2vw 0 1.7vw .78vw; line-height: .86; }
+    .discovery-copy { padding: 3.4375vw 0 0 1.5625vw; width: 50vw; height: 100%; }
+    .discovery-copy h1 { line-height: .70575; width: 46.25vw; }
+    .discovery-copy h1 span { font-size: 6.7708vw; line-height: .859; }
+    .discovery-copy p { position: absolute; top: 22.34375vw; left: 2.34375vw; width: 47.8646vw; margin: 0; line-height: .81155; }
     .journey-button {
         width: 24.79vw;
         height: 6.0417vw;
         min-height: 0;
         padding: 0;
         font-size: 2.0833vw;
-        margin-left: .78vw;
+        position: absolute;
+        top: 28.9583vw;
+        left: 2.34375vw;
+        margin: 0;
     }
     .companion {
         width: 45.15625vw;
@@ -114,13 +97,12 @@
         top: -4.9479vw;
         left: 44.53125vw;
         right: auto;
-        overflow: hidden;
     }
-    .companion img { position: absolute; width: 100.06%; height: 107.96%; left: -.03%; top: -7.84%; }
+    .companion img { width: 100%; height: 100%; object-fit: contain; }
     .landing-page .destinations { width: 86.9792%; margin-left: 6.7708%; padding-top: 8.6979vw; padding-bottom: 0; }
     .landing-page .section-head { height: 8.1771vw; margin-bottom: 0; align-items: flex-start; }
     .landing-page .section-head .eyebrow { display: block; margin-bottom: 1.05vw; }
-    .landing-page .section-head h2 { line-height: .9; }
+    .landing-page .section-head h2 { line-height: .859; }
     .guild-story { padding: 10.8333vw 0 0; }
     .guild-story h2 { line-height: .987; }
     .story-panel { border: 0; border-radius: 1.823vw; background: #a69f8966; backdrop-filter: none; }
@@ -149,8 +131,6 @@
     .footer-policies { margin-left: 4.27vw; padding-left: 6.51vw; width: 26.15vw; }
 }
 @media (min-width: 761px) and (max-width: 1100px) {
-    .guild-nav { font-size: 15px; gap: 22px; }
-    .guild-logo img { width: 72px; }
     .discovery-hero { min-height: 540px; }
     .discovery-copy { width: 62%; }
     .discovery-copy h1 { font-size: clamp(52px, 7vw, 72px); line-height: 1; }
@@ -178,7 +158,7 @@
     .landing-page .faq-item p { font-size: 1.04167vw; line-height: 1.124; }
     .journey-button { border-radius: 4.8958vw; }
     .discovery-copy h1 { font-size: 6.6667vw; }
-    .discovery-copy p { font-size: 1.6667vw; margin-top: 3.6vw; }
+    .discovery-copy p { font-size: 1.6667vw; }
     .landing-page .section-head h2 { font-size: 4.1667vw; }
 }
 @media (max-width: 1100px) {
@@ -197,7 +177,13 @@
     .guild-founder figcaption { top: 40.57vw; left: 42%; width: 46%; }
     .guild-founder figcaption span { display: block; max-width: 18vw; margin: auto; }
     .story-world { min-height: 105.2083vw; }
-    .landing-page .guild-nav { font-size: 1.0417vw; }
+    .landing-page .section-head .eyebrow { line-height: .70575; margin-bottom: 1.3229vw; }
+    .card-note .eyebrow { font-size: 1.25vw; line-height: .6888; }
+    .card-note h3 { margin-top: 1.0156vw; margin-bottom: .7708vw; line-height: .95; }
+    .card-note p { max-width: 30.7292vw; margin-left: .2604vw; line-height: .863775; }
+    .card-note .text-link { display: flex; align-items: center; justify-content: center; width: 20.0521vw; height: 2.5vw; padding: 0; right: 1.9271vw; bottom: 1.7708vw; background: #fff3cd7a; }
+    #snezhnaya .card-art { width: 23.125vw; aspect-ratio: 444 / 235; margin-left: -.3125vw; }
+    .landing-page .reference-footer { background: #0a131d; }
 }
 @media (max-width: 1100px) {
     .guild-story { padding-bottom: 0; }
@@ -213,7 +199,6 @@
     .guild-founder figcaption { top: auto; bottom: 12%; left: 38%; width: 60%; font-size: 14px; }
     .guild-founder strong { font-size: 20px; }
     .founder-signature { height: 110px; bottom: 15px; }
-    .guild-nav { grid-template-columns: minmax(0, 1.5fr) 58px minmax(0, 1fr) auto; }
 }
 
 /* Readable cards on tablet and phone. */
@@ -240,4 +225,5 @@
 }
 @media (prefers-reduced-motion: reduce) {
     .card { transition: none; }
+    .card:hover { transform: none; }
 }

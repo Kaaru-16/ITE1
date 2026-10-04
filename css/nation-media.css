@@ -1,3 +1,4 @@
+@import url("shared-media.css");
 @media (min-width: 1101px) {
     .reference-footer { position: relative; padding: 0; }
     .reference-footer > a { position: absolute; left: 25.2083%; top: 5.2083vw; }
@@ -11,33 +12,8 @@
         align-content: start;
     }
     .reference-footer > p { position: absolute; left: 65.4167%; top: 6.71875vw; }
-    .nav-atmosphere { height: 54.7917vw; }
-    .nav-atmosphere img { height: 133.1%; top: -33.1%; }
-    .guild-nav {
-        width: 50.1%;
-        max-width: none;
-        margin-left: 24.6354%;
-        gap: 0;
-        grid-template-columns: 22.292vw 10.938vw 13.594vw auto;
-        padding-top: 2.2917vw;
-        font-size: 1.0417vw;
-    }
-    .guild-nav > a:last-child { margin: 0; }
 }
 @media (max-width: 1100px) {
-    .guild-nav {
-        width: 94%;
-        max-width: none;
-        gap: 16px;
-        padding: 18px 0;
-        grid-template-columns: 1.5fr 72px 1fr auto;
-        font-size: 15px;
-    }
-    .guild-nav > a, .nation-menu summary { white-space: normal; }
-    .guild-nav > a:last-child { margin-left: 0; }
-    .guild-logo img { width: 72px; }
-    .nation-menu summary img { width: 12px; height: 15px; flex-shrink: 0; }
-    .nav-atmosphere { height: 300px; }
     .destination-scene { height: auto; padding: 150px 7% 55px; }
     /* Fit the hero artwork. */
     .scene-art { height: 100%; }
@@ -103,16 +79,6 @@
 }
 /* Phone layout. */
 @media (max-width: 600px) {
-    /* Fit navigation to this screen size. */
-    .guild-nav {
-        width: 100%;
-        padding-right: 10px;
-        padding-left: 10px;
-        grid-template-columns: minmax(0, 1.2fr) 52px minmax(0, 1fr) max-content;
-        gap: 6px;
-        font-size: 9px;
-    }
-    .guild-logo img { width: 52px; }
     /* Adjust hero spacing. */
     .destination-scene { padding-top: 125px; }
     /* Resize the gallery heading. */

@@ -1,5 +1,6 @@
 /* Shared typeface, navigation and footer. */
 * { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: clamp(90px, 9vw, 180px); }
 a { color: inherit; text-decoration: none; }
 img { display: block; }
@@ -18,8 +19,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
     font-display: swap;
 }
 .site-header { position: fixed; z-index: 10; inset: 0 0 auto; }
-/* Keep the fixed navbar transparent. */
-.site-header .nav-atmosphere { display: none; }
+/* Fading vignette follows the fixed navigation. */
 .nav-atmosphere img { position: absolute; width: 100%; height: 126.83%; top: -26.83%; object-fit: fill; }
 .guild-nav {
     position: relative;
@@ -42,10 +42,11 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
 .guild-logo img { filter: drop-shadow(0 4px 7px #0005); width: 6.12vw; height: auto; }
 .nav-atmosphere {
     position: absolute;
+    inset: 0 0 auto;
     width: 100%;
     overflow: hidden;
     pointer-events: none;
-    height: 30vw;
+    height: clamp(180px, 22vw, 420px);
     opacity: .78;
 }
 .nation-menu { position: relative; justify-self: auto; }
