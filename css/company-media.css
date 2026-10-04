@@ -57,8 +57,6 @@
 }
 @media (min-width: 1101px) {
     /* Company frame measurements, scaled from the 1920px design. */
-    .landing-page .nav-atmosphere { height: 54.7917vw; opacity: .7826; }
-    .landing-page .nav-atmosphere img { height: 133.1%; top: -33.1%; }
     .landing-world {
         min-height: 124.7396vw;
         padding-top: 10.78125vw;

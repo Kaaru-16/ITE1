@@ -6,14 +6,14 @@
     .nation-menu summary img { width: 1.2vw; height: 1.3vw; }
 }
 @media (max-width: 1100px) {
-    .guild-nav { width: 94%; max-width: none; margin: auto; grid-template-columns: minmax(0, 1.5fr) 64px minmax(0, 1fr) auto; gap: 16px; padding: 16px 0; font-size: 14px; }
+    .guild-nav { width: max-content; max-width: 94%; margin: auto; grid-template-columns: auto 64px auto auto; gap: clamp(16px, 3vw, 32px); padding: 16px 0; font-size: 14px; }
     .guild-nav > a, .nation-menu summary { white-space: normal; }
     .guild-nav > a:last-child { margin-left: 0; }
     .guild-logo img { width: 64px; }
     .nation-menu summary img { width: 12px; height: 15px; flex-shrink: 0; }
 }
 @media (max-width: 600px) {
-    .guild-nav { width: calc(100% - 20px); grid-template-columns: minmax(0, 1.5fr) 52px minmax(0, 1fr) auto; gap: 8px; padding: 14px 0; font-size: 11px; }
+    .guild-nav { width: max-content; max-width: calc(100% - 20px); grid-template-columns: minmax(0, 1.5fr) 52px minmax(0, 1fr) auto; gap: 8px; padding: 14px 0; font-size: 11px; }
     .guild-logo img { width: 52px; }
     .nation-menu summary { gap: 5px; }
 }

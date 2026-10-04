@@ -20,7 +20,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
 }
 .site-header { position: fixed; z-index: 10; inset: 0 0 auto; }
 /* Fading vignette follows the fixed navigation. */
-.nav-atmosphere img { position: absolute; width: 100%; height: 126.83%; top: -26.83%; object-fit: fill; }
+.nav-atmosphere img { position: absolute; width: 100%; height: 133.1%; top: -33.1%; object-fit: fill; }
 .guild-nav {
     position: relative;
     display: grid;
@@ -46,8 +46,8 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
     width: 100%;
     overflow: hidden;
     pointer-events: none;
-    height: clamp(180px, 22vw, 420px);
-    opacity: .78;
+    height: clamp(180px, 54.7917vw, 1052px);
+    opacity: .7826;
 }
 .nation-menu { position: relative; justify-self: auto; }
 .nation-menu summary {
