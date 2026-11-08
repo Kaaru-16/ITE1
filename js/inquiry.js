@@ -177,10 +177,11 @@
         panels.forEach(element => { element.hidden = element !== panel; });
         dialog.dataset.view = name;
         dialog.setAttribute("aria-labelledby", heading.id);
-        if (!dialog.open) dialog.showModal();
+        const wasOpen = dialog.open;
+        if (!wasOpen) dialog.showModal();
         dialog.scrollTop = 0;
         (focusTarget || heading).focus({ preventScroll: true });
-        panel.dispatchEvent(new Event("ui:open", { bubbles: true }));
+        (wasOpen ? panel : dialog).dispatchEvent(new Event("ui:open", { bubbles: true }));
     }
 
     function updateDateMinimum() {
