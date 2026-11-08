@@ -9,6 +9,8 @@
         <link href="css/nation.css" rel="stylesheet"/>
         <link href="css/natlan.css" rel="stylesheet"/>
         <link href="css/nation-media.css" rel="stylesheet"/>
+        <link href="css/inquiry.css" rel="stylesheet"/>
+        <script src="js/inquiry.js" defer></script>
     </head>
     <body class="natlan-page">
         <a class="skip" href="#main">Skip to content</a>
@@ -33,16 +35,17 @@
                     <p class="scene-description">Journey through blazing volcanic fields, golden canyons, and warm hospitality in a region built for thrill seekers and night-sky dreamers alike.</p>
                 </div>
                 <div class="scene-pricing">
-                    <h3>Base Price</h3>
+                    <h2>Base Price</h2>
                     <div class="price-value">PHP 14,800</div>
                     <small>per person (4 Days / 3 Nights)</small>
                 </div>
+                <div class="scene-stops">
+                    <h2>Featured Stops</h2>
+                    <p class="stops-value">The people of the springs, ancient sacred mountain, and the stadium of the sacred flame.</p>
+                </div>
                 <div class="scene-actions">
-                    <div class="scene-stops">
-                        <h3>Featured Stops</h3>
-                        <p class="stops-value">The people of the springs, ancient sacred mountain, and the stadium of the sacred flame.</p>
-                    </div>
-                    <a class="booking-button" href="#journey-title">View Package Details <img alt="" height="24" src="image/home-imgImage3.png" width="24"/></a>
+                    <button class="booking-button" type="button" data-inquiry-package="natlan" aria-haspopup="dialog" aria-controls="booking-inquiry" hidden>Book your Journey <img alt="" src="image/inquiry-book.svg"/></button>
+                    <a class="package-details-link" href="#journey-title">View package details <img alt="" height="28" src="image/inquiry-details.png" width="28"/></a>
                 </div>
             </section>
             <section aria-labelledby="journey-title" class="journey-gallery">

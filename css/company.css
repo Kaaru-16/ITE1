@@ -1,24 +1,11 @@
 @import url("shared.css");
-:root {
-    --font-body: Arial,Helvetica,sans-serif;
-    --ink: #2e2444;
-    --cream: #f6f4ed;
-    --gold: #ffeeab;
-    --line: #d8d6cd;
-    --display: Georgia, "Times New Roman", serif;
-}
+
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
+:root { --gold: #ffeeab; }
+
 img { width: 100%; }
-h1 { font-size: clamp(3.3rem,6.5vw,6.4rem); }
-h2 { font-size: clamp(2.3rem,4vw,3.8rem); }
-h3 { font-size: 1.7rem; }
 .skip:focus { top: 0; }
-body {
-    margin: 0;
-    background: var(--cream);
-    color: var(--ink);
-    line-height: 1.65;
-    font-family: var(--display);
-}
 h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; letter-spacing: 0; }
 .skip { position: fixed; top: -80px; background: white; padding: 12px; z-index: 20; color: #2e2444; }
 .landing-page {
@@ -27,10 +14,10 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     color: #fff;
     font-family: var(--display);
     font-weight: 700;
+    line-height: 1.65;
     overflow-x: clip;
 }
-.landing-page p { color: inherit; }
-.landing-page .destinations { width: 87%; max-width: none; padding: 8vw 0; }
+.landing-page .destinations { width: 87%; margin: auto; padding: 8vw 0; }
 .landing-page #main { overflow: clip; }
 .landing-world {
     background: url("../image/hero-background.png") center top / 100% 100% no-repeat;
@@ -55,8 +42,9 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     text-shadow: 0 3px 8px #0006;
 }
 .discovery-copy h1 { font-size: 7.4vw; line-height: .79; letter-spacing: -.12vw; }
-.discovery-copy h1 span { color: #ffe8a0; }
-.discovery-copy p { width: 94%; margin: 1.8vw .2vw 1.65vw; font-size: 1.9vw; line-height: .94; }
+.discovery-copy h1 span { color: var(--gold); }
+.hero-line-break { display: none; }
+.discovery-copy p { font-family: var(--body-copy); font-weight: 500; width: 94%; margin: 1.8vw .2vw 1.65vw; font-size: 1.9vw; line-height: .94; }
 .journey-button {
     display: inline-flex;
     align-items: center;
@@ -74,14 +62,9 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
 .journey-button:hover { background: #fff0bf; }
 .companion { position: absolute; width: 43vw; right: -.9vw; top: -5.1vw; pointer-events: none; }
 .companion img { width: 100%; height: auto; }
-.eyebrow { font-size: 10px; font-weight: 700; display: block; margin-bottom: 22px; }
-.section { padding: 90px 0; }
-.section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; }
-.section-head .eyebrow { margin-bottom: 14px; }
-.wrap { margin: auto; width: 86.46%; max-width: 1660px; }
-.section-head .eyebrow, .eyebrow { color: #796942; }
 .landing-page .section-head { margin-bottom: 1.6vw; }
 .landing-page .eyebrow {
+    display: block;
     color: #fff;
     font: bold 1.75vw/1.1 var(--display);
     letter-spacing: 0;
@@ -107,7 +90,7 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     backdrop-filter: blur(6px);
     box-shadow: 0 4px 5px #0003;
 }
-.story-panel p { font-size: 1.85vw; line-height: .97; }
+.story-panel p { font: 500 1.85vw/.987 var(--body-copy); }
 .story-panel:last-child { margin-bottom: 0; }
 .story-scenery {
     position: absolute;
@@ -160,6 +143,7 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     font-size: 1.25vw;
     line-height: 1.1;
 }
+.guild-founder figcaption span { font-family: var(--body-copy); font-weight: 500; }
 .guild-founder strong { display: block; font-size: 1.875vw; margin-bottom: .5vw; }
 .founder-signature {
     position: absolute;
@@ -169,18 +153,10 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     left: 10%;
     bottom: 1vw;
 }
-.faq-grid { grid-template-columns: .8fr 1.2fr; gap: 90px; }
-.faq-item { border-bottom: 1px solid var(--line); }
-.faq-item h3 { margin: 0; }
-.faq-item p { font-size: 13px; padding: 15px 25px 0 0; }
-.faq{ font-family: var(--font-body); }
 .landing-page #travel-notes {
-    width: 100%;
-    max-width: none;
     padding: 2.7vw 6.7vw 9.5vw;
     background: #172b4670;
 }
-.landing-page .faq-grid { display: block; }
 .landing-page .faq-intro h2 { font-size: 4.3vw; line-height: 1.05; margin: 0 0 3vw; }
 .landing-page .faq {
     display: flex;
@@ -188,9 +164,8 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     justify-content: center;
     align-items: flex-start;
     gap: 3vw 2.3vw;
-    border: 0;
 }
-.landing-page .faq-item { width: calc((100% - 4.6vw) / 3); text-align: center; padding: 0; border: 0; }
+.landing-page .faq-item { width: calc((100% - 4.6vw) / 3); text-align: center; }
 .landing-page .faq-item h3 {
     display: flex;
     align-items: center;
@@ -199,13 +174,11 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     padding: .7vw 2vw;
     border-radius: 1.8vw;
     background: #cbc4b875;
-    font-family: var(--display);
-    font-weight: 700;
     font-size: 1.85vw;
     line-height: .9;
     margin-bottom: 1vw;
 }
-.landing-page .faq-item p { font: bold 1.18vw/1 var(--display); padding-right: 0; }
+.landing-page .faq-item p { font: 500 1.18vw/1.124 var(--body-copy); padding-top: 15px; }
 .reference-footer {
     display: flex;
     justify-content: center;
@@ -242,7 +215,8 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
     transition: transform 180ms ease, box-shadow 180ms ease;
 }
 .card-art { position: relative; width: 21.875vw; max-width: 100%; aspect-ratio: 420 / 232; overflow: hidden; border-radius: 1.1458vw; }
-.card-art img { position: absolute; max-width: none; width: var(--image-width, 100%); height: var(--image-height, 100%); left: var(--image-left, 0); top: var(--image-top, 0); object-fit: cover; }
+.card-art img { position: absolute; max-width: none; width: var(--image-width, 100%); height: var(--image-height, 100%); left: var(--image-left, 0); top: var(--image-top, 0); }
+#inazuma .card-art img { object-fit: cover; }
 .card-info { position: relative; padding: .625vw .26vw 0; }
 .card-info > div { min-width: 0; padding-right: 2.1vw; }
 .card h3 { font-size: 1.6667vw; line-height: .987; letter-spacing: -.0333vw; }
@@ -263,8 +237,8 @@ h1, h2, h3 { line-height: 1.15; font-family: var(--display); font-weight: 700; l
 .card-note { position: relative; grid-column: span 2; padding: 2.96875vw 1.3542vw 1vw; border-radius: 1.823vw; background: #a69f8966; backdrop-filter: blur(6px); }
 .card-note .eyebrow { font-size: 1.3vw; }
 .card-note h3 { margin: .6vw 0 .8vw; font-size: 2.5vw; line-height: .96; }
-.card-note p { max-width: 31vw; font-size: 1.25vw; line-height: 1; }
-.card-note .text-link { position: absolute; right: 1.93vw; bottom: 1.77vw; padding: .65vw 1.5vw; border-radius: 2vw; background: #e2dfbf80; font-size: .8333vw; }
+.card-note p { max-width: 31vw; font: 500 1.25vw/1.051 var(--body-copy); }
+.card-note .text-link { position: absolute; right: 1.93vw; bottom: 1.77vw; padding: .65vw 1.5vw; border-radius: 2vw; background: #e2dfbf80; font: 500 1.04167vw/.99 var(--body-copy); }
 .card:focus-visible { outline: 3px solid #ffe8a0; outline-offset: 5px; }
 @media (hover: hover) {
     .card:hover { transform: translateY(-8px) scale(1.015); box-shadow: 0 12px 22px #0005, inset 0 0 0 2px #ffe8a0b3; }

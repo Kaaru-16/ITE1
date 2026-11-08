@@ -11,7 +11,6 @@
     </head>
     <body class="landing-page">
         <a class="skip" href="#main">Skip to content</a>
-        <!-- Navigation -->
         <header class="site-header">
             <div aria-hidden="true" class="nav-atmosphere"> <img alt="" src="image/nav-shade.png"/> </div>
             <nav aria-label="Main navigation" class="guild-nav">
@@ -24,26 +23,21 @@
                 <a href="company.html#travel-notes">FAQs</a>
             </nav>
         </header>
-        <!-- Hero, destinations, story and FAQs -->
         <main id="main">
             <div class="landing-world">
-                <!-- Hero section -->
-                <section aria-label="Discover Teyvat" class="discovery-hero">
+                <section class="discovery-hero" aria-labelledby="hero-title">
                     <div class="discovery-copy">
-                        <h1>Discover the<br/>Wonders of<br/><span>Teyvat</span></h1>
-                        <p>Premium, bespoke travel experiences across the seven nations. Let us curate your ultimate continental journey!</p>
+                        <h1 id="hero-title">Discover the<br/>Wonders of<br/><span>Teyvat</span></h1>
+                        <p>Premium, bespoke travel experiences across<br class="hero-line-break"/> the seven nations. Let us curate your ultimate continental journey!</p>
                         <a class="journey-button" href="#destinations">Begin Your Journey</a>
                     </div>
                     <div class="companion"> <img alt="Paimon welcoming travelers to Teyvat" height="1138" src="image/paimon.png" width="1000"/> </div>
                 </section>
-                <!-- Destinations section -->
-                <section class="section wrap destinations">
-                    <div class="section-head" id="destinations">
-                        <div>
-                            <span class="eyebrow">Find your somewhere</span>
-                            <h2>One world, Seven stories.</h2>
-                        </div>
-                    </div>
+                <section class="destinations" aria-labelledby="destinations-title">
+                    <header class="section-head" id="destinations">
+                        <span class="eyebrow">Find your somewhere</span>
+                        <h2 id="destinations-title">One world, Seven stories.</h2>
+                    </header>
                     <div class="cards">
                         <a class="card" href="mondstadt.html" id="mondstadt">
                             <span class="choice-badge"><img alt="" src="image/home-imgImage4.png"/><span>Travellers’<br/>Choice</span></span>
@@ -128,13 +122,12 @@
             </div>
             <div class="story-world">
                 <div aria-hidden="true" class="story-scenery"> <img alt="" src="image/home-img110436882.png"/> </div>
-                <!-- Guild story -->
-                <section class="guild-story" id="our-story">
+                <section class="guild-story" id="our-story" aria-labelledby="story-title">
                     <figure class="guild-founder">
                         <div class="founder-art"> <img alt="Illustrated founder of Teyvat Travel Services" src="image/guild-founder.png"/> </div>
                         <figcaption> <img alt="" aria-hidden="true" class="founder-signature" src="image/founder-signature.png"/> <strong>Kirk Anbasdelasma</strong> <span>Teyvat Travel Services&rsquo;<br/>Director of Operations</span> </figcaption>
                     </figure>
-                    <h2>Our Guild and Story</h2>
+                    <h2 id="story-title">Our Guild and Story</h2>
                     <div class="story-panel">
                         <p>Welcome to <span class="story-accent">Teyvat Travel Services</span>, your premier gateway to the unparalleled wonders of the seven nations. Teyvat Travel Services is the premier luxury travel guild. We specialize in transforming perilous continental routes into comfortable, unforgettable bespoke vacations.</p>
                     </div>
@@ -142,35 +135,32 @@
                         <p>Established on September 11, 2026, Teyvat Travel Services was founded by sole proprietor and former traveler Kirk Anbasdelasma. Drawing upon our founder's extensive knowledge of Teyvat's diverse terrain, cultural nuances, and hidden routes, we specialize in curating safe, luxurious, and deeply immersive itineraries. From securing complex cross-border permits to arranging secure caravan escorts through the Sumeru deserts, we handle every detail so you can focus on the adventure.</p>
                     </div>
                 </section>
-                <!-- Travel notes section -->
-                <section class="section wrap" id="travel-notes">
-                    <div class="faq-grid">
-                        <div class="faq-intro">
-                            <span class="eyebrow">A little preparation goes long way</span>
-                            <h2>FREQUENTLY ASKED QUESTIONS</h2>
-                        </div>
-                        <div class="faq">
-                            <div class="faq-item">
-                                <h3>How do I choose my destination?</h3>
-                                <p>Browse the seven regional pages and compare their highlights, pace, and sample itineraries. Each package page shows its proposed duration, stops, and sample price.</p>
-                            </div>
-                            <div class="faq-item">
-                                <h3>How much is a trip for a group of four?</h3>
-                                <p>A quotation depends on your destination, preferred dates, accommodation, and group needs. The reference catalog lists sample per-person rates; final arrangements require confirmation from the Director.</p>
-                            </div>
-                            <div class="faq-item">
-                                <h3>Can I check available dates or book online?</h3>
-                                <p>This website presents travel information only. It does not check live availability, accept bookings, or process payments. Dates must be confirmed with the Director.</p>
-                            </div>
-                            <div class="faq-item">
-                                <h3>What is included in a package?</h3>
-                                <p>Each regional page lists proposed inclusions and exclusions. Review these before planning your trip; final arrangements must be confirmed before any booking.</p>
-                            </div>
-                            <div class="faq-item">
-                                <h3>Are these real travel offers?</h3>
-                                <p>These are fictional packages created for an educational website project. Mondstadt uses the sample design’s game scenery; the other regional illustrations remain draft placeholders. All offers and prices are illustrative.</p>
-                            </div>
-                        </div>
+                <section id="travel-notes" aria-labelledby="faq-title">
+                    <header class="faq-intro">
+                        <span class="eyebrow">A little preparation goes long way</span>
+                        <h2 id="faq-title">FREQUENTLY ASKED QUESTIONS</h2>
+                    </header>
+                    <div class="faq">
+                        <article class="faq-item">
+                            <h3>How do I choose my destination?</h3>
+                            <p>Browse the seven regional pages and compare their highlights, pace, and sample itineraries. Each package page shows its proposed duration, stops, and sample price.</p>
+                        </article>
+                        <article class="faq-item">
+                            <h3>How much is a trip for a group of four?</h3>
+                            <p>A quotation depends on your destination, preferred dates, accommodation, and group needs. The reference catalog lists sample per-person rates; final arrangements require confirmation from the Director.</p>
+                        </article>
+                        <article class="faq-item">
+                            <h3>Can I check available dates or book online?</h3>
+                            <p>Open any nation page to preview a booking inquiry. Contact the Director to confirm dates, availability, and prices.</p>
+                        </article>
+                        <article class="faq-item">
+                            <h3>What is included in a package?</h3>
+                            <p>Each regional page lists proposed inclusions and exclusions. Review these before planning your trip; final arrangements must be confirmed before any booking.</p>
+                        </article>
+                        <article class="faq-item">
+                            <h3>Are these real travel offers?</h3>
+                            <p>These are fictional packages created for an educational website project. Mondstadt uses the sample design’s game scenery; the other regional illustrations remain draft placeholders. All offers and prices are illustrative.</p>
+                        </article>
                     </div>
                 </section>
             </div>

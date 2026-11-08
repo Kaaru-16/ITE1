@@ -14,20 +14,22 @@
     .reference-footer > p { position: absolute; left: 65.4167%; top: 6.71875vw; }
 }
 @media (max-width: 1100px) {
+    .nation-world { min-height: 0; }
     .destination-scene { height: auto; padding: 150px 7% 55px; }
     /* Fit the hero artwork. */
-    .scene-art { height: 100%; }
+    .scene-art { height: 100%; transform: none; object-position: center; }
     .scene-art img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
     /* Resize the hero introduction. */
     .scene-copy { width: auto; padding: 0; margin: 0; }
     .scene-copy h1 { font-size: clamp(42px, 10vw, 78px); line-height: 1.1; }
     .scene-subtitle { font-size: 25px; margin-top: 12px; }
-    .scene-description { width: 100%; margin-top: 22px; font-size: 17px; line-height: 1.35; }
+    .nation-emblem { width: 1.055em; height: 1.055em; }
+    .scene-description { position: static; width: 100%; margin-top: 22px; font-size: 17px; line-height: 1.35; }
     /* Place price and stops in normal flow. */
     .scene-pricing, .scene-stops { position: relative; inset: auto; }
     .scene-pricing { margin-top: 120px; }
-    .scene-pricing h3, .scene-stops h3 { font-size: 28px; }
-    .price-value { width: 230px; min-height: 62px; margin-top: 10px; border-radius: 32px; font-size: 30px; }
+    .scene-pricing h2, .scene-stops h2 { font-size: 28px; }
+    .price-value { width: 230px; height: auto; min-height: 62px; margin-top: 10px; border-radius: 32px; font-size: 30px; }
     .scene-pricing small { width: 230px; font-size: 14px; margin-top: 8px; }
     .scene-stops { margin-top: 30px; }
     .stops-value {
@@ -41,12 +43,7 @@
     }
     /* Fit the button below the stops. */
     .booking-button {
-        position: relative;
-        inset: auto;
-        width: fit-content;
-        max-width: 100%;
         min-height: 58px;
-        margin-top: 28px;
         padding: 16px 24px;
         gap: 16px;
         font-size: 23px;
@@ -70,7 +67,7 @@
     .journey-day p, .package-note { font-size: 15px; line-height: 1.45; }
     .package-note { margin-top: 22px; }
     /* Adjust panel spacing. */
-    .package-inclusions { padding: 26px; border-radius: 22px; }
+    .package-inclusions { min-height: 0; padding: 26px; border-radius: 22px; }
     .package-inclusions ul { margin: 18px 0; padding: 0 0 20px 22px; font-size: 18px; line-height: 1.4; }
     /* Wrap footer content. */
     .reference-footer { flex-wrap: wrap; padding: 35px 7%; gap: 25px; font-size: 12px; }
@@ -90,14 +87,4 @@
 /* Respect reduced-motion preferences. */
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-}
-/* Let text wrap without moving the button over the stops. */
-@media (max-width: 1100px) {
-    .nation-world { min-height: 0; }
-    .scene-description { position: static; }
-    .scene-art { transform: none; object-position: center; }
-    .nation-emblem { width: 1.055em; height: 1.055em; }
-    .price-value { height: auto; }
-    .booking-button img { width: 24px; height: 24px; }
-    .package-inclusions { min-height: 0; }
 }

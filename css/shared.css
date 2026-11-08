@@ -1,4 +1,11 @@
-/* Shared typeface, navigation and footer. */
+/* Shared typefaces, navigation and footer. */
+:root { --body-copy: "Inter Tight", Arial, sans-serif; }
+@font-face {
+    font-family: "Inter Tight";
+    src: url("../font/inter-tight.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+}
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: clamp(90px, 9vw, 180px); }

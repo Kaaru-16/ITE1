@@ -78,7 +78,7 @@ figure { margin: 0; }
 }
 /* Price and featured stops. */
 .scene-pricing { position: absolute; top: 33.90625vw; left: 6.8229%; }
-.scene-pricing h3, .scene-stops h3 { font-size: 1.875vw; line-height: 1.08; }
+.scene-pricing h2, .scene-stops h2 { font-size: 1.875vw; line-height: 1.08; }
 .price-value {
     display: grid;
     place-items: center;
@@ -102,12 +102,9 @@ figure { margin: 0; }
     font-size: 1.18vw;
     line-height: 1.05;
 }
-/* Same-page package link. */
+/* Package actions. */
 .booking-button {
-    position: absolute;
-    top: 41.6146vw;
-    left: var(--button-left, 57.8646%);
-    width: 32.5521vw;
+    width: 100%;
     min-height: 6.0417vw;
     display: flex;
     align-items: center;
@@ -115,6 +112,11 @@ figure { margin: 0; }
     gap: 1.4vw;
     text-align: center;
     padding: 1vw 1.8vw;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: inherit;
+    text-shadow: 0 2px 5px #0007;
     border: 2px solid #eec966;
     border-radius: 5.3646vw;
     background: #ffe79c75;
@@ -123,7 +125,8 @@ figure { margin: 0; }
     letter-spacing: -.04167vw;
     line-height: 1.1;
 }
-.booking-button img { width: 1.875vw; height: 1.875vw; object-fit: contain; filter: brightness(0) invert(1); }
+.booking-button[hidden] { display: none; }
+.booking-button img { width: auto; height: auto; max-width: clamp(22px, 1.845vw, 35.425px); }
 .booking-button:hover, .booking-button:focus-visible { background: #fff3cda6; }
 /* Gallery frames and reference crops. */
 .journey-gallery h2 {
@@ -201,3 +204,11 @@ figure { margin: 0; }
     line-height: var(--list-line);
 }
 .package-inclusions .package-note { margin-top: 1vw; }
+:is(.mondstadt-page, .liyue-page) :is(.scene-description, .scene-pricing small, .journey-day p, .package-note, .package-inclusions ul) {
+    font-family: var(--body-copy);
+    font-weight: 500;
+}
+@media (min-width: 1101px) {
+    :is(.mondstadt-page, .liyue-page) .scene-stops { padding-top: 0; }
+    :is(.mondstadt-page, .liyue-page) :is(.journey-day p, .package-note) { font-size: 1.04167vw; }
+}
