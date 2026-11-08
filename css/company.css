@@ -1,7 +1,5 @@
 @import url("shared.css");
 
-html { scrollbar-width: none; }
-html::-webkit-scrollbar { display: none; }
 :root { --gold: #ffeeab; }
 
 img { width: 100%; }

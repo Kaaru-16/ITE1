@@ -186,7 +186,6 @@ html:has(.inquiry-dialog[open]) { overflow: hidden; }
     min-width: max(100%, 5rem);
     max-height: 12rem;
     overflow-y: auto;
-    scrollbar-width: none;
     overscroll-behavior: contain;
     margin: 0;
     padding: 4px;
@@ -196,7 +195,6 @@ html:has(.inquiry-dialog[open]) { overflow: hidden; }
     background: #303233;
     box-shadow: 0 4px 12px #0006;
 }
-.inquiry-code-list::-webkit-scrollbar { display: none; }
 .inquiry-code-list.opens-above {
     top: auto;
     bottom: calc(100% + 6px);

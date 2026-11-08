@@ -6,7 +6,8 @@
     font-weight: 500;
     font-display: swap;
 }
-* { box-sizing: border-box; }
+* { box-sizing: border-box; scrollbar-width: none; }
+::-webkit-scrollbar { display: none; }
 html, body { margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-padding-top: clamp(90px, 9vw, 180px); }
 a { color: inherit; text-decoration: none; }
