@@ -180,6 +180,7 @@
         if (!dialog.open) dialog.showModal();
         dialog.scrollTop = 0;
         (focusTarget || heading).focus({ preventScroll: true });
+        panel.dispatchEvent(new Event("ui:open", { bubbles: true }));
     }
 
     function updateDateMinimum() {
@@ -222,6 +223,7 @@
     }
 
     function showPhoneCodes(query) {
+        const wasOpen = !phoneCodeList.hidden;
         const digits = query.replace(/^\+/, "");
         const matches = callingCodes.filter(code => String(code).startsWith(digits));
         const entries = matches.map(code => {
@@ -239,6 +241,7 @@
         phoneCodeList.scrollTop = 0;
         phoneCode.setAttribute("aria-expanded", "true");
         positionPhoneCodes();
+        if (!wasOpen && !phoneCodeList.hidden) phoneCodeList.dispatchEvent(new Event("ui:open", { bubbles: true }));
     }
 
     function choosePhoneCode(option) {

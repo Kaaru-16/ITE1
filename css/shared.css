@@ -119,3 +119,11 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
 }
 .reference-footer img { width: 9.7917vw; height: auto; }
 .footer-policies { display: grid; gap: 1vw; border-left: 1px solid #fff8; padding: 2vw 0 2vw 6.5vw; }
+
+@media (prefers-reduced-motion: no-preference) {
+    :where(button, a[href], summary) {
+        transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+
+    .nation-menu summary img { transition: transform 180ms ease; }
+}
