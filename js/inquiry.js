@@ -352,21 +352,104 @@
         phone.setSelectionRange(caret, caret);
     });
     date.addEventListener("focus", updateDateMinimum);
-    form.addEventListener("submit", event => {
-        event.preventDefault();
-        phoneCode.required = phone.value !== "";
-        if (!phoneCode.reportValidity()) return;
-        formatPhoneCode();
-        updateDateMinimum();
-        if (!date.reportValidity()) return;
-        const group = updateEstimate();
-        const dateLabel = date.valueAsDate.toLocaleDateString("en-PH", {
-            dateStyle: "long",
-            timeZone: "UTC",
-        });
-        dialog.querySelector("[data-review-details]").textContent = group + " · " + dateLabel + " pending review";
+    
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    phoneCode.required = phone.value !== "";
+
+    if (!phoneCode.reportValidity()) return;
+
+    formatPhoneCode();
+    updateDateMinimum();
+
+    if (!date.reportValidity()) return;
+
+    const group = updateEstimate();
+
+    const formData = {
+        traveler: form.elements.traveler.value.trim(),
+        email: form.elements.email.value.trim(),
+
+        phone: phone.value
+            ? phoneCode.value + phone.value
+            : "",
+
+        package: selected,
+        date: date.value,
+        travelers: count.value,
+        requests: form.elements.requests.value.trim()
+    };
+
+    const submitButton = form.querySelector(
+        'button[type="submit"]'
+    );
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting...";
+
+    try {
+        const response = await fetch(
+            "api/submit-inquiry.php",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            }
+        );
+
+        const responseText = await response.text();
+        let result;
+
+        try {
+            result = JSON.parse(responseText);
+        } catch {
+            if (responseText.trimStart().startsWith("<")) {
+                throw new Error(
+                    "The inquiry API returned PHP or HTML instead of JSON. Open the site through XAMPP Apache at http://localhost/teyvat-travel/mondstadt.html, not VS Code Live Server."
+                );
+            }
+            throw new Error("The server returned an invalid response. Check the Apache PHP error log.");
+        }
+
+        if (!response.ok || !result.success) {
+            throw new Error(
+                result.message || "Unable to submit inquiry."
+            );
+        }
+
+        const dateLabel = date.valueAsDate.toLocaleDateString(
+            "en-PH",
+            {
+                dateStyle: "long",
+                timeZone: "UTC"
+            }
+        );
+
+        dialog.querySelector(
+            "[data-review-details]"
+        ).textContent =
+            group + " · " + dateLabel + " pending review";
+
+        // Display the successful submission confirmation
         showPanel("received");
-    });
+
+        console.log("Saved inquiry ID:", result.id);
+
+    } catch (error) {
+
+        alert(error.message);
+
+    } finally {
+
+        submitButton.disabled = false;
+        submitButton.textContent = "Submit Inquiry";
+
+    }
+});
+
 
     document.body.append(dialog);
     trigger.hidden = false;
