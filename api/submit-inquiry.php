@@ -18,15 +18,15 @@ if (!is_array($data)) {
     exit;
 }
 
-// Available packages and their official prices
+// Package mapping
 $packages = [
-    "mondstadt" => ["name" => "Mondstadt", "rate" => 12500],
-    "liyue" => ["name" => "Liyue", "rate" => 15000],
-    "inazuma" => ["name" => "Inazuma", "rate" => 18000],
-    "sumeru" => ["name" => "Sumeru", "rate" => 14000],
-    "fontaine" => ["name" => "Fontaine", "rate" => 20000],
-    "natlan" => ["name" => "Natlan", "rate" => 14800],
-    "snezhnaya" => ["name" => "Snezhnaya", "rate" => 22000]
+    "mondstadt" => "Mondstadt",
+    "liyue" => "Liyue",
+    "inazuma" => "Inazuma",
+    "sumeru" => "Sumeru",
+    "fontaine" => "Fontaine",
+    "natlan" => "Natlan",
+    "snezhnaya" => "Snezhnaya"
 ];
 
 $name = trim($data["traveler"] ?? "");
@@ -76,67 +76,70 @@ if (
     exit;
 }
 
-$package = $packages[$packageKey];
-$rate = $package["rate"];
-$total = $rate * $travelers;
-
-if (!is_int($total) || $total > PHP_INT_MAX) {
-    http_response_code(422);
-    echo json_encode([
-        "success" => false,
-        "message" => "Invalid booking total."
-    ]);
-    exit;
-}
-
 try {
+    $packageStmt = $pdo->prepare(
+        "SELECT package_id FROM packages WHERE package_name = :package_name"
+    );
+    $packageStmt->execute([":package_name" => $packages[$packageKey]]);
+    $packageId = $packageStmt->fetchColumn();
 
-    $sql = "INSERT INTO booking_inquiries (
-        traveler_name,
-        email,
-        phone,
-        package_key,
-        package_name,
-        travel_date,
-        traveler_count,
-        rate_per_person,
-        estimated_total,
-        special_requests
-    ) VALUES (
-        :traveler_name,
-        :email,
-        :phone,
-        :package_key,
-        :package_name,
-        :travel_date,
-        :traveler_count,
-        :rate_per_person,
-        :estimated_total,
-        :special_requests
-    )";
+    if ($packageId === false) {
+        throw new PDOException("Package is missing from the database: " . $packages[$packageKey]);
+    }
 
-    $stmt = $pdo->prepare($sql);
+    $pdo->beginTransaction();
 
-    $stmt->execute([
-        ":traveler_name" => $name,
-        ":email" => $email,
-        ":phone" => $phone ?: null,
-        ":package_key" => $packageKey,
-        ":package_name" => $package["name"],
-        ":travel_date" => $travelDate,
-        ":traveler_count" => $travelers,
-        ":rate_per_person" => $rate,
-        ":estimated_total" => $total,
-        ":special_requests" => $requests ?: null
+    $customerStmt = $pdo->prepare(
+        "INSERT INTO customer_data (customer_name, customer_email, customer_cell)
+        VALUES (:customer_name, :customer_email, :customer_cell)"
+    );
+    $customerStmt->execute([
+        ":customer_name" => $name,
+        ":customer_email" => $email,
+        ":customer_cell" => $phone ?: null
     ]);
+    $customerId = $pdo->lastInsertId();
+
+    $orderStmt = $pdo->prepare(
+        "INSERT INTO order_details (
+            customer_id,
+            package_id,
+            pax_number,
+            travel_date,
+            order_status,
+            order_req
+        ) VALUES (
+            :customer_id,
+            :package_id,
+            :pax_number,
+            :travel_date,
+            :order_status,
+            :order_req
+        )"
+    );
+    $orderStmt->execute([
+        ":customer_id" => $customerId,
+        ":package_id" => $packageId,
+        ":pax_number" => $travelers,
+        ":travel_date" => $travelDate,
+        ":order_status" => "Pending",
+        ":order_req" => $requests ?: null
+    ]);
+
+    $orderId = $pdo->lastInsertId();
+    $pdo->commit();
 
     echo json_encode([
         "success" => true,
         "message" => "Your booking inquiry has been saved!",
-        "id" => $pdo->lastInsertId()
+        "id" => $orderId
     ]);
 
 } catch (PDOException $e) {
+
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
 
     error_log($e->getMessage());
 
