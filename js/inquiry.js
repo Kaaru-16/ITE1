@@ -11,22 +11,39 @@
     };
     if (!trigger || !window.HTMLDialogElement) return;
 
-    // Geographic calling codes from Google's libphonenumber PhoneNumberMetadata.xml.
-    const callingCodes = [
-        1, 7, 20, 27, 30, 31, 32, 33, 34, 36, 39, 40, 41, 43, 44, 45,
-        46, 47, 48, 49, 51, 52, 53, 54, 55, 56, 57, 58, 60, 61, 62, 63,
-        64, 65, 66, 81, 82, 84, 86, 90, 91, 92, 93, 94, 95, 98, 211, 212,
-        213, 216, 218, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232,
-        233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248,
-        249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 260, 261, 262, 263, 264, 265,
-        266, 267, 268, 269, 290, 291, 297, 298, 299, 350, 351, 352, 353, 354, 355, 356,
-        357, 358, 359, 370, 371, 372, 373, 374, 375, 376, 377, 378, 380, 381, 382, 383,
-        385, 386, 387, 389, 420, 421, 423, 500, 501, 502, 503, 504, 505, 506, 507, 508,
-        509, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 670, 672, 673, 674, 675,
-        676, 677, 678, 679, 680, 681, 682, 683, 685, 686, 687, 688, 689, 690, 691, 692,
-        850, 852, 853, 855, 856, 880, 886, 960, 961, 962, 963, 964, 965, 966, 967, 968,
-        970, 971, 972, 973, 974, 975, 976, 977, 992, 993, 994, 995, 996, 998,
-    ];
+    const page = new URL(window.location.href);
+    const apiUrl = new URL("api/submit-inquiry.php", page);
+    const isFilePreview = page.protocol === "file:";
+    // For a public static deployment, set this to the PHP site's HTTPS directory URL with a trailing slash.
+    const hostedBookingSite = "";
+    const bookingPage = getBookingPage();
+
+    function getBookingPage() {
+        const documentRoot = "/xampp/htdocs/";
+        const rootIndex = page.pathname.toLowerCase().indexOf(documentRoot);
+        const filename = page.pathname.split("/").pop();
+        if (isFilePreview && rootIndex !== -1) {
+            const apachePage = new URL("http://localhost/");
+            apachePage.pathname = page.pathname.slice(rootIndex + documentRoot.length - 1);
+            return apachePage;
+        }
+        if (["localhost", "127.0.0.1", "[::1]"].includes(page.hostname)) {
+            return new URL(filename, "http://localhost/ITelect/ITE1/");
+        }
+        return hostedBookingSite ? new URL(filename, hostedBookingSite) : null;
+    }
+
+    const phoneLengthList = new Intl.ListFormat("en", { type: "disjunction" });
+    const emailDomainSuggestions = new Map([
+        ["gmal.com", "gmail.com"],
+        ["gmaol.com", "gmail.com"],
+        ["gmial.com", "gmail.com"],
+        ["gmai.com", "gmail.com"],
+        ["gmail.con", "gmail.com"],
+        ["hotmial.com", "hotmail.com"],
+        ["outlok.com", "outlook.com"],
+        ["yaho.com", "yahoo.com"],
+    ]);
     const money = new Intl.NumberFormat("en-PH");
     const price = amount => "PHP " + money.format(amount);
     const duration = pkg => pkg.days + " Days / " + pkg.nights + " Nights";
@@ -34,13 +51,16 @@
     dialog.className = "inquiry-dialog";
     dialog.id = "booking-inquiry";
     dialog.innerHTML = `
-        <form class="inquiry-panel" data-panel="form">
+        <form class="inquiry-panel" data-panel="form" novalidate>
             <button type="button" class="inquiry-close" data-close aria-label="Close inquiry">
                 <img src="image/inquiry-close.svg" alt="">
             </button>
             <header class="inquiry-header">
                 <h2 id="inquiry-title" tabindex="-1"></h2>
                 <p>Share your plans and review a sample quote for your group.</p>
+                <div class="inquiry-feedback" data-file-notice hidden>
+                    <p>To send an inquiry, open this site through a PHP server such as XAMPP Apache.</p>
+                </div>
             </header>
             <section class="inquiry-summary" aria-label="Selected package and estimate">
                 <div class="inquiry-summary-row">
@@ -63,14 +83,19 @@
                 <p class="inquiry-hint">Sample estimate only. The Director confirms the final quote for actual inquiries.</p>
             </section>
             <div class="inquiry-fields">
-                <label>Lead Traveler Name *
-                    <input name="traveler" autocomplete="name" placeholder="Enter full name" required>
-                </label>
-                <label>Email Address *
-                    <input name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
-                </label>
                 <div class="inquiry-field">
-                    <label for="inquiry-phone">Phone Number</label>
+                    <label for="inquiry-traveler">Lead Traveler Name *</label>
+                    <input id="inquiry-traveler" name="traveler" autocomplete="name" placeholder="Enter full name" required>
+                </div>
+                <div class="inquiry-field">
+                    <label for="inquiry-email">Email Address *</label>
+                    <input id="inquiry-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+                    <p class="inquiry-hint" data-email-suggestion hidden>
+                        Did you mean <button class="inquiry-email-correction" type="button"></button>?
+                    </p>
+                </div>
+                <div class="inquiry-field">
+                    <label for="inquiry-phone">Mobile Number</label>
                     <div class="inquiry-phone-controls">
                         <div class="inquiry-code-picker">
                             <input name="phoneCode" type="text" inputmode="numeric" value="+63" role="combobox"
@@ -80,23 +105,29 @@
                             <button type="button" class="inquiry-code-toggle" tabindex="-1" aria-label="Toggle dialing codes"></button>
                             <ul id="inquiry-calling-codes" class="inquiry-code-list" role="listbox" aria-label="Dialing codes" hidden></ul>
                         </div>
-                        <input id="inquiry-phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9]+" autocomplete="tel-national" placeholder="Phone number">
+                        <input id="inquiry-phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9 ]+" autocomplete="tel-national" placeholder="Mobile number" aria-describedby="inquiry-phone-hint">
                     </div>
+                    <p class="inquiry-hint" id="inquiry-phone-hint" hidden></p>
                 </div>
                 <div class="inquiry-field">
                     <label for="inquiry-date">Preferred Travel Date *</label>
                     <input id="inquiry-date" name="date" type="date" aria-describedby="inquiry-date-hint" required>
                     <p class="inquiry-hint" id="inquiry-date-hint">Choose today or a later date. Availability requires confirmation.</p>
                 </div>
-                <label>Number of Travelers *
-                    <input name="travelers" type="number" min="1" step="1" required>
-                </label>
-                <label>Special requests (optional)
-                    <textarea name="requests" rows="1" placeholder="Dietary needs, accessibility..."></textarea>
-                </label>
+                <div class="inquiry-field">
+                    <label for="inquiry-travelers">Number of Travelers *</label>
+                    <input id="inquiry-travelers" name="travelers" type="number" min="1" max="1000000" step="1" required>
+                </div>
+                <div class="inquiry-field">
+                    <label for="inquiry-requests">Special requests (optional)</label>
+                    <textarea id="inquiry-requests" name="requests" rows="1" placeholder="Dietary needs, accessibility..."></textarea>
+                </div>
             </div>
             <p class="inquiry-hint">* Required fields. We save your details so the travel team can review your inquiry.</p>
-            <button class="inquiry-primary" type="submit">Submit Inquiry</button>
+            <div class="inquiry-actions">
+                <p class="inquiry-feedback" role="alert" data-submit-error></p>
+                <button class="inquiry-primary" type="submit">Submit Inquiry</button>
+            </div>
         </form>
         <section class="inquiry-panel inquiry-picker" data-panel="packages" hidden>
             <h2 id="inquiry-packages-title" tabindex="-1">Choose your nation</h2>
@@ -134,13 +165,20 @@
     const panels = [...dialog.querySelectorAll("[data-panel]")];
     const count = form.elements.travelers;
     const date = form.elements.date;
+    const email = form.elements.email;
+    const emailSuggestion = form.querySelector("[data-email-suggestion]");
+    const emailCorrection = emailSuggestion.querySelector("button");
     const phone = form.elements.phone;
+    const phoneHint = form.querySelector("#inquiry-phone-hint");
     const phoneCode = form.elements.phoneCode;
     const phoneCodePicker = dialog.querySelector(".inquiry-code-picker");
     const phoneCodeToggle = dialog.querySelector(".inquiry-code-toggle");
     const phoneCodeList = dialog.querySelector(".inquiry-code-list");
     const changePackageButton = dialog.querySelector(".inquiry-change");
     const submitButton = form.querySelector('button[type="submit"]');
+    const submitError = form.querySelector("[data-submit-error]");
+    const fieldErrors = new Map();
+    const encoder = new TextEncoder();
     const receipt = dialog.querySelector('[data-panel="received"]');
     const review = receipt.querySelector(".inquiry-review");
     const reviewFields = Object.fromEntries(
@@ -149,8 +187,24 @@
     let selected = trigger.dataset.inquiryPackage;
     let submitting = false;
     let savedWhileClosed = false;
+    let checkingServer = false;
+    let phoneLengths = null;
+    let phoneRulesError = "Loading phone number rules. Try again in a moment.";
 
-    phoneCode.pattern = "\\+?(?:" + callingCodes.join("|") + ")";
+    if (isFilePreview) {
+        form.querySelector("[data-file-notice]").hidden = false;
+        submitButton.disabled = true;
+    }
+
+    for (const field of form.querySelectorAll(".inquiry-fields :is(input, textarea)")) {
+        const error = document.createElement("p");
+        error.id = "inquiry-error-" + field.name;
+        error.className = "inquiry-field-error";
+        const description = field.getAttribute("aria-describedby");
+        field.setAttribute("aria-describedby", description ? description + " " + error.id : error.id);
+        field.closest(".inquiry-field").append(error);
+        fieldErrors.set(field, error);
+    }
     for (const [id, pkg] of Object.entries(packages)) {
         const button = document.createElement("button");
         button.type = "button";
@@ -183,12 +237,12 @@
         packageOptions.querySelectorAll("button").forEach(button => {
             button.setAttribute("aria-pressed", String(button.dataset.package === id));
         });
-        count.max = Math.floor(Number.MAX_SAFE_INTEGER / pkg.rate);
         updateEstimate();
     }
 
     function showPanel(name, focusTarget) {
         closePhoneCodes();
+        if (name !== "form" && phone.hasAttribute("data-rejected-input")) validateField(phone);
         const panel = panels.find(element => element.dataset.panel === name);
         const heading = panel.querySelector("h2");
         panels.forEach(element => { element.hidden = element !== panel; });
@@ -206,6 +260,115 @@
         const month = String(today.getMonth() + 1).padStart(2, "0");
         const day = String(today.getDate()).padStart(2, "0");
         date.min = today.getFullYear() + "-" + month + "-" + day;
+    }
+
+    function showFieldError(field, message) {
+        delete field.dataset.rejectedInput;
+        if (message) field.setAttribute("aria-invalid", "true");
+        else field.removeAttribute("aria-invalid");
+        fieldErrors.get(field).textContent = message;
+        return !message;
+    }
+
+    function selectedCallingCode() {
+        return phoneCode.value.replace(/^\+/, "");
+    }
+
+    function selectedPhoneLengths() {
+        return phoneLengths?.[selectedCallingCode()];
+    }
+
+    function phoneDigits(value) {
+        return value.replace(/\D/g, "");
+    }
+
+    function formatPhoneInput() {
+        const digits = phoneDigits(phone.value);
+        let formatted = digits;
+        const AsYouType = window.libphonenumber?.AsYouType;
+        if (digits && AsYouType && selectedPhoneLengths()) {
+            const prefix = "+" + selectedCallingCode();
+            const international = new AsYouType().input(prefix + digits);
+            if (international.startsWith(prefix)) {
+                const national = international.slice(prefix.length).replace(/\D+/g, " ").trim();
+                if (phoneDigits(national) === digits) formatted = national;
+            }
+        }
+        if (formatted === phone.value) return;
+        let remaining = phoneDigits(phone.value.slice(0, phone.selectionStart)).length;
+        phone.value = formatted;
+        let caret = 0;
+        while (caret < formatted.length && remaining > 0) {
+            if (formatted[caret] !== " ") remaining--;
+            caret++;
+        }
+        phone.setSelectionRange(caret, caret);
+    }
+
+    function exceedsPhoneLimit(insertedDigits) {
+        const max = selectedPhoneLengths()?.at(-1);
+        const existing = phoneDigits(phone.value).length;
+        const selected = phoneDigits(phone.value.slice(phone.selectionStart, phone.selectionEnd)).length;
+        if (!max || existing - selected + insertedDigits <= max) return false;
+        showFieldError(phone, "Enter up to " + max + " digits.");
+        phone.dataset.rejectedInput = "";
+        return true;
+    }
+
+    function updatePhoneHint() {
+        const lengths = selectedPhoneLengths();
+        phoneHint.hidden = !lengths;
+        const code = selectedCallingCode();
+        phone.placeholder = code === "63" ? "9XX XXX XXXX" : "Mobile number";
+        formatPhoneInput();
+        if (!lengths) return;
+        const allowed = phoneLengthList.format(lengths.map(String));
+        phoneHint.textContent = lengths.length === 1
+            ? "Enter exactly " + allowed + " digits after +" + code + "."
+            : "Maximum " + lengths.at(-1) + " digits after +" + code + ". Allowed lengths are " + allowed + " digits.";
+        if (code === "63") phoneHint.textContent += " Omit the leading 0.";
+    }
+
+    function updateEmailSuggestion() {
+        const [name, domain] = email.value.trim().split("@");
+        const correction = email.validity.valid && emailDomainSuggestions.get(domain?.toLowerCase());
+        emailSuggestion.hidden = !correction;
+        emailCorrection.textContent = correction ? name + "@" + correction : "";
+    }
+
+    function validateField(field) {
+        const value = field.value.trim();
+        let message = "";
+        if (field.name === "traveler") {
+            if (!value) message = "Enter the lead traveler’s name.";
+            else if (/\p{N}/u.test(value)) message = "Enter a name without numbers.";
+            else if (encoder.encode(value).length > 120) message = "Enter a shorter name.";
+        } else if (field === phoneCode && !field.validity.valid) {
+            message = "Enter a supported dialing code, such as +63.";
+        } else if (field === phone && value) {
+            const lengths = selectedPhoneLengths();
+            const digits = phoneDigits(value);
+            if (!phoneLengths) message = phoneRulesError;
+            else if (selectedCallingCode() === "63" && digits.startsWith("0")) message = "Omit the leading 0 after +63.";
+            else if (lengths && !lengths.includes(digits.length)) message = "Check the number of digits for this calling code.";
+        } else if (field === date && field.validity.rangeUnderflow) {
+            message = "Choose today or a later date.";
+        } else if (field === email) {
+            const [name, domain] = value.split("@");
+            if (!value) message = "Enter your email address.";
+            else if (value.length > 254 || name.length > 64) message = "Enter a shorter email address.";
+            else if (field.validity.typeMismatch || !domain?.includes(".") ||
+                name.startsWith(".") || name.endsWith(".") || name.includes("..")) {
+                message = "Enter a complete email address, such as name@example.com.";
+            }
+        } else if (field.name === "requests" && encoder.encode(value).length > 65535) {
+            message = "Shorten your special requests.";
+        }
+        return showFieldError(field, message || field.validationMessage);
+    }
+
+    function focusInvalidField() {
+        form.querySelector('[aria-invalid="true"]')?.focus();
     }
 
     function resizePhoneCode() {
@@ -243,7 +406,7 @@
     function showPhoneCodes(query) {
         const wasOpen = !phoneCodeList.hidden;
         const digits = query.replace(/^\+/, "");
-        const matches = callingCodes.filter(code => String(code).startsWith(digits));
+        const matches = Object.keys(phoneLengths || {}).filter(code => code.startsWith(digits));
         const entries = matches.map(code => {
             const option = document.createElement("li");
             option.id = "inquiry-code-" + code;
@@ -268,6 +431,9 @@
         phoneCode.value = option.textContent;
         phoneCode.setSelectionRange(phoneCode.value.length, phoneCode.value.length);
         resizePhoneCode();
+        updatePhoneHint();
+        if (phoneCode.hasAttribute("aria-invalid")) validateField(phoneCode);
+        if (phone.value) validateField(phone);
     }
 
     function handlePhoneCodeKeys(event) {
@@ -302,7 +468,7 @@
         resizePhoneCode();
     }
 
-    trigger.addEventListener("click", () => {
+    function openInquiry() {
         trigger.focus();
         if (savedWhileClosed) {
             savedWhileClosed = false;
@@ -314,11 +480,38 @@
             return;
         }
         form.reset();
+        submitError.textContent = "";
         phoneCode.required = false;
         resizePhoneCode();
+        updatePhoneHint();
         updateDateMinimum();
         selectPackage(trigger.dataset.inquiryPackage);
         showPanel("form");
+    }
+
+    trigger.addEventListener("click", async () => {
+        if (checkingServer) return;
+        if (bookingPage && bookingPage.href !== page.origin + page.pathname && !savedWhileClosed && !submitting) {
+            checkingServer = true;
+            try {
+                // A PHP endpoint rejects HEAD with a JSON response. A static preview cannot run it.
+                const response = isFilePreview ? null : await fetch(apiUrl, {
+                    method: "HEAD",
+                    cache: "no-store",
+                    signal: AbortSignal.timeout(3000)
+                }).catch(() => null);
+                const isPhp = response?.status === 405 &&
+                    response.headers.get("content-type")?.startsWith("application/json");
+                if (isFilePreview || (response && response.status < 500 && !isPhp)) {
+                    bookingPage.searchParams.set("booking", "open");
+                    window.location.assign(bookingPage);
+                    return;
+                }
+            } finally {
+                checkingServer = false;
+            }
+        }
+        openInquiry();
     });
     changePackageButton.addEventListener("click", () => showPanel("packages"));
     packageOptions.addEventListener("click", event => {
@@ -349,6 +542,7 @@
     phoneCode.addEventListener("focus", () => phoneCode.select());
     phoneCode.addEventListener("input", () => {
         resizePhoneCode();
+        updatePhoneHint();
         showPhoneCodes(phoneCode.value);
     });
     phoneCode.addEventListener("change", formatPhoneCode);
@@ -372,30 +566,84 @@
     dialog.addEventListener("scroll", positionPhoneCodes);
     window.addEventListener("resize", positionPhoneCodes);
     window.visualViewport?.addEventListener("resize", positionPhoneCodes);
+    phone.addEventListener("beforeinput", event => {
+        if (!event.cancelable) return;
+        if (event.data && exceedsPhoneLimit(phoneDigits(event.data).length)) {
+            event.preventDefault();
+            return;
+        }
+        const caret = phone.selectionStart;
+        if (caret !== phone.selectionEnd) return;
+        // Delete the adjacent digit when the caret is beside an inserted space.
+        if (event.inputType === "deleteContentBackward" && phone.value[caret - 1] === " ") {
+            phone.setSelectionRange(caret - 2, caret);
+        } else if (event.inputType === "deleteContentForward" && phone.value[caret] === " ") {
+            phone.setSelectionRange(caret, caret + 2);
+        }
+    });
+    phone.addEventListener("paste", event => {
+        if (!event.clipboardData) return;
+        event.preventDefault();
+        const digits = phoneDigits(event.clipboardData.getData("text"));
+        if (!digits || exceedsPhoneLimit(digits.length)) return;
+        phone.setRangeText(digits, phone.selectionStart, phone.selectionEnd, "end");
+        phone.dispatchEvent(new Event("input", { bubbles: true }));
+    });
     phone.addEventListener("input", () => {
-        const digits = phone.value.replace(/\D/g, "");
-        phoneCode.required = digits.length > 0;
-        if (digits === phone.value) return;
-        const caret = phone.value.slice(0, phone.selectionStart).replace(/\D/g, "").length;
-        phone.value = digits;
-        phone.setSelectionRange(caret, caret);
+        formatPhoneInput();
+        phoneCode.required = phone.value !== "";
+    });
+    email.addEventListener("input", updateEmailSuggestion);
+    email.addEventListener("change", updateEmailSuggestion);
+    emailCorrection.addEventListener("click", () => {
+        email.value = emailCorrection.textContent;
+        email.focus();
+        email.dispatchEvent(new Event("input", { bubbles: true }));
     });
     date.addEventListener("focus", updateDateMinimum);
+    form.addEventListener("reset", () => {
+        for (const field of fieldErrors.keys()) showFieldError(field, "");
+        emailSuggestion.hidden = true;
+        emailCorrection.textContent = "";
+    });
+    form.addEventListener("input", event => {
+        const field = event.target;
+        if (!fieldErrors.has(field)) return;
+        const maxPhoneLength = field === phone && selectedPhoneLengths()?.at(-1);
+        if ((field.name === "traveler" && field.value) || field.hasAttribute("aria-invalid") ||
+            (maxPhoneLength && phoneDigits(phone.value).length > maxPhoneLength)) {
+            validateField(field);
+        }
+        if (field === phone && phoneCode.hasAttribute("aria-invalid")) validateField(phoneCode);
+        if (field === phoneCode && phone.value) validateField(phone);
+    });
+    form.addEventListener("focusout", event => {
+        const field = event.target;
+        if (!fieldErrors.has(field)) return;
+        if (field.hasAttribute("data-rejected-input") ||
+            (!field.hasAttribute("aria-invalid") && (field.value || field.validity.badInput))) {
+            validateField(field);
+        }
+    });
     form.addEventListener("submit", async event => {
         event.preventDefault();
-        if (submitting || !dialog.open || dialog.dataset.view !== "form") return;
+        if (isFilePreview || submitting || !dialog.open || dialog.dataset.view !== "form") return;
 
         phoneCode.required = phone.value !== "";
-        if (!phoneCode.reportValidity()) return;
         formatPhoneCode();
         updateDateMinimum();
-        if (!form.reportValidity()) return;
+        submitError.textContent = "";
+        const allFieldsValid = [...fieldErrors.keys()].map(validateField).every(Boolean);
+        if (!allFieldsValid) {
+            focusInvalidField();
+            return;
+        }
 
         // Capture the exact submission before the request so the receipt reflects what was sent.
         const formData = {
             traveler: form.elements.traveler.value.trim(),
-            email: form.elements.email.value.trim(),
-            phone: phone.value ? phoneCode.value + phone.value : "",
+            email: email.value.trim(),
+            phone: phone.value ? phoneCode.value + phoneDigits(phone.value) : "",
             package: selected,
             date: date.value,
             travelers: count.value,
@@ -414,24 +662,33 @@
         submitButton.textContent = "Submitting...";
 
         try {
-            const response = await fetch("api/submit-inquiry.php", {
+            const response = await fetch(apiUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData)
             });
-            const responseText = await response.text();
             let result;
 
             try {
-                result = JSON.parse(responseText);
+                result = await response.json();
             } catch {
-                if (responseText.trimStart().startsWith("<")) {
-                    throw new Error("The inquiry API returned HTML instead of JSON. Open this page through XAMPP Apache and try again.");
+                if (response.status >= 500) {
+                    throw new Error("The booking server is unavailable. Please try again later.");
                 }
-                throw new Error("The server returned an invalid response. Check the Apache PHP error log.");
+                throw new Error("The booking service returned an unexpected response. Open the site through a PHP server such as XAMPP Apache and try again.");
             }
 
             if (!response.ok || !result?.success) {
+                if (response.status === 422 && result?.errors) {
+                    let unhandledError = false;
+                    for (const [name, message] of Object.entries(result.errors)) {
+                        const field = form.elements.namedItem(name);
+                        if (fieldErrors.has(field)) showFieldError(field, message);
+                        else unhandledError = true;
+                    }
+                    if (dialog.open) focusInvalidField();
+                    if (!unhandledError) return;
+                }
                 throw new Error(result?.message || "Unable to submit inquiry.");
             }
 
@@ -450,7 +707,9 @@
                 savedWhileClosed = true;
             }
         } catch (error) {
-            alert(error.message);
+            submitError.textContent = error instanceof TypeError
+                ? "Could not reach the booking service. Check your connection and try again."
+                : error.message;
         } finally {
             submitting = false;
             changePackageButton.disabled = false;
@@ -461,4 +720,30 @@
 
     document.body.append(dialog);
     trigger.hidden = false;
+    if (!isFilePreview) {
+        const formatter = document.createElement("script");
+        formatter.src = new URL("js/vendor/libphonenumber-1.13.15/libphonenumber-min.js", page);
+        formatter.addEventListener("load", formatPhoneInput);
+        document.head.append(formatter);
+        fetch(new URL("data/phone-lengths.json", page), { signal: AbortSignal.timeout(5000) })
+            .then(response => {
+                if (!response.ok) throw new Error("Phone metadata unavailable");
+                return response.json();
+            })
+            .then(data => {
+                phoneLengths = data.callingCodes;
+                phoneCode.pattern = "\\+?(?:" + Object.keys(phoneLengths).join("|") + ")";
+                updatePhoneHint();
+                if (phone.hasAttribute("aria-invalid")) validateField(phone);
+            })
+            .catch(() => {
+                phoneRulesError = "Could not load phone number rules. Reload the page and try again.";
+                if (phone.hasAttribute("aria-invalid")) validateField(phone);
+            });
+    }
+    if (!isFilePreview && page.searchParams.get("booking") === "open") {
+        page.searchParams.delete("booking");
+        window.history.replaceState(window.history.state, "", page);
+        openInquiry();
+    }
 })();

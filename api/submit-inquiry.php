@@ -27,49 +27,79 @@ $packages = [
     "snezhnaya" => "Snezhnaya"
 ];
 
-$name = trim($data["traveler"] ?? "");
-$email = trim($data["email"] ?? "");
-$phone = trim($data["phone"] ?? "");
+$name = $data["traveler"] ?? "";
+$email = $data["email"] ?? "";
+$phone = $data["phone"] ?? "";
 $packageKey = $data["package"] ?? "";
 $travelDate = $data["date"] ?? "";
 $travelers = filter_var(
     $data["travelers"] ?? null,
     FILTER_VALIDATE_INT
 );
-$requests = trim($data["requests"] ?? "");
+$requests = $data["requests"] ?? "";
 
-if (
-    $name === "" ||
-    strlen($name) > 120 ||
-    !filter_var($email, FILTER_VALIDATE_EMAIL) ||
-    strlen($email) > 254 ||
-    !isset($packages[$packageKey]) ||
-    !$travelers ||
-    $travelers < 1 ||
-    $travelers > 1000000 ||
-    strlen($phone) > 32 ||
-    strlen($requests) > 65535
-) {
-    http_response_code(422);
-    echo json_encode([
-        "success" => false,
-        "message" => "Please check your booking information."
-    ]);
-    exit;
+$errors = [];
+if (!is_string($name) || trim($name) === "") {
+    $errors["traveler"] = "Enter the lead traveler's name.";
+} elseif (preg_match('/\p{N}/u', $name)) {
+    $errors["traveler"] = "Enter a name without numbers.";
+} elseif (strlen(trim($name)) > 120) {
+    $errors["traveler"] = "Enter a shorter name.";
+}
+if (!is_string($email) || !filter_var(trim($email), FILTER_VALIDATE_EMAIL) || strlen(trim($email)) > 254) {
+    $errors["email"] = "Enter a valid email address.";
+}
+if (!is_string($phone)) {
+    $errors["phone"] = "Enter a valid phone number.";
+} elseif (trim($phone) !== "") {
+    $phone = trim($phone);
+    $rulesPath = __DIR__ . "/../data/phone-lengths.json";
+    $rules = is_readable($rulesPath) ? json_decode(file_get_contents($rulesPath), true) : null;
+    if (empty($rules["callingCodes"])) {
+        http_response_code(500);
+        echo json_encode(["success" => false, "message" => "Phone number validation is temporarily unavailable."]);
+        exit;
+    }
+    $digits = substr($phone, 1);
+    $validPhone = false;
+    if (preg_match('/^\+[1-9][0-9]+$/D', $phone)) {
+        for ($prefixLength = 1; $prefixLength <= 3; $prefixLength++) {
+            $callingCode = substr($digits, 0, $prefixLength);
+            $lengths = $rules["callingCodes"][$callingCode] ?? null;
+            if ($lengths === null) continue;
+            $nationalNumber = substr($digits, $prefixLength);
+            $validPhone = in_array(strlen($nationalNumber), $lengths, true)
+                && ($callingCode !== "63" || !str_starts_with($nationalNumber, "0"));
+            break;
+        }
+    }
+    if (!$validPhone) {
+        $errors["phone"] = "Check the calling code and the number of digits.";
+    }
+}
+if (!is_string($packageKey) || !isset($packages[$packageKey])) {
+    $errors["package"] = "Select a valid package.";
+}
+if ($travelers === false || $travelers < 1 || $travelers > 1000000) {
+    $errors["travelers"] = "Enter a whole number of travelers between 1 and 1,000,000.";
+}
+if (!is_string($requests) || strlen(trim($requests)) > 65535) {
+    $errors["requests"] = "Shorten your special requests.";
 }
 
-// Validate date
-$date = DateTime::createFromFormat("!Y-m-d", $travelDate);
+$date = is_string($travelDate) && preg_match('/^\d{4}-\d{2}-\d{2}$/D', $travelDate)
+    ? DateTime::createFromFormat("!Y-m-d", $travelDate)
+    : false;
+if (!$date || $date->format("Y-m-d") !== $travelDate || $travelDate < date("Y-m-d")) {
+    $errors["date"] = "Choose today or a later date.";
+}
 
-if (
-    !$date ||
-    $date->format("Y-m-d") !== $travelDate ||
-    $travelDate < date("Y-m-d")
-) {
+if ($errors) {
     http_response_code(422);
     echo json_encode([
         "success" => false,
-        "message" => "Please select a valid travel date."
+        "message" => "Please check your booking information.",
+        "errors" => $errors
     ]);
     exit;
 }
@@ -94,9 +124,9 @@ try {
         VALUES (:customer_name, :customer_email, :customer_cell)"
     );
     $customerStmt->execute([
-        ":customer_name" => $name,
-        ":customer_email" => $email,
-        ":customer_cell" => $phone ?: null
+        ":customer_name" => trim($name),
+        ":customer_email" => trim($email),
+        ":customer_cell" => trim($phone) ?: null
     ]);
     $customerId = $pdo->lastInsertId();
 
@@ -123,7 +153,7 @@ try {
         ":pax_number" => $travelers,
         ":travel_date" => $travelDate,
         ":order_status" => "Pending",
-        ":order_req" => $requests ?: null
+        ":order_req" => trim($requests) ?: null
     ]);
 
     $orderId = $pdo->lastInsertId();
