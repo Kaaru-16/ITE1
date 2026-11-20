@@ -8,8 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
-require_once __DIR__ . "/../config/db.php";
-
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!is_array($data)) {
@@ -77,6 +75,8 @@ if (
 }
 
 try {
+    require_once __DIR__ . "/../config/db.php";
+
     $packageStmt = $pdo->prepare(
         "SELECT package_id FROM packages WHERE package_name = :package_name"
     );
@@ -135,9 +135,9 @@ try {
         "id" => $orderId
     ]);
 
-} catch (PDOException $e) {
+} catch (RuntimeException $e) {
 
-    if ($pdo->inTransaction()) {
+    if (isset($pdo) && $pdo->inTransaction()) {
         $pdo->rollBack();
     }
 

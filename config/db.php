@@ -1,20 +1,25 @@
 <?php
-$host = "localhost";
-$dbname = "teyvat_travel";
-$username = "root";
-$password = "";
+$configPath = getenv("TEYVAT_DB_CONFIG") ?: "C:/xampp/teyvat-travel/db.php";
 
-try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
-        $username,
-        $password,
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ]
-    );
-} catch (PDOException $e) {
-    error_log($e->getMessage());
-    die("Database connection failed.");
+if (!is_readable($configPath)) {
+    throw new RuntimeException("The Teyvat database configuration file is missing or unreadable.");
 }
+
+$config = require $configPath;
+$sslCa = defined("Pdo\\Mysql::ATTR_SSL_CA") ? Pdo\Mysql::ATTR_SSL_CA : PDO::MYSQL_ATTR_SSL_CA;
+$sslVerify = defined("Pdo\\Mysql::ATTR_SSL_VERIFY_SERVER_CERT")
+    ? Pdo\Mysql::ATTR_SSL_VERIFY_SERVER_CERT
+    : PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT;
+
+$pdo = new PDO(
+    "mysql:host={$config['host']};port={$config['port']};dbname={$config['database']};charset=utf8mb4",
+    $config["username"],
+    $config["password"],
+    [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_TIMEOUT => 8,
+        $sslCa => $config["ca"],
+        $sslVerify => true,
+    ]
+);

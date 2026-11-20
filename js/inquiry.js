@@ -95,7 +95,7 @@
                     <textarea name="requests" rows="1" placeholder="Dietary needs, accessibility..."></textarea>
                 </label>
             </div>
-            <p class="inquiry-hint">* Required fields. This demo previews your inquiry on this page. Your details stay in this window.</p>
+            <p class="inquiry-hint">* Required fields. We save your details so the travel team can review your inquiry.</p>
             <button class="inquiry-primary" type="submit">Submit Inquiry</button>
         </form>
         <section class="inquiry-panel inquiry-picker" data-panel="packages" hidden>
@@ -109,8 +109,8 @@
                 <img src="image/inquiry-confirm-close.svg" alt="">
             </button>
             <h2 id="inquiry-received-title" tabindex="-1">Inquiry received</h2>
-            <p class="inquiry-status">Demo · Awaiting availability review</p>
-            <p>Here’s a preview of your inquiry. Your details stayed in this window. Availability and final pricing require confirmation.</p>
+            <p class="inquiry-status">Awaiting availability review</p>
+            <p>Your inquiry was saved. Availability and final pricing require confirmation.</p>
             <div class="inquiry-summary">
                 <h3 data-package-name></h3>
                 <p data-review-details></p>
@@ -408,7 +408,7 @@ form.addEventListener("submit", async event => {
         } catch {
             if (responseText.trimStart().startsWith("<")) {
                 throw new Error(
-                    "The inquiry API returned PHP or HTML instead of JSON. Open the site through XAMPP Apache at http://localhost/teyvat-travel/mondstadt.html, not VS Code Live Server."
+                    "The inquiry API returned HTML instead of JSON. Open this page through XAMPP Apache and try again."
                 );
             }
             throw new Error("The server returned an invalid response. Check the Apache PHP error log.");
