@@ -92,8 +92,7 @@
                 </div>
                 <div class="inquiry-field">
                     <label for="inquiry-email">Personal Email Address *</label>
-                    <input id="inquiry-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" list="inquiry-email-domains" required>
-                    <datalist id="inquiry-email-domains"></datalist>
+                    <input id="inquiry-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
                     <p class="inquiry-hint" data-email-suggestion hidden>
                         Did you mean <button class="inquiry-email-correction" type="button"></button>?
                     </p>
@@ -109,9 +108,9 @@
                             <button type="button" class="inquiry-code-toggle" tabindex="-1" aria-label="Toggle dialing codes"></button>
                             <ul id="inquiry-calling-codes" class="inquiry-code-list" role="listbox" aria-label="Dialing codes" hidden></ul>
                         </div>
-                        <input id="inquiry-phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9 ]+" autocomplete="tel-national" placeholder="Mobile number" aria-describedby="inquiry-phone-hint">
+                        <input id="inquiry-phone" name="phone" type="tel" inputmode="numeric" pattern="[0-9 ]+" autocomplete="tel-national" placeholder="Mobile number" aria-describedby="inquiry-phone-hint" readonly>
                     </div>
-                    <p class="inquiry-hint" id="inquiry-phone-hint" hidden></p>
+                    <p class="inquiry-hint" id="inquiry-phone-hint">Loading mobile number rules…</p>
                 </div>
                 <div class="inquiry-field">
                     <label for="inquiry-date">Preferred Travel Date *</label>
@@ -170,7 +169,6 @@
     const count = form.elements.travelers;
     const date = form.elements.date;
     const email = form.elements.email;
-    const emailDomainList = form.querySelector("#inquiry-email-domains");
     const emailSuggestion = form.querySelector("[data-email-suggestion]");
     const emailCorrection = emailSuggestion.querySelector("button");
     const phone = form.elements.phone;
@@ -194,8 +192,9 @@
     let savedWhileClosed = false;
     let checkingServer = false;
     let emailDomains = [];
-    let phoneLengths = null;
-    let phoneRulesError = "Loading phone number rules. Try again in a moment.";
+    let phoneRules = null;
+    let phoneRulesError = "Loading mobile number rules…";
+    let previousPhoneDigits = "";
 
     if (isFilePreview) {
         form.querySelector("[data-file-notice]").hidden = false;
@@ -280,8 +279,9 @@
         return phoneCode.value.replace(/^\+/, "");
     }
 
-    function selectedPhoneLengths() {
-        return phoneLengths?.[selectedCallingCode()];
+    function selectedPhoneRule() {
+        const code = selectedCallingCode();
+        return phoneRules && Object.hasOwn(phoneRules, code) ? phoneRules[code] : null;
     }
 
     function phoneDigits(value) {
@@ -292,7 +292,7 @@
         const digits = phoneDigits(phone.value);
         let formatted = digits;
         const AsYouType = window.libphonenumber?.AsYouType;
-        if (digits && AsYouType && selectedPhoneLengths()) {
+        if (digits && AsYouType && selectedPhoneRule()) {
             const prefix = "+" + selectedCallingCode();
             const international = new AsYouType().input(prefix + digits);
             if (international.startsWith(prefix)) {
@@ -311,41 +311,119 @@
         phone.setSelectionRange(caret, caret);
     }
 
-    function exceedsPhoneLimit(insertedDigits) {
-        const max = selectedPhoneLengths()?.at(-1);
+    function rejectPhoneInput(message) {
+        showFieldError(phone, message);
+        phone.dataset.rejectedInput = "";
+    }
+
+    function blocksPhoneInsertion(insertedDigits) {
+        if (!insertedDigits) return false;
+        const max = selectedPhoneRule()?.lengths.at(-1);
         const existing = phoneDigits(phone.value).length;
         const selected = phoneDigits(phone.value.slice(phone.selectionStart, phone.selectionEnd)).length;
-        if (!max || existing - selected + insertedDigits <= max) return false;
-        showFieldError(phone, "Enter up to " + max + " digits.");
-        phone.dataset.rejectedInput = "";
+        const nextLength = existing - selected + insertedDigits;
+        if (max && (nextLength <= max || nextLength < existing)) return false;
+        rejectPhoneInput(max ? "Enter up to " + max + " digits." : phoneEntryHint());
         return true;
     }
 
+    function phoneEntryHint() {
+        if (isFilePreview) return "Open this page through a PHP server to enter a mobile number.";
+        return phoneRules ? "Choose a supported calling code to enter a mobile number." : phoneRulesError;
+    }
+
+    function allowedPhoneLengthMessage(lengths) {
+        const allowed = phoneLengthList.format(lengths.map(String));
+        return lengths.length === 1 ? "Enter exactly " + allowed + " digits." : "Enter " + allowed + " digits.";
+    }
+
     function updatePhoneHint() {
-        const lengths = selectedPhoneLengths();
-        phoneHint.hidden = !lengths;
+        const rule = selectedPhoneRule();
+        const lengths = rule?.lengths;
+        phone.readOnly = !lengths && !phone.value;
         const code = selectedCallingCode();
-        phone.placeholder = code === "63" ? "9XX XXX XXXX" : "Mobile number";
+        phone.placeholder = code === "63" ? "917 123 4567" : "Mobile number";
         formatPhoneInput();
-        if (!lengths) return;
+        if (!lengths) {
+            phoneHint.textContent = phoneEntryHint();
+            return;
+        }
         const allowed = phoneLengthList.format(lengths.map(String));
         phoneHint.textContent = lengths.length === 1
             ? "Enter exactly " + allowed + " digits after +" + code + "."
             : "Maximum " + lengths.at(-1) + " digits after +" + code + ". Allowed lengths are " + allowed + " digits.";
-        if (code === "63") phoneHint.textContent += " Omit the leading 0.";
+        if (code === "63") {
+            phoneHint.textContent += " Start with " + phoneLengthList.format([...rule.firstDigits]);
+        }
+    }
+
+    function domainEditDistance(typed, provider) {
+        const distances = [Array.from({ length: provider.length + 1 }, (_, index) => index)];
+        for (let row = 1; row <= typed.length; row++) {
+            const previous = distances[row - 1];
+            const current = [row];
+            for (let column = 1; column <= provider.length; column++) {
+                const cost = typed[row - 1] === provider[column - 1] ? 0 : 1;
+                current[column] = Math.min(previous[column] + 1, current[column - 1] + 1, previous[column - 1] + cost);
+                if (row > 1 && column > 1 &&
+                    typed[row - 1] === provider[column - 2] && typed[row - 2] === provider[column - 1]) {
+                    current[column] = Math.min(current[column], distances[row - 2][column - 2] + 1);
+                }
+            }
+            distances.push(current);
+        }
+        return distances[typed.length][provider.length];
+    }
+
+    function suggestEmailDomain(domain) {
+        const normalized = domain.replace(/[,;]/g, ".").replace(/\.{2,}/g, ".").replace(/^\.|\.$/g, "");
+        if (normalized.length < 4 || schoolEmailDomain.test(normalized) || emailDomains.includes(domain)) return "";
+        if (emailDomains.includes(normalized)) return normalized;
+        if (emailDomainSuggestions.has(normalized)) return emailDomainSuggestions.get(normalized);
+
+        const [name, ...suffixLabels] = normalized.split(".");
+        const suffix = suffixLabels.join(".");
+        if (!suffix) {
+            const exactNames = emailDomains.filter(provider => provider.startsWith(name + "."));
+            if (exactNames.length === 1) return exactNames[0];
+        }
+        let match = "";
+        let bestDistance = Infinity;
+        for (const provider of emailDomains) {
+            if (Math.abs(normalized.length - provider.length) > 3) continue;
+            const distance = domainEditDistance(normalized, provider);
+            if (distance > 3 || distance > bestDistance) continue;
+            if (distance > 1) {
+                const [providerName, ...providerSuffixLabels] = provider.split(".");
+                const nameDistance = domainEditDistance(name, providerName);
+                const suffixDistance = domainEditDistance(suffix, providerSuffixLabels.join("."));
+                const closeParts = nameDistance <= (providerName.length >= 5 ? 2 : 1) &&
+                    suffixDistance <= (nameDistance === 0 ? 2 : 1);
+                const missingDot = !suffix && distance === 2 &&
+                    domainEditDistance(normalized, provider.replaceAll(".", "")) <= 1;
+                if (!closeParts && !missingDot) continue;
+            }
+            match = distance === bestDistance ? "" : provider;
+            bestDistance = distance;
+        }
+        return match;
     }
 
     function updateEmailSuggestion() {
-        const [name, domain, extra] = email.value.trim().split("@");
-        const typedDomain = domain?.toLowerCase();
-        const correction = email.validity.valid && emailDomainSuggestions.get(typedDomain);
+        const address = email.value.trim();
+        const parts = address.match(/^([a-z0-9.!#$%&'*+/=?^_\x60{|}~-]{1,64})(@+\s*)([a-z0-9.,;-]{1,63})$/i);
+        let correction = "";
+        if (parts) {
+            const [, name, separator, typedDomain] = parts;
+            const domain = typedDomain.toLowerCase();
+            if (!name.startsWith(".") && !name.endsWith(".") && !name.includes("..")) {
+                const provider = suggestEmailDomain(domain) ||
+                    (separator !== "@" && emailDomains.includes(domain) ? domain : "");
+                if (provider) correction = name + "@" + provider;
+            }
+        }
         emailSuggestion.hidden = !correction;
-        emailCorrection.textContent = correction ? name + "@" + correction : "";
-
-        const options = name && typedDomain !== undefined && extra === undefined && !correction
-            ? emailDomains.filter(provider => provider.startsWith(typedDomain) && provider !== typedDomain).slice(0, 8)
-            : [];
-        emailDomainList.replaceChildren(...options.map(provider => new Option("", name + "@" + provider)));
+        emailCorrection.textContent = correction;
     }
 
     function validateField(field) {
@@ -358,11 +436,19 @@
         } else if (field === phoneCode && !field.validity.valid) {
             message = "Enter a supported dialing code, such as +63.";
         } else if (field === phone && value) {
-            const lengths = selectedPhoneLengths();
+            const rule = selectedPhoneRule();
             const digits = phoneDigits(value);
-            if (!phoneLengths) message = phoneRulesError;
+            if (!rule) message = phoneEntryHint();
+            else if (digits.length > rule.lengths.at(-1)) message = "Enter up to " + rule.lengths.at(-1) + " digits.";
             else if (selectedCallingCode() === "63" && digits.startsWith("0")) message = "Omit the leading 0 after +63.";
-            else if (lengths && !lengths.includes(digits.length)) message = "Check the number of digits for this calling code.";
+            else if (digits && !rule.firstDigits.includes(digits[0])) {
+                const allowed = phoneLengthList.format([...rule.firstDigits]);
+                message = "Mobile numbers after +" + selectedCallingCode() + " must start with " + allowed + ".";
+            } else if (!rule.lengths.includes(digits.length)) {
+                message = allowedPhoneLengthMessage(rule.lengths);
+            } else if (!rule.pattern.test(digits)) {
+                message = "Enter a valid mobile number for this calling code.";
+            }
         } else if (field === date && field.validity.rangeUnderflow) {
             message = "Choose today or a later date.";
         } else if (field === email) {
@@ -420,7 +506,7 @@
     function showPhoneCodes(query) {
         const wasOpen = !phoneCodeList.hidden;
         const digits = query.replace(/^\+/, "");
-        const matches = Object.keys(phoneLengths || {}).filter(code => code.startsWith(digits));
+        const matches = Object.keys(phoneRules || {}).filter(code => code.startsWith(digits));
         const entries = matches.map(code => {
             const option = document.createElement("li");
             option.id = "inquiry-code-" + code;
@@ -582,7 +668,7 @@
     window.visualViewport?.addEventListener("resize", positionPhoneCodes);
     phone.addEventListener("beforeinput", event => {
         if (!event.cancelable) return;
-        if (event.data && exceedsPhoneLimit(phoneDigits(event.data).length)) {
+        if (event.data && blocksPhoneInsertion(phoneDigits(event.data).length)) {
             event.preventDefault();
             return;
         }
@@ -599,13 +685,26 @@
         if (!event.clipboardData) return;
         event.preventDefault();
         const digits = phoneDigits(event.clipboardData.getData("text"));
-        if (!digits || exceedsPhoneLimit(digits.length)) return;
+        if (!digits || blocksPhoneInsertion(digits.length)) return;
         phone.setRangeText(digits, phone.selectionStart, phone.selectionEnd, "end");
         phone.dispatchEvent(new Event("input", { bubbles: true }));
     });
-    phone.addEventListener("input", () => {
+    phone.addEventListener("input", event => {
+        const digits = phoneDigits(phone.value);
+        const max = selectedPhoneRule()?.lengths.at(-1);
+        // Some input methods and autofill bypass the cancellable beforeinput event.
+        if (digits.length > (max ?? 0) && digits.length > previousPhoneDigits.length) {
+            phone.value = previousPhoneDigits;
+            phone.setSelectionRange(phone.value.length, phone.value.length);
+            formatPhoneInput();
+            rejectPhoneInput(max ? "Enter up to " + max + " digits." : phoneEntryHint());
+            event.stopPropagation();
+            return;
+        }
+        previousPhoneDigits = digits;
         formatPhoneInput();
         phoneCode.required = phone.value !== "";
+        if (!max && !phone.value) phone.readOnly = true;
     });
     email.addEventListener("input", updateEmailSuggestion);
     email.addEventListener("change", updateEmailSuggestion);
@@ -616,17 +715,19 @@
     });
     date.addEventListener("focus", updateDateMinimum);
     form.addEventListener("reset", () => {
+        previousPhoneDigits = "";
         for (const field of fieldErrors.keys()) showFieldError(field, "");
-        emailDomainList.replaceChildren();
         emailSuggestion.hidden = true;
         emailCorrection.textContent = "";
     });
     form.addEventListener("input", event => {
         const field = event.target;
         if (!fieldErrors.has(field)) return;
-        const maxPhoneLength = field === phone && selectedPhoneLengths()?.at(-1);
+        const rule = field === phone ? selectedPhoneRule() : null;
+        const digits = rule ? phoneDigits(phone.value) : "";
+        const checkPhone = digits && (!rule.firstDigits.includes(digits[0]) || digits.length >= rule.lengths.at(-1));
         if ((field.name === "traveler" && field.value) || field.hasAttribute("aria-invalid") ||
-            (maxPhoneLength && phoneDigits(phone.value).length > maxPhoneLength)) {
+            checkPhone) {
             validateField(field);
         }
         if (field === phone && phoneCode.hasAttribute("aria-invalid")) validateField(phoneCode);
@@ -748,19 +849,28 @@
         formatter.src = new URL("js/vendor/libphonenumber-1.13.15/libphonenumber-min.js", page);
         formatter.addEventListener("load", formatPhoneInput);
         document.head.append(formatter);
-        fetch(new URL("data/phone-lengths.json", page), { signal: AbortSignal.timeout(5000) })
+        fetch(new URL("data/phone-lengths.json?v=2", page), { cache: "no-cache", signal: AbortSignal.timeout(5000) })
             .then(response => {
                 if (!response.ok) throw new Error("Phone metadata unavailable");
                 return response.json();
             })
             .then(data => {
-                phoneLengths = data.callingCodes;
-                phoneCode.pattern = "\\+?(?:" + Object.keys(phoneLengths).join("|") + ")";
+                const rules = Object.entries(data.callingCodes).map(([code, rule]) => {
+                    if (!Array.isArray(rule.lengths) || !rule.lengths.length ||
+                        typeof rule.firstDigits !== "string" || typeof rule.pattern !== "string") {
+                        throw new Error("Invalid mobile number rules");
+                    }
+                    return [code, { ...rule, pattern: new RegExp("^(?:" + rule.pattern + ")$") }];
+                });
+                if (!rules.length) throw new Error("Mobile number rules are empty");
+                phoneRules = Object.fromEntries(rules);
+                phoneCode.pattern = "\\+?(?:" + Object.keys(phoneRules).join("|") + ")";
                 updatePhoneHint();
-                if (phone.hasAttribute("aria-invalid")) validateField(phone);
+                if (phone.value) validateField(phone);
             })
             .catch(() => {
-                phoneRulesError = "Could not load phone number rules. Reload the page and try again.";
+                phoneRulesError = "Mobile number rules couldn’t load. Leave the number blank to continue, or reload the page to try again.";
+                updatePhoneHint();
                 if (phone.hasAttribute("aria-invalid")) validateField(phone);
             });
     }

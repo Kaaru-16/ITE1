@@ -67,20 +67,29 @@ if (!is_string($phone)) {
         exit;
     }
     $digits = substr($phone, 1);
-    $validPhone = false;
+    $phoneError = "Enter a valid mobile number for this calling code.";
     if (preg_match('/^\+[1-9][0-9]+$/D', $phone)) {
         for ($prefixLength = 1; $prefixLength <= 3; $prefixLength++) {
             $callingCode = substr($digits, 0, $prefixLength);
-            $lengths = $rules["callingCodes"][$callingCode] ?? null;
-            if ($lengths === null) continue;
+            $rule = $rules["callingCodes"][$callingCode] ?? null;
+            if ($rule === null) continue;
             $nationalNumber = substr($digits, $prefixLength);
-            $validPhone = in_array(strlen($nationalNumber), $lengths, true)
-                && ($callingCode !== "63" || !str_starts_with($nationalNumber, "0"));
+            $length = strlen($nationalNumber);
+            $maximum = max($rule["lengths"]);
+            if ($length > $maximum) {
+                $phoneError = "Enter up to $maximum digits.";
+            } elseif (!in_array($length, $rule["lengths"], true)) {
+                $phoneError = count($rule["lengths"]) === 1
+                    ? "Enter exactly $maximum digits."
+                    : "Allowed digit counts are " . implode(", ", $rule["lengths"]) . ".";
+            } elseif (preg_match('/\A(?:' . $rule["pattern"] . ')\z/', $nationalNumber) === 1) {
+                $phoneError = null;
+            }
             break;
         }
     }
-    if (!$validPhone) {
-        $errors["phone"] = "Check the calling code and the number of digits.";
+    if ($phoneError !== null) {
+        $errors["phone"] = $phoneError;
     }
 }
 if (!is_string($packageKey) || !isset($packages[$packageKey])) {
