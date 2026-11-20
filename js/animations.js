@@ -26,7 +26,7 @@
             ".guild-nav > a", ".guild-nav summary", heroItems,
             ".section-head", ".card", ".card-note", ".guild-story h2", ".story-panel",
             ".guild-founder", ".faq-intro", ".faq-item", ".journey-gallery h2",
-            ".journey-places figure", ".journey-day", ".package-inclusions", ".reference-footer",
+            ".journey-places figure", ".journey-day", ".package-inclusions",
         ].join(", ");
         const items = document.querySelectorAll(selector);
         const revealThreshold = .12;
@@ -98,7 +98,7 @@
     function pressControl(event) {
         if (reduceMotion.matches) return;
         const control = event.target.closest("button:not(:disabled), a[href], summary");
-        if (!control) return;
+        if (!control || control.closest("footer")) return;
 
         control.animate(
             [{ filter: "brightness(.82)" }, { filter: "brightness(1)" }],

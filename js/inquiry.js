@@ -111,13 +111,22 @@
             <h2 id="inquiry-received-title" tabindex="-1">Inquiry received</h2>
             <p class="inquiry-status">Awaiting availability review</p>
             <p>Your inquiry was saved. Availability and final pricing require confirmation.</p>
+            <p class="inquiry-reference">Booking reference <strong data-booking-reference></strong></p>
             <div class="inquiry-summary">
-                <h3 data-package-name></h3>
+                <h3 data-receipt-package></h3>
                 <p data-review-details></p>
-                <strong class="inquiry-review-total" data-total></strong>
+                <strong class="inquiry-review-total" data-receipt-total></strong>
                 <p class="inquiry-muted">Estimate only. Availability, final price, and payment details require confirmation.</p>
             </div>
-            <button type="button" class="inquiry-primary inquiry-review">Review inquiry details</button>
+            <details class="inquiry-review">
+                <summary>Review inquiry details</summary>
+                <dl>
+                    <div><dt>Lead traveler</dt><dd data-submitted="traveler"></dd></div>
+                    <div><dt>Email</dt><dd data-submitted="email"></dd></div>
+                    <div><dt>Phone</dt><dd data-submitted="phone"></dd></div>
+                    <div><dt>Special requests</dt><dd data-submitted="requests"></dd></div>
+                </dl>
+            </details>
         </section>`;
 
     const form = dialog.querySelector("form");
@@ -131,7 +140,15 @@
     const phoneCodeToggle = dialog.querySelector(".inquiry-code-toggle");
     const phoneCodeList = dialog.querySelector(".inquiry-code-list");
     const changePackageButton = dialog.querySelector(".inquiry-change");
+    const submitButton = form.querySelector('button[type="submit"]');
+    const receipt = dialog.querySelector('[data-panel="received"]');
+    const review = receipt.querySelector(".inquiry-review");
+    const reviewFields = Object.fromEntries(
+        [...review.querySelectorAll("[data-submitted]")].map(field => [field.dataset.submitted, field])
+    );
     let selected = trigger.dataset.inquiryPackage;
+    let submitting = false;
+    let savedWhileClosed = false;
 
     phoneCode.pattern = "\\+?(?:" + callingCodes.join("|") + ")";
     for (const [id, pkg] of Object.entries(packages)) {
@@ -287,6 +304,15 @@
 
     trigger.addEventListener("click", () => {
         trigger.focus();
+        if (savedWhileClosed) {
+            savedWhileClosed = false;
+            showPanel("received");
+            return;
+        }
+        if (submitting) {
+            showPanel("form");
+            return;
+        }
         form.reset();
         phoneCode.required = false;
         resizePhoneCode();
@@ -302,7 +328,6 @@
         showPanel("form", changePackageButton);
     });
     dialog.querySelector(".inquiry-keep").addEventListener("click", () => showPanel("form", changePackageButton));
-    dialog.querySelector(".inquiry-review").addEventListener("click", () => showPanel("form"));
     dialog.querySelectorAll("[data-close]").forEach(button => {
         button.addEventListener("click", () => dialog.close());
     });
@@ -312,8 +337,12 @@
         showPanel("form", changePackageButton);
     });
     dialog.addEventListener("close", () => {
+        if (dialog.open) return;
         closePhoneCodes();
-        form.reset();
+        if (!submitting) form.reset();
+        if (!savedWhileClosed) {
+            Object.values(reviewFields).forEach(field => { field.textContent = ""; });
+        }
         trigger.focus({ preventScroll: true });
     });
     count.addEventListener("input", updateEstimate);
@@ -352,104 +381,83 @@
         phone.setSelectionRange(caret, caret);
     });
     date.addEventListener("focus", updateDateMinimum);
-    
-form.addEventListener("submit", async event => {
-    event.preventDefault();
+    form.addEventListener("submit", async event => {
+        event.preventDefault();
+        if (submitting || !dialog.open || dialog.dataset.view !== "form") return;
 
-    phoneCode.required = phone.value !== "";
+        phoneCode.required = phone.value !== "";
+        if (!phoneCode.reportValidity()) return;
+        formatPhoneCode();
+        updateDateMinimum();
+        if (!form.reportValidity()) return;
 
-    if (!phoneCode.reportValidity()) return;
+        // Capture the exact submission before the request so the receipt reflects what was sent.
+        const formData = {
+            traveler: form.elements.traveler.value.trim(),
+            email: form.elements.email.value.trim(),
+            phone: phone.value ? phoneCode.value + phone.value : "",
+            package: selected,
+            date: date.value,
+            travelers: count.value,
+            requests: form.elements.requests.value.trim()
+        };
+        const pkg = packages[formData.package];
+        const group = updateEstimate();
+        const dateLabel = date.valueAsDate.toLocaleDateString("en-PH", {
+            dateStyle: "long",
+            timeZone: "UTC"
+        });
 
-    formatPhoneCode();
-    updateDateMinimum();
-
-    if (!date.reportValidity()) return;
-
-    const group = updateEstimate();
-
-    const formData = {
-        traveler: form.elements.traveler.value.trim(),
-        email: form.elements.email.value.trim(),
-
-        phone: phone.value
-            ? phoneCode.value + phone.value
-            : "",
-
-        package: selected,
-        date: date.value,
-        travelers: count.value,
-        requests: form.elements.requests.value.trim()
-    };
-
-    const submitButton = form.querySelector(
-        'button[type="submit"]'
-    );
-
-    submitButton.disabled = true;
-    submitButton.textContent = "Submitting...";
-
-    try {
-        const response = await fetch(
-            "api/submit-inquiry.php",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            }
-        );
-
-        const responseText = await response.text();
-        let result;
+        submitting = true;
+        changePackageButton.disabled = true;
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
 
         try {
-            result = JSON.parse(responseText);
-        } catch {
-            if (responseText.trimStart().startsWith("<")) {
-                throw new Error(
-                    "The inquiry API returned HTML instead of JSON. Open this page through XAMPP Apache and try again."
-                );
+            const response = await fetch("api/submit-inquiry.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+            const responseText = await response.text();
+            let result;
+
+            try {
+                result = JSON.parse(responseText);
+            } catch {
+                if (responseText.trimStart().startsWith("<")) {
+                    throw new Error("The inquiry API returned HTML instead of JSON. Open this page through XAMPP Apache and try again.");
+                }
+                throw new Error("The server returned an invalid response. Check the Apache PHP error log.");
             }
-            throw new Error("The server returned an invalid response. Check the Apache PHP error log.");
-        }
 
-        if (!response.ok || !result.success) {
-            throw new Error(
-                result.message || "Unable to submit inquiry."
-            );
-        }
-
-        const dateLabel = date.valueAsDate.toLocaleDateString(
-            "en-PH",
-            {
-                dateStyle: "long",
-                timeZone: "UTC"
+            if (!response.ok || !result?.success) {
+                throw new Error(result?.message || "Unable to submit inquiry.");
             }
-        );
 
-        dialog.querySelector(
-            "[data-review-details]"
-        ).textContent =
-            group + " · " + dateLabel + " pending review";
-
-        // Display the successful submission confirmation
-        showPanel("received");
-
-        console.log("Saved inquiry ID:", result.id);
-
-    } catch (error) {
-
-        alert(error.message);
-
-    } finally {
-
-        submitButton.disabled = false;
-        submitButton.textContent = "Submit Inquiry";
-
-    }
-});
-
+            receipt.querySelector("[data-booking-reference]").textContent = result.id ?? "Unavailable";
+            receipt.querySelector("[data-receipt-package]").textContent = pkg.name;
+            receipt.querySelector("[data-review-details]").textContent = group + " · " + dateLabel;
+            receipt.querySelector("[data-receipt-total]").textContent = price(Number(formData.travelers) * pkg.rate);
+            Object.entries(reviewFields).forEach(([name, field]) => {
+                field.textContent = formData[name] || "Not provided";
+            });
+            review.open = false;
+            form.reset();
+            if (dialog.open) {
+                showPanel("received");
+            } else {
+                savedWhileClosed = true;
+            }
+        } catch (error) {
+            alert(error.message);
+        } finally {
+            submitting = false;
+            changePackageButton.disabled = false;
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit Inquiry";
+        }
+    });
 
     document.body.append(dialog);
     trigger.hidden = false;
