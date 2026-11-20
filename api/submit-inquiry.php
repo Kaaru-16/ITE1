@@ -48,6 +48,12 @@ if (!is_string($name) || trim($name) === "") {
 }
 if (!is_string($email) || !filter_var(trim($email), FILTER_VALIDATE_EMAIL) || strlen(trim($email)) > 254) {
     $errors["email"] = "Enter a valid email address.";
+} else {
+    $emailDomain = substr(strrchr(trim($email), "@"), 1);
+    // Keep this domain check in sync with the booking form.
+    if (preg_match('/(?:^|\.)(?:edu(?:\.[a-z]{2})?|(?:ac|sch)\.[a-z]{2}|k12\.[a-z]{2}\.us|school|deped\.gov\.ph)$/iD', $emailDomain)) {
+        $errors["email"] = "Use a personal email address. School email addresses are not accepted.";
+    }
 }
 if (!is_string($phone)) {
     $errors["phone"] = "Enter a valid phone number.";

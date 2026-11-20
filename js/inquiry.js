@@ -42,8 +42,11 @@
         ["gmail.con", "gmail.com"],
         ["hotmial.com", "hotmail.com"],
         ["outlok.com", "outlook.com"],
+        ["yaahoo.com", "yahoo.com"],
         ["yaho.com", "yahoo.com"],
     ]);
+    // Keep this domain check in sync with the booking API.
+    const schoolEmailDomain = /(?:^|\.)(?:edu(?:\.[a-z]{2})?|(?:ac|sch)\.[a-z]{2}|k12\.[a-z]{2}\.us|school|deped\.gov\.ph)$/i;
     const money = new Intl.NumberFormat("en-PH");
     const price = amount => "PHP " + money.format(amount);
     const duration = pkg => pkg.days + " Days / " + pkg.nights + " Nights";
@@ -88,8 +91,9 @@
                     <input id="inquiry-traveler" name="traveler" autocomplete="name" placeholder="Enter full name" required>
                 </div>
                 <div class="inquiry-field">
-                    <label for="inquiry-email">Email Address *</label>
-                    <input id="inquiry-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+                    <label for="inquiry-email">Personal Email Address *</label>
+                    <input id="inquiry-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" list="inquiry-email-domains" required>
+                    <datalist id="inquiry-email-domains"></datalist>
                     <p class="inquiry-hint" data-email-suggestion hidden>
                         Did you mean <button class="inquiry-email-correction" type="button"></button>?
                     </p>
@@ -166,6 +170,7 @@
     const count = form.elements.travelers;
     const date = form.elements.date;
     const email = form.elements.email;
+    const emailDomainList = form.querySelector("#inquiry-email-domains");
     const emailSuggestion = form.querySelector("[data-email-suggestion]");
     const emailCorrection = emailSuggestion.querySelector("button");
     const phone = form.elements.phone;
@@ -188,6 +193,7 @@
     let submitting = false;
     let savedWhileClosed = false;
     let checkingServer = false;
+    let emailDomains = [];
     let phoneLengths = null;
     let phoneRulesError = "Loading phone number rules. Try again in a moment.";
 
@@ -330,10 +336,16 @@
     }
 
     function updateEmailSuggestion() {
-        const [name, domain] = email.value.trim().split("@");
-        const correction = email.validity.valid && emailDomainSuggestions.get(domain?.toLowerCase());
+        const [name, domain, extra] = email.value.trim().split("@");
+        const typedDomain = domain?.toLowerCase();
+        const correction = email.validity.valid && emailDomainSuggestions.get(typedDomain);
         emailSuggestion.hidden = !correction;
         emailCorrection.textContent = correction ? name + "@" + correction : "";
+
+        const options = name && typedDomain !== undefined && extra === undefined && !correction
+            ? emailDomains.filter(provider => provider.startsWith(typedDomain) && provider !== typedDomain).slice(0, 8)
+            : [];
+        emailDomainList.replaceChildren(...options.map(provider => new Option("", name + "@" + provider)));
     }
 
     function validateField(field) {
@@ -360,6 +372,8 @@
             else if (field.validity.typeMismatch || !domain?.includes(".") ||
                 name.startsWith(".") || name.endsWith(".") || name.includes("..")) {
                 message = "Enter a complete email address, such as name@example.com.";
+            } else if (schoolEmailDomain.test(domain)) {
+                message = "Use a personal email address. School email addresses are not accepted.";
             }
         } else if (field.name === "requests" && encoder.encode(value).length > 65535) {
             message = "Shorten your special requests.";
@@ -603,6 +617,7 @@
     date.addEventListener("focus", updateDateMinimum);
     form.addEventListener("reset", () => {
         for (const field of fieldErrors.keys()) showFieldError(field, "");
+        emailDomainList.replaceChildren();
         emailSuggestion.hidden = true;
         emailCorrection.textContent = "";
     });
@@ -721,6 +736,14 @@
     document.body.append(dialog);
     trigger.hidden = false;
     if (!isFilePreview) {
+        fetch(new URL("data/email-domains.json", page))
+            .then(response => response.ok ? response.json() : null)
+            .then(data => {
+                if (!Array.isArray(data?.domains)) return;
+                emailDomains = data.domains;
+                updateEmailSuggestion();
+            })
+            .catch(() => {});
         const formatter = document.createElement("script");
         formatter.src = new URL("js/vendor/libphonenumber-1.13.15/libphonenumber-min.js", page);
         formatter.addEventListener("load", formatPhoneInput);
