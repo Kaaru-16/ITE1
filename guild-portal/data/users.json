@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Guild Master (Admin)",
+        "email": "admin@teyvat.example",
+        "password": "$2y$10$RD57u\/ZpLb8yfxdtul5u7u\/4gt2ei9SIQrYmuvyS7iwDZ6BRzeZIu",
+        "role": "admin",
+        "status": "approved"
+    },
+    {
+        "id": 2,
+        "name": "Jules Hart",
+        "email": "jules@teyvat.example",
+        "password": "$2y$12$8MxsUl.Ai9CluUKeKK\/XnOjSI9Xk0unuhNE2WJgYr0aQAY6ntdARG",
+        "role": "staff",
+        "status": "approved",
+        "assignment_names": [
+            "Jules Hart"
+        ],
+        "profile_photo": null
+    },
+    {
+        "id": 3,
+        "name": "Ren Ash",
+        "email": "ren@teyvat.example",
+        "password": "$2y$10$AvjLP0AZwOefloNwfUOvieSpsBbcKZNJ2BJEgPUOP01l74RV6d9MC",
+        "role": "staff",
+        "status": "disabled"
+    },
+    {
+        "id": 4,
+        "name": "Lyra Vance",
+        "email": "lyra@teyvat.example",
+        "password": "$2y$10$Bz5.R7u83jdh2lNw4Z59C.vVKbT7hagY7DzIEmMebaKINMcYhTa7O",
+        "role": "staff",
+        "status": "rejected"
+    }
+]

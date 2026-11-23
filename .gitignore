@@ -1,3 +1,5 @@
 .env
 .vscode/
 config/super_sercet.php
+/guild-portal/data/.portal.lock
+/config/portal.live

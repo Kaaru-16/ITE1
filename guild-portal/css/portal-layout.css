@@ -1,0 +1,585 @@
+.auth-mode {
+    --auth-unit: min(0.052083333vw, 1px);
+}
+
+.auth-mode .auth-bg {
+    background: url("../image/portal-temple.png") center top / max(127.708vw, 178vh) auto no-repeat;
+    mask: url("../image/portal-mask.svg") center calc(-39 * var(--auth-unit)) / 100% calc(1158 * var(--auth-unit)) no-repeat;
+}
+
+.auth-mode .auth-container {
+    min-height: 100svh;
+    padding: calc(150 * var(--auth-unit)) 18px 32px;
+}
+
+.auth-mode .auth-card {
+    max-width: calc(1017 * var(--auth-unit));
+    min-height: calc(785 * var(--auth-unit));
+    padding: calc(50 * var(--auth-unit)) 18px calc(56 * var(--auth-unit));
+    border: 0;
+    border-radius: calc(27 * var(--auth-unit));
+    box-shadow: 0 4px 7px #0004;
+}
+
+.auth-mode .auth-heading {
+    margin: 0;
+    font-size: calc(80 * var(--auth-unit));
+    line-height: calc(92 * var(--auth-unit));
+}
+
+.auth-mode .auth-heading span { color: #d7c488; }
+[data-theme="light"] .auth-mode .auth-heading span { color: #ffedae; }
+
+#signupView .auth-heading {
+    font-size: calc(72 * var(--auth-unit));
+}
+
+.auth-mode .auth-sub {
+    margin: calc(18 * var(--auth-unit)) 0 0;
+    font-size: max(13px, calc(26 * var(--auth-unit)));
+    line-height: calc(31 * var(--auth-unit));
+}
+
+.auth-mode .auth-card > form {
+    display: grid;
+    gap: calc(28.9 * var(--auth-unit));
+    width: min(100%, calc(680 * var(--auth-unit)));
+    margin: calc(45 * var(--auth-unit)) auto 0;
+}
+
+.auth-mode .auth-card > form .form-group {
+    margin: 0;
+}
+
+.auth-mode .auth-card > form label {
+    margin: 0 0 calc(13 * var(--auth-unit));
+    font-size: max(13px, calc(23.8 * var(--auth-unit)));
+    font-weight: 600;
+    line-height: calc(29 * var(--auth-unit));
+}
+
+.auth-mode .auth-card > form input,
+.auth-mode .auth-card > form .btn-gold-full {
+    height: calc(81.6 * var(--auth-unit));
+    min-height: 0;
+    padding: 0 calc(23.8 * var(--auth-unit));
+    font-size: max(13px, calc(23.8 * var(--auth-unit)));
+    font-family: Inter, sans-serif;
+    margin: 0;
+}
+
+.auth-mode .auth-card > form input {
+    width: calc(100% - 6.8 * var(--auth-unit));
+    border-radius: calc(17 * var(--auth-unit));
+}
+
+.auth-password-field {
+    position: relative;
+    width: calc(100% - 6.8 * var(--auth-unit));
+}
+
+.auth-mode .auth-card > form .auth-password-field input {
+    width: 100%;
+    padding-inline-end: max(50px, calc(65 * var(--auth-unit)));
+}
+
+.password-toggle {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    display: grid;
+    place-items: center;
+    width: max(44px, calc(62 * var(--auth-unit)));
+    border: 0;
+    border-radius: inherit;
+    background: transparent;
+    color: var(--auth-field-text);
+    cursor: pointer;
+}
+
+.password-toggle svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.auth-password-field:has(input[type="password"]) .eye-slash { display: none; }
+.password-toggle:focus-visible { outline-offset: -4px; border-radius: 9px; }
+
+.auth-mode .auth-card > form input[aria-invalid="true"] { border-color: #ff9ca7; }
+.auth-field-error { color: #ffbfc6; font-size: max(12px, calc(16 * var(--auth-unit))); line-height: 1.4; }
+.auth-field-error:not(:empty) { margin-top: 7px; }
+.auth-field-error.success { color: #a7f3d0; }
+
+[data-theme="light"] .auth-field-error:not(:empty) {
+    padding: 6px 8px;
+    border-radius: 5px;
+    background: #fff0f2;
+    color: #842439;
+}
+
+[data-theme="light"] .auth-field-error.success:not(:empty) {
+    background: #e4f6ed;
+    color: #154d39;
+}
+
+.auth-mode .auth-card > form .btn-gold-full {
+    font-weight: 700;
+}
+
+.auth-mode .auth-switch-link {
+    margin: calc(41 * var(--auth-unit)) 0 0;
+    font-size: max(12px, calc(21 * var(--auth-unit)));
+}
+
+.auth-mode .auth-theme-wrap {
+    top: calc(31 * var(--auth-unit));
+    right: calc(117 * var(--auth-unit));
+}
+
+.auth-mode .theme-switch {
+    --switch-unit: max(0.65px, var(--auth-unit));
+    gap: calc(5 * var(--switch-unit));
+    width: calc(103 * var(--switch-unit));
+    height: calc(50 * var(--switch-unit));
+    justify-content: center;
+    padding: 0;
+    border: 1px solid #d4b87870;
+    border-radius: calc(15 * var(--switch-unit));
+    background: #141922e8;
+}
+
+.auth-mode .theme-switch span {
+    width: calc(44 * var(--switch-unit));
+    height: calc(40 * var(--switch-unit));
+    border-radius: calc(10 * var(--switch-unit));
+    background: #282a2b;
+}
+
+.auth-mode .theme-switch img {
+    width: calc(25 * var(--switch-unit));
+    height: calc(25 * var(--switch-unit));
+}
+
+[data-theme="dark"] .auth-mode .theme-switch .moon-icon,
+[data-theme="light"] .auth-mode .theme-switch .sun-icon {
+    background: #ffd054;
+}
+
+.signup-name-dialog {
+    width: min(30rem, calc(100% - 2rem));
+    margin: auto;
+    padding: 24px;
+    color: var(--text-primary);
+    background: var(--bg-card-solid);
+    border: 1px solid var(--border-subtle);
+    border-radius: 18px;
+}
+
+.signup-name-dialog::backdrop { background: #101827aa; }
+.signup-name-dialog p { margin: 8px 0 20px; }
+.signup-name-dialog .form-group label { color: var(--text-primary); text-shadow: none; }
+.signup-dialog-actions { display: flex; justify-content: flex-end; gap: 10px; }
+.signup-dialog-actions .btn-gold-full { width: auto; margin: 0; }
+
+/* The header is shared. The queue and detail use the Figma content dimensions. */
+#topNav, .figma-workspace {
+    --workspace-gutter: clamp(18px, 3.888889vw, 56px);
+    --workspace-surface: #172231d9;
+    --workspace-outline: #516175;
+    --workspace-divider: #394a5d;
+    --workspace-input: #434646;
+    --workspace-placeholder: #e2e8ef;
+}
+
+[data-theme="light"] :is(#topNav, .figma-workspace) {
+    --workspace-surface: #f8fafdce;
+    --workspace-outline: #a1afc0;
+    --workspace-divider: #d6e0eb;
+    --workspace-input: #f5f8fc;
+    --workspace-placeholder: #33485e;
+}
+
+.figma-workspace .app-bg {
+    background-image: url("../image/portal-mondstadt.png");
+}
+
+[data-theme="light"] .figma-workspace .app-bg {
+    background-image: url("../../shared/image/mondstadt-background.png");
+}
+
+#topNav {
+    min-height: 82px;
+    padding: 12px var(--workspace-gutter);
+    gap: 12px;
+}
+
+#topNav .nav-left,
+#topNav .brand-logo-img {
+    width: 76px;
+    height: 51px;
+}
+
+#topNav .portal-label {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.figma-workspace .app-workspace {
+    padding: 34px var(--workspace-gutter) 34px;
+}
+
+.figma-workspace .app-workspace:has(#staffQueueView:not(.hidden)) {
+    padding-right: max(18px, calc(var(--workspace-gutter) - 24px));
+}
+
+.figma-workspace .page-title { font-size: clamp(30px, 3.25vw, 44px); line-height: 1.27; }
+.figma-workspace .page-subtitle { margin-top: 7px; font-size: 16px; line-height: 19px; color: var(--text-primary); }
+.figma-workspace .panel-card { background: var(--workspace-surface); border-color: var(--workspace-outline); border-radius: 20px; }
+
+#staffQueueView .section-header { margin-bottom: 24px; }
+#staffQueueView .kpi-grid { gap: 16px; margin-bottom: 24px; }
+#staffQueueView .kpi-card { min-height: 96px; padding: 16px 19px; border-radius: 16px; background: var(--auth-glass); }
+#staffQueueView .kpi-label { margin-bottom: 5px; color: var(--text-primary); font-size: 14px; }
+#staffQueueView .kpi-value { font: 700 33px/1.2 Lora, Georgia, serif; }
+#staffQueueView .panel-card { overflow: hidden; padding: 0; }
+#staffQueueView .filter-bar { margin: 0; padding: 18px 24px; }
+#staffQueueView :is(.search-input, .filter-select) {
+    height: 46px;
+    padding-inline: 14px;
+    border: 1px solid #a1afc0;
+    border-radius: 12px;
+    font-size: 15px;
+}
+#staffQueueView .search-input { flex: 0 1 354px; }
+#staffQueueView .search-input::placeholder { color: var(--workspace-placeholder); opacity: 1; }
+#staffQueueView .filter-select { flex: 0 1 202px; }
+.figma-workspace :is(.search-input, .filter-select, .form-control) { background-color: var(--workspace-input); }
+.figma-workspace :is(.filter-select, .form-control) {
+    appearance: none;
+    padding-right: 34px;
+    background-image: url("../image/portal-chevron.svg");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+}
+
+[data-theme="light"] .figma-workspace :is(.filter-select, .form-control) {
+    appearance: auto;
+    background-image: none;
+    padding-right: 14px;
+}
+
+#staffQueueView .data-table { table-layout: fixed; min-width: 980px; font-size: 16px; }
+#staffQueueView col:nth-child(1) { width: 12.72%; }
+#staffQueueView col:nth-child(2) { width: 16.72%; }
+#staffQueueView col:nth-child(3) { width: 14.05%; }
+#staffQueueView col:nth-child(4) { width: 12.57%; }
+#staffQueueView col:nth-child(5) { width: 6.95%; }
+#staffQueueView col:nth-child(6) { width: 11.83%; }
+#staffQueueView col:nth-child(7) { width: 15.53%; }
+#staffQueueView col:nth-child(8) { width: 9.63%; }
+#staffQueueView .data-table th { height: 40px; font-size: 14px; white-space: nowrap; }
+#staffQueueView .data-table td { height: 57px; }
+#staffQueueView .data-table :is(td, th) { padding: 6px 10px 6px 0; border-color: var(--workspace-divider); overflow-wrap: anywhere; }
+#staffQueueView .data-table :is(td, th):first-child { padding-left: 24px; }
+#staffQueueView .table-footer { min-height: 44px; margin: 0; padding: 12px 24px; font-size: 14px; }
+
+.figma-workspace .status-badge, .figma-workspace .assignee-pill {
+    padding: 3px 10px;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+/* The detail frame is 1440 px wide. Scale the layout and type together on wide screens. */
+.figma-workspace:has(#bookingDetailView:not(.hidden)) {
+    --detail-unit: clamp(1px, 0.069444444vw, 1.5px);
+    --detail-label: #c8d3e0;
+    --detail-value: #f3f6fa;
+    --detail-price: #c5ddf9;
+    --detail-control-border: #535657;
+    --detail-back: #3e4142;
+}
+
+[data-theme="dark"] .figma-workspace:has(#bookingDetailView:not(.hidden)) {
+    background-color: #202020;
+    /* The exported Mondstadt image already has 48% opacity. */
+    --overlay-tint: transparent;
+}
+
+[data-theme="light"] .figma-workspace:has(#bookingDetailView:not(.hidden)) {
+    --detail-label: #33485e;
+    --detail-value: #172638;
+    --detail-price: #234e79;
+    --detail-control-border: #a1afc0;
+    --detail-back: #24354b;
+}
+
+@media (min-width: 1441px) {
+    .figma-workspace:has(#bookingDetailView:not(.hidden)) #topNav,
+    .figma-workspace .app-workspace:has(#bookingDetailView:not(.hidden)) {
+        max-width: calc(1440 * var(--detail-unit));
+        margin-inline: auto;
+        padding-inline: calc(56 * var(--detail-unit));
+    }
+
+    .figma-workspace .app-workspace:has(#bookingDetailView:not(.hidden)) {
+        padding-top: calc(116 * var(--detail-unit) - 82px);
+        padding-bottom: clamp(12px, calc(100svh - 730 * var(--detail-unit)), calc(34 * var(--detail-unit)));
+    }
+}
+
+#bookingDetailView .btn-pill-back {
+    margin-bottom: calc(22 * var(--detail-unit));
+    min-height: calc(37 * var(--detail-unit));
+    padding: calc(8 * var(--detail-unit)) calc(13 * var(--detail-unit));
+    border-color: var(--detail-control-border);
+    background: var(--detail-back);
+    font: 600 calc(14 * var(--detail-unit))/1.2 Inter, sans-serif;
+}
+
+[data-theme="light"] #bookingDetailView .btn-pill-back { color: #f8fafd; }
+
+#bookingDetailView .detail-header { margin-bottom: calc(22 * var(--detail-unit)); gap: calc(16 * var(--detail-unit)); }
+#bookingDetailView .page-title { font-size: calc(44 * var(--detail-unit)); line-height: calc(56 * var(--detail-unit)); }
+#bookingDetailView .page-subtitle { margin-top: calc(7 * var(--detail-unit)); font: 400 calc(16 * var(--detail-unit))/calc(19 * var(--detail-unit)) Inter, sans-serif; }
+#bookingDetailView .detail-header .status-badge {
+    padding: calc(7 * var(--detail-unit)) calc(13 * var(--detail-unit));
+    font-size: calc(15 * var(--detail-unit));
+    line-height: calc(18 * var(--detail-unit));
+}
+#bookingDetailView .detail-grid { grid-template-columns: minmax(0, 880fr) minmax(255px, 424fr); gap: calc(24 * var(--detail-unit)); }
+#bookingDetailView .detail-left { display: grid; gap: calc(20 * var(--detail-unit)); }
+#bookingDetailView .panel-card {
+    display: grid;
+    align-content: start;
+    gap: calc(19 * var(--detail-unit));
+    padding: calc(24 * var(--detail-unit));
+    border-radius: calc(20 * var(--detail-unit));
+    box-shadow: 0 4px 12px #0a111d33;
+}
+#bookingDetailView .detail-left .panel-card:first-child { min-height: calc(285 * var(--detail-unit)); }
+#bookingDetailView .detail-left .panel-card + .panel-card { min-height: calc(143 * var(--detail-unit)); margin-top: 0; }
+#bookingDetailView .detail-right .panel-card { min-height: calc(345 * var(--detail-unit)); }
+#bookingDetailView .card-heading { margin: 0; font-size: calc(25 * var(--detail-unit)); line-height: calc(32 * var(--detail-unit)); }
+#bookingDetailView .info-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#bookingDetailView .info-grid-2 { grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); }
+#bookingDetailView :is(.info-grid-2, .info-grid-3) { gap: calc(16 * var(--detail-unit)); }
+#bookingDetailView .field-label,
+#bookingDetailView .form-group label { color: var(--detail-label); font: 400 calc(14 * var(--detail-unit))/calc(17 * var(--detail-unit)) Inter, sans-serif; }
+#bookingDetailView .field-label { margin-bottom: calc(3 * var(--detail-unit)); }
+#bookingDetailView .field-value { color: var(--detail-value); font: 400 calc(16 * var(--detail-unit))/calc(20 * var(--detail-unit)) Inter, sans-serif; overflow-wrap: anywhere; }
+#bookingDetailView .card-divider { margin: 0; border-color: var(--workspace-divider); }
+#bookingDetailView .panel-card > .mt-20 { margin-top: 0; }
+#bookingDetailView .form-group { margin: 0; }
+#bookingDetailView .form-group label { margin-bottom: calc(5 * var(--detail-unit)); }
+#bookingDetailView .form-control {
+    height: calc(46 * var(--detail-unit));
+    padding: 0 calc(34 * var(--detail-unit)) 0 calc(14 * var(--detail-unit));
+    border-color: var(--detail-control-border);
+    border-radius: calc(12 * var(--detail-unit));
+    background-position: right calc(14 * var(--detail-unit)) center;
+    color: var(--detail-value);
+    font-size: calc(14 * var(--detail-unit));
+    font-weight: 500;
+}
+#bookingDetailView .form-control:focus { border-color: var(--detail-control-border); }
+#bookingDetailView .btn-gold-full { height: calc(46 * var(--detail-unit)); padding: 0 12px; margin: 0; font-size: calc(14 * var(--detail-unit)); font-weight: 700; }
+#bookingDetailView :is(#detailRate, #detailTotal) { color: var(--detail-price); font-weight: 600; }
+.detail-assignee { position: relative; }
+.figma-workspace .detail-assignee-pill {
+    display: none;
+    position: absolute;
+    inset: 50% auto auto calc(14 * var(--detail-unit));
+    transform: translateY(-50%);
+    padding: calc(3 * var(--detail-unit)) calc(10 * var(--detail-unit));
+    font-size: calc(15 * var(--detail-unit));
+    line-height: calc(20 * var(--detail-unit));
+    pointer-events: none;
+}
+#bookingDetailView .detail-assignee select:has(option[value="Unassigned"]:checked) { color: transparent; appearance: none; background-image: url("../image/portal-chevron.svg"); }
+.detail-assignee select option { color: var(--text-primary); }
+.figma-workspace .detail-assignee select:has(option[value="Unassigned"]:checked) + .detail-assignee-pill { display: inline-block; }
+
+@media (max-width: 960px) {
+    #staffQueueView .kpi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #bookingDetailView .detail-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 700px) {
+    .auth-mode { --auth-unit: 0.58px; }
+    .auth-mode .auth-container { padding-top: 76px; }
+    .auth-mode .auth-card { min-height: 0; }
+    .auth-mode .auth-bg { mask-size: 100% 115%; }
+    .auth-mode .auth-card > form input, .auth-password-field { width: 100%; }
+    .auth-mode .auth-theme-wrap { right: 18px; }
+    #topNav { min-height: 68px; }
+    #topNav .brand-logo-img { width: 55px; height: auto; }
+    #topNav .portal-label { font-size: 16px; }
+    .figma-workspace .app-workspace { padding-top: 24px; }
+    #staffQueueView .kpi-grid { gap: 8px; }
+    #staffQueueView .kpi-card { min-height: 74px; padding: 10px; }
+    #staffQueueView .kpi-label { font-size: 12px; }
+    #staffQueueView .kpi-value { font-size: 24px; }
+    #staffQueueView .filter-bar { padding: 12px; }
+    #staffQueueView .search-input { flex-basis: 100%; }
+    #staffQueueView .filter-select { flex: 1 1 9rem; }
+    #bookingDetailView .panel-card { padding: 18px; }
+    #bookingDetailView .info-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #bookingDetailView .info-grid-3 { grid-template-columns: 1fr; }
+    #bookingDetailView .page-title { font-size: 30px; line-height: 1.2; }
+}
+
+@media (max-width: 380px) {
+    #topNav .portal-label, #topNav .nav-divider { display: none; }
+}
+
+#topNav .nav-left { margin-inline-start: 44px; }
+
+.workspace-sidebar {
+    position: fixed;
+    z-index: 12;
+    inset: 12px auto auto 12px;
+    padding: 4px;
+}
+
+.workspace-sidebar.expanded {
+    display: flex;
+    flex-direction: column;
+    width: min(16rem, calc(100vw - 24px));
+    bottom: 12px;
+    background: var(--bg-card-solid);
+    border-radius: 14px;
+    box-shadow: 0 0 0 1px var(--border-subtle), 0 12px 34px #0005;
+    overflow: auto;
+}
+
+.sidebar-trigger {
+    align-self: flex-start;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.sidebar-trigger .avatar-circle,
+.profile-photo-row .avatar-circle {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    overflow: hidden;
+    background: #ffd054;
+    color: #111827;
+    font-size: 14px;
+}
+
+.avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
+
+.sidebar-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 8px 8px;
+}
+
+.sidebar-identity {
+    display: grid;
+    gap: 4px;
+    padding: 0 8px 14px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-subtle);
+    overflow-wrap: anywhere;
+}
+
+.sidebar-identity span,
+.sidebar-footer > span { color: var(--text-secondary); font-size: 12px; }
+.sidebar-links { display: grid; gap: 3px; }
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 13px;
+    text-align: start;
+    cursor: pointer;
+}
+
+.sidebar-link:hover { background: var(--bg-row-hover); }
+.sidebar-link[aria-current="page"] {
+    background: var(--neutral-pill);
+    color: var(--neutral-ink);
+    border-color: var(--neutral-border);
+    font-weight: 650;
+}
+
+.sidebar-link svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    display: grid;
+    justify-items: start;
+    gap: 8px;
+    padding-block: 16px 4px;
+}
+.sidebar-footer > span, .sidebar-footer .theme-switch { margin-inline-start: 8px; }
+.sidebar-footer .sidebar-link { border-top-color: var(--border-subtle); }
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 16px;
+    max-width: 64rem;
+}
+.profile-grid .card-heading { margin-bottom: 16px; }
+.profile-photo-row { display: flex; align-items: center; gap: 10px; }
+.profile-photo-row input { min-width: 0; padding: 6px; }
+.profile-photo-row input::file-selector-button {
+    margin-inline-end: 8px;
+    padding: 6px 8px;
+    border: 0;
+    border-radius: 5px;
+    background: var(--neutral-pill);
+    color: var(--neutral-ink);
+    cursor: pointer;
+}
+#profilePhotoHint { margin: 8px 0 0; }
+#removeProfilePhoto { margin-top: 10px; }
+#staffManagementView .section-header > button { flex-shrink: 0; min-height: 44px; }
+[data-theme="light"] :is(#profileView, #staffManagementView) .alert-box {
+    background: #fff1f1;
+    border-color: #bb5767;
+    color: #841f30;
+}
+[data-theme="light"] :is(#profileView, #staffManagementView) .alert-box.success {
+    background: #e4f6ed;
+    border-color: #438167;
+    color: #154d39;
+}
+
+@media (max-width: 680px) {
+    .profile-grid { grid-template-columns: minmax(0, 1fr); }
+    .workspace-sidebar { inset: 8px auto auto 8px; }
+    .workspace-sidebar.expanded { bottom: 8px; }
+}
