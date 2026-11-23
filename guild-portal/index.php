@@ -245,7 +245,6 @@ function passwordVisibilityButton(string $inputId): void
 
         <!-- STAFF VIEW: BOOKING DETAIL & ASSIGNMENT -->
         <section id="bookingDetailView" class="workspace-section booking-font hidden">
-            <button id="backToQueueBtn" class="btn-pill-back" type="button">← Back to queue</button>
 
             <div class="detail-header">
                 <div>
@@ -323,14 +322,12 @@ function passwordVisibilityButton(string $inputId): void
                         </div>
                         <div class="form-group">
                             <label for="detailAssigneeSelect">Assigned to</label>
-                            <div class="detail-assignee">
-                                <select id="detailAssigneeSelect" class="form-control"></select>
-                                <span class="assignee-pill detail-assignee-pill" aria-hidden="true">Unassigned</span>
-                            </div>
+                            <select id="detailAssigneeSelect" class="form-control"></select>
                         </div>
                         <hr class="card-divider">
                         <button id="saveBookingBtn" class="btn-gold-full" type="button">Save changes</button>
-                        <div id="saveToast" class="save-toast hidden">Changes saved!</div>
+                        <button id="assignAllBookingsBtn" class="btn-ghost-sm hidden" type="button" disabled>Assign all bookings</button>
+                        <div id="saveToast" class="save-toast hidden" role="status"></div>
                     </div>
                 </div>
             </div>
@@ -418,6 +415,8 @@ function passwordVisibilityButton(string $inputId): void
                     <div class="form-group">
                         <label for="staffBookingAccess">Booking permissions</label>
                         <select id="staffBookingAccess">
+                            <option value="review_all">View and update all bookings</option>
+                            <option value="view_all">View all bookings only</option>
                             <option value="review">View and update assigned bookings</option>
                             <option value="view">View assigned bookings only</option>
                             <option value="none">No booking access</option>

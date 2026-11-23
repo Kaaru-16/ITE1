@@ -7,6 +7,8 @@ let currentUser = null;
 let allBookings = [];
 let allUsers = [];
 let activeBookingRef = null;
+let savingBooking = false;
+let bookingFeedbackTimer;
 
 const today = new Date();
 let calYear = today.getFullYear();
@@ -235,9 +237,14 @@ function bindWorkspaceMenu() {
         if (!sidebar.contains(event.target)) close();
     });
     document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && sidebar.classList.contains('expanded')) {
+        if (event.key !== 'Escape' || event.defaultPrevented || event.repeat || document.querySelector('dialog[open]')) return;
+        if (sidebar.classList.contains('expanded')) {
             if (sidebar.contains(document.activeElement)) trigger.focus();
             close();
+            event.preventDefault();
+        } else if (!byId('bookingDetailView').classList.contains('hidden')) {
+            event.preventDefault();
+            returnToBookingQueue();
         }
     });
     document.querySelectorAll('[data-workspace-view]').forEach(link => {
@@ -319,12 +326,14 @@ function renderDashboardData(data) {
     allBookings = data.bookings || [];
     allUsers = data.users || [];
     const admin = currentUser.role === 'admin';
-    const canReview = admin || currentUser.booking_access === 'review';
+    const canReview = admin || ['review', 'review_all'].includes(currentUser.booking_access);
     byId('assigneeFilter').classList.toggle('hidden', !admin);
     byId('detailAssigneeSelect').disabled = !admin;
     byId('detailStatusSelect').disabled = !canReview;
     byId('saveBookingBtn').classList.toggle('hidden', !canReview);
+    byId('assignAllBookingsBtn').classList.toggle('hidden', !admin);
     populateStaffDropdowns();
+    updateBookingButtons();
     renderStaffQueue();
     if (admin) {
         renderAdminDashboard();
@@ -370,38 +379,65 @@ function bindWorkspaceEvents() {
         byId(id).addEventListener('change', renderStaffQueue);
     }
 
-    byId('backToQueueBtn').addEventListener('click', () => {
-        switchSection('staffQueueView');
-    });
-
-    byId('saveBookingBtn').addEventListener('click', async () => {
-        if (!activeBookingRef) return;
-        const status = byId('detailStatusSelect').value;
-        const assigned_to = byId('detailAssigneeSelect').value;
-
-        const data = await post('update_booking', { reference: activeBookingRef, status, assigned_to });
-        if (data.success) {
-            allBookings = data.bookings;
-            renderStaffQueue();
-            renderAdminDashboard();
-
-            const badge = byId('detailStatusBadge');
-            badge.textContent = status;
-            badge.className = `status-badge status-${status.replace(/\s+/g, '-')}`;
-
-            const toast = byId('saveToast');
-            toast.textContent = 'Changes saved.';
-            toast.className = 'save-toast';
-            setTimeout(() => { if (toast.className === 'save-toast') toast.classList.add('hidden'); }, 2200);
-        } else {
-            const toast = byId('saveToast');
-            toast.textContent = data.error || 'The booking could not be saved.';
-            toast.className = 'alert-box';
-        }
-    });
+    byId('detailAssigneeSelect').addEventListener('change', updateBookingButtons);
+    byId('saveBookingBtn').addEventListener('click', () => saveBookingChanges(false));
+    byId('assignAllBookingsBtn').addEventListener('click', () => saveBookingChanges(true));
 
     byId('prevMonthBtn').addEventListener('click', () => moveCalendar(-1));
     byId('nextMonthBtn').addEventListener('click', () => moveCalendar(1));
+}
+
+function canAssignBookings(user) {
+    return user.role === 'staff' && user.status === 'approved' && user.booking_access !== 'none';
+}
+
+function selectedAssignee() {
+    const id = byId('detailAssigneeSelect').value;
+    return allUsers.find(user => String(user.id) === id && canAssignBookings(user));
+}
+
+function updateBookingButtons() {
+    byId('saveBookingBtn').disabled = savingBooking;
+    byId('assignAllBookingsBtn').disabled = savingBooking || !selectedAssignee();
+}
+
+async function saveBookingChanges(assignAll) {
+    if (savingBooking || !activeBookingRef) return;
+    const reference = activeBookingRef;
+    const status = byId('detailStatusSelect').value;
+    const assigned_to = byId('detailAssigneeSelect').value;
+    if (assignAll) {
+        const staff = selectedAssignee();
+        if (currentUser.role !== 'admin' || !staff
+            || !window.confirm(`Assign every booking to ${staff.name}? This replaces existing staff assignments.`)) return;
+    }
+
+    savingBooking = true;
+    updateBookingButtons();
+    const data = assignAll
+        ? await post('assign_all_bookings', { assigned_to })
+        : await post('update_booking', { reference, status, assigned_to });
+    savingBooking = false;
+    updateBookingButtons();
+    if (data.success) {
+        allBookings = data.bookings;
+        renderStaffQueue();
+        renderAdminDashboard();
+    }
+
+    if (reference !== activeBookingRef || byId('bookingDetailView').classList.contains('hidden')) return;
+    if (data.success && !assignAll) {
+        const badge = byId('detailStatusBadge');
+        badge.textContent = status;
+        badge.className = `status-badge status-${status.replace(/\s+/g, '-')}`;
+    }
+    const toast = byId('saveToast');
+    clearTimeout(bookingFeedbackTimer);
+    toast.className = data.success ? 'save-toast' : 'alert-box';
+    toast.textContent = data.success
+        ? (assignAll ? `All bookings assigned. ${data.updated} ${data.updated === 1 ? 'booking updated' : 'bookings updated'}.` : 'Changes saved.')
+        : (data.error || 'The changes could not be saved.');
+    if (data.success) bookingFeedbackTimer = setTimeout(() => toast.classList.add('hidden'), 3000);
 }
 
 function moveCalendar(offset) {
@@ -413,7 +449,7 @@ function moveCalendar(offset) {
 }
 
 function populateStaffDropdowns() {
-    const approvedStaff = allUsers.filter(u => u.role === 'staff' && u.status === 'approved' && u.booking_access !== 'none');
+    const approvedStaff = allUsers.filter(canAssignBookings);
     const staffValue = user => String(user.id);
     const assignees = new Map(approvedStaff.map(user => [staffValue(user), user.name]));
     for (const booking of allBookings) {
@@ -442,13 +478,15 @@ function renderStaffQueue() {
     const access = currentUser.booking_access;
     if (isStaff) {
         const descriptions = {
+            review_all: 'Review any booking in the queue and update its status.',
+            view_all: 'View all bookings in the queue.',
             review: 'Review bookings assigned to you and update their status.',
             view: 'View bookings assigned to you.',
             none: 'The Director manages booking access.'
         };
         byId('bookingQueueSubtitle').textContent = descriptions[access] || descriptions.view;
     }
-    const bookingAction = isStaff && access === 'review' ? 'Review' : 'View';
+    const bookingAction = isStaff && ['review', 'review_all'].includes(access) ? 'Review' : 'View';
     const search = byId('searchInput').value.toLowerCase();
     const nation = byId('nationFilter').value;
     const status = byId('statusFilter').value;
@@ -490,6 +528,7 @@ function renderStaffQueue() {
         tr.insertCell().append(assignee);
         const view = makeButton(bookingAction, 'action-link', () => openBookingDetail(b.reference));
         view.setAttribute('aria-label', bookingAction + ' booking ' + b.reference);
+        view.dataset.bookingReference = b.reference;
         tr.insertCell().append(view);
     }
     if (!filtered.length) {
@@ -498,13 +537,19 @@ function renderStaffQueue() {
         if (isStaff && access === 'none') {
             cell.textContent = 'Your account has no booking access.';
         } else {
-            cell.textContent = isStaff && !allBookings.length
+            cell.textContent = isStaff && ['view', 'review'].includes(access) && !allBookings.length
                 ? 'No bookings have been assigned to you yet.'
                 : 'No bookings match these filters.';
         }
     }
 
     byId('tableFooterCount').textContent = `Showing ${filtered.length} ${filtered.length === 1 ? 'booking' : 'bookings'}`;
+}
+
+function returnToBookingQueue() {
+    switchSection('staffQueueView');
+    const previousRow = byId('bookingsTableBody').querySelector(`[data-booking-reference="${CSS.escape(activeBookingRef ?? '')}"]`);
+    (previousRow || byId('searchInput')).focus();
 }
 
 function openBookingDetail(ref) {
@@ -536,6 +581,8 @@ function openBookingDetail(ref) {
     const value = assigneeValue(b);
     if (![...assignee.options].some(o => o.value === value)) assignee.add(new Option(b.assigned_to, value));
     assignee.value = value;
+    updateBookingButtons();
+    byId('saveToast').classList.add('hidden');
 
     switchSection('bookingDetailView');
 }

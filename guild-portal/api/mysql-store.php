@@ -29,7 +29,7 @@ function liveUser(array $record, bool $ownAccount = false): array
 
 function liveBookings(PDO $db, array $actor): array
 {
-    if ($actor['role'] === 'staff' && !in_array($actor['booking_access'], ['view', 'review'], true)) {
+    if ($actor['role'] === 'staff' && !in_array($actor['booking_access'], ['view', 'review', 'view_all', 'review_all'], true)) {
         return [];
     }
     $sql = 'SELECT o.order_id, o.travel_date, o.pax_number, o.order_status, o.order_req,
@@ -41,7 +41,7 @@ function liveBookings(PDO $db, array $actor): array
             JOIN nations AS n ON n.nation_id = p.nation_id
             LEFT JOIN users AS u ON u.user_id = o.assigned_user_id';
     $params = [];
-    if ($actor['role'] !== 'admin') {
+    if ($actor['role'] !== 'admin' && !in_array($actor['booking_access'], ['view_all', 'review_all'], true)) {
         $sql .= ' WHERE o.assigned_user_id = ?';
         $params[] = $actor['id'];
     }
@@ -88,7 +88,7 @@ function saveLiveStaff(PDO $db, array $input, bool $signup): never
     }
     $access = !$signup && array_key_exists('booking_access', $input)
         ? field($input, 'booking_access') : ($current ?? 'review');
-    if (!in_array($access, ['none', 'view', 'review'], true)) {
+    if (!in_array($access, ['none', 'view', 'review', 'view_all', 'review_all'], true)) {
         reply(['error' => 'Choose valid booking permissions.'], 422);
     }
     try {
@@ -117,10 +117,17 @@ function saveLiveStaff(PDO $db, array $input, bool $signup): never
         : 'Staff account saved.']);
 }
 
+function eligibleAssignee(PDO $db, string $id): bool
+{
+    return (bool) liveQuery($db, "SELECT user_id FROM users WHERE user_id = ? AND role = 'staff'
+        AND access_status = 'approved' AND booking_access IN ('view', 'review', 'view_all', 'review_all') FOR UPDATE",
+        [$id])->fetchColumn();
+}
+
 function updateLiveBooking(PDO $db, array $actor, array $input): never
 {
     $isAdmin = $actor['role'] === 'admin';
-    if (!$isAdmin && $actor['booking_access'] !== 'review') {
+    if (!$isAdmin && !in_array($actor['booking_access'], ['review', 'review_all'], true)) {
         reply(['error' => 'Your account cannot update booking statuses.'], 403);
     }
     $status = field($input, 'status');
@@ -136,23 +143,29 @@ function updateLiveBooking(PDO $db, array $actor, array $input): never
     try {
         $booking = liveQuery($db, 'SELECT assigned_user_id FROM order_details WHERE order_id = ? FOR UPDATE',
             [$reference])->fetch();
-        if (!$booking || (!$isAdmin && (int) $booking['assigned_user_id'] !== $actor['id'])) {
+        if (!$booking) {
             $db->rollBack();
             reply(['error' => 'Booking unavailable.'], 404);
         }
-        if (!$isAdmin && !liveQuery($db, "SELECT 1 FROM users WHERE user_id = ? AND role = 'staff'
-                    AND access_status = 'approved' AND booking_access = 'review' FOR UPDATE", [$actor['id']])->fetchColumn()) {
-            $db->rollBack();
-            reply(['error' => 'Your account cannot update booking statuses.'], 403);
+        if (!$isAdmin) {
+            // Recheck the scope while locked in case the Director changed permissions mid-request.
+            $access = liveQuery($db, "SELECT booking_access FROM users WHERE user_id = ? AND role = 'staff'
+                        AND access_status = 'approved' FOR UPDATE", [$actor['id']])->fetchColumn();
+            if (!in_array($access, ['review', 'review_all'], true)) {
+                $db->rollBack();
+                reply(['error' => 'Your account cannot update booking statuses.'], 403);
+            }
+            if ($access === 'review' && (int) $booking['assigned_user_id'] !== $actor['id']) {
+                $db->rollBack();
+                reply(['error' => 'Booking unavailable.'], 404);
+            }
         }
         $assignedId = $booking['assigned_user_id'];
         if ($isAdmin) {
             if ($assignee === 'Unassigned') {
                 $assignedId = null;
             } elseif (!preg_match('/\A[1-9][0-9]{0,19}\z/', $assignee)
-                || ($assignee !== (string) $assignedId && !liveQuery($db, "SELECT user_id FROM users
-                     WHERE user_id = ? AND role = 'staff' AND access_status = 'approved' AND booking_access IN ('view', 'review') FOR UPDATE",
-                    [$assignee])->fetchColumn())) {
+                || ($assignee !== (string) $assignedId && !eligibleAssignee($db, $assignee))) {
                 $db->rollBack();
                 reply(['error' => 'Choose an approved staff member with booking access.'], 422);
             } else {
@@ -171,6 +184,30 @@ function updateLiveBooking(PDO $db, array $actor, array $input): never
     reply(['success' => true, 'bookings' => liveBookings($db, $actor)]);
 }
 
+function assignAllBookings(PDO $db, array $actor, array $input): never
+{
+    $assignee = field($input, 'assigned_to');
+    if (!preg_match('/\A[1-9][0-9]{0,19}\z/', $assignee)) {
+        reply(['error' => 'Select a staff member to assign all bookings.'], 422);
+    }
+    $db->beginTransaction();
+    try {
+        // Match the single-booking action's lock order before checking staff access.
+        liveQuery($db, 'SELECT order_id FROM order_details ORDER BY order_id FOR UPDATE')->closeCursor();
+        if (!eligibleAssignee($db, $assignee)) {
+            $db->rollBack();
+            reply(['error' => 'Choose an approved staff member with booking access.'], 422);
+        }
+        $updated = liveQuery($db, 'UPDATE order_details SET assigned_user_id = ?
+                                     WHERE assigned_user_id IS NULL OR assigned_user_id <> ?', [$assignee, $assignee])->rowCount();
+        $db->commit();
+    } catch (Throwable $error) {
+        if ($db->inTransaction()) $db->rollBack();
+        throw $error;
+    }
+    reply(['success' => true, 'updated' => $updated, 'bookings' => liveBookings($db, $actor)]);
+}
+
 function handleLivePortal(PDO $db, string $action, array $input): never
 {
     $actor = null;
@@ -185,7 +222,7 @@ function handleLivePortal(PDO $db, string $action, array $input): never
         }
     }
     $isAdmin = ($actor['role'] ?? null) === 'admin';
-    if (in_array($action, ['save_staff', 'approve_staff'], true) && !$isAdmin) {
+    if (in_array($action, ['save_staff', 'approve_staff', 'assign_all_bookings'], true) && !$isAdmin) {
         reply(['error' => 'Admin access required.'], 403);
     }
     if (in_array($action, ['dashboard_data', 'update_booking', 'update_profile', 'change_password'], true) && !$actor) {
@@ -254,6 +291,9 @@ function handleLivePortal(PDO $db, string $action, array $input): never
 
         case 'update_booking':
             updateLiveBooking($db, $actor, $input);
+
+        case 'assign_all_bookings':
+            assignAllBookings($db, $actor, $input);
 
         case 'approve_staff':
             $id = (int) ($input['user_id'] ?? 0);

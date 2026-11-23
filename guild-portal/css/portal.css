@@ -577,17 +577,6 @@ body.workspace-mode .app-bg { opacity: 1; }
 }
 
 /* Booking Detail View */
-.btn-pill-back {
-    background: rgba(19, 27, 38, 0.85);
-    border: 1px solid var(--border-subtle);
-    color: var(--gold);
-    padding: 7px 16px;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor: pointer;
-    margin-bottom: 16px;
-}
-
 .detail-header {
     display: flex;
     justify-content: space-between;

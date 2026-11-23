@@ -6,7 +6,7 @@ header('Content-Type: application/json');
 $action = field($_GET, 'action');
 $input = json_decode(file_get_contents('php://input'), true);
 $input = is_array($input) ? $input : [];
-if (in_array($action, ['login', 'signup', 'logout', 'update_booking', 'save_staff', 'approve_staff', 'update_profile', 'change_password'], true)) {
+if (in_array($action, ['login', 'signup', 'logout', 'update_booking', 'assign_all_bookings', 'save_staff', 'approve_staff', 'update_profile', 'change_password'], true)) {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         header('Allow: POST');
         reply(['error' => 'Use POST to make this change.'], 405);
