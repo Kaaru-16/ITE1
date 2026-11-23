@@ -109,7 +109,7 @@ function passwordVisibilityButton(string $inputId): void
                 </div>
                 <div class="form-group">
                     <label for="loginPassword">Password</label>
-                    <div class="auth-password-field">
+                    <div class="password-field">
                         <input type="password" id="loginPassword" autocomplete="current-password" placeholder="Enter your password" aria-describedby="loginPasswordError loginAlert" required>
                         <?php passwordVisibilityButton('loginPassword'); ?>
                     </div>
@@ -138,7 +138,7 @@ function passwordVisibilityButton(string $inputId): void
                 </div>
                 <div class="form-group">
                     <label for="signupPassword">Password</label>
-                    <div class="auth-password-field">
+                    <div class="password-field">
                         <input type="password" id="signupPassword" autocomplete="new-password" minlength="8" placeholder="Create a password" aria-describedby="signupPasswordError signupAlert" required>
                         <?php passwordVisibilityButton('signupPassword'); ?>
                     </div>
@@ -176,7 +176,7 @@ function passwordVisibilityButton(string $inputId): void
             <div class="section-header">
                 <div>
                     <h1 class="page-title">Booking queue</h1>
-                    <p class="page-subtitle">Pending inquiries appear first. Search or filter to find a booking.</p>
+                    <p id="bookingQueueSubtitle" class="page-subtitle">Pending inquiries appear first. Search or filter to find a booking.</p>
                 </div>
             </div>
 
@@ -350,7 +350,7 @@ function passwordVisibilityButton(string $inputId): void
                 </div>
             </div>
 
-            <p class="admin-metric-note"><span id="adminSampleNotice" class="hidden">Sample data. </span>Totals show confirmed booking value by travel date.</p>
+            <p class="admin-metric-note">Totals show confirmed booking value by travel date.</p>
             <div class="kpi-grid">
                 <div class="kpi-card">
                     <span class="kpi-label">Selected day · <span id="selectedDayLabel"></span></span>
@@ -415,6 +415,14 @@ function passwordVisibilityButton(string $inputId): void
                     <div class="form-group"><label for="staffStatus">Access status</label><select id="staffStatus">
                         <option value="approved">Approved</option><option value="pending">Pending</option><option value="rejected">Rejected</option><option value="disabled">Deactivated</option>
                     </select></div>
+                    <div class="form-group">
+                        <label for="staffBookingAccess">Booking permissions</label>
+                        <select id="staffBookingAccess">
+                            <option value="review">View and update assigned bookings</option>
+                            <option value="view">View assigned bookings only</option>
+                            <option value="none">No booking access</option>
+                        </select>
+                    </div>
                     <div class="staff-actions">
                         <button type="button" id="cancelStaffBtn" class="btn-ghost-sm">Cancel</button>
                         <button type="submit" class="btn-approve">Save staff account</button>
@@ -446,28 +454,59 @@ function passwordVisibilityButton(string $inputId): void
                             <input id="profilePhoto" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="profilePhotoHint">
                         </div>
                         <p id="profilePhotoHint" class="card-sub">JPEG, PNG, or WebP up to 5 MB.</p>
-                        <button id="removeProfilePhoto" type="button" class="btn-ghost-sm hidden">Remove photo</button>
+                        <div class="profile-photo-actions">
+                            <button id="adjustProfilePhoto" type="button" class="btn-ghost-sm hidden" aria-controls="profilePhotoEditor" aria-expanded="false">Adjust photo</button>
+                            <button id="removeProfilePhoto" type="button" class="btn-ghost-sm hidden">Remove photo</button>
+                        </div>
+                        <fieldset id="profilePhotoEditor" class="profile-photo-editor hidden">
+                            <legend>Adjust photo</legend>
+                            <canvas id="profileCropPreview" width="256" height="256" role="img" aria-label="Circular profile photo preview"></canvas>
+                            <div class="profile-crop-controls">
+                                <label for="profileCropZoom">Zoom</label>
+                                <input id="profileCropZoom" type="range" min="1" max="3" step="0.05" value="1">
+                                <label for="profileCropX">Horizontal position</label>
+                                <input id="profileCropX" type="range" min="0" max="100" value="50">
+                                <label for="profileCropY">Vertical position</label>
+                                <input id="profileCropY" type="range" min="0" max="100" value="50">
+                                <button id="resetProfileCrop" type="button" class="btn-ghost-sm">Reset crop</button>
+                            </div>
+                        </fieldset>
                     </div>
-                    <button type="submit" class="btn-gold-full">Save profile</button>
+                    <div class="profile-actions">
+                        <button type="submit" class="btn-gold-full">Save profile</button>
+                    </div>
                 </form>
-                <form id="passwordForm" class="panel-card">
-                    <h2 class="card-heading">Change password</h2>
+                <div class="password-panel">
+                    <form id="passwordForm" class="panel-card">
+                        <h2 class="card-heading">Change password</h2>
+                        <input id="passwordUsername" type="email" autocomplete="username" hidden>
+                        <div class="form-group">
+                            <label for="currentPassword">Current password</label>
+                            <div class="password-field">
+                                <input id="currentPassword" type="password" autocomplete="current-password" required>
+                                <?php passwordVisibilityButton('currentPassword'); ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New password</label>
+                            <div class="password-field">
+                                <input id="newPassword" type="password" autocomplete="new-password" minlength="8" required>
+                                <?php passwordVisibilityButton('newPassword'); ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm new password</label>
+                            <div class="password-field">
+                                <input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" required>
+                                <?php passwordVisibilityButton('confirmPassword'); ?>
+                            </div>
+                        </div>
+                        <div class="profile-actions">
+                            <button type="submit" class="btn-gold-full">Change password</button>
+                        </div>
+                    </form>
                     <p id="passwordMessage" role="status" class="alert-box hidden"></p>
-                    <input id="passwordUsername" type="email" autocomplete="username" hidden>
-                    <div class="form-group">
-                        <label for="currentPassword">Current password</label>
-                        <input id="currentPassword" type="password" autocomplete="current-password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="newPassword">New password</label>
-                        <input id="newPassword" type="password" autocomplete="new-password" minlength="8" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm new password</label>
-                        <input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" required>
-                    </div>
-                    <button type="submit" class="btn-gold-full">Change password</button>
-                </form>
+                </div>
             </div>
         </section>
 

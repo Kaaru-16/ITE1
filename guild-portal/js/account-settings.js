@@ -12,41 +12,104 @@ export function paintAvatar(target, name, photo) {
     }
 }
 
-// Resize and re-encode photos before sending them to the portal.
-async function prepareProfilePhoto(file) {
-    const image = await createImageBitmap(file);
-    try {
-        const size = Math.min(image.width, image.height);
-        const canvas = document.createElement('canvas');
-        canvas.width = canvas.height = 256;
-        const context = canvas.getContext('2d', { alpha: false });
-        context.fillStyle = '#ffffff';
-        context.fillRect(0, 0, 256, 256);
-        context.drawImage(image, (image.width - size) / 2, (image.height - size) / 2, size, size, 0, 0, 256, 256);
-        return canvas.toDataURL('image/jpeg', 0.82);
-    } finally {
-        image.close();
-    }
+// Keep the square crop inside the source image at every zoom level.
+function drawPhotoCrop(canvas, image, zoom, horizontal, vertical) {
+    const size = Math.min(image.width, image.height) / zoom;
+    const left = (image.width - size) * horizontal;
+    const top = (image.height - size) * vertical;
+    const context = canvas.getContext('2d', { alpha: false });
+    context.fillStyle = '#fff';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(image, left, top, size, size, 0, 0, canvas.width, canvas.height);
 }
 
 export function bindProfileForms({ getUser, updateUser, post, showMessage }) {
-    let removePhoto = false;
-    let previewUrl = '';
+    const form = byId('profileForm');
+    const photoInput = byId('profilePhoto');
+    const nameInput = byId('profileName');
+    const adjustPhoto = byId('adjustProfilePhoto');
+    const removeButton = byId('removeProfilePhoto');
+    const editor = byId('profilePhotoEditor');
+    const canvas = byId('profileCropPreview');
+    const zoom = byId('profileCropZoom');
+    const horizontal = byId('profileCropX');
+    const vertical = byId('profileCropY');
 
-    function refreshProfilePreview(file) {
-        if (previewUrl) URL.revokeObjectURL(previewUrl);
-        previewUrl = file ? URL.createObjectURL(file) : '';
-        const photo = previewUrl || (!removePhoto && getUser().profile_photo);
-        paintAvatar(byId('profilePreview'), byId('profileName').value, photo);
-        byId('removeProfilePhoto').classList.toggle('hidden', !photo);
+    let removePhoto = false;
+    let cropImage = null;
+    let cropDirty = false;
+    let imageRequest = 0;
+    let loadingPhoto = false;
+
+    function showCropEditor(open) {
+        editor.classList.toggle('hidden', !open);
+        adjustPhoto.setAttribute('aria-expanded', String(open));
+        adjustPhoto.textContent = open ? 'Hide crop controls' : 'Adjust photo';
+    }
+
+    function clearCrop() {
+        imageRequest++;
+        loadingPhoto = false;
+        cropImage?.close();
+        cropImage = null;
+        cropDirty = false;
+        showCropEditor(false);
+    }
+
+    function refreshProfilePreview() {
+        const photo = !removePhoto && getUser().profile_photo;
+        paintAvatar(byId('profilePreview'), nameInput.value, photo);
+        adjustPhoto.classList.toggle('hidden', !photo && !cropImage);
+        removeButton.classList.toggle('hidden', !photo && !cropImage);
+    }
+
+    function renderCrop() {
+        if (!cropImage) return;
+        drawPhotoCrop(canvas, cropImage, zoom.valueAsNumber, horizontal.valueAsNumber / 100, vertical.valueAsNumber / 100);
+    }
+
+    function resetCrop() {
+        for (const control of [zoom, horizontal, vertical]) control.value = control.defaultValue;
+        renderCrop();
+    }
+
+    async function loadCrop(source, isNewPhoto) {
+        clearCrop();
+        const request = imageRequest;
+        loadingPhoto = true;
+        showMessage('profileMessage');
+        try {
+            const file = isNewPhoto ? source : await (await fetch(source)).blob();
+            const image = await createImageBitmap(file);
+            // A reset or another file selection can supersede a pending decode.
+            if (request !== imageRequest) {
+                image.close();
+                return;
+            }
+            cropImage = image;
+            cropDirty = isNewPhoto;
+            removePhoto = false;
+            resetCrop();
+            showCropEditor(true);
+            refreshProfilePreview();
+        } catch {
+            if (request !== imageRequest) return;
+            photoInput.value = '';
+            clearCrop();
+            refreshProfilePreview();
+            showMessage('profileMessage', 'The photo could not be opened. Choose another image and try again.');
+        } finally {
+            if (request === imageRequest) loadingPhoto = false;
+        }
     }
 
     function resetProfileForms() {
         const user = getUser();
         removePhoto = false;
-        byId('profileForm').reset();
+        clearCrop();
+        form.reset();
         byId('passwordForm').reset();
-        byId('profileName').value = user.name;
+        nameInput.value = user.name;
         byId('profileEmail').value = user.email;
         byId('passwordUsername').value = user.email;
         refreshProfilePreview();
@@ -54,36 +117,46 @@ export function bindProfileForms({ getUser, updateUser, post, showMessage }) {
         showMessage('passwordMessage');
     }
 
-    const form = byId('profileForm');
-    const photoInput = byId('profilePhoto');
-    const nameInput = byId('profileName');
-    nameInput.addEventListener('input', () => {
-        if (!previewUrl) refreshProfilePreview();
-    });
+    nameInput.addEventListener('input', refreshProfilePreview);
     photoInput.addEventListener('change', () => {
         const file = photoInput.files[0];
-        if (file && (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024)) {
+        if (!file) return;
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 5 * 1024 * 1024) {
             photoInput.value = '';
+            clearCrop();
             refreshProfilePreview();
             showMessage('profileMessage', 'Choose a JPEG, PNG, or WebP image up to 5 MB.');
             return;
         }
-        showMessage('profileMessage');
-        refreshProfilePreview(file);
+        loadCrop(file, true);
     });
-    byId('removeProfilePhoto').addEventListener('click', () => {
+    adjustPhoto.addEventListener('click', () => {
+        if (loadingPhoto) return;
+        if (cropImage) showCropEditor(editor.classList.contains('hidden'));
+        else if (getUser().profile_photo) loadCrop(getUser().profile_photo, false);
+    });
+    removeButton.addEventListener('click', () => {
         removePhoto = true;
         photoInput.value = '';
+        clearCrop();
         refreshProfilePreview();
     });
+    for (const control of [zoom, horizontal, vertical]) {
+        control.addEventListener('input', () => {
+            cropDirty = true;
+            renderCrop();
+        });
+    }
+    byId('resetProfileCrop').addEventListener('click', resetCrop);
+
     form.addEventListener('submit', async event => {
         event.preventDefault();
         const button = form.querySelector('[type="submit"]');
+        if (button.disabled || loadingPhoto) return;
         button.disabled = true;
         const payload = { name: nameInput.value };
         try {
-            const file = photoInput.files[0];
-            if (file) payload.profile_photo = await prepareProfilePhoto(file);
+            if (cropDirty) payload.profile_photo = canvas.toDataURL('image/jpeg', 0.82);
             else if (removePhoto) payload.profile_photo = null;
             const result = await post('update_profile', payload);
             if (!result.success) {

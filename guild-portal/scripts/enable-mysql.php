@@ -43,11 +43,9 @@ try {
     if (!in_array('profile_photo', $columns, true)) {
         $pdo->exec('ALTER TABLE users ADD profile_photo MEDIUMTEXT NULL');
     }
+    ensureBookingAccessColumn($pdo);
 
-    if (file_put_contents($configDir . '/portal.live', "MySQL\n", LOCK_EX) === false) {
-        throw new RuntimeException('Could not enable the live portal in the local config directory.');
-    }
-    echo "MySQL is enabled for the Guild Portal. Sign in with the Director account.\n";
+    echo "Guild Portal database setup is complete. Sign in with the Director account.\n";
 } catch (Throwable $error) {
     fwrite(STDERR, 'Setup failed: ' . $error->getMessage() . PHP_EOL);
     exit(1);

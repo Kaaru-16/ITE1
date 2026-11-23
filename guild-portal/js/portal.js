@@ -95,6 +95,22 @@ function setPasswordVisibility(input, button, visible) {
     button.title = label;
 }
 
+function bindPasswordVisibility(form) {
+    const toggles = [...form.querySelectorAll('.password-toggle')];
+    const hidePasswords = () => {
+        for (const button of toggles) {
+            setPasswordVisibility(byId(button.getAttribute('aria-controls')), button, false);
+        }
+    };
+
+    for (const button of toggles) {
+        const input = byId(button.getAttribute('aria-controls'));
+        button.addEventListener('click', () => setPasswordVisibility(input, button, input.type === 'password'));
+    }
+    form.addEventListener('reset', hidePasswords);
+    return hidePasswords;
+}
+
 function bindAuthEvents() {
     const loginForm = byId('loginForm');
     const signupForm = byId('signupForm');
@@ -109,19 +125,14 @@ function bindAuthEvents() {
         [signupForm, signupAlert, loginForm]
     ]) {
         const view = form.closest('.auth-card');
-        const toggle = form.querySelector('.password-toggle');
-        const password = byId(toggle.getAttribute('aria-controls'));
-        toggle.addEventListener('click', () => {
-            setPasswordVisibility(password, toggle, password.type === 'password');
-        });
+        const hidePassword = bindPasswordVisibility(form);
         form.addEventListener('input', event => {
             setAuthFieldError(event.target, '');
             alert.textContent = '';
         });
-        form.addEventListener('reset', () => setPasswordVisibility(password, toggle, false));
         view.querySelector('.auth-switch-link a').addEventListener('click', event => {
             event.preventDefault();
-            setPasswordVisibility(password, toggle, false);
+            hidePassword();
             view.classList.add('hidden');
             otherForm.closest('.auth-card').classList.remove('hidden');
             otherForm.querySelector('input[type="email"]').focus();
@@ -268,14 +279,14 @@ async function enterWorkspace() {
 
     if (!await loadDashboardData()) return;
 
-    switchSection(currentUser.role === 'admin' ? 'adminDashboardView' : 'staffQueueView');
+    switchSection(currentUser.role === 'admin' ? 'adminDashboardView' : 'staffQueueView', false);
 }
 
-function switchSection(sectionId) {
+function switchSection(sectionId, refresh = true) {
     const sections = ['staffQueueView', 'bookingDetailView', 'adminDashboardView', 'staffManagementView', 'profileView'];
     if (!sections.includes(sectionId)) return;
     if (['adminDashboardView', 'staffManagementView'].includes(sectionId) && currentUser?.role !== 'admin') return;
-    document.body.classList.toggle('figma-workspace', ['staffQueueView', 'bookingDetailView'].includes(sectionId));
+    document.body.classList.toggle('figma-workspace', ['staffQueueView', 'bookingDetailView', 'profileView'].includes(sectionId));
     const activeView = sectionId === 'bookingDetailView' ? 'staffQueueView' : sectionId;
     document.querySelectorAll('[data-workspace-view]').forEach(link => {
         if (link.dataset.workspaceView === activeView) link.setAttribute('aria-current', 'page');
@@ -285,12 +296,11 @@ function switchSection(sectionId) {
         byId(id).classList.toggle('hidden', id !== sectionId);
     }
     if (sectionId === 'profileView') resetProfileForms();
+    if (refresh) refreshBookings();
 }
 
-let livePortal = false;
-
 function assigneeValue(booking) {
-    return livePortal ? String(booking.assigned_user_id ?? 'Unassigned') : booking.assigned_to;
+    return String(booking.assigned_user_id ?? 'Unassigned');
 }
 
 async function loadDashboardData() {
@@ -300,21 +310,54 @@ async function loadDashboardData() {
         else window.alert(data.error || 'The workspace could not load.');
         return false;
     }
+    renderDashboardData(data);
+    return true;
+}
+
+function renderDashboardData(data) {
     currentUser = data.user;
     allBookings = data.bookings || [];
     allUsers = data.users || [];
-    livePortal = data.live === true;
     const admin = currentUser.role === 'admin';
-    byId('adminSampleNotice').classList.toggle('hidden', livePortal);
+    const canReview = admin || currentUser.booking_access === 'review';
     byId('assigneeFilter').classList.toggle('hidden', !admin);
     byId('detailAssigneeSelect').disabled = !admin;
+    byId('detailStatusSelect').disabled = !canReview;
+    byId('saveBookingBtn').classList.toggle('hidden', !canReview);
     populateStaffDropdowns();
     renderStaffQueue();
     if (admin) {
         renderAdminDashboard();
         renderStaffApprovals();
     }
-    return true;
+}
+
+let refreshingBookings = false;
+
+function showingBookingSummary() {
+    return currentUser && document.visibilityState === 'visible'
+        && ['staffQueueView', 'adminDashboardView'].some(id => !byId(id).classList.contains('hidden'));
+}
+
+async function refreshBookings() {
+    if (refreshingBookings || !showingBookingSummary()) return;
+    refreshingBookings = true;
+    const previousBookings = allBookings;
+    const previousUsers = allUsers;
+    try {
+        const data = await request('dashboard_data');
+        // Leave active forms alone and discard results overtaken by a local save.
+        if (!showingBookingSummary() || previousBookings !== allBookings || previousUsers !== allUsers) return;
+        if (data.httpStatus === 401) {
+            location.reload();
+        } else if (data.user && (data.user.booking_access !== currentUser.booking_access
+            || JSON.stringify(data.bookings) !== JSON.stringify(previousBookings)
+            || JSON.stringify(data.users) !== JSON.stringify(previousUsers))) {
+            renderDashboardData(data);
+        }
+    } finally {
+        refreshingBookings = false;
+    }
 }
 
 function bindWorkspaceEvents() {
@@ -370,8 +413,8 @@ function moveCalendar(offset) {
 }
 
 function populateStaffDropdowns() {
-    const approvedStaff = allUsers.filter(u => u.role === 'staff' && u.status === 'approved');
-    const staffValue = user => livePortal ? String(user.id) : user.name;
+    const approvedStaff = allUsers.filter(u => u.role === 'staff' && u.status === 'approved' && u.booking_access !== 'none');
+    const staffValue = user => String(user.id);
     const assignees = new Map(approvedStaff.map(user => [staffValue(user), user.name]));
     for (const booking of allBookings) {
         const value = assigneeValue(booking);
@@ -395,6 +438,17 @@ function populateStaffDropdowns() {
 }
 
 function renderStaffQueue() {
+    const isStaff = currentUser.role === 'staff';
+    const access = currentUser.booking_access;
+    if (isStaff) {
+        const descriptions = {
+            review: 'Review bookings assigned to you and update their status.',
+            view: 'View bookings assigned to you.',
+            none: 'The Director manages booking access.'
+        };
+        byId('bookingQueueSubtitle').textContent = descriptions[access] || descriptions.view;
+    }
+    const bookingAction = isStaff && access === 'review' ? 'Review' : 'View';
     const search = byId('searchInput').value.toLowerCase();
     const nation = byId('nationFilter').value;
     const status = byId('statusFilter').value;
@@ -434,17 +488,23 @@ function renderStaffQueue() {
         assignee.textContent = b.assigned_to;
         if (b.assigned_to === 'Unassigned') assignee.className = 'assignee-pill';
         tr.insertCell().append(assignee);
-        const view = makeButton('View', 'action-link', () => openBookingDetail(b.reference));
-        view.setAttribute('aria-label', 'View booking ' + b.reference);
+        const view = makeButton(bookingAction, 'action-link', () => openBookingDetail(b.reference));
+        view.setAttribute('aria-label', bookingAction + ' booking ' + b.reference);
         tr.insertCell().append(view);
     }
     if (!filtered.length) {
         const cell = tbody.insertRow().insertCell();
         cell.colSpan = 8;
-        cell.textContent = 'No bookings match these filters.';
+        if (isStaff && access === 'none') {
+            cell.textContent = 'Your account has no booking access.';
+        } else {
+            cell.textContent = isStaff && !allBookings.length
+                ? 'No bookings have been assigned to you yet.'
+                : 'No bookings match these filters.';
+        }
     }
 
-    byId('tableFooterCount').textContent = `Showing ${filtered.length} bookings`;
+    byId('tableFooterCount').textContent = `Showing ${filtered.length} ${filtered.length === 1 ? 'booking' : 'bookings'}`;
 }
 
 function openBookingDetail(ref) {
@@ -648,6 +708,7 @@ function openStaffEditor(user) {
     password.required = !user;
     password.placeholder = user ? 'Leave blank to keep the current password' : 'At least 8 characters';
     byId('staffStatus').value = user?.status || 'approved';
+    byId('staffBookingAccess').value = user?.booking_access || 'review';
     byId('staffEditorError').classList.add('hidden');
     byId('staffEditor').showModal();
 }
@@ -661,7 +722,8 @@ async function saveStaffEditor(event) {
         name: byId('staffName').value,
         email: byId('staffEmail').value,
         password: byId('staffPassword').value,
-        status: byId('staffStatus').value
+        status: byId('staffStatus').value,
+        booking_access: byId('staffBookingAccess').value
     });
     submit.disabled = false;
     if (!data.success) {
@@ -701,5 +763,8 @@ const resetProfileForms = bindProfileForms({
 
 initTheme();
 bindAuthEvents();
+bindPasswordVisibility(byId('passwordForm'));
 bindWorkspaceEvents();
+document.addEventListener('visibilitychange', refreshBookings);
+setInterval(refreshBookings, 30000);
 checkSession();
