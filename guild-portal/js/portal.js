@@ -198,7 +198,7 @@ function bindAuthEvents() {
 function renderWorkspaceIdentity() {
     paintAvatar(byId('workspaceAvatar'), currentUser.name, currentUser.profile_photo);
     byId('workspaceUserName').textContent = currentUser.name;
-    byId('workspaceUserRole').textContent = currentUser.role === 'admin' ? 'Admin' : 'Staff';
+    byId('workspaceUserRole').textContent = currentUser.role_label ?? (currentUser.role === 'admin' ? 'Admin' : 'Staff');
     document.querySelectorAll('[data-admin-only]').forEach(link => {
         link.classList.toggle('hidden', currentUser.role !== 'admin');
     });

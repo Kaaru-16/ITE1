@@ -39,7 +39,7 @@ function field(array $values, string $key): string
 
 function publicUser(array $user, bool $ownAccount = false): array
 {
-    $fields = array_intersect_key($user, array_flip(['id', 'name', 'email', 'role', 'status', 'booking_access']));
+    $fields = array_intersect_key($user, array_flip(['id', 'name', 'email', 'role', 'role_label', 'status', 'booking_access']));
     if ($ownAccount) {
         $fields['profile_photo'] = $user['profile_photo'] ?? null;
     }

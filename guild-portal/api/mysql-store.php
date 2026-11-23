@@ -21,6 +21,7 @@ function liveUser(array $record, bool $ownAccount = false): array
         'name' => $record['display_name'],
         'email' => $record['email'],
         'role' => $record['role'] === 'director' ? 'admin' : $record['role'],
+        'role_label' => $record['role'] === 'director' ? 'Director' : null,
         'status' => $record['access_status'],
         'booking_access' => $record['booking_access'],
         'profile_photo' => $record['profile_photo'] ?? null,

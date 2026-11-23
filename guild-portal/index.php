@@ -511,6 +511,6 @@ function passwordVisibilityButton(string $inputId): void
 
     </main>
 
-    <script type="module" src="js/portal.js"></script>
+    <script type="module" src="js/portal.js?v=<?= filemtime(__DIR__ . '/js/portal.js') ?>"></script>
 </body>
 </html>
