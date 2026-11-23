@@ -1,32 +1,32 @@
 @font-face {
-    font-family: Lora;
-    src: url('../../shared/font/lora.woff2') format('woff2');
-    font-weight: 400 700;
+    font-family: "HYWenHei";
+    src: url('../../teyvat-site/font/zhcn.ttf') format('truetype');
+    font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: Inter;
-    src: url('../../shared/font/inter.woff2') format('woff2');
-    font-weight: 100 900;
+    font-family: "Inter Tight";
+    src: url('../../teyvat-site/font/inter-tight.woff2') format('woff2');
+    font-weight: 500;
     font-display: swap;
 }
 
 :root {
-    --bg-card: rgba(23, 34, 49, 0.88);
+    --bg-card: rgba(23, 34, 49, 0.96);
     --bg-card-solid: #131B26;
     --bg-input: #2A333E;
     --bg-row-hover: rgba(255, 255, 255, 0.04);
     --border-subtle: rgba(255, 255, 255, 0.09);
     --text-primary: #F3F4F6;
-    --text-secondary: #9CA3AF;
+    --text-secondary: #C3CDD9;
     --gold: #FCD34D;
     --blue-accent: #93C5FD;
     --green-accent: #6EE7B7;
     --overlay-tint: rgba(32, 32, 32, 0.52);
-    --heading-font: Lora, Georgia, serif;
-    --booking-font: 'Inter', sans-serif;
+    --heading-font: "HYWenHei", Cambria, Georgia, serif;
+    --booking-font: "Inter Tight", Arial, sans-serif;
     --row: #1a263559;
     --row-alt: #2e3e5159;
     --table-heading: #34476080;
@@ -44,7 +44,7 @@
 }
 
 [data-theme="light"] {
-    --bg-card: rgba(248, 250, 253, 0.82);
+    --bg-card: rgba(248, 250, 253, 0.96);
     --bg-card-solid: #FFFFFF;
     --bg-input: #F1F5F9;
     --bg-row-hover: rgba(15, 23, 42, 0.04);
@@ -79,7 +79,8 @@
 
 body {
     isolation: isolate;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--booking-font);
+    font-synthesis: none;
     color: var(--text-primary);
     min-height: 100vh;
     background-color: #0B111A;
@@ -89,6 +90,8 @@ body {
 h1, h2, h3, .auth-heading, .page-title, .card-heading, .portal-label, .month-title {
     font-family: var(--heading-font);
 }
+
+button, input, select, textarea { font-family: inherit; }
 
 .booking-font,
 .booking-font input,
@@ -113,12 +116,8 @@ h1, h2, h3, .auth-heading, .page-title, .card-heading, .portal-label, .month-tit
 }
 
 .app-bg {
-    background-image: url('../image/booking-queue.png');
-    opacity: 0;
-}
-
-[data-theme="light"] .app-bg {
     background-image: url('../../shared/image/mondstadt-background.png');
+    opacity: 0;
 }
 
 body.workspace-mode .auth-bg { opacity: 0; }
@@ -808,14 +807,14 @@ body.workspace-mode .app-bg { opacity: 1; }
 .auth-card input { background: var(--auth-field); color: var(--auth-field-text); border-color: #535657; min-height: 44px; }
 .auth-card input::placeholder { color: var(--auth-placeholder); }
 .auth-switch-link a { color: var(--auth-link); text-shadow: 0 1px 3px #10141ecc; }
-.panel-card, .kpi-card { backdrop-filter: blur(14px); }
-.workspace-section .page-title, .workspace-section .page-subtitle { text-shadow: 0 1px 5px #000a; }
+.workspace-section .page-title, .workspace-section .page-subtitle { text-shadow: 0 1px 1px #000c; }
 [data-theme="light"] .workspace-section .page-title,
-[data-theme="light"] .workspace-section .page-subtitle { text-shadow: 0 0 6px #fff7df; }
+[data-theme="light"] .workspace-section .page-subtitle { text-shadow: 0 1px 1px #fff; }
 .data-table thead { background: var(--table-heading); }
 .data-table tbody tr { background: var(--row); }
 .data-table tbody tr:nth-child(even) { background: var(--row-alt); }
 .data-table .strong-cell { font-weight: 600; }
+.data-table, .staff-identity, .calendar-grid { letter-spacing: 0.01em; }
 .assignee-pill, .status-neutral {
     background: var(--neutral-pill);
     color: var(--neutral-ink);

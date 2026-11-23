@@ -156,8 +156,10 @@ export function bindProfileForms({ getUser, updateUser, post, showMessage }) {
         button.disabled = true;
         const payload = { name: nameInput.value };
         try {
-            if (cropDirty) payload.profile_photo = canvas.toDataURL('image/jpeg', 0.82);
-            else if (removePhoto) payload.profile_photo = null;
+            if (cropDirty) {
+                const photo = canvas.toDataURL('image/jpeg', 0.94);
+                payload.profile_photo = photo.length <= 90000 ? photo : canvas.toDataURL('image/jpeg', 0.82);
+            } else if (removePhoto) payload.profile_photo = null;
             const result = await post('update_profile', payload);
             if (!result.success) {
                 showMessage('profileMessage', result.error || 'The profile could not be saved.');

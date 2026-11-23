@@ -23,8 +23,8 @@ function passwordVisibilityButton(string $inputId): void
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<?= htmlspecialchars($_SESSION['csrf'], ENT_QUOTES, 'UTF-8') ?>">
     <title>Teyvat Travel Services — Guild Portal</title>
-    <link rel="stylesheet" href="css/portal.css">
-    <link rel="stylesheet" href="css/portal-layout.css">
+    <link rel="stylesheet" href="css/portal.css?v=<?= filemtime(__DIR__ . '/css/portal.css') ?>">
+    <link rel="stylesheet" href="css/portal-layout.css?v=<?= filemtime(__DIR__ . '/css/portal-layout.css') ?>">
 </head>
 <body class="auth-mode">
 

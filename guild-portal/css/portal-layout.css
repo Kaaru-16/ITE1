@@ -64,7 +64,7 @@
     min-height: 0;
     padding: 0 calc(23.8 * var(--auth-unit));
     font-size: max(13px, calc(23.8 * var(--auth-unit)));
-    font-family: Inter, sans-serif;
+    font-family: var(--booking-font);
     margin: 0;
 }
 
@@ -190,7 +190,6 @@
 /* The header is shared. The queue and detail use the Figma content dimensions. */
 #topNav, .figma-workspace {
     --workspace-gutter: clamp(18px, 3.888889vw, 56px);
-    --workspace-surface: #172231d9;
     --workspace-outline: #516175;
     --workspace-divider: #394a5d;
     --workspace-input: #434646;
@@ -198,19 +197,10 @@
 }
 
 [data-theme="light"] :is(#topNav, .figma-workspace) {
-    --workspace-surface: #f8fafdce;
     --workspace-outline: #a1afc0;
     --workspace-divider: #d6e0eb;
     --workspace-input: #f5f8fc;
     --workspace-placeholder: #33485e;
-}
-
-.figma-workspace .app-bg {
-    background-image: url("../image/portal-mondstadt.png");
-}
-
-[data-theme="light"] .figma-workspace .app-bg {
-    background-image: url("../../shared/image/mondstadt-background.png");
 }
 
 #topNav {
@@ -240,7 +230,7 @@
     color: #f4e7bf;
     font-size: 20px;
     font-weight: 700;
-    text-shadow: 0 0 4px #0a1220bf;
+    text-shadow: 0 1px 1px #0a1220;
     white-space: nowrap;
 }
 
@@ -259,13 +249,13 @@
 
 .figma-workspace .page-title { font-size: clamp(30px, 3.25vw, 44px); line-height: 1.27; }
 .figma-workspace .page-subtitle { margin-top: 7px; font-size: 16px; line-height: 19px; color: var(--text-primary); }
-.figma-workspace .panel-card { background: var(--workspace-surface); border-color: var(--workspace-outline); border-radius: 20px; }
+.figma-workspace .panel-card { border-color: var(--workspace-outline); border-radius: 20px; }
 
 #staffQueueView .section-header { margin-bottom: 24px; }
 #staffQueueView .kpi-grid { gap: 16px; margin-bottom: 24px; }
-#staffQueueView .kpi-card { min-height: 96px; padding: 16px 19px; border-radius: 16px; background: var(--auth-glass); }
+#staffQueueView .kpi-card { min-height: 96px; padding: 16px 19px; border-radius: 16px; }
 #staffQueueView .kpi-label { margin-bottom: 5px; color: var(--text-primary); font-size: 14px; }
-#staffQueueView .kpi-value { font: 700 33px/1.2 Lora, Georgia, serif; }
+#staffQueueView .kpi-value { font: 700 33px/1.2 var(--heading-font); }
 #staffQueueView .panel-card { overflow: hidden; padding: 0; }
 #staffQueueView .filter-bar { margin: 0; padding: 18px 24px; }
 #staffQueueView :is(.search-input, .filter-select) {
@@ -323,12 +313,6 @@
     --detail-control-border: #535657;
 }
 
-[data-theme="dark"] .figma-workspace:has(:is(#bookingDetailView, #profileView):not(.hidden)) {
-    background-color: #202020;
-    /* The exported Mondstadt image already has 48% opacity. */
-    --overlay-tint: transparent;
-}
-
 [data-theme="light"] .figma-workspace:has(#bookingDetailView:not(.hidden)) {
     --detail-label: #33485e;
     --detail-value: #172638;
@@ -352,7 +336,7 @@
 
 #bookingDetailView .detail-header { margin-bottom: calc(22 * var(--detail-unit)); gap: calc(16 * var(--detail-unit)); }
 #bookingDetailView .page-title { font-size: calc(44 * var(--detail-unit)); line-height: calc(56 * var(--detail-unit)); }
-#bookingDetailView .page-subtitle { margin-top: calc(7 * var(--detail-unit)); font: 400 calc(16 * var(--detail-unit))/calc(19 * var(--detail-unit)) Inter, sans-serif; }
+#bookingDetailView .page-subtitle { margin-top: calc(7 * var(--detail-unit)); font: 400 calc(16 * var(--detail-unit))/calc(19 * var(--detail-unit)) var(--booking-font); }
 #bookingDetailView .detail-header .status-badge {
     padding: calc(7 * var(--detail-unit)) calc(13 * var(--detail-unit));
     font-size: calc(15 * var(--detail-unit));
@@ -380,13 +364,13 @@
 #bookingDetailView .info-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 #bookingDetailView .info-grid-2 { grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); }
 #bookingDetailView :is(.info-grid-2, .info-grid-3) { gap: calc(16 * var(--detail-unit)); }
-#bookingDetailView .field-label { color: var(--detail-label); font: 400 calc(14 * var(--detail-unit))/calc(17 * var(--detail-unit)) Inter, sans-serif; }
+#bookingDetailView .field-label { color: var(--detail-label); font: 400 calc(14 * var(--detail-unit))/calc(17 * var(--detail-unit)) var(--booking-font); }
 #bookingDetailView .field-label { margin-bottom: calc(3 * var(--detail-unit)); }
-#bookingDetailView .field-value { color: var(--detail-value); font: 400 calc(16 * var(--detail-unit))/calc(20 * var(--detail-unit)) Inter, sans-serif; overflow-wrap: anywhere; }
+#bookingDetailView .field-value { color: var(--detail-value); font: 400 calc(16 * var(--detail-unit))/calc(20 * var(--detail-unit)) var(--booking-font); overflow-wrap: anywhere; }
 #bookingDetailView .card-divider { margin: 0; border-color: var(--workspace-divider); }
 #bookingDetailView .panel-card > .mt-20 { margin-top: 0; }
 #bookingDetailView .form-group { margin: 0; }
-#bookingDetailView .form-group label { margin-bottom: 5px; color: var(--detail-label); font: 400 13px/1.35 Inter, sans-serif; }
+#bookingDetailView .form-group label { margin-bottom: 5px; color: var(--detail-label); font: 400 13px/1.35 var(--booking-font); }
 #bookingDetailView .form-control {
     height: 42px;
     padding: 0 34px 0 14px;
@@ -473,12 +457,21 @@
 }
 
 .sidebar-trigger .avatar-circle {
-    width: 52px;
-    height: 52px;
+    width: 60px;
+    height: 60px;
+    border: 0;
+    box-shadow: none;
     font-size: 16px;
 }
 
-.avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
+.sidebar-trigger .avatar-circle:has(img) { background: transparent; }
+.avatar-circle img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.sidebar-trigger .avatar-circle img { scale: 1.08; }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .sidebar-trigger .avatar-circle { transition: translate 150ms ease; }
+    .sidebar-trigger:hover .avatar-circle { translate: 0 -2px; }
+}
 
 .sidebar-menu {
     flex: 1;
