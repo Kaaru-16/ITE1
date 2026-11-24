@@ -1,12 +1,21 @@
 @font-face {
     font-family: Inter;
-    src: url("../../shared/font/inter.woff2") format("woff2");
+    src: url("../../shared/font/zhcn.ttf") format("truetype");
     font-weight: 400 700;
     font-display: swap;
 }
+
+
 @font-face {
     font-family: Lora;
     src: url("../../shared/font/lora.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Hymn";
+    src: url("../../shared/font/zhcn.ttf") format("truetype");
     font-weight: 700;
     font-display: swap;
 }
@@ -47,7 +56,7 @@ html:has(.inquiry-dialog[open]) { overflow: hidden; }
     border-radius: 39px;
     background: #303233f5;
     color: #fff;
-    font: 400 14px/1.5 Inter, Arial, sans-serif;
+    font: 400 14px/1.5 Hynm, Arial, sans-serif;
     box-shadow: inset 0 0 40px #ffffff09;
 }
 .inquiry-dialog::backdrop { background: #000b; }
@@ -71,7 +80,7 @@ html:has(.inquiry-dialog[open]) { overflow: hidden; }
 .inquiry-panel[hidden] { display: none; }
 .inquiry-panel h2 {
     padding-right: 42px;
-    font: 700 clamp(25px, 4vw, 36px)/1.3 Lora, Georgia, serif;
+    font: 700 clamp(25px, 4vw, 36px)/1.3 "Hymn", Georgia, serif;
 }
 .inquiry-panel h2:focus { outline: none; }
 .inquiry-header { display: grid; gap: 8px; }
