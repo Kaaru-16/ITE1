@@ -14,7 +14,7 @@
 }
 
 @font-face {
-    font-family: "Hymn";
+    font-family: "HYWenHei";
     src: url("../../shared/font/zhcn.ttf") format("truetype");
     font-weight: 700;
     font-display: swap;
@@ -56,7 +56,7 @@ html:has(.inquiry-dialog[open]) { overflow: hidden; }
     border-radius: 39px;
     background: #303233f5;
     color: #fff;
-    font: 400 14px/1.5 Hynm, Arial, sans-serif;
+    font: 400 14px/1.5 "HYWenHei", Arial, sans-serif;
     box-shadow: inset 0 0 40px #ffffff09;
 }
 .inquiry-dialog::backdrop { background: #000b; }
@@ -134,7 +134,7 @@ html:has(.inquiry-dialog[open]) { overflow: hidden; }
     font-weight: 600;
     text-transform: uppercase;
 }
-.inquiry-summary h3 { color: var(--inquiry-muted); font: 700 22px/1.35 Lora, Georgia, serif; }
+.inquiry-summary h3 { color: var(--inquiry-muted); font: 700 22px/1.35 "HYWenHei", Georgia, serif; }
 .inquiry-dialog .inquiry-change {
     padding: 10px 16px;
     border: 1px solid var(--inquiry-border);
@@ -262,7 +262,7 @@ html:has(.inquiry-dialog[open]) { overflow: hidden; }
     background: var(--inquiry-accent);
     color: #0a131d;
     box-shadow: 0 8px 10px #ffd0544d;
-    font: 700 22px/1.2 Lora, Georgia, serif;
+    font: 700 22px/1.2 "HYWenHei", Georgia, serif;
 }
 .inquiry-dialog .inquiry-primary:hover { background: #ffe092; }
 .inquiry-dialog .inquiry-primary:disabled { opacity: .65; cursor: default; }
