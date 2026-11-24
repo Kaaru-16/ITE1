@@ -1,4 +1,9 @@
 <?php
+if (realpath($_SERVER['SCRIPT_FILENAME'] ?? '') === __FILE__) {
+    http_response_code(404);
+    exit;
+}
+
 $configPath = getenv("TEYVAT_DB_CONFIG") ?: "C:/xampp/teyvat-travel/db.php";
 
 if (!is_readable($configPath)) {

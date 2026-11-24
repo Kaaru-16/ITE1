@@ -123,58 +123,25 @@ if ($errors) {
 }
 
 try {
-    require_once __DIR__ . "/../../config/db.php";
-
-    $packageStmt = $pdo->prepare(
-        "SELECT package_id FROM packages WHERE package_name = :package_name"
-    );
-    $packageStmt->execute([":package_name" => $packages[$packageKey]]);
-    $packageId = $packageStmt->fetchColumn();
-
-    if ($packageId === false) {
-        throw new PDOException("Package is missing from the database: " . $packages[$packageKey]);
-    }
+    require_once dirname(__DIR__, 2) . '/database/connection.php';
 
     $pdo->beginTransaction();
-
-    $customerStmt = $pdo->prepare(
-        "INSERT INTO customer_data (customer_name, customer_email, customer_cell)
-        VALUES (:customer_name, :customer_email, :customer_cell)"
-    );
-    $customerStmt->execute([
-        ":customer_name" => trim($name),
-        ":customer_email" => trim($email),
-        ":customer_cell" => trim($phone) ?: null
+    $stmt = $pdo->prepare("CALL create_booking_inquiry(?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([
+        $packages[$packageKey],
+        trim($name),
+        trim($email),
+        trim($phone) ?: null,
+        $travelers,
+        $travelDate,
+        trim($requests) ?: null
     ]);
-    $customerId = $pdo->lastInsertId();
+    $orderId = $stmt->fetchColumn();
+    $stmt->closeCursor();
+    if ($orderId === false) {
+        throw new RuntimeException("The booking procedure did not return an order reference.");
+    }
 
-    $orderStmt = $pdo->prepare(
-        "INSERT INTO order_details (
-            customer_id,
-            package_id,
-            pax_number,
-            travel_date,
-            order_status,
-            order_req
-        ) VALUES (
-            :customer_id,
-            :package_id,
-            :pax_number,
-            :travel_date,
-            :order_status,
-            :order_req
-        )"
-    );
-    $orderStmt->execute([
-        ":customer_id" => $customerId,
-        ":package_id" => $packageId,
-        ":pax_number" => $travelers,
-        ":travel_date" => $travelDate,
-        ":order_status" => "Pending",
-        ":order_req" => trim($requests) ?: null
-    ]);
-
-    $orderId = $pdo->lastInsertId();
     $pdo->commit();
 
     inquiryResponse(200, [

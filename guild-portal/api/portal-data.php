@@ -17,7 +17,7 @@ if (in_array($action, ['login', 'signup', 'logout', 'update_booking', 'assign_al
 }
 
 try {
-    require dirname(__DIR__, 2) . '/config/db.php';
+    require dirname(__DIR__, 2) . '/database/connection.php';
     require __DIR__ . '/mysql-store.php';
     handleLivePortal($pdo, $action, $input);
 } catch (Throwable $error) {
@@ -86,7 +86,7 @@ function changedPasswordHash(array $input, string $existingHash): string
     if (in_array($next, ['admin123', 'staff123'], true) || password_verify($next, $existingHash)) {
         reply(['error' => 'Choose a different password.'], 422);
     }
-    return password_hash($next, PASSWORD_DEFAULT);
+    return password_hash($next, PASSWORD_BCRYPT);
 }
 
 function staffError(array $input, bool $passwordRequired): ?string

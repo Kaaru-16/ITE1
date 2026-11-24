@@ -98,14 +98,14 @@ function saveLiveStaff(PDO $db, array $input, bool $signup): never
             $params = [$name, $email, $status, $access];
             if ($password !== '') {
                 $sql .= ', password_hash = ?';
-                $params[] = password_hash($password, PASSWORD_DEFAULT);
+                $params[] = password_hash($password, PASSWORD_BCRYPT);
             }
             $params[] = $id;
             liveQuery($db, $sql . " WHERE user_id = ? AND role = 'staff'", $params);
         } else {
             liveQuery($db, "INSERT INTO users (display_name, email, password_hash, role, access_status, booking_access)
                             VALUES (?, ?, ?, 'staff', ?, ?)",
-                [$name, $email, password_hash($password, PASSWORD_DEFAULT), $status, $access]);
+                [$name, $email, password_hash($password, PASSWORD_BCRYPT), $status, $access]);
         }
     } catch (PDOException $error) {
         if ($error->getCode() === '23000') {
@@ -199,8 +199,9 @@ function assignAllBookings(PDO $db, array $actor, array $input): never
             $db->rollBack();
             reply(['error' => 'Choose an approved staff member with booking access.'], 422);
         }
-        $updated = liveQuery($db, 'UPDATE order_details SET assigned_user_id = ?
-                                     WHERE assigned_user_id IS NULL OR assigned_user_id <> ?', [$assignee, $assignee])->rowCount();
+        $assignment = liveQuery($db, 'CALL assign_all_bookings(?)', [$assignee]);
+        $updated = (int) $assignment->fetchColumn();
+        $assignment->closeCursor();
         $db->commit();
     } catch (Throwable $error) {
         if ($db->inTransaction()) $db->rollBack();

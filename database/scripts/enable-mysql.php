@@ -18,9 +18,8 @@ if (strlen($email) > 254 || !filter_var($email, FILTER_VALIDATE_EMAIL)
 }
 
 try {
-    $configDir = dirname(__DIR__, 2) . '/config';
-    require $configDir . '/db.php';
-    require __DIR__ . '/../api/mysql-store.php';
+    require dirname(__DIR__) . '/connection.php';
+    require dirname(__DIR__, 2) . '/guild-portal/api/mysql-store.php';
 
     $columns = $pdo->query('SHOW COLUMNS FROM users')->fetchAll(PDO::FETCH_COLUMN);
     if (!in_array('access_status', $columns, true)) {
@@ -37,7 +36,7 @@ try {
     } else {
         liveQuery($pdo, "INSERT INTO users (display_name, email, password_hash, role, access_status)
                          VALUES (?, ?, ?, 'director', 'approved')",
-            [$name, $email, password_hash($password, PASSWORD_DEFAULT)]);
+            [$name, $email, password_hash($password, PASSWORD_BCRYPT)]);
     }
 
     if (!in_array('profile_photo', $columns, true)) {
