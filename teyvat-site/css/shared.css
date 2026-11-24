@@ -26,6 +26,19 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline
     font-style: normal;
     font-display: swap;
 }
+
+dialog#booking-inquiry.inquiry-dialog .inquiry-panel h2,
+.inquiry-dialog .inquiry-panel h2 {
+    font-family: "HYWenHei", Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(25px, 4vw, 36px);
+    line-height: 1.3;
+}
+
+.inquiry-dialog {
+    font-family: "HYWenHei", var(--body-copy, Arial, sans-serif);
+    font-weight: 700;
+}
 .site-header { position: fixed; z-index: 10; inset: 0 0 auto; }
 /* Fading vignette follows the fixed navigation. */
 .nav-atmosphere img { position: absolute; width: 100%; height: 133.1%; top: -33.1%; object-fit: fill; }
